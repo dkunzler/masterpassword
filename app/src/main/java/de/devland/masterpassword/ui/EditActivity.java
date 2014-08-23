@@ -14,7 +14,7 @@ import android.os.Build;
 import de.devland.masterpassword.R;
 
 
-public class EditActivity extends Activity {
+public class EditActivity extends LoginRequiringActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

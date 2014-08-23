@@ -15,7 +15,7 @@ import de.devland.masterpassword.R;
 import it.gmariotti.cardslib.library.prototypes.SectionedCardAdapter;
 
 
-public class PasswordViewActivity extends Activity {
+public class PasswordViewActivity extends LoginRequiringActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
