@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE'
+    }
+
+    defaultConfig {
+        applicationId "de.devland.masterpassword"
+        minSdkVersion 15
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile 'com.github.gabrielemariotti.cards:library:1.8.0'
+    compile 'com.jakewharton:butterknife:5.1.2'
+    compile 'com.github.satyan:sugar:1.3'
+    compile 'org.projectlombok:lombok:1.14.0' // TODO lombok-api
+
+    apt 'org.projectlombok:lombok:1.14.0'
+
+    // MasterPassword dependencies
+    compile('com.lambdaworks:scrypt:1.3.2')
+    compile('net.sf.plist:property-list:2.0.0')
+    compile('com.lyndir.lhunath.opal:opal-crypto:GIT-SNAPSHOT') {
+        exclude module: 'jsr305' // problems while dexing
+    }
+    compile('com.lyndir.lhunath.opal:opal-system:GIT-SNAPSHOT') {
+        exclude module: 'jsr305' // problems while dexing
+    }
+}

@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="LoginTheme" parent="android:Theme.Holo.NoActionBar.TranslucentDecor">
+        <!-- Customize your theme here. -->
+    </style>
+
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Master Password</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_edit">Site</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="caption_siteName">Site Name</string>
+    <string name="caption_userName">User Name</string>
+    <string name="caption_passwordType">Password Type</string>
+    <string name="caption_siteCounter">Site Counter</string>
+
+</resources>

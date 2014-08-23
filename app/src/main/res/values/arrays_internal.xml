@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="passwordTypeKeys">
+        <item>GeneratedMaximum</item>
+        <item>GeneratedLong</item>
+        <item>GeneratedMedium</item>
+        <item>GeneratedBasic</item>
+        <item>GeneratedShort</item>
+        <item>GeneratedPIN</item>
+    </string-array>
+</resources>

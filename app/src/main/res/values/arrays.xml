@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="passwordTypeValues">
+        <item>Maximum Security</item>
+        <item>Long</item>
+        <item>Medium</item>
+        <item>Basic</item>
+        <item>Short</item>
+        <item>PIN</item>
+    </string-array>
+</resources>
