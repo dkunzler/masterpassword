@@ -11,5 +11,6 @@
     <string name="caption_userName">User Name</string>
     <string name="caption_passwordType">Password Type</string>
     <string name="caption_siteCounter">Site Counter</string>
+    <string name="caption_add">Add</string>
 
 </resources>

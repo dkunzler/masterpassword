@@ -2,7 +2,10 @@ package de.devland.masterpassword;
 
 import android.app.Application;
 
+import com.orm.Database;
 import com.orm.SugarApp;
+
+import java.lang.reflect.Field;
 
 
 /**
@@ -20,5 +23,18 @@ public class App extends SugarApp {
 
     public static App get() {
         return instance;
+    }
+
+    public static Database getDb() {
+        try {
+            Field database = SugarApp.class.getDeclaredField("database");
+            database.setAccessible(true);
+            return (Database) database.get(App.get());
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

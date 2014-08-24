@@ -1,7 +1,6 @@
 package de.devland.masterpassword.ui;
 
 
-
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -26,7 +25,6 @@ import de.devland.masterpassword.model.Site;
 
 /**
  * A simple {@link Fragment} subclass.
- *
  */
 public class EditFragment extends Fragment {
 
@@ -44,7 +42,7 @@ public class EditFragment extends Fragment {
     private String[] passwordTypeValues;
     private String[] passwordTypeKeys;
 
-    private long siteId = 1; // TODO -1
+    private long siteId = -1;
     private Site site;
 
     public EditFragment() {
@@ -117,6 +115,8 @@ public class EditFragment extends Fragment {
         int passwordTypeIndex = passwordType.getSelectedItemPosition();
         site.setPasswordType(MPElementType.valueOf(passwordTypeKeys[passwordTypeIndex]));
         site.setSiteCounter(siteCounter.getValue());
-        site.save();
+        if (site.complete()) {
+            site.save();
+        }
     }
 }
