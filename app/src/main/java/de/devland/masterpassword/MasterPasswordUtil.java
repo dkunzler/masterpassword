@@ -2,6 +2,11 @@ package de.devland.masterpassword;
 
 import android.content.Intent;
 
+import com.lyndir.lhunath.masterpassword.MasterPassword;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import de.devland.masterpassword.ui.LoginActivity;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +17,9 @@ import lombok.Setter;
 public enum MasterPasswordUtil {
     INSTANCE;
 
-    @Getter
-    @Setter
     private String masterPassword;
+
+    private Map<String, byte[]> keysForUserName = new HashMap<String, byte[]>();
 
     public boolean needsLogin(boolean redirect) {
         if (masterPassword == null) {
@@ -29,8 +34,25 @@ public enum MasterPasswordUtil {
         }
     }
 
-    public void clear() {
-        masterPassword = null;
+    public void setMasterPassword(String masterPassword) {
+        this.masterPassword = masterPassword;
     }
 
+    public void clear() {
+        masterPassword = null;
+        keysForUserName.clear();
+    }
+
+
+    public byte[] getKeyForUserName(String userName) {
+        byte[] keyForUser;
+
+        if (!keysForUserName.containsKey(userName)) {
+            keyForUser = MasterPassword.keyForPassword(masterPassword, userName); // TODO Background
+        } else {
+            keyForUser = keysForUserName.get(userName);
+        }
+
+        return keyForUser;
+    }
 }

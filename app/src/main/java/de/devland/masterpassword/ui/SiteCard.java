@@ -32,7 +32,6 @@ public class SiteCard extends Card {
 
     public SiteCard(Context context, Site site) {
         super(context, R.layout.card_site);
-//        super(context);
         this.site = site;
         CardHeader header = new CardHeader(getContext());
         header.setTitle(site.getSiteName());
@@ -44,7 +43,7 @@ public class SiteCard extends Card {
         ButterKnife.inject(this, view);
         siteName.setText(site.getSiteName());
         userName.setText(site.getUserName());
-        byte[] keyForPassword = MasterPassword.keyForPassword(MasterPasswordUtil.INSTANCE.getMasterPassword(), site.getUserName());
+        byte[] keyForPassword = MasterPasswordUtil.INSTANCE.getKeyForUserName(site.getUserName());
         String generatedPassword = MasterPassword.generateContent(site.getPasswordType(), site.getSiteName(), keyForPassword, site.getSiteCounter());
         password.setText(generatedPassword);
     }

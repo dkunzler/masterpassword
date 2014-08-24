@@ -1,11 +1,11 @@
 package de.devland.masterpassword;
 
-import android.app.Application;
-
 import com.orm.Database;
 import com.orm.SugarApp;
 
 import java.lang.reflect.Field;
+
+import lombok.SneakyThrows;
 
 
 /**
@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 public class App extends SugarApp {
 
     private static App instance;
+    private static Database db;
 
     @Override
     public void onCreate() {
@@ -25,16 +26,13 @@ public class App extends SugarApp {
         return instance;
     }
 
+    @SneakyThrows({NoSuchFieldException.class, IllegalAccessException.class})
     public static Database getDb() {
-        try {
+        if (db == null) {
             Field database = SugarApp.class.getDeclaredField("database");
             database.setAccessible(true);
-            return (Database) database.get(App.get());
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            db = (Database) database.get(App.get());
         }
-        return null;
+        return db;
     }
 }
