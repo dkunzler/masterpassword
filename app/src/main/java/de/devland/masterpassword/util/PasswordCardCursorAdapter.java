@@ -3,6 +3,8 @@ package de.devland.masterpassword.util;
 import android.content.Context;
 import android.database.Cursor;
 
+import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.ui.SiteCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
 import it.gmariotti.cardslib.library.view.CardView;
@@ -26,7 +28,9 @@ public class PasswordCardCursorAdapter extends CardCursorAdapter {
 
     @Override
     protected Card getCardFromCursor(Cursor cursor) {
-        Card card = new Card(getContext());
+        Site site = Site.fromCursor(cursor);
+        Card card = new SiteCard(getContext(), site);
+
         return card;
     }
 }

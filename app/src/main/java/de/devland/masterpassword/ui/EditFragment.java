@@ -59,8 +59,6 @@ public class EditFragment extends Fragment {
         site = Site.findById(Site.class, siteId);
         if (site == null) {
             site = new Site();
-            site.save();
-            siteId = site.getId();
         }
     }
 

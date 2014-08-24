@@ -1,5 +1,7 @@
 package com.lyndir.lhunath.masterpassword;
 
+import android.content.res.Resources;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
@@ -14,6 +16,9 @@ import java.util.Map;
 import net.sf.plist.*;
 import net.sf.plist.io.PropertyListException;
 import net.sf.plist.io.PropertyListParser;
+
+import de.devland.masterpassword.App;
+import de.devland.masterpassword.R;
 
 
 /**
@@ -34,14 +39,17 @@ public class MPTemplates extends MetaObject {
 
     public static MPTemplates load() {
 
-        return loadFromPList( "ciphers.plist" );
+        return loadFromPList();
     }
 
-    public static MPTemplates loadFromPList(final String templateResource) {
+    // changed to use android raw loading mechanismn
+    // TODO use android arrays instead
+    public static MPTemplates loadFromPList() {
 
         @SuppressWarnings("IOResourceOpenedButNotSafelyClosed")
-        InputStream templateStream = Thread.currentThread().getContextClassLoader().getResourceAsStream( templateResource );
-        Preconditions.checkNotNull( templateStream, "Not found: %s", templateResource );
+        Resources res = App.get().getResources();
+        InputStream templateStream = res.openRawResource(R.raw.ciphers);
+        Preconditions.checkNotNull( templateStream, "Not found: ciphers.plist" );
         try {
             NSObject plistObject = PropertyListParser.parse( templateStream );
             Preconditions.checkState( NSDictionary.class.isAssignableFrom( plistObject.getClass() ) );
@@ -83,11 +91,11 @@ public class MPTemplates extends MetaObject {
             return new MPTemplates( templates );
         }
         catch (PropertyListException e) {
-            logger.err( e, "Could not parse templates from: %s", templateResource );
+            logger.err( e, "Could not parse templates from: ciphers.plist");
             throw Throwables.propagate( e );
         }
         catch (IOException e) {
-            logger.err( e, "Could not read templates from: %s", templateResource );
+            logger.err( e, "Could not read templates from: ciphers.plist");
             throw Throwables.propagate( e );
         }
         finally {
