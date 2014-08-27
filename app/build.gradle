@@ -26,23 +26,24 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile 'com.github.gabrielemariotti.cards:library:1.8.0'
-    compile 'com.jakewharton:butterknife:5.1.2'
-    compile 'com.github.satyan:sugar:1.3'
-    compile 'org.projectlombok:lombok:1.14.0' // TODO lombok-api
+    compile 'com.github.gabrielemariotti.cards:library:1.8.0' // Apache v2.0
+    compile 'com.jakewharton:butterknife:5.1.2' // Apache v2.0
+    compile 'com.github.satyan:sugar:1.3' // MIT
+    compile files('libs/lombok-api-1.14.0.jar') // MIT
 
-    apt 'org.projectlombok:lombok:1.14.0'
+    apt 'org.projectlombok:lombok:1.14.0' // MIT
 
     // MasterPassword dependencies
-    compile 'org.slf4j:slf4j-android:1.7.7'
-    compile('com.lambdaworks:scrypt:1.3.2')
-    compile('net.sf.plist:property-list:2.0.0')
-    compile('com.lyndir.lhunath.opal:opal-crypto:1.6-p6') {
+    compile files('libs/masterpassword-algorithm-65cef6d8ed.jar') // GPL v3
+    compile 'org.slf4j:slf4j-android:1.7.7' // MIT
+    compile('com.lambdaworks:scrypt:1.3.2') // Apache v2.0
+    compile('net.sf.plist:property-list:2.0.0') // LGPL 2.1
+    compile('com.lyndir.lhunath.opal:opal-crypto:1.6-p6') { // Apache v2.0
         exclude module: 'jsr305' // problems while dexing
     }
-    compile('com.lyndir.lhunath.opal:opal-system:1.6-p6') {
+    compile('com.lyndir.lhunath.opal:opal-system:1.6-p6') { // Apache v2.0
         exclude module: 'jsr305' // problems while dexing
     }
 }
