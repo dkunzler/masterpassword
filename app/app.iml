@@ -82,24 +82,23 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="property-list-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="asm-3.3.1" level="project" />
-    <orderEntry type="library" exported="" name="slf4j-api-1.6.1" level="project" />
+    <orderEntry type="library" exported="" name="opal-crypto-1.6-p6" level="project" />
+    <orderEntry type="library" exported="" name="opal-system-1.6-p6" level="project" />
     <orderEntry type="library" exported="" name="bcpg-jdk16-1.45" level="project" />
     <orderEntry type="library" exported="" name="butterknife-5.1.2" level="project" />
-    <orderEntry type="library" exported="" name="opal-system-GIT-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" name="logback-android-core-1.1.1-3" level="project" />
-    <orderEntry type="library" exported="" name="apktool-lib-1.4.4-3" level="project" />
-    <orderEntry type="library" exported="" name="guava-14.0.1" level="project" />
+    <orderEntry type="library" exported="" name="guava-17.0" level="project" />
     <orderEntry type="library" exported="" name="lombok-1.14.0" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-android-1.7.7" level="project" />
     <orderEntry type="library" exported="" name="cglib-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="annotations-2.0.3" level="project" />
+    <orderEntry type="library" exported="" name="masterpassword-algorithm-GIT-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="sugar-1.3" level="project" />
     <orderEntry type="library" exported="" name="joda-time-1.6" level="project" />
     <orderEntry type="library" exported="" name="library-1.8.0" level="project" />
-    <orderEntry type="library" exported="" name="logback-android-classic-1.1.1-3" level="project" />
     <orderEntry type="library" exported="" name="bcprov-jdk16-1.45" level="project" />
     <orderEntry type="library" exported="" name="scrypt-1.3.2" level="project" />
-    <orderEntry type="library" exported="" name="opal-crypto-GIT-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="objenesis-1.2" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-api-1.7.7" level="project" />
   </component>
 </module>
 

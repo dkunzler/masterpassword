@@ -3,7 +3,7 @@ package de.devland.masterpassword.model;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.lyndir.lhunath.masterpassword.MPElementType;
+import com.lyndir.masterpassword.MPElementType;
 import com.orm.Database;
 import com.orm.SugarRecord;
 

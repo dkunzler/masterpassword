@@ -3,7 +3,7 @@ package de.devland.masterpassword;
 import android.content.Intent;
 import android.util.Log;
 
-import com.lyndir.lhunath.masterpassword.MasterPassword;
+import com.lyndir.masterpassword.MasterPassword;
 
 import java.util.HashMap;
 import java.util.Map;

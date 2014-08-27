@@ -14,7 +14,7 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.lyndir.lhunath.masterpassword.MPElementType;
+import com.lyndir.masterpassword.MPElementType;
 
 import java.util.Arrays;
 

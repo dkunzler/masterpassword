@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lyndir.lhunath.masterpassword.MasterPassword;
+import com.lyndir.masterpassword.MasterPassword;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
