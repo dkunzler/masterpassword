@@ -13,6 +13,7 @@ public class LoginRequiringActivity extends Activity {
         super.onResume();
         if (MasterPasswordUtil.INSTANCE.needsLogin(true)) {
             this.finish();
+            this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 }

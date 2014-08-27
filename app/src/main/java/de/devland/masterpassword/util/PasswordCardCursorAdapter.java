@@ -26,6 +26,7 @@ public class PasswordCardCursorAdapter extends CardCursorAdapter {
         super(context, c, flags);
     }
 
+
     @Override
     protected Card getCardFromCursor(Cursor cursor) {
         Site site = Site.fromCursor(cursor);

@@ -33,6 +33,8 @@ public class SiteCard extends Card {
     public SiteCard(Context context, Site site) {
         super(context, R.layout.card_site);
         this.site = site;
+        //this.setSwipeable(true);
+        this.setId(String.valueOf(site.getId()));
         CardHeader header = new CardHeader(getContext());
         header.setTitle(site.getSiteName());
     }

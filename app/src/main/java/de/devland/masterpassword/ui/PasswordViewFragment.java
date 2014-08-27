@@ -8,11 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.util.PasswordCardCursorAdapter;
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
@@ -24,6 +30,7 @@ public class PasswordViewFragment extends Fragment {
     @InjectView(R.id.cardList)
     CardListView cardListView;
 
+    //CardArrayAdapter adapter;
     PasswordCardCursorAdapter adapter;
 
     public PasswordViewFragment() {
@@ -33,6 +40,8 @@ public class PasswordViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //adapter = new CardArrayAdapter(getActivity(), new ArrayList<Card>());
         adapter = new PasswordCardCursorAdapter(getActivity());
     }
 
@@ -41,6 +50,14 @@ public class PasswordViewFragment extends Fragment {
         super.onResume();
         Cursor cursor = Site.findAll();
         adapter.swapCursor(cursor);
+        List<Card> cards = new ArrayList<Card>();
+
+        //Iterator<Site> siteIterator = Site.findAll(Site.class);
+        //while (siteIterator.hasNext()) {
+        //    Site site = siteIterator.next();
+        //    cards.add(new SiteCard(getActivity(), site));
+        //}
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package de.devland.masterpassword;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.lyndir.lhunath.masterpassword.MasterPassword;
 
@@ -48,7 +49,8 @@ public enum MasterPasswordUtil {
         byte[] keyForUser;
 
         if (!keysForUserName.containsKey(userName)) {
-            keyForUser = MasterPassword.keyForPassword(masterPassword, userName); // TODO Background
+            keyForUser = MasterPassword.keyForPassword(masterPassword, userName); // TODO Backgroun
+            keysForUserName.put(userName, keyForUser);
         } else {
             keyForUser = keysForUserName.get(userName);
         }
