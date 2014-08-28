@@ -75,7 +75,7 @@ public class EditFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_edit, container, false);
         ButterKnife.inject(this, rootView);
 
-        siteCounter.setMinValue(0);
+        siteCounter.setMinValue(1);
         siteCounter.setMaxValue(Integer.MAX_VALUE);
         siteCounter.setWrapSelectorWheel(false);
         return rootView;

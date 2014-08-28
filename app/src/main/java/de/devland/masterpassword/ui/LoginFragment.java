@@ -24,8 +24,6 @@ public class LoginFragment extends Fragment {
 
     @InjectView(R.id.editText_masterPassword)
     protected EditText masterPassword;
-    @InjectView(R.id.button_login)
-    protected Button loginButton;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -40,7 +38,7 @@ public class LoginFragment extends Fragment {
     }
 
 
-    @OnClick(R.id.button_login)
+    @OnClick(R.id.imageView_login)
     public void onClick() {
         MasterPasswordUtil.INSTANCE.setMasterPassword(masterPassword.getText().toString());
         GenerateUserKeysAsyncTask keysAsyncTask = new GenerateUserKeysAsyncTask(getActivity(), new Runnable() {

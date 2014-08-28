@@ -45,7 +45,7 @@ public class PasswordViewActivity extends LoginRequiringActivity {
         int id = item.getItemId();
         if (id == R.id.action_add) {
             Intent intent = new Intent(getApplicationContext(), EditActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, PasswordViewFragment.REQUEST_CODE_ADD);
             return true;
         }
         return super.onOptionsItemSelected(item);

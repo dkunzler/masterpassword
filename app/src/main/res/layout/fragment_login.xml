@@ -24,14 +24,25 @@
             android:id="@+id/editText_masterPassword"
             android:layout_centerHorizontal="true" />
 
-        <Button
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text=">"-->
+            <!--android:id="@+id/button_login"-->
+            <!--android:layout_below="@+id/editText_masterPassword"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="20dp" />-->
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=">"
-            android:id="@+id/button_login"
+            android:id="@+id/imageView_login"
+            android:src="@drawable/ic_go"
             android:layout_below="@+id/editText_masterPassword"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp" />
+
     </RelativeLayout>
+
 
 </RelativeLayout>

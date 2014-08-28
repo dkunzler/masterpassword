@@ -2,6 +2,7 @@ package de.devland.masterpassword.ui;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,15 +24,16 @@ import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
  * A simple {@link Fragment} subclass.
- *
  */
 public class PasswordViewFragment extends Fragment {
 
-    @InjectView(R.id.cardList)
-    CardListView cardListView;
+    public static final int REQUEST_CODE_ADD = 1;
 
-    //CardArrayAdapter adapter;
-    PasswordCardCursorAdapter adapter;
+    @InjectView(R.id.cardList)
+    protected CardListView cardListView;
+
+    protected CardArrayAdapter adapter;
+//   protected PasswordCardCursorAdapter adapter;
 
     public PasswordViewFragment() {
         // Required empty public constructor
@@ -41,23 +43,43 @@ public class PasswordViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //adapter = new CardArrayAdapter(getActivity(), new ArrayList<Card>());
-        adapter = new PasswordCardCursorAdapter(getActivity());
+        adapter = new CardArrayAdapter(getActivity(), new ArrayList<Card>());
+        adapter.setEnableUndo(true);
+//        adapter = new PasswordCardCursorAdapter(getActivity());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Cursor cursor = Site.findAll();
-        adapter.swapCursor(cursor);
+//        Cursor cursor = Site.findAll();
+//        adapter.swapCursor(cursor);
+        refreshCards();
+    }
+
+    private void refreshCards() {
         List<Card> cards = new ArrayList<Card>();
 
-        //Iterator<Site> siteIterator = Site.findAll(Site.class);
-        //while (siteIterator.hasNext()) {
-        //    Site site = siteIterator.next();
-        //    cards.add(new SiteCard(getActivity(), site));
-        //}
+        Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, Site.SITE_NAME, null);
+        while (siteIterator.hasNext()) {
+            Site site = siteIterator.next();
+            SiteCard siteCard = new SiteCard(getActivity(), site);
+            siteCard.setOnUndoSwipeListListener(new Card.OnUndoSwipeListListener() {
+                @Override
+                public void onUndoSwipe(Card card) {
+                    if (card instanceof SiteCard) {
+                        SiteCard siteCard = (SiteCard) card;
+                        siteCard.getSite().save();
+                        refreshCards();
+                    }
 
+                }
+            });
+            cards.add(siteCard);
+        }
+
+        adapter.clear();
+        adapter.addAll(cards);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
