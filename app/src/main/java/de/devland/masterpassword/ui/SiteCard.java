@@ -67,8 +67,9 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
         final ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("password", password.getText());
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(getContext(), "Copied password to clipboard for 20 seconds.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.copiedToClipboard, Toast.LENGTH_SHORT).show();
 
+        // TODO handler injection
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

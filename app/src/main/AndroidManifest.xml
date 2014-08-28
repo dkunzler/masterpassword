@@ -27,10 +27,6 @@
             android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/LoginTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.EditActivity"
@@ -40,12 +36,9 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.PasswordViewActivity" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+        <receiver android:name=".receiver.ClearPasswordReceiver"></receiver>
     </application>
 
 </manifest>

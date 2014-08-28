@@ -22,10 +22,12 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import lombok.NoArgsConstructor;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+@NoArgsConstructor
 public class EditFragment extends Fragment {
 
     public static final String ARG_SITE_ID = "de.devland.masterpassword.EditFragment.siteId";
@@ -44,10 +46,6 @@ public class EditFragment extends Fragment {
 
     private long siteId = -1;
     private Site site;
-
-    public EditFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
