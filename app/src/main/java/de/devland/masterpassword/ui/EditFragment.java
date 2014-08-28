@@ -54,7 +54,7 @@ public class EditFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null) {
-            siteId = arguments.getInt(ARG_SITE_ID, -1);
+            siteId = arguments.getLong(ARG_SITE_ID, -1);
         }
         site = Site.findById(Site.class, siteId);
         if (site == null) {
@@ -75,7 +75,7 @@ public class EditFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_edit, container, false);
         ButterKnife.inject(this, rootView);
 
-        siteCounter.setMinValue(1);
+        siteCounter.setMinValue(0);
         siteCounter.setMaxValue(Integer.MAX_VALUE);
         siteCounter.setWrapSelectorWheel(false);
         return rootView;

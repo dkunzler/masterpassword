@@ -21,8 +21,10 @@ public class EditActivity extends LoginRequiringActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         if (savedInstanceState == null) {
+            EditFragment editFragment = new EditFragment();
+            editFragment.setArguments(getIntent().getExtras());
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new EditFragment())
+                    .add(R.id.container, editFragment)
                     .commit();
         }
     }

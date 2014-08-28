@@ -1,19 +1,23 @@
 package de.devland.masterpassword.ui;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lyndir.masterpassword.MasterPassword;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import de.devland.masterpassword.MasterPasswordUtil;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 import lombok.Getter;
 
 /**
@@ -30,6 +34,8 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
     TextView userName;
     @InjectView(R.id.password)
     TextView password;
+
+    Handler handler = new Handler();
 
 
     public SiteCard(Context context, Site site) {
@@ -54,5 +60,21 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
     @Override
     public void onSwipe(Card card) {
         site.delete();
+    }
+
+    @OnClick(R.id.password)
+    void copyPasswordToClipboard() {
+        final ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("password", password.getText());
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(getContext(), "Copied password to clipboard for 20 seconds.", Toast.LENGTH_SHORT).show();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ClipData clip = ClipData.newPlainText("", "");
+                clipboard.setPrimaryClip(clip);
+            }
+        }, 20000);
     }
 }

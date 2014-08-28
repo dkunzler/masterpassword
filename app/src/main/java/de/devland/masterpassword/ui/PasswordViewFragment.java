@@ -3,7 +3,6 @@ package de.devland.masterpassword.ui;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
-import de.devland.masterpassword.util.PasswordCardCursorAdapter;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
@@ -25,7 +23,7 @@ import it.gmariotti.cardslib.library.view.CardListView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PasswordViewFragment extends Fragment {
+public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener {
 
     public static final int REQUEST_CODE_ADD = 1;
 
@@ -74,6 +72,7 @@ public class PasswordViewFragment extends Fragment {
 
                 }
             });
+            siteCard.setOnClickListener(this);
             cards.add(siteCard);
         }
 
@@ -94,5 +93,16 @@ public class PasswordViewFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cardListView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(Card card, View view) {
+        if (card instanceof SiteCard) {
+            SiteCard siteCard = (SiteCard) card;
+            Intent intent = new Intent(getActivity(), EditActivity.class);
+            intent.putExtra(EditFragment.ARG_SITE_ID, siteCard.getSite().getId());
+            startActivity(intent);
+
+        }
     }
 }
