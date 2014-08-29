@@ -60,6 +60,7 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
     @Override
     public void onSwipe(Card card) {
         site.delete();
+        site.setId(null);
     }
 
     @OnClick(R.id.password)

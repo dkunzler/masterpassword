@@ -5,6 +5,9 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,10 +43,27 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         adapter = new CardArrayAdapter(getActivity(), new ArrayList<Card>());
-        adapter.setEnableUndo(true);
 //        adapter = new PasswordCardCursorAdapter(getActivity());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.password_view, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_add) {
+            Intent intent = new Intent(getActivity(), EditActivity.class);
+            startActivityForResult(intent, PasswordViewFragment.REQUEST_CODE_ADD);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -78,6 +98,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         adapter.clear();
         adapter.addAll(cards);
+        adapter.setEnableUndo(true);
         adapter.notifyDataSetChanged();
     }
 
@@ -93,6 +114,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cardListView.setAdapter(adapter);
+        adapter.setEnableUndo(true);
     }
 
     @Override

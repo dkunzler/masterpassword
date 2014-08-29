@@ -14,5 +14,7 @@
     <string name="caption_add">Add</string>
     <string name="copiedToClipboard">Copied password to clipboard for 20 seconds.</string>
     <string name="errorEmpty">Cannot be empty</string>
+    <string name="caption_save">Speichern</string>
+    <string name="caption_cancel">Abbrechen</string>
 
 </resources>
