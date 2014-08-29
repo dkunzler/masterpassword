@@ -59,8 +59,6 @@ public class EditFragment extends Fragment {
         site = Site.findById(Site.class, siteId);
         if (site == null) {
             site = new Site();
-        } else {
-            readValues();
         }
     }
 
@@ -108,6 +106,13 @@ public class EditFragment extends Fragment {
         userName.setAdapter(adapter);
         userName.setThreshold(1);
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        readValues();
     }
 
     private void readValues() {
