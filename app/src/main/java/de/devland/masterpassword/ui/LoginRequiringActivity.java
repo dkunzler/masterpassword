@@ -6,7 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import de.devland.masterpassword.MasterPasswordUtil;
+import de.devland.masterpassword.MasterPasswordHolder;
 import de.devland.masterpassword.receiver.ClearPasswordReceiver;
 
 /**
@@ -16,7 +16,7 @@ public class LoginRequiringActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (MasterPasswordUtil.INSTANCE.needsLogin(true)) {
+        if (MasterPasswordHolder.INSTANCE.needsLogin(true)) {
             this.finish();
             this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         } else {

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MasterPassword.iml" filepath="$PROJECT_DIR$/MasterPassword.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/masterpassword.iml" filepath="$PROJECT_DIR$/masterpassword.iml" />
     </modules>
   </component>
 </project>

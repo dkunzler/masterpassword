@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import de.devland.masterpassword.MasterPasswordUtil;
+import de.devland.masterpassword.MasterPasswordHolder;
 
 /**
  * Created by David Kunzler on 28/08/14.
@@ -12,6 +12,6 @@ import de.devland.masterpassword.MasterPasswordUtil;
 public class ClearPasswordReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        MasterPasswordUtil.INSTANCE.clear();
+        MasterPasswordHolder.INSTANCE.clear();
     }
 }

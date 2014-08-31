@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lyndir.masterpassword.MasterPassword;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import de.devland.masterpassword.MasterPasswordUtil;
+import de.devland.masterpassword.MasterPasswordHolder;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import it.gmariotti.cardslib.library.internal.Card;
@@ -52,8 +50,7 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
         ButterKnife.inject(this, view);
         siteName.setText(site.getSiteName());
         userName.setText(site.getUserName());
-        byte[] keyForPassword = MasterPasswordUtil.INSTANCE.getKeyForUserName(site.getUserName());
-        String generatedPassword = MasterPassword.generateContent(site.getPasswordType(), site.getSiteName(), keyForPassword, site.getSiteCounter());
+        String generatedPassword = MasterPasswordHolder.INSTANCE.generatePassword(site.getPasswordType(), site.getSiteName(), site.getSiteCounter());
         password.setText(generatedPassword);
     }
 

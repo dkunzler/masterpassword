@@ -1,9 +1,7 @@
 package de.devland.masterpassword.ui;
 
 
-import android.app.AlarmManager;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
-import de.devland.masterpassword.MasterPasswordUtil;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
@@ -47,7 +44,6 @@ public class LoginFragment extends Fragment {
     @OnClick(R.id.imageView_login)
     public void onClick() {
         if (checkInputs()) {
-            MasterPasswordUtil.INSTANCE.setMasterPassword(masterPassword.getText().toString());
             Esperandro.getPreferences(DefaultPrefs.class, getActivity()).defaultUserName(fullName.getText().toString());
             GenerateUserKeysAsyncTask keysAsyncTask = new GenerateUserKeysAsyncTask(getActivity(), new Runnable() {
                 @Override
@@ -57,7 +53,7 @@ public class LoginFragment extends Fragment {
                     getActivity().finish();
                 }
             });
-            keysAsyncTask.execute();
+            keysAsyncTask.execute(masterPassword.getText().toString(), fullName.getText().toString());
         }
     }
 
