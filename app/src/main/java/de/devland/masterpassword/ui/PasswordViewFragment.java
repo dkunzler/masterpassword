@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -52,6 +53,8 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         adapter = new CardArrayAdapter(getActivity(), new ArrayList<Card>());
 
         showCasePrefs = Esperandro.getPreferences(ShowCasePrefs.class, getActivity());
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     @Override
