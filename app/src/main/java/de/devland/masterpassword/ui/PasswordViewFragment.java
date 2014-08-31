@@ -29,25 +29,20 @@ import de.devland.masterpassword.util.ProKeyUtil;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
+import lombok.NoArgsConstructor;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+@NoArgsConstructor
 public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener {
 
     private ShowCasePrefs showCasePrefs;
 
     @InjectView(R.id.cardList)
     protected CardListView cardListView;
-    @InjectView(R.id.list_card_undobar_message)
-    protected TextView undoBarMessage;
 
     protected CardArrayAdapter adapter;
-//   protected PasswordCardCursorAdapter adapter;
-
-    public PasswordViewFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,7 +115,6 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_password_view, container, false);
         ButterKnife.inject(this, rootView);
-        undoBarMessage.setText(getActivity().getString(R.string.msg_siteDeleted));
 
         return rootView;
     }

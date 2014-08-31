@@ -21,10 +21,12 @@ import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.prefs.ShowCasePrefs;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
 import de.devland.masterpassword.util.MasterPasswordHolder;
+import lombok.NoArgsConstructor;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+@NoArgsConstructor
 public class LoginFragment extends Fragment {
 
     private ShowCasePrefs showCasePrefs;
@@ -33,10 +35,6 @@ public class LoginFragment extends Fragment {
     protected EditText masterPassword;
     @InjectView(R.id.editText_fullName)
     protected EditText fullName;
-
-    public LoginFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
