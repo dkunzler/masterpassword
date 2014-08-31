@@ -36,6 +36,7 @@ public class GenerateUserKeysAsyncTask extends AsyncTask<String, Integer, Master
     @Override
     protected void onPostExecute(MasterKey masterKey) {
         super.onPostExecute(masterKey);
+        MasterPasswordHolder.INSTANCE.setMasterKey(masterKey);
         if (dialog != null) {
             dialog.dismiss();
         }

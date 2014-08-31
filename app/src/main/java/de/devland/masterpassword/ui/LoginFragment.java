@@ -16,6 +16,7 @@ import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
+import de.devland.masterpassword.util.MasterPasswordHolder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +30,16 @@ public class LoginFragment extends Fragment {
 
     public LoginFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (!MasterPasswordHolder.INSTANCE.needsLogin(false)) {
+            Intent intent = new Intent(getActivity(), PasswordViewActivity.class);
+            getActivity().startActivity(intent);
+            getActivity().finish();
+        }
     }
 
     @Override
