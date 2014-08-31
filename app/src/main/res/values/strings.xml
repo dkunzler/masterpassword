@@ -18,5 +18,7 @@
     <string name="caption_cancel">Cancel</string>
     <string name="msg_generateKey">Generating Master Key...</string>
     <string name="msg_siteDeleted">Site deleted</string>
+    <string name="hint_password">Master Password</string>
+    <string name="hint_fullName">Your Name</string>
 
 </resources>

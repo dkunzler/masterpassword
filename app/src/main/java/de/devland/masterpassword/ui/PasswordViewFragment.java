@@ -12,14 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.prefs.ShowCasePrefs;
 import de.devland.masterpassword.util.ProKeyUtil;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
@@ -30,7 +35,7 @@ import it.gmariotti.cardslib.library.view.CardListView;
  */
 public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener {
 
-    public static final int REQUEST_CODE_ADD = 1;
+    private ShowCasePrefs showCasePrefs;
 
     @InjectView(R.id.cardList)
     protected CardListView cardListView;
@@ -50,7 +55,8 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         setHasOptionsMenu(true);
 
         adapter = new CardArrayAdapter(getActivity(), new ArrayList<Card>());
-//        adapter = new PasswordCardCursorAdapter(getActivity());
+
+        showCasePrefs = Esperandro.getPreferences(ShowCasePrefs.class, getActivity());
     }
 
     @Override
@@ -69,7 +75,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         int id = item.getItemId();
         if (id == R.id.action_add) {
             Intent intent = new Intent(getActivity(), EditActivity.class);
-            startActivityForResult(intent, PasswordViewFragment.REQUEST_CODE_ADD);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -78,8 +84,6 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     @Override
     public void onResume() {
         super.onResume();
-//        Cursor cursor = Site.findAll();
-//        adapter.swapCursor(cursor);
         refreshCards();
     }
 
@@ -117,6 +121,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         View rootView = inflater.inflate(R.layout.fragment_password_view, container, false);
         ButterKnife.inject(this, rootView);
         undoBarMessage.setText(getActivity().getString(R.string.msg_siteDeleted));
+
         return rootView;
     }
 
@@ -125,6 +130,18 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         super.onViewCreated(view, savedInstanceState);
         cardListView.setAdapter(adapter);
         adapter.setEnableUndo(true);
+        if (!getActivity().isFinishing()) {
+            if (!showCasePrefs.addCardShown()) {
+                ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(getActivity(), true);
+                showCaseBuilder.hideOnTouchOutside()
+                        .setContentTitle("Add Site")
+                        .setStyle(R.style.ShowcaseLightTheme)
+                        .setContentText("Add a site you want to generate a password for.")
+                        .setTarget(new ActionItemTarget(getActivity(), R.id.action_add));
+                showCaseBuilder.build().show();
+                showCasePrefs.addCardShown(true);
+            }
+        }
     }
 
     @Override

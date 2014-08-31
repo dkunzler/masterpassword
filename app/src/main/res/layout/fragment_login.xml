@@ -22,7 +22,7 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/editText_masterPassword"
-            android:hint="Master Password"
+            android:hint="@string/hint_password"
             android:layout_centerHorizontal="true" />
 
         <EditText
@@ -31,7 +31,7 @@
             android:inputType="text"
             android:ems="10"
             android:id="@+id/editText_fullName"
-            android:hint="Your Name"
+            android:hint="@string/hint_fullName"
             android:layout_below="@+id/editText_masterPassword"
             android:layout_centerHorizontal="true" />
 
