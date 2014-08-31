@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.util.ProKeyUtil;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
@@ -32,6 +34,8 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
     @InjectView(R.id.cardList)
     protected CardListView cardListView;
+    @InjectView(R.id.list_card_undobar_message)
+    protected TextView undoBarMessage;
 
     protected CardArrayAdapter adapter;
 //   protected PasswordCardCursorAdapter adapter;
@@ -53,6 +57,11 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.password_view, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        if (ProKeyUtil.INSTANCE.isPro()) {
+            searchItem.setVisible(true);
+        }
     }
 
     @Override
@@ -107,6 +116,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_password_view, container, false);
         ButterKnife.inject(this, rootView);
+        undoBarMessage.setText(getActivity().getString(R.string.msg_siteDeleted));
         return rootView;
     }
 

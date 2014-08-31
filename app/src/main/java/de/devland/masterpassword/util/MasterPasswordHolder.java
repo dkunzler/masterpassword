@@ -1,10 +1,11 @@
-package de.devland.masterpassword;
+package de.devland.masterpassword.util;
 
 import android.content.Intent;
 
 import com.lyndir.masterpassword.MPElementType;
 import com.lyndir.masterpassword.MasterKey;
 
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.ui.LoginActivity;
 
 /**

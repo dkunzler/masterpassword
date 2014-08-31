@@ -17,5 +17,6 @@
     <string name="caption_save">Speichern</string>
     <string name="caption_cancel">Abbrechen</string>
     <string name="msg_generateKey">Generating Passwords...</string>
+    <string name="msg_siteDeleted">Site deleted</string>
 
 </resources>

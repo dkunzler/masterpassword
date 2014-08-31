@@ -18,7 +18,11 @@ import android.widget.Spinner;
 
 import com.lyndir.masterpassword.MPElementType;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -99,10 +103,23 @@ public class EditFragment extends Fragment {
         siteCounter.setMaxValue(Integer.MAX_VALUE);
         siteCounter.setWrapSelectorWheel(false);
 
-        // TODO fill adapter with usernames
-        // TODO pre fill with default user name when new site
-        // TODO add x button to editText
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, Arrays.asList("test"));
+        SortedSet<String> userNames = new TreeSet<String>();
+
+        Iterator<Site> siteIterator = Site.findAll(Site.class);
+        while (siteIterator.hasNext()) {
+            Site site = siteIterator.next();
+            String siteUserName = site.getUserName();
+            if (siteUserName != null && !siteUserName.isEmpty()) {
+                userNames.add(siteUserName);
+            }
+        }
+
+        List<String> sortedUserNames = new ArrayList<String>();
+        for (String siteUserName : userNames) {
+            sortedUserNames.add(siteUserName);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, sortedUserNames);
         userName.setAdapter(adapter);
         userName.setThreshold(1);
         return rootView;

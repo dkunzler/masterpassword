@@ -6,7 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import de.devland.masterpassword.MasterPasswordHolder;
+import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.receiver.ClearPasswordReceiver;
 
 /**

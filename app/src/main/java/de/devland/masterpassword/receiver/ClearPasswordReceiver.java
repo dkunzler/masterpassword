@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import de.devland.masterpassword.MasterPasswordHolder;
+import de.devland.masterpassword.util.MasterPasswordHolder;
 
 /**
  * Created by David Kunzler on 28/08/14.

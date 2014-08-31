@@ -34,19 +34,9 @@ public class Site extends SugarRecord<Site> {
 
     protected String category;
 
-    public static Cursor findAll() {
-        Database database = App.getDb();
-        SQLiteDatabase sqLiteDatabase = database.getDB();
-        Cursor c = sqLiteDatabase.rawQuery("select rowid _id, * from SITE order by SITE_NAME", null);
-        return c;
-    }
-
     public boolean complete() {
         boolean complete = true;
         if (siteName == null || siteName.isEmpty()) {
-            complete = false;
-        }
-        if (userName == null || userName.isEmpty()) {
             complete = false;
         }
         return complete;
