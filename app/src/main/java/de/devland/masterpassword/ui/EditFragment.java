@@ -15,7 +15,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.lyndir.masterpassword.MPElementType;
 
 import java.util.ArrayList;
@@ -26,8 +29,10 @@ import java.util.TreeSet;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.prefs.ShowCasePrefs;
 import lombok.NoArgsConstructor;
 
 /**
@@ -38,8 +43,12 @@ public class EditFragment extends Fragment {
 
     public static final String ARG_SITE_ID = "de.devland.masterpassword.EditFragment.siteId";
 
+    private ShowCasePrefs showCasePrefs;
+
     @InjectView(R.id.editText_siteName)
     protected EditText siteName;
+    @InjectView(R.id.textView_userName)
+    protected TextView userNameText;
     @InjectView(R.id.editText_userName)
     protected AutoCompleteTextView userName;
     @InjectView(R.id.spinner_passwordType)
@@ -64,6 +73,7 @@ public class EditFragment extends Fragment {
         if (site == null) {
             site = new Site();
         }
+        showCasePrefs = Esperandro.getPreferences(ShowCasePrefs.class, getActivity());
     }
 
     @Override
@@ -130,6 +140,17 @@ public class EditFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         readValues();
+
+        if (!showCasePrefs.editShown()) {
+            ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(getActivity(), true);
+            showCaseBuilder.hideOnTouchOutside()
+                    .setContentTitle("A Site")
+                    .setStyle(R.style.ShowcaseLightTheme)
+                    .setContentText("Site Name, Password Type and Site Counter are required to derive the password. User Name is a reminder when logging in to the site and therefore optional.")
+                    .setTarget(new ViewTarget(userNameText));
+            showCaseBuilder.build().show();
+            showCasePrefs.editShown(true);
+        }
     }
 
     private void readValues() {

@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.receiver.ClearPasswordReceiver;
+import de.devland.masterpassword.util.MasterPasswordHolder;
 
 /**
  * Created by David Kunzler on 23.08.2014.

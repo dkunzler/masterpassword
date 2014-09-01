@@ -18,4 +18,13 @@ public interface ShowCasePrefs extends SharedPreferenceActions {
     @Default(ofBoolean = false)
     boolean addCardShown();
     void addCardShown(boolean addCardShown);
+
+    @Default(ofBoolean = false)
+    boolean editShown();
+    void editShown(boolean editShown);
+
+    @Default(ofBoolean = false)
+    boolean firstCardShown();
+    void firstCardShown(boolean firstCardShown);
+
 }

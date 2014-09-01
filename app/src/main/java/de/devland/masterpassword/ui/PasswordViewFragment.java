@@ -3,7 +3,9 @@ package de.devland.masterpassword.ui;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,10 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+import com.github.amlcurran.showcaseview.targets.PointTarget;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -86,7 +88,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     }
 
     private void refreshCards() {
-        List<Card> cards = new ArrayList<Card>();
+        List<SiteCard> cards = new ArrayList<SiteCard>();
 
         Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, Site.SITE_NAME, null);
         while (siteIterator.hasNext()) {
@@ -111,6 +113,20 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         adapter.addAll(cards);
         adapter.setEnableUndo(true);
         adapter.notifyDataSetChanged();
+
+        if (cards.size() > 0 && !showCasePrefs.firstCardShown()) {
+            ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(getActivity(), true);
+            Display display = getActivity().getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+
+            showCaseBuilder.hideOnTouchOutside()
+                    .setStyle(R.style.ShowcaseLightTheme)
+                    .setContentText("Swipe to delete.\nTap password to copy to clipboard.")
+                    .setTarget(new PointTarget(size.x / 2, size.y / 4));
+            showCaseBuilder.build().show();
+            showCasePrefs.firstCardShown(true);
+        }
     }
 
     @Override

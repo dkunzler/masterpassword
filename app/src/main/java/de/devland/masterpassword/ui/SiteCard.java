@@ -12,9 +12,9 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.util.MasterPasswordHolder;
 import it.gmariotti.cardslib.library.internal.Card;
 import lombok.Getter;
 

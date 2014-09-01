@@ -7,7 +7,6 @@ import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.ui.SiteCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
-import it.gmariotti.cardslib.library.view.CardView;
 
 /**
  * Created by David Kunzler on 24.08.2014.

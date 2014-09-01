@@ -1,13 +1,10 @@
 package de.devland.masterpassword.model;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.lyndir.masterpassword.MPElementType;
-import com.orm.Database;
 import com.orm.SugarRecord;
 
-import de.devland.masterpassword.App;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
