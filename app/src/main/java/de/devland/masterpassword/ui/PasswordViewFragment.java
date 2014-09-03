@@ -2,6 +2,7 @@ package de.devland.masterpassword.ui;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SearchView;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
@@ -28,9 +31,8 @@ import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.ShowCasePrefs;
-import de.devland.masterpassword.util.ProKeyUtil;
+import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
 import lombok.NoArgsConstructor;
 
@@ -38,21 +40,24 @@ import lombok.NoArgsConstructor;
  * A simple {@link Fragment} subclass.
  */
 @NoArgsConstructor
-public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener {
+public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener, SearchView.OnQueryTextListener {
 
     private ShowCasePrefs showCasePrefs;
 
     @InjectView(R.id.cardList)
     protected CardListView cardListView;
 
-    protected CardArrayAdapter adapter;
+    protected MenuItem searchItem;
+    protected SearchView searchView;
+
+    protected SiteCardArrayAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        adapter = new CardArrayAdapter(getActivity(), new ArrayList<Card>());
+        adapter = new SiteCardArrayAdapter(getActivity(), new ArrayList<Card>());
 
         showCasePrefs = Esperandro.getPreferences(ShowCasePrefs.class, getActivity());
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
@@ -64,10 +69,10 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.password_view, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        if (ProKeyUtil.INSTANCE.isPro()) {
-            searchItem.setVisible(true);
-        }
+        searchItem = menu.findItem(R.id.action_search);
+        searchItem.setVisible(true);
+        searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
@@ -167,4 +172,20 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         }
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+        searchView.clearFocus();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        adapter.getFilter().filter(s);
+        return true;
+    }
+
 }
