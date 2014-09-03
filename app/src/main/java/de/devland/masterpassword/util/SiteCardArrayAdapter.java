@@ -34,12 +34,13 @@ public class SiteCardArrayAdapter extends CardArrayAdapter {
                 //constraint is the result from text you want to filter against.
                 //objects is your data set you will filter from
                 if (constraint != null) {
+                    // Live Site
                     int length = allCards.size();
                     int i = 0;
                     while (i < length) {
                         SiteCard item = (SiteCard) allCards.get(i);
                         Site site = item.getSite();
-                        if (site.getSiteName().contains(constraint)) {
+                        if (site.getSiteName().toLowerCase().contains(String.valueOf(constraint).toLowerCase())) {
                             tempList.add(item);
                         }
 

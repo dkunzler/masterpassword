@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -48,8 +49,11 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
         ButterKnife.inject(this, view);
+        // TODO check for icon visibility when they are there
         siteName.setText(site.getSiteName());
+        siteName.setGravity(Gravity.CENTER);
         userName.setText(site.getUserName());
+        userName.setGravity(Gravity.CENTER);
         String generatedPassword = MasterPasswordHolder.INSTANCE.generatePassword(site.getPasswordType(), site.getSiteName(), site.getSiteCounter());
         password.setText(generatedPassword);
     }

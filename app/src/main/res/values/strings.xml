@@ -8,7 +8,7 @@
     <string name="title_activity_edit">Site</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="caption_siteName">Site Name</string>
-    <string name="caption_userName">User Name</string>
+    <string name="caption_userName">Login Name</string>
     <string name="caption_passwordType">Password Type</string>
     <string name="caption_siteCounter">Site Counter</string>
     <string name="caption_add">Add</string>
@@ -19,5 +19,6 @@
     <string name="msg_generateKey">Generating Master Key...</string>
     <string name="hint_password">Master Password</string>
     <string name="hint_fullName">Your Name</string>
+    <string name="msg_optional">optional</string>
 
 </resources>

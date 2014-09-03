@@ -41,7 +41,7 @@ public enum MasterPasswordHolder {
     public String generatePassword(MPElementType passwordType, String siteName, int siteCounter) {
         String result = "";
         if (masterKey != null) {
-            result = masterKey.encode(siteName, passwordType, siteCounter);
+            result = masterKey.encode(siteName.trim(), passwordType, siteCounter);
         } else {
             Intent loginIntent = new Intent(App.get(), LoginActivity.class);
             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);

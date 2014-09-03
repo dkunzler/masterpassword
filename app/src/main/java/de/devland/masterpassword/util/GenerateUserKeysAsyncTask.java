@@ -30,7 +30,7 @@ public class GenerateUserKeysAsyncTask extends AsyncTask<String, Integer, Master
 
     @Override
     protected MasterKey doInBackground(String... strings) {
-        return new MasterKey(strings[0], strings[1]);
+        return new MasterKey(strings[0].trim(), strings[1].trim());
     }
 
     @Override

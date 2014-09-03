@@ -54,6 +54,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView_userName"
+            android:hint="@string/msg_optional"
             android:layout_marginTop="@dimen/edittext_marginCaption" />
 
         <TextView
