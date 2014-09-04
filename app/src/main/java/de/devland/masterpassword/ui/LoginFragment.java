@@ -85,7 +85,7 @@ public class LoginFragment extends Fragment {
                     getActivity().finish();
                 }
             });
-            keysAsyncTask.execute(masterPassword.getText().toString(), fullName.getText().toString());
+            keysAsyncTask.execute(fullName.getText().toString(), masterPassword.getText().toString());
         }
     }
 
