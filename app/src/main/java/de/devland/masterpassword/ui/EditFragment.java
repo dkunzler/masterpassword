@@ -3,7 +3,9 @@ package de.devland.masterpassword.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -91,7 +93,7 @@ public class EditFragment extends Fragment {
             case R.id.action_save:
                 writeValues();
             case R.id.action_cancel:
-                getActivity().navigateUpTo(getActivity().getParentActivityIntent());
+                NavUtils.navigateUpTo(getActivity(), new Intent(getActivity(), getActivity().getParent().getClass()));
         }
 
         return super.onOptionsItemSelected(item);
