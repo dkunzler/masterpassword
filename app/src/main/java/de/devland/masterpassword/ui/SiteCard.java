@@ -58,6 +58,9 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
         siteName.setGravity(Gravity.CENTER);
         userName.setText(site.getUserName());
         userName.setGravity(Gravity.CENTER);
+        if (site.getUserName().isEmpty()) {
+            userName.setVisibility(View.GONE);
+        }
         String generatedPassword = MasterPasswordHolder.INSTANCE.generatePassword(site.getPasswordType(), site.getSiteName(), site.getSiteCounter());
         password.setText(generatedPassword);
     }
