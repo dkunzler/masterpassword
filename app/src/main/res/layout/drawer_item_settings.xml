@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView_settingsIcon"
+        android:src="@drawable/ic_drawer_logout"
         android:layout_margin="5dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -46,6 +47,7 @@
         android:layout_centerVertical="true"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:text="Small Text"
+        android:textColor="#ff787878"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:id="@+id/textView_settingsItem"
@@ -57,7 +59,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#000"
+        android:background="#ff787878"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>
 

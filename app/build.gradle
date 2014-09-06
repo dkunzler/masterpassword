@@ -39,6 +39,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.2' // Apache v2.0
     compile 'com.github.satyan:sugar:1.3' // MIT
     compile 'de.devland.esperandro:esperandro-api:2.1.0' // Apache v2.0
+    compile 'de.devland.esperandro:esperandro-gson-addon:2.1.0' // Apache v2.0
     compile files('libs/lombok-api-1.14.0.jar') // MIT
     compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
 

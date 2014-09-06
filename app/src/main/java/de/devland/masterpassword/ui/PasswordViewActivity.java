@@ -16,6 +16,7 @@ import de.devland.masterpassword.R;
 import de.devland.masterpassword.ui.drawer.DrawerItem;
 import de.devland.masterpassword.ui.drawer.DrawerItemAdapter;
 import de.devland.masterpassword.ui.drawer.LogoutDrawerItem;
+import de.devland.masterpassword.ui.drawer.PreferencesDrawerItem;
 
 
 public class PasswordViewActivity extends LoginRequiringActivity implements AdapterView.OnItemClickListener {
@@ -63,12 +64,17 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
-        drawerItems.add(new LogoutDrawerItem(this));
-        drawerItemAdapter = new DrawerItemAdapter(this, drawerItems);
+        initializeDrawerItems();
 
         drawerList.setAdapter(drawerItemAdapter);
         drawerList.setOnItemClickListener(this);
+    }
+
+    private void initializeDrawerItems() {
+        List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
+        drawerItems.add(new PreferencesDrawerItem());
+        drawerItems.add(new LogoutDrawerItem(this));
+        drawerItemAdapter = new DrawerItemAdapter(this, drawerItems);
     }
 
     @Override

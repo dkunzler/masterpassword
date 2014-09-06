@@ -8,4 +8,5 @@
         <item>GeneratedShort</item>
         <item>GeneratedPIN</item>
     </string-array>
+    <string name="verifyPasswordTitle">Verify password at login</string>
 </resources>

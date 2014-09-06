@@ -13,8 +13,10 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import it.gmariotti.cardslib.library.internal.Card;
 import lombok.Getter;
@@ -36,6 +38,7 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
 
     Handler handler = new Handler();
 
+    DefaultPrefs defaultPrefs;
 
     public SiteCard(Context context, Site site) {
         super(context, R.layout.card_site);
@@ -43,6 +46,7 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
         this.setSwipeable(true);
         this.setId(String.valueOf(site.getId()));
         this.setOnSwipeListener(this);
+        this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
     }
 
     @Override
@@ -69,15 +73,22 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
         final ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("password", password.getText());
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(getContext(), R.string.copiedToClipboard, Toast.LENGTH_SHORT).show();
 
         // TODO handler injection
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ClipData clip = ClipData.newPlainText("", "");
-                clipboard.setPrimaryClip(clip);
-            }
-        }, 20000);
+        int clipboardDuration = Integer.parseInt(defaultPrefs.clipboardDuration());
+        if (clipboardDuration > 0) {
+            Toast.makeText(getContext(), String.format(getContext().getString(R.string.copiedToClipboardWithDuration), clipboardDuration), Toast.LENGTH_SHORT).show();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ClipData clip = ClipData.newPlainText("", "");
+                    clipboard.setPrimaryClip(clip);
+                }
+            }, clipboardDuration * 1000);
+        } else {
+            Toast.makeText(getContext(), R.string.copiedToClipboard, Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

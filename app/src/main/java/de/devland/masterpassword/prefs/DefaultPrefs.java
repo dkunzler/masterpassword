@@ -12,10 +12,36 @@ import de.devland.masterpassword.model.Category;
  */
 @SharedPreferences
 public interface DefaultPrefs extends SharedPreferenceActions {
+
+    @Default(ofBoolean = true)
+    boolean firstStart();
+    void firstStart(boolean firstStart);
+
     @Default
     String defaultUserName();
     void defaultUserName(String userName);
 
+    String masterPasswordHash();
+    void masterPasswordHash(String masterPasswordHash);
+
     List<Category> categories();
     void categories(List<Category> categories);
+
+    @Default(ofBoolean = false)
+    boolean verifyPassword();
+    void verifyPassword(boolean verifyPassword);
+
+    @Default(ofString = "20")
+    String clipboardDuration();
+    void clipboardDuration(String clipboardDuration);
+
+    @Default(ofString = "10")
+    String autoLogoutDuration();
+    void autoLogoutDuration(String autoLogoutDuration);
+
+    String versionName();
+    void versionName(String versionName);
+
+    int versionCode();
+    void versionCode(int versionCode);
 }

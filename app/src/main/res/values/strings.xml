@@ -3,7 +3,6 @@
 
     <string name="app_name">Master Password</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_edit">Site</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -14,7 +13,8 @@
     <string name="caption_add">Add</string>
     <string name="caption_logout">Logout</string>
     <string name="caption_settings">Settings</string>
-    <string name="copiedToClipboard">Copied password to clipboard for 20 seconds.</string>
+    <string name="copiedToClipboardWithDuration">Copied password to clipboard for %d seconds.</string>
+    <string name="copiedToClipboard">Copied password to clipboard.</string>
     <string name="errorEmpty">Cannot be empty</string>
     <string name="caption_save">Save</string>
     <string name="caption_cancel">Cancel</string>

@@ -8,38 +8,55 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         // Database configuration
-        <meta-data android:name="DATABASE" android:value="sites.db" />
-        <meta-data android:name="VERSION" android:value="1" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="de.devland.masterpassword.model" />
+        <meta-data
+            android:name="DATABASE"
+            android:value="sites.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="de.devland.masterpassword.model" />
 
         <activity
             android:name=".ui.PasswordViewActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
             android:name=".ui.EditActivity"
             android:label="@string/title_activity_edit"
-            android:windowSoftInputMode="stateUnchanged"
-            android:parentActivityName=".ui.PasswordViewActivity" >
+            android:parentActivityName=".ui.PasswordViewActivity"
+            android:windowSoftInputMode="stateUnchanged" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.PasswordViewActivity" />
         </activity>
 
-        <receiver android:name=".receiver.ClearPasswordReceiver"></receiver>
+        <receiver android:name=".receiver.ClearPasswordReceiver" />
+
+        <activity
+            android:name=".prefs.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".ui.PasswordViewActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
+        </activity>
     </application>
 
 </manifest>
