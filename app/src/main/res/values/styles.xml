@@ -6,19 +6,19 @@
     </style>
 
     <style name="ShowcaseLightTheme" parent="ShowcaseView">
-        <item name="sv_backgroundColor">#5c000000</item>
-        <item name="sv_showcaseColor">#ffaaaaaa</item>
-        <item name="sv_tintButtonColor">false</item>
+        <!--<item name="sv_backgroundColor">#5c000000</item>-->
+        <!--<item name="sv_showcaseColor">#ffaaaaaa</item>-->
+        <!--<item name="sv_tintButtonColor">false</item>-->
         <!--item name="sv_titleTextAppearance">@style/CustomTitle</item-->
     </style>
 
 
     <style name="TextAppearance.ShowcaseView.Title" parent="android:style/TextAppearance.Large">
-        <item name="android:textColor">#ff000000</item>
+        <!--<item name="android:textColor">#ff000000</item>-->
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextAppearance.ShowcaseView.Detail" parent="android:style/TextAppearance">
-        <item name="android:textColor">#ff000000</item>
+        <!--<item name="android:textColor">#ff000000</item>-->
     </style>
 </resources>
