@@ -9,18 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.devland.masterpassword.prefs.ShowCasePrefs;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
 import de.devland.masterpassword.util.MasterPasswordHolder;
+import de.devland.masterpassword.util.ShowCaseManager;
 import lombok.NoArgsConstructor;
 
 /**
@@ -28,8 +25,6 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 public class LoginFragment extends Fragment {
-
-    private ShowCasePrefs showCasePrefs;
 
     @InjectView(R.id.editText_masterPassword)
     protected EditText masterPassword;
@@ -44,8 +39,6 @@ public class LoginFragment extends Fragment {
             getActivity().startActivity(intent);
             getActivity().finish();
         }
-
-        showCasePrefs = Esperandro.getPreferences(ShowCasePrefs.class, getActivity());
     }
 
     @Override
@@ -61,16 +54,7 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         fullName.setText(Esperandro.getPreferences(DefaultPrefs.class, getActivity()).defaultUserName());
 
-        if (!showCasePrefs.loginShown()) {
-            ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(getActivity(), true);
-            showCaseBuilder.hideOnTouchOutside()
-                    .setContentTitle("Your Credentials")
-                    .setStyle(R.style.ShowcaseLightTheme)
-                    .setContentText("The combination of your full name and a master password will be used to derive your different site passwords.")
-                    .setTarget(new ViewTarget(masterPassword));
-            showCaseBuilder.build().show();
-            showCasePrefs.loginShown(true);
-        }
+        ShowCaseManager.INSTANCE.showLoginShowCase(getActivity(), masterPassword);
     }
 
     @OnClick(R.id.imageView_login)

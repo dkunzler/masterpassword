@@ -4,9 +4,7 @@ package de.devland.masterpassword.ui;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,20 +15,15 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
-import com.github.amlcurran.showcaseview.targets.PointTarget;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
-import de.devland.masterpassword.prefs.ShowCasePrefs;
+import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.CardListView;
@@ -41,8 +34,6 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener, SearchView.OnQueryTextListener {
-
-    private ShowCasePrefs showCasePrefs;
 
     @InjectView(R.id.cardList)
     protected CardListView cardListView;
@@ -59,7 +50,6 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         adapter = new SiteCardArrayAdapter(getActivity(), new ArrayList<Card>());
 
-        showCasePrefs = Esperandro.getPreferences(ShowCasePrefs.class, getActivity());
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
     }
@@ -119,18 +109,8 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         adapter.setEnableUndo(true);
         adapter.notifyDataSetChanged();
 
-        if (cards.size() > 0 && !showCasePrefs.firstCardShown()) {
-            ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(getActivity(), true);
-            Display display = getActivity().getWindowManager().getDefaultDisplay();
-            Point size = new Point();
-            display.getSize(size);
-
-            showCaseBuilder.hideOnTouchOutside()
-                    .setStyle(R.style.ShowcaseLightTheme)
-                    .setContentText("Swipe to delete.\nTap password to copy to clipboard.")
-                    .setTarget(new PointTarget(size.x / 2, size.y / 4));
-            showCaseBuilder.build().show();
-            showCasePrefs.firstCardShown(true);
+        if (cards.size() > 0) {
+            ShowCaseManager.INSTANCE.showFirstCardShowCase(getActivity());
         }
     }
 
@@ -149,16 +129,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         cardListView.setAdapter(adapter);
         adapter.setEnableUndo(true);
         if (!getActivity().isFinishing()) {
-            if (!showCasePrefs.addCardShown()) {
-                ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(getActivity(), true);
-                showCaseBuilder.hideOnTouchOutside()
-                        .setContentTitle("Add Site")
-                        .setStyle(R.style.ShowcaseLightTheme)
-                        .setContentText("Add a site you want to generate a password for.")
-                        .setTarget(new ActionItemTarget(getActivity(), R.id.action_add));
-                showCaseBuilder.build().show();
-                showCasePrefs.addCardShown(true);
-            }
+            ShowCaseManager.INSTANCE.showAddShowCase(getActivity());
         }
     }
 
