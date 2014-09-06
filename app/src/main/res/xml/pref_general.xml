@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<CheckBoxPreference-->
+        <!--android:key="verifyPassword"-->
+        <!--android:summaryOff="@string/verifyPasswordOff"-->
+        <!--android:summaryOn="@string/verifyPasswordOn"-->
+        <!--android:title="@string/verifyPasswordTitle" />-->
+
+    <ListPreference
+        android:entries="@array/passwordTypeValues"
+        android:entryValues="@array/passwordTypeKeys"
+        android:key="defaultPasswordType"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="Default password type" />
+
+    <ListPreference
+        android:entries="@array/pref_clipboardDuration_titles"
+        android:entryValues="@array/pref_clipboardDuration_values"
+        android:key="clipboardDuration"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/clipboardDurationTitle" />
+
+    <ListPreference
+        android:entries="@array/pref_autoLogoutDuration_titles"
+        android:entryValues="@array/pref_autoLogoutDuration_values"
+        android:key="autoLogoutDuration"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/autoLogoutDurationTitle" />
+
+</PreferenceScreen>
