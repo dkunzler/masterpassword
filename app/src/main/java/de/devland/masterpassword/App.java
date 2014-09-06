@@ -3,6 +3,7 @@ package de.devland.masterpassword;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.lyndir.masterpassword.MPElementType;
 import com.orm.Database;
 import com.orm.SugarApp;
 
@@ -32,6 +33,7 @@ public class App extends SugarApp {
         defaultPrefs.versionCode(pInfo.versionCode);
         if (defaultPrefs.firstStart()) {
             defaultPrefs.initDefaults();
+            defaultPrefs.defaultPasswordType(MPElementType.GeneratedMaximum);
             defaultPrefs.firstStart(false);
         }
     }

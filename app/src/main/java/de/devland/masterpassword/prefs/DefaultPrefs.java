@@ -1,5 +1,7 @@
 package de.devland.masterpassword.prefs;
 
+import com.lyndir.masterpassword.MPElementType;
+
 import java.util.List;
 
 import de.devland.esperandro.SharedPreferenceActions;
@@ -44,4 +46,7 @@ public interface DefaultPrefs extends SharedPreferenceActions {
 
     int versionCode();
     void versionCode(int versionCode);
+
+    MPElementType defaultPasswordType();
+    void defaultPasswordType(MPElementType defaultPasswordType);
 }

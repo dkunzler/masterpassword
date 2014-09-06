@@ -115,6 +115,7 @@ public class SettingsActivity extends PreferenceActivity {
         bindPreferenceSummaryToValue(findPreference("clipboardDuration"));
         bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));
         bindPreferenceSummaryToValue(findPreference("versionName"));
+        bindPreferenceSummaryToValue(findPreference("defaultPasswordType"));
     }
 
     /**
@@ -227,6 +228,8 @@ public class SettingsActivity extends PreferenceActivity {
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("clipboardDuration"));
             bindPreferenceSummaryToValue(findPreference("verifyPassword"));
+            bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));
+            bindPreferenceSummaryToValue(findPreference("defaultPasswordType"));
         }
     }
 

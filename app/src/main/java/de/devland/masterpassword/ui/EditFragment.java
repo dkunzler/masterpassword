@@ -29,8 +29,10 @@ import java.util.TreeSet;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.ShowCaseManager;
 import lombok.NoArgsConstructor;
 
@@ -41,6 +43,8 @@ import lombok.NoArgsConstructor;
 public class EditFragment extends Fragment {
 
     public static final String ARG_SITE_ID = "de.devland.masterpassword.EditFragment.siteId";
+
+    protected DefaultPrefs defaultPrefs;
 
     @InjectView(R.id.editText_siteName)
     protected EditText siteName;
@@ -62,6 +66,7 @@ public class EditFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
         Bundle arguments = getArguments();
         if (arguments != null) {
             siteId = arguments.getLong(ARG_SITE_ID, -1);
@@ -69,6 +74,7 @@ public class EditFragment extends Fragment {
         site = Site.findById(Site.class, siteId);
         if (site == null) {
             site = new Site();
+            site.setPasswordType(defaultPrefs.defaultPasswordType());
         }
     }
 
@@ -87,7 +93,7 @@ public class EditFragment extends Fragment {
             case R.id.action_save:
                 writeValues();
             case R.id.action_cancel:
-                NavUtils.navigateUpTo(getActivity(), new Intent(getActivity(), getActivity().getParent().getClass()));
+                NavUtils.navigateUpFromSameTask(getActivity());
         }
 
         return super.onOptionsItemSelected(item);
@@ -128,6 +134,7 @@ public class EditFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, sortedUserNames);
         userName.setAdapter(adapter);
         userName.setThreshold(1);
+
         return rootView;
     }
 
@@ -143,7 +150,12 @@ public class EditFragment extends Fragment {
     private void readValues() {
         siteName.setText(site.getSiteName());
         userName.setText(site.getUserName());
-        String passwordTypeName = site.getPasswordType().toString();
+        updatePasswordTypeSpinner(site.getPasswordType());
+        siteCounter.setValue(site.getSiteCounter());
+    }
+
+    private void updatePasswordTypeSpinner(MPElementType passwordTypeEnum) {
+        String passwordTypeName = passwordTypeEnum.toString();
         for (int i = 0; i < passwordTypeKeys.length; i++) {
             String passwordTypeKey = passwordTypeKeys[i];
             if (passwordTypeKey.equals(passwordTypeName)) {
@@ -151,7 +163,6 @@ public class EditFragment extends Fragment {
                 break;
             }
         }
-        siteCounter.setValue(site.getSiteCounter());
     }
 
     private void writeValues() {

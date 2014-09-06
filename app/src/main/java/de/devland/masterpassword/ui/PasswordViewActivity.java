@@ -72,7 +72,7 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
 
     private void initializeDrawerItems() {
         List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
-        drawerItems.add(new PreferencesDrawerItem());
+        drawerItems.add(new PreferencesDrawerItem(drawerLayout));
         drawerItems.add(new LogoutDrawerItem(this));
         drawerItemAdapter = new DrawerItemAdapter(this, drawerItems);
     }
