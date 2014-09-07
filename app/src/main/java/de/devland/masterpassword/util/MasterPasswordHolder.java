@@ -34,8 +34,10 @@ public enum MasterPasswordHolder {
     }
 
     public void clear() {
-        masterKey.invalidate();
-        masterKey = null;
+        if (masterKey != null) {
+            masterKey.invalidate();
+            masterKey = null;
+        }
     }
 
     public String generatePassword(MPElementType passwordType, String siteName, int siteCounter) {
