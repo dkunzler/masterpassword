@@ -50,7 +50,7 @@
         <receiver android:name=".receiver.ClearPasswordReceiver" />
 
         <activity
-            android:name=".prefs.SettingsActivity"
+            android:name=".ui.preferences.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".ui.PasswordViewActivity" >
             <meta-data

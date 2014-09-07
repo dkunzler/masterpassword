@@ -40,4 +40,6 @@
     </string-array>
 
     <string name="pref_header_about">About</string>
+    <string name="defaultPasswordTypeTitle">Default password type</string>
+    <string name="appVersionTitle">App Version</string>
 </resources>

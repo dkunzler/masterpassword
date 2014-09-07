@@ -12,7 +12,7 @@
         android:key="defaultPasswordType"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:title="Default password type" />
+        android:title="@string/defaultPasswordTypeTitle" />
 
     <ListPreference
         android:entries="@array/pref_clipboardDuration_titles"

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.prefs.SettingsActivity;
+import de.devland.masterpassword.ui.preferences.SettingsActivity;
 import lombok.RequiredArgsConstructor;
 
 /**

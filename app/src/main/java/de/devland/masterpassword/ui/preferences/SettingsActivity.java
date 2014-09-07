@@ -1,4 +1,4 @@
-package de.devland.masterpassword.prefs;
+package de.devland.masterpassword.ui.preferences;
 
 import android.annotation.TargetApi;
 import android.content.Context;

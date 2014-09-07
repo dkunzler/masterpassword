@@ -3,11 +3,11 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="de.devland.masterpassword.prefs.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="de.devland.masterpassword.ui.preferences.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="de.devland.masterpassword.prefs.SettingsActivity$AboutPreferenceFragment"
+        android:fragment="de.devland.masterpassword.ui.preferences.SettingsActivity$AboutPreferenceFragment"
         android:title="@string/pref_header_about" />
 
 </preference-headers>

@@ -2,6 +2,6 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference android:title="App Version" android:key="versionName"/>
+    <Preference android:title="@string/appVersionTitle" android:key="versionName"/>
 
 </PreferenceScreen>
