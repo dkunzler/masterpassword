@@ -18,7 +18,7 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "http://maven.lyndir.com"
+            url "http://maven.devland.de"
         }
     }
 }

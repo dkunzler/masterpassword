@@ -56,14 +56,8 @@ dependencies {
     apt 'de.devland.esperandro:esperandro:2.1.0' // Apache v2.0
 
     // MasterPassword dependencies
-    compile files('libs/masterpassword-algorithm-4f70e0f67.jar') // GPL v3
+    compile('com.lyndir.masterpassword:masterpassword-algorithm:398f7bdb') { // GPL v3
+        exclude module: 'jsr305' // problems while dexing
+    }
     compile 'org.slf4j:slf4j-android:1.7.7' // MIT
-    compile('com.lambdaworks:scrypt:1.3.2') // Apache v2.0
-    compile('net.sf.plist:property-list:2.0.0') // LGPL 2.1
-    compile('com.lyndir.lhunath.opal:opal-crypto:1.6-p6') { // Apache v2.0
-        exclude module: 'jsr305' // problems while dexing
-    }
-    compile('com.lyndir.lhunath.opal:opal-system:1.6-p6') { // Apache v2.0
-        exclude module: 'jsr305' // problems while dexing
-    }
 }

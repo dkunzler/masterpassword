@@ -96,16 +96,16 @@
     <orderEntry type="library" exported="" name="bcpg-jdk16-1.45" level="project" />
     <orderEntry type="library" exported="" name="butterknife-5.1.2" level="project" />
     <orderEntry type="library" exported="" name="guava-17.0" level="project" />
-    <orderEntry type="library" exported="" name="masterpassword-algorithm-4f70e0f67" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-20.0.0" level="project" />
     <orderEntry type="library" exported="" name="esperandro-gson-addon-2.1.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-20.0.0" level="project" />
+    <orderEntry type="library" exported="" name="scrypt-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="slf4j-android-1.7.7" level="project" />
     <orderEntry type="library" exported="" name="cglib-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="annotations-2.0.3" level="project" />
     <orderEntry type="library" exported="" name="sugar-1.3" level="project" />
     <orderEntry type="library" exported="" name="joda-time-1.6" level="project" />
-    <orderEntry type="library" exported="" name="scrypt-1.3.2" level="project" />
+    <orderEntry type="library" exported="" name="masterpassword-algorithm-398f7bdb" level="project" />
   </component>
 </module>
 
