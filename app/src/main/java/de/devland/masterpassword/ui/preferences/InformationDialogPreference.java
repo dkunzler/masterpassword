@@ -7,6 +7,12 @@ import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.webkit.WebView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import de.devland.masterpassword.R;
+
 /**
  * Created by David Kunzler on 07.09.2014.
  */
@@ -48,9 +54,27 @@ public class InformationDialogPreference extends DialogPreference {
     }
 
     public String stringByName(Resources resources, String resourceName) {
+        String result = resourceName;
         if (resourceName.length() > 1 && resourceName.charAt(0) == '@' && resourceName.contains("@string/")) {
-            resourceName = resources.getString(resources.getIdentifier((new StringBuilder()).append(getContext().getPackageName()).append(":").append(resourceName.substring(1)).toString(), null, null));
+            result = resources.getString(resources.getIdentifier((new StringBuilder()).append(getContext().getPackageName()).append(":").append(resourceName.substring(1)).toString(), null, null));
+        } else if (resourceName.length() > 1 && resourceName.startsWith("raw/")) {
+            InputStream contentStream = resources.openRawResource(resources.getIdentifier(resourceName.substring(4), "raw", getContext().getPackageName()));
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+            int i;
+            try {
+                i = contentStream.read();
+                while (i != -1) {
+                    byteArrayOutputStream.write(i);
+                    i = contentStream.read();
+                }
+                contentStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            result = byteArrayOutputStream.toString();
         }
-        return resourceName;
+        return result;
     }
 }

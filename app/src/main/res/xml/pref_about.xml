@@ -2,6 +2,12 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference android:title="@string/appVersionTitle" android:key="versionName"/>
+    <Preference
+        android:key="versionName"
+        android:title="@string/appVersionTitle" />
+
+    <de.devland.masterpassword.ui.preferences.InformationDialogPreference
+        content="raw/licenses"
+        android:title="Open-Source-Licenses" />
 
 </PreferenceScreen>
