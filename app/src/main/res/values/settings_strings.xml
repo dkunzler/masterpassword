@@ -27,8 +27,15 @@
         <item>Never</item>
     </string-array>
 
+    <string name="languageTitle">Language</string>
+    <string-array name="pref_language_titles">
+        <item>System Language</item>
+        <item>English</item>
+        <item>German</item>
+    </string-array>
 
     <string name="pref_header_about">About</string>
     <string name="defaultPasswordTypeTitle">Default password type</string>
     <string name="appVersionTitle">App Version</string>
+    <string name="opensourceLicensesTitle">Open-Source-Licenses</string>
 </resources>

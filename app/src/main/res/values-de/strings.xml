@@ -22,5 +22,6 @@
     <string name="msg_optional">optional</string>
     <string name="drawer_open">Öffne Menü</string>
     <string name="drawer_close">Schließe Menü</string>
-
+    <string name="title_restartApp">App Neustarten</string>
+    <string name="msg_restartApp">Um die Sprache zu wechseln muss die App neugestartet werden. Jetzt neustarten?</string>
 </resources>

@@ -27,8 +27,16 @@
         <item>Nie</item>
     </string-array>
 
+    <string name="languageTitle">Sprache</string>
+    <string-array name="pref_language_titles">
+        <item>Systemsprache</item>
+        <item>Englisch</item>
+        <item>Deutsch</item>
+    </string-array>
+
 
     <string name="defaultPasswordTypeTitle">Standard Passwort-Typ</string>
     <string name="pref_header_about">Über</string>
     <string name="appVersionTitle">App Version</string>
+    <string name="opensourceLicensesTitle">Open-Source-Lizenzen</string>
 </resources>

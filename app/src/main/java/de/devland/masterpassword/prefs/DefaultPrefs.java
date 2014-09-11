@@ -49,4 +49,8 @@ public interface DefaultPrefs extends SharedPreferenceActions {
 
     MPElementType defaultPasswordType();
     void defaultPasswordType(MPElementType defaultPasswordType);
+
+    @Default(ofString = "")
+    String language();
+    void language(String language);
 }

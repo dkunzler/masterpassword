@@ -3,9 +3,6 @@ package de.devland.masterpassword.ui.preferences;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -14,14 +11,12 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
-import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
-
-import de.devland.masterpassword.R;
+import android.view.MenuItem;
 
 import java.util.List;
+
+import de.devland.masterpassword.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -112,6 +107,8 @@ public class SettingsActivity extends PreferenceActivity {
         // their values. When their values change, their summaries are updated
         // to reflect the new value, per the Android Design guidelines.
         bindPreferenceSummaryToValue(findPreference("verifyPassword"));
+        bindPreferenceSummaryToValue(findPreference("language"));
+        ((LanguagePreference) findPreference("language")).setSettingsActivity(this);
         bindPreferenceSummaryToValue(findPreference("clipboardDuration"));
         bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));
         bindPreferenceSummaryToValue(findPreference("versionName"));
@@ -226,6 +223,8 @@ public class SettingsActivity extends PreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
+            bindPreferenceSummaryToValue(findPreference("language"));
+            ((LanguagePreference) findPreference("language")).setSettingsActivity(getActivity());
             bindPreferenceSummaryToValue(findPreference("clipboardDuration"));
             bindPreferenceSummaryToValue(findPreference("verifyPassword"));
             bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));
