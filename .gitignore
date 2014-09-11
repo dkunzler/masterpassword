@@ -2,7 +2,7 @@ release.jks
 */**/app-release.apk
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+*.iml
+.idea/
 .DS_Store
 /build
