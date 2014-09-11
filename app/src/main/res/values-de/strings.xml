@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Master Password</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_edit">Site</string>
+    <string name="caption_siteName">Site Name</string>
+    <string name="caption_userName">Login Benutzername</string>
+    <string name="caption_passwordType">Password-Typ</string>
+    <string name="caption_siteCounter">Zähler</string>
+    <string name="caption_add">Neu</string>
+    <string name="caption_logout">Ausloggen</string>
+    <string name="caption_settings">Einstellungen</string>
+    <string name="copiedToClipboardWithDuration">Passwort für %d Sekunden in die Zwischenablage kopiert.</string>
+    <string name="copiedToClipboard">Passwort in die Zwischenablage kopiert.</string>
+    <string name="errorEmpty">Darf nicht leer sein</string>
+    <string name="caption_save">Speichern</string>
+    <string name="caption_cancel">Abbrechen</string>
+    <string name="msg_generateKey">Generiere Masterkey...</string>
+    <string name="hint_password">Master Passwort</string>
+    <string name="hint_fullName">Dein Name</string>
+    <string name="msg_optional">optional</string>
+    <string name="drawer_open">Öffne Menü</string>
+    <string name="drawer_close">Schließe Menü</string>
+
+</resources>
