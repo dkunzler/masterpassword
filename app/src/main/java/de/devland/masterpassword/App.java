@@ -43,8 +43,8 @@ public class App extends SugarApp {
             defaultPrefs.firstStart(false);
         }
 
+        // http://stackoverflow.com/questions/2264874/changing-locale-within-the-app-itself
         Configuration config = getBaseContext().getResources().getConfiguration();
-//        String lang = "en";
         String lang = defaultPrefs.language();
         if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
             targetLocale = new Locale(lang);
@@ -55,6 +55,7 @@ public class App extends SugarApp {
         }
     }
 
+    // http://stackoverflow.com/questions/2264874/changing-locale-within-the-app-itself
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

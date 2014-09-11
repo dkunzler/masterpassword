@@ -2,11 +2,14 @@ package de.devland.masterpassword.ui.preferences;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
@@ -14,6 +17,7 @@ import android.util.AttributeSet;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.ui.LoginActivity;
 import lombok.Setter;
 
 /**
@@ -74,6 +78,13 @@ public class LanguagePreference extends ListPreference {
             builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    // http://stackoverflow.com/questions/6609414/howto-programatically-restart-android-app
+                    Intent mStartActivity = new Intent(settingsActivity, LoginActivity.class);
+                    mStartActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    int mPendingIntentId = 123456;
+                    PendingIntent mPendingIntent = PendingIntent.getActivity(settingsActivity, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                    AlarmManager mgr = (AlarmManager) settingsActivity.getSystemService(Context.ALARM_SERVICE);
+                    mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
                     android.os.Process.killProcess(android.os.Process.myPid());
                 }
             });
