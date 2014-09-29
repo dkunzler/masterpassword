@@ -1,5 +1,5 @@
 release.jks
-*/**/app-release.apk
+**/*.apk
 .gradle
 /local.properties
 *.iml
