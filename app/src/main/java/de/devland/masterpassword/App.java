@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.util.ProKeyUtil;
 import lombok.SneakyThrows;
 
 
@@ -33,6 +34,7 @@ public class App extends SugarApp {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        ProKeyUtil.INSTANCE.initLicenseCheck();
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         defaultPrefs.versionName(pInfo.versionName);
