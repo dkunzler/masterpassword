@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.devland.masterpassword" >
+    package="de.devland.masterpassword">
+
+    <permission
+        android:name="de.devland.masterpassword.ANSWERLICENSECHECK"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="de.devland.masterpassword.INITIATELICENSECHECK" />
 
     <application
-        android:name=".App"
+        android:name="de.devland.masterpassword.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         // Database configuration
         <meta-data
             android:name="DATABASE"
@@ -23,8 +29,8 @@
             android:value="de.devland.masterpassword.model" />
 
         <activity
-            android:name=".ui.PasswordViewActivity"
-            android:label="@string/app_name" >
+            android:name="de.devland.masterpassword.ui.PasswordViewActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,31 +38,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name="de.devland.masterpassword.ui.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".ui.EditActivity"
+            android:name="de.devland.masterpassword.ui.EditActivity"
             android:label="@string/title_activity_edit"
-            android:parentActivityName=".ui.PasswordViewActivity"
-            android:windowSoftInputMode="stateUnchanged" >
+            android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity"
+            android:windowSoftInputMode="stateUnchanged">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.PasswordViewActivity" />
         </activity>
 
-        <receiver android:name=".receiver.ClearPasswordReceiver" />
+        <receiver android:name="de.devland.masterpassword.receiver.ClearPasswordReceiver" />
 
         <activity
-            android:name=".ui.preferences.SettingsActivity"
+            android:name="de.devland.masterpassword.ui.preferences.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".ui.PasswordViewActivity" >
+            android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
         </activity>
+
+        <receiver
+            android:name="de.devland.masterpassword.receiver.LicenseCheckReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="de.devland.masterpassword.ANSWERLICENSECHECK">
+            <intent-filter>
+                <action android:name="de.devland.masterpassword.answerlicensecheck" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
