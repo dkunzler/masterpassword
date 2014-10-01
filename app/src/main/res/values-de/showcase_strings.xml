@@ -3,7 +3,7 @@
     <string name="title_edit">Eine Site</string>
     <string name="content_edit">Site Name, Password-Typ und Zähler sind zum Berechnen des Passworts benötigt. Der Benutzername ist nur eine Gedächtnisstütze zum Login und daher optional.</string>
     <string name="title_login">Deine Zugangsdaten</string>
-    <string name="content_login">Die Kombinationena aus vollem Namen und Master Passwort wird verwendet um die verschiedenen Site Passwörter zu generieren.</string>
+    <string name="content_login">Die Kombination aus vollem Namen und Master Passwort wird verwendet um die verschiedenen Site Passwörter zu generieren.</string>
     <string name="title_add">Site hinzufügen</string>
     <string name="content_add">Füge eine Site hinzu, für die du ein Passwort generieren willst.</string>
     <string name="content_firstCard">Wischen zum Löschen.\n Passwort antippen zum Kopieren.</string>
