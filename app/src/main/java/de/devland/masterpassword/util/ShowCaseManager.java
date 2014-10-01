@@ -31,9 +31,9 @@ public enum ShowCaseManager {
         if (!showCasePrefs.editShown()) {
             ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(activity, true);
             showCaseBuilder.hideOnTouchOutside()
-                    .setContentTitle("A Site")
+                    .setContentTitle(R.string.title_edit)
                     .setStyle(R.style.ShowcaseLightTheme)
-                    .setContentText("Site Name, Password Type and Site Counter are required to derive the password. User Name is a reminder when logging in to the site and therefore optional.")
+                    .setContentText(R.string.content_edit)
                     .setTarget(new ViewTarget(target));
             showCaseBuilder.build().show();
             showCasePrefs.editShown(true);
@@ -44,9 +44,9 @@ public enum ShowCaseManager {
         if (!showCasePrefs.loginShown()) {
             ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(activity, true);
             showCaseBuilder.hideOnTouchOutside()
-                    .setContentTitle("Your Credentials")
+                    .setContentTitle(R.string.title_login)
                     .setStyle(R.style.ShowcaseLightTheme)
-                    .setContentText("The combination of your full name and a master password will be used to derive your different site passwords.")
+                    .setContentText(R.string.content_login)
                     .setTarget(new ViewTarget(target));
             showCaseBuilder.build().show();
             showCasePrefs.loginShown(true);
@@ -57,9 +57,9 @@ public enum ShowCaseManager {
         if (!showCasePrefs.addCardShown()) {
             ShowcaseView.Builder showCaseBuilder = new ShowcaseView.Builder(activity, true);
             showCaseBuilder.hideOnTouchOutside()
-                    .setContentTitle("Add Site")
+                    .setContentTitle(R.string.title_add)
                     .setStyle(R.style.ShowcaseLightTheme)
-                    .setContentText("Add a site you want to generate a password for.")
+                    .setContentText(R.string.content_add)
                     .setTarget(new ActionItemTarget(activity, R.id.action_add));
             showCaseBuilder.build().show();
             showCasePrefs.addCardShown(true);
@@ -75,7 +75,7 @@ public enum ShowCaseManager {
 
             showCaseBuilder.hideOnTouchOutside()
                     .setStyle(R.style.ShowcaseLightTheme)
-                    .setContentText("Swipe to delete.\nTap password to copy to clipboard.")
+                    .setContentText(R.string.content_firstCard)
                     .setTarget(new PointTarget(size.x / 2, size.y / 4));
             showCaseBuilder.build().show();
             showCasePrefs.firstCardShown(true);
