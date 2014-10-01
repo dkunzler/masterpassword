@@ -74,7 +74,7 @@ public class EditFragment extends Fragment {
         site = Site.findById(Site.class, siteId);
         if (site == null) {
             site = new Site();
-            site.setPasswordType(defaultPrefs.defaultPasswordType());
+            site.setPasswordType(MPElementType.valueOf(defaultPrefs.defaultPasswordType()));
         }
     }
 

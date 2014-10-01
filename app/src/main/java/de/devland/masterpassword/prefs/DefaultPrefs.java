@@ -47,8 +47,9 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     int versionCode();
     void versionCode(int versionCode);
 
-    MPElementType defaultPasswordType();
-    void defaultPasswordType(MPElementType defaultPasswordType);
+    @Default(ofString = "GeneratedMaximum")
+    String defaultPasswordType();
+    void defaultPasswordType(String defaultPasswordType);
 
     @Default(ofString = "")
     String language();

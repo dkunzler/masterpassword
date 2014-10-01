@@ -14,6 +14,7 @@ import java.util.Locale;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.ProKeyUtil;
+import de.devland.masterpassword.util.UpgradeManager;
 import lombok.SneakyThrows;
 
 
@@ -37,11 +38,14 @@ public class App extends SugarApp {
         ProKeyUtil.INSTANCE.initLicenseCheck();
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        if (pInfo.versionCode != defaultPrefs.versionCode()) {
+            UpgradeManager upgradeManager = new UpgradeManager(this);
+            upgradeManager.onUpgrade(defaultPrefs.versionCode(), pInfo.versionCode);
+        }
         defaultPrefs.versionName(pInfo.versionName);
         defaultPrefs.versionCode(pInfo.versionCode);
         if (defaultPrefs.firstStart()) {
             defaultPrefs.initDefaults();
-            defaultPrefs.defaultPasswordType(MPElementType.GeneratedMaximum);
             defaultPrefs.firstStart(false);
         }
 
