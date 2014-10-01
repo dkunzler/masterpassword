@@ -3,6 +3,7 @@ package de.devland.masterpassword.ui;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
@@ -63,6 +64,8 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
         }
         String generatedPassword = MasterPasswordHolder.INSTANCE.generatePassword(site.getPasswordType(), site.getSiteName(), site.getSiteCounter());
         password.setText(generatedPassword);
+        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/RobotoSlab-Light.ttf");
+        password.setTypeface(typeface);
     }
 
     @Override
