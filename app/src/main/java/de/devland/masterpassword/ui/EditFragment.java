@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lyndir.masterpassword.MPElementType;
 
@@ -174,5 +176,9 @@ public class EditFragment extends Fragment {
         if (site.complete()) {
             site.save();
         }
+    }
+
+    public void onBackPressed() {
+        writeValues();
     }
 }
