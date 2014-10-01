@@ -208,6 +208,17 @@ public class SettingsActivity extends PreferenceActivity {
         }
     }
 
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        if (fragmentName.equals(GeneralPreferenceFragment.class.getName())) {
+            return true;
+        }
+        if (fragmentName.equals(AboutPreferenceFragment.class.getName())) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * This fragment shows general preferences only. It is used when the
      * activity is showing a two-pane settings UI.
