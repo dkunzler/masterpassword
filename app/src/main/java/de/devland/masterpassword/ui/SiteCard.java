@@ -3,6 +3,7 @@ package de.devland.masterpassword.ui;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.view.Gravity;
@@ -18,6 +19,7 @@ import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import it.gmariotti.cardslib.library.internal.Card;
 import lombok.Getter;
@@ -82,21 +84,7 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
         ClipData clip = ClipData.newPlainText("password", password.getText());
         clipboard.setPrimaryClip(clip);
 
-        // TODO handler injection
-        int clipboardDuration = Integer.parseInt(defaultPrefs.clipboardDuration());
-        if (clipboardDuration > 0) {
-            Toast.makeText(getContext(), String.format(getContext().getString(R.string.copiedToClipboardWithDuration), clipboardDuration), Toast.LENGTH_SHORT).show();
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    ClipData clip = ClipData.newPlainText("", "");
-                    clipboard.setPrimaryClip(clip);
-                }
-            }, clipboardDuration * 1000);
-        } else {
-            Toast.makeText(getContext(), R.string.copiedToClipboard, Toast.LENGTH_SHORT).show();
-        }
-
+        Intent service = new Intent(getContext(), ClearClipboardService.class);
+        getContext().startService(service);
     }
 }

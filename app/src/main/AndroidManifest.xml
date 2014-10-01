@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.devland.masterpassword">
+    package="de.devland.masterpassword" >
 
     <permission
         android:name="de.devland.masterpassword.ANSWERLICENSECHECK"
@@ -13,7 +13,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         // Database configuration
         <meta-data
             android:name="DATABASE"
@@ -30,7 +30,7 @@
 
         <activity
             android:name="de.devland.masterpassword.ui.PasswordViewActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +46,7 @@
             android:name="de.devland.masterpassword.ui.EditActivity"
             android:label="@string/title_activity_edit"
             android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity"
-            android:windowSoftInputMode="stateUnchanged">
+            android:windowSoftInputMode="stateUnchanged" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
@@ -57,7 +57,7 @@
         <activity
             android:name="de.devland.masterpassword.ui.preferences.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity">
+            android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
@@ -67,11 +67,17 @@
             android:name="de.devland.masterpassword.receiver.LicenseCheckReceiver"
             android:enabled="true"
             android:exported="true"
-            android:permission="de.devland.masterpassword.ANSWERLICENSECHECK">
+            android:permission="de.devland.masterpassword.ANSWERLICENSECHECK" >
             <intent-filter>
                 <action android:name="de.devland.masterpassword.answerlicensecheck" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name="de.devland.masterpassword.service.ClearClipboardService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
