@@ -35,6 +35,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/password"
+        android:typeface="serif"
         android:gravity="center"
         android:padding="10dp"
         android:textColor="@android:color/white"
