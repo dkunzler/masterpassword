@@ -49,7 +49,7 @@
             android:windowSoftInputMode="stateUnchanged">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.devland.masterpassword.PasswordViewActivity" />
+                android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
         </activity>
 
         <receiver android:name="de.devland.masterpassword.receiver.ClearPasswordReceiver" />
