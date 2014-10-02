@@ -34,11 +34,14 @@ public class LoginRequiringActivity extends Activity {
         super.onResume();
 
         if (!MasterPasswordHolder.INSTANCE.needsLogin(false)) {
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            long triggerTime = System.currentTimeMillis() + 1000 * 60 * Integer.parseInt(defaultPrefs.autoLogoutDuration());
-            Intent intent = new Intent(this, ClearPasswordReceiver.class);
-            PendingIntent broadcast = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmManager.set(AlarmManager.RTC, triggerTime, broadcast);
+            int autoLogoutDuration = Integer.parseInt(defaultPrefs.autoLogoutDuration());
+            if (autoLogoutDuration > 0) {
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                long triggerTime = System.currentTimeMillis() + 1000 * 60 * autoLogoutDuration;
+                Intent intent = new Intent(this, ClearPasswordReceiver.class);
+                PendingIntent broadcast = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                alarmManager.set(AlarmManager.RTC, triggerTime, broadcast);
+            }
         }
     }
 }
