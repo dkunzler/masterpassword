@@ -21,4 +21,7 @@
     <style name="TextAppearance.ShowcaseView.Detail" parent="android:style/TextAppearance">
         <!--<item name="android:textColor">#ff000000</item>-->
     </style>
+
+    <color name="floating_button_normal">#2d2d2d</color>
+    <color name="floating_button_pressed">#555555</color>
 </resources>

@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.SearchView;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,12 +24,14 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.CardListView;
+import it.gmariotti.cardslib.library.view.listener.SwipeOnScrollListener;
 import lombok.NoArgsConstructor;
 
 /**
@@ -37,11 +42,40 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
     @InjectView(R.id.cardList)
     protected CardListView cardListView;
+    @InjectView(R.id.floating_action_add)
+    protected FloatingActionButton addButton;
 
     protected MenuItem searchItem;
     protected SearchView searchView;
 
     protected SiteCardArrayAdapter adapter;
+    SwipeOnScrollListener hideFloatingButtonScrollListener = new SwipeOnScrollListener() {
+        private int mScrollY = 0;
+
+        protected int getListViewScrollY() {
+            View topChild = cardListView.getChildAt(0);
+            return topChild == null ? 0 : cardListView.getFirstVisiblePosition() * topChild.getHeight() -
+                    topChild.getTop();
+        }
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            super.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+            int newScrollY = getListViewScrollY();
+            if (newScrollY == mScrollY) {
+                return;
+            }
+
+            if (newScrollY > mScrollY) {
+                // Scrolling up
+                addButton.hide();
+            } else if (newScrollY < mScrollY) {
+                // Scrolling down
+                addButton.show();
+            }
+            mScrollY = newScrollY;
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,12 +102,13 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_add) {
-            Intent intent = new Intent(getActivity(), EditActivity.class);
-            startActivity(intent);
-            return true;
-        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.floating_action_add)
+    protected void onAddClick() {
+        Intent intent = new Intent(getActivity(), EditActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -83,7 +118,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     }
 
     private void refreshCards() {
-        List<SiteCard> cards = new ArrayList<SiteCard>();
+        List<Card> cards = new ArrayList<Card>();
 
         Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, Site.SITE_NAME, null);
         while (siteIterator.hasNext()) {
@@ -104,6 +139,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
             cards.add(siteCard);
         }
 
+        cards.add(new DummyCard(getActivity()));
         adapter.clear();
         adapter.addAll(cards);
         adapter.setEnableUndo(true);
@@ -127,6 +163,9 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cardListView.setAdapter(adapter);
+      
+        cardListView.setOnScrollListener(hideFloatingButtonScrollListener);
+
         adapter.setEnableUndo(true);
         if (!getActivity().isFinishing()) {
             ShowCaseManager.INSTANCE.showAddShowCase(getActivity());

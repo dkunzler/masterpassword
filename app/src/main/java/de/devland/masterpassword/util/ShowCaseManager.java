@@ -6,7 +6,6 @@ import android.view.Display;
 import android.view.View;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 import com.github.amlcurran.showcaseview.targets.PointTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
@@ -67,7 +66,7 @@ public enum ShowCaseManager {
                 showCaseBuilder.hideOnTouchOutside().setContentTitle(R.string.title_add)
                                .setStyle(R.style.ShowcaseLightTheme)
                                .setContentText(R.string.content_add)
-                               .setTarget(new ActionItemTarget(activity, R.id.action_add));
+                               .setTarget(new ViewTarget(R.id.floating_action_add, activity));
                 showCaseBuilder.build().show();
             } catch (IllegalArgumentException e) {
             } finally {
