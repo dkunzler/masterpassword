@@ -49,6 +49,7 @@ dependencies {
     compile "com.android.support:support-v4:20.0.+"
 
     compile 'com.github.gabrielemariotti.cards:library:1.9.1' // Apache v2.0
+    compile 'com.melnykov:floatingactionbutton:1.0.3' // MIT
     compile 'com.jakewharton:butterknife:5.1.2' // Apache v2.0
     compile 'de.devland.esperandro:esperandro-api:2.1.0' // Apache v2.0
     compile 'de.devland.esperandro:esperandro-gson-addon:2.1.0' // Apache v2.0
