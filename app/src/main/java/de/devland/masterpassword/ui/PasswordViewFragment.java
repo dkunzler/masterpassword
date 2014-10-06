@@ -138,16 +138,15 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
             siteCard.setOnClickListener(this);
             cards.add(siteCard);
         }
+        if (cards.size() > 0) {
+            ShowCaseManager.INSTANCE.showFirstCardShowCase(getActivity());
+        }
 
         cards.add(new DummyCard(getActivity()));
         adapter.clear();
         adapter.addAll(cards);
         adapter.setEnableUndo(true);
         adapter.notifyDataSetChanged();
-
-        if (cards.size() > 0) {
-            ShowCaseManager.INSTANCE.showFirstCardShowCase(getActivity());
-        }
     }
 
     @Override
