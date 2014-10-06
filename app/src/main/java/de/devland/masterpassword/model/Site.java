@@ -5,6 +5,8 @@ import android.database.Cursor;
 import com.lyndir.masterpassword.MPElementType;
 import com.orm.SugarRecord;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,6 +30,8 @@ public class Site extends SugarRecord<Site> {
     protected String userName = "";
     protected int siteCounter = 0;
     protected MPElementType passwordType = MPElementType.GeneratedMaximum;
+    protected Date lastUsed = new Date(0);
+    protected String storedPassword;
 
     protected String category;
 

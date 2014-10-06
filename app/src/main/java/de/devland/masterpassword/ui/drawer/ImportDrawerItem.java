@@ -3,11 +3,18 @@ package de.devland.masterpassword.ui.drawer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+
+import com.ipaulpro.afilechooser.utils.FileUtils;
+
+import de.devland.masterpassword.R;
 
 /**
  * Created by David Kunzler on 06.10.2014.
  */
 public class ImportDrawerItem extends SettingsDrawerItem {
+    public static final int REQUEST_CODE_IMPORT = 1234;
+
     private Activity activity;
 
     public ImportDrawerItem(Activity activity) {
@@ -16,29 +23,24 @@ public class ImportDrawerItem extends SettingsDrawerItem {
 
     @Override
     public int getImageRes() {
-        return 0;
+        return R.drawable.ic_drawer_import;
     }
 
     @Override
     public int getHeaderRes() {
-        return 0;
+        return R.string.caption_import;
     }
 
     @Override
     public void onClick(Context context) {
-        // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file
-        // browser.
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        Intent getContentIntent = FileUtils.createGetContentIntent();
+        getContentIntent.setType("text/plain");
 
-        // Filter to only show results that can be "opened", such as a
-        // file (as opposed to a list of contacts or timezones)
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        Intent intent = Intent.createChooser(getContentIntent, "Select a file");
+        activity.startActivityForResult(intent, REQUEST_CODE_IMPORT);
+    }
 
-        // Filter to show only images, using the image MIME data type.
-        // If one wanted to search for ogg vorbis files, the type would be "audio/ogg".
-        // To search for all documents available via installed storage providers,
-        // it would be "*/*".
-        intent.setType("text/plain");
-        activity.startActivityForResult(intent, 1);
+    public void doImport(Uri fileUri) {
+        // TODO
     }
 }

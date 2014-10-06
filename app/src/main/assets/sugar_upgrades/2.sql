@@ -1,2 +1,2 @@
-alter table SITE add LAST_USED INTEGER;
+alter table SITE add LAST_USED INTEGER DEFAULT 0;
 alter table SITE add STORED_PASSWORD TEXT;

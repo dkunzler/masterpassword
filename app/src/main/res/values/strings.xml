@@ -11,6 +11,8 @@
     <string name="caption_add">Add</string>
     <string name="caption_logout">Logout</string>
     <string name="caption_settings">Settings</string>
+    <string name="caption_import">Import</string>
+    <string name="caption_export">Export</string>
     <string name="copiedToClipboardWithDuration">Copied password to clipboard for %d seconds.</string>
     <string name="copiedToClipboard">Copied password to clipboard.</string>
     <string name="errorEmpty">Cannot be empty</string>

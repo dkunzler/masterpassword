@@ -8,6 +8,8 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="de.devland.masterpassword.INITIATELICENSECHECK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="de.devland.masterpassword.App"
@@ -81,6 +83,22 @@
             android:exported="false" >
         </service>
 
+        <!-- aFileChooser -->
+        <activity
+            android:name="com.ipaulpro.afilechooser.FileChooserActivity"
+            android:icon="@drawable/ic_chooser"
+            android:enabled="@bool/use_activity"
+            android:exported="true"
+            android:label="@string/choose_file" >
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
         <provider
             android:name="com.ianhanniballake.localstorage.LocalStorageProvider"
             android:authorities="de.devland.masterpassword.provider.localstorage.documents"

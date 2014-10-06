@@ -1,5 +1,6 @@
 package de.devland.masterpassword.ui;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -15,6 +16,7 @@ import java.util.List;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.ui.drawer.DrawerItem;
 import de.devland.masterpassword.ui.drawer.DrawerItemAdapter;
+import de.devland.masterpassword.ui.drawer.ExportDrawerItem;
 import de.devland.masterpassword.ui.drawer.ImportDrawerItem;
 import de.devland.masterpassword.ui.drawer.LogoutDrawerItem;
 import de.devland.masterpassword.ui.drawer.PreferencesDrawerItem;
@@ -26,6 +28,9 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
     private ActionBarDrawerToggle drawerToggle;
     private ListView drawerList;
     private DrawerItemAdapter drawerItemAdapter;
+
+    private ImportDrawerItem importDrawerItem;
+    private ExportDrawerItem exportDrawerItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +78,10 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
 
     private void initializeDrawerItems() {
         List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
-        drawerItems.add(new ImportDrawerItem(this));
+        importDrawerItem = new ImportDrawerItem(this);
+        exportDrawerItem = new ExportDrawerItem(this);
+        drawerItems.add(importDrawerItem);
+        drawerItems.add(exportDrawerItem);
         drawerItems.add(new PreferencesDrawerItem(drawerLayout));
         drawerItems.add(new LogoutDrawerItem(this));
         drawerItemAdapter = new DrawerItemAdapter(this, drawerItems);
@@ -107,5 +115,22 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         drawerItemAdapter.getItem(i).onClick(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ImportDrawerItem.REQUEST_CODE_IMPORT:
+                if (resultCode == RESULT_OK) {
+                    importDrawerItem.doImport(data.getData());
+                }
+                break;
+            case ExportDrawerItem.REQUEST_CODE_EXPORT:
+                if (resultCode == RESULT_OK) {
+                    exportDrawerItem.doExport(data.getData());
+                }
+                break;
+        }
     }
 }
