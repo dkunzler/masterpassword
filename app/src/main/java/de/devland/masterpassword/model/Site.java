@@ -43,6 +43,11 @@ public class Site extends SugarRecord<Site> {
         return complete;
     }
 
+    public void touch() {
+        lastUsed = new Date();
+        this.save();
+    }
+
     public static Site fromCursor(Cursor cursor) {
         Site result = new Site();
         result.setSiteName(cursor.getString(cursor.getColumnIndex(SITE_NAME)));
