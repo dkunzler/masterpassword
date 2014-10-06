@@ -15,6 +15,7 @@ import java.util.List;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.ui.drawer.DrawerItem;
 import de.devland.masterpassword.ui.drawer.DrawerItemAdapter;
+import de.devland.masterpassword.ui.drawer.ImportDrawerItem;
 import de.devland.masterpassword.ui.drawer.LogoutDrawerItem;
 import de.devland.masterpassword.ui.drawer.PreferencesDrawerItem;
 
@@ -72,6 +73,7 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
 
     private void initializeDrawerItems() {
         List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
+        drawerItems.add(new ImportDrawerItem(this));
         drawerItems.add(new PreferencesDrawerItem(drawerLayout));
         drawerItems.add(new LogoutDrawerItem(this));
         drawerItemAdapter = new DrawerItemAdapter(this, drawerItems);
