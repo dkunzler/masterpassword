@@ -44,9 +44,17 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     //compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:support-v4:20.0.+"
+
+    compile(name:'aFileChooser', ext:'aar') // Apache v2.0
 
     compile 'com.github.gabrielemariotti.cards:library:1.9.1' // Apache v2.0
     compile 'com.melnykov:floatingactionbutton:1.0.3' // MIT
