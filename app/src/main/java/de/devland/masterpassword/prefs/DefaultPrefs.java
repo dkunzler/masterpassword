@@ -1,13 +1,12 @@
 package de.devland.masterpassword.prefs;
 
-import com.lyndir.masterpassword.MPElementType;
-
 import java.util.List;
 
 import de.devland.esperandro.SharedPreferenceActions;
 import de.devland.esperandro.annotations.Default;
 import de.devland.esperandro.annotations.SharedPreferences;
 import de.devland.masterpassword.model.Category;
+import de.devland.masterpassword.model.Site;
 
 /**
  * Created by David Kunzler on 28/08/14.
@@ -54,4 +53,8 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     @Default(ofString = "")
     String language();
     void language(String language);
+
+    @Default(ofString = Site.SITE_NAME)
+    String sortBy();
+    void sortBy(String sortBy);
 }

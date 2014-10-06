@@ -25,8 +25,10 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.Card;
@@ -47,6 +49,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
     protected MenuItem searchItem;
     protected SearchView searchView;
+    protected DefaultPrefs defaultPrefs;
 
     protected SiteCardArrayAdapter adapter;
     SwipeOnScrollListener hideFloatingButtonScrollListener = new SwipeOnScrollListener() {
@@ -82,6 +85,8 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
+
         adapter = new SiteCardArrayAdapter(getActivity(), new ArrayList<Card>());
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
@@ -102,6 +107,21 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        String currentSortBy = defaultPrefs.sortBy();
+
+        switch (id) {
+            case R.id.menuSortAlphabetically:
+                 defaultPrefs.sortBy(Site.SITE_NAME);
+                break;
+            case R.id.menuSortLastUsed:
+                defaultPrefs.sortBy(Site.LAST_USED + " DESC");
+                break;
+        }
+
+        if (!defaultPrefs.sortBy().equals(currentSortBy)) {
+            refreshCards();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -120,7 +140,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     private void refreshCards() {
         List<Card> cards = new ArrayList<Card>();
 
-        Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, Site.SITE_NAME, null);
+        Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, defaultPrefs.sortBy(), null);
         while (siteIterator.hasNext()) {
             Site site = siteIterator.next();
             SiteCard siteCard = new SiteCard(getActivity(), site);
@@ -162,7 +182,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cardListView.setAdapter(adapter);
-      
+
         cardListView.setOnScrollListener(hideFloatingButtonScrollListener);
 
         adapter.setEnableUndo(true);

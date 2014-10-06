@@ -26,5 +26,8 @@
     <string name="drawer_close">Close Menu</string>
     <string name="title_restartApp">Restart App</string>
     <string name="msg_restartApp">To change language the app needs to restart. Restart now?</string>
+    <string name="caption_sort_lastUsage">Sort by last usage</string>
+    <string name="caption_sort_alphabetically">Sort alphabetically</string>
+    <string name="caption_sort">Sort</string>
 
 </resources>

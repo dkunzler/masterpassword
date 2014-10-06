@@ -25,6 +25,7 @@ public class Site extends SugarRecord<Site> {
     public static final String SITE_COUNTER = "SITE_COUNTER";
     public static final String PASSWORD_TYPE = "PASSWORD_TYPE";
     public static final String CATEGORY = "CATEGORY";
+    public static final String LAST_USED = "LAST_USED";
 
     protected String siteName = "";
     protected String userName = "";

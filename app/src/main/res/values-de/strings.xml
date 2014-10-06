@@ -24,4 +24,7 @@
     <string name="drawer_close">Schließe Menü</string>
     <string name="title_restartApp">App Neustarten</string>
     <string name="msg_restartApp">Um die Sprache zu wechseln muss die App neugestartet werden. Jetzt neustarten?</string>
+    <string name="caption_sort_lastUsage">Sort. nach letzter Nutzung</string>
+    <string name="caption_sort_alphabetically">Sortiere alphabetisch</string>
+    <string name="caption_sort">Sortierung</string>
 </resources>
