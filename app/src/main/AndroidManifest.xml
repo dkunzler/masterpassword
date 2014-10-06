@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="de.devland.masterpassword" >
 
     <permission
@@ -20,7 +21,7 @@
             android:value="sites.db" />
         <meta-data
             android:name="VERSION"
-            android:value="1" />
+            android:value="2" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
@@ -40,13 +41,13 @@
         <activity
             android:name="de.devland.masterpassword.ui.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="de.devland.masterpassword.ui.EditActivity"
             android:label="@string/title_activity_edit"
             android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity"
-            android:windowSoftInputMode="stateUnchanged" >
+            android:windowSoftInputMode="stateUnchanged"
+            tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
@@ -57,7 +58,8 @@
         <activity
             android:name="de.devland.masterpassword.ui.preferences.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity" >
+            android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity"
+            tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
