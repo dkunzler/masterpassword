@@ -43,7 +43,7 @@
         <activity
             android:name="de.devland.masterpassword.ui.LoginActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name="de.devland.masterpassword.ui.EditActivity"
             android:label="@string/title_activity_edit"
