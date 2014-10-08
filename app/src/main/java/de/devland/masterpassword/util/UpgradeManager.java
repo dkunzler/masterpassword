@@ -26,6 +26,7 @@ public class UpgradeManager {
                 if (defaultPrefs.defaultPasswordType().equals("\"GeneratedMaximum\"")) {
                     defaultPrefs.defaultPasswordType(MPElementType.GeneratedMaximum.toString());
                 }
+                defaultPrefs.hidePasswords(defaultPrefs.hidePasswords());
         }
     }
 

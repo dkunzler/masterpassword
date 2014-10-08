@@ -1,10 +1,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--<CheckBoxPreference-->
-        <!--android:key="verifyPassword"-->
-        <!--android:summaryOff="@string/verifyPasswordOff"-->
-        <!--android:summaryOn="@string/verifyPasswordOn"-->
-        <!--android:title="@string/verifyPasswordTitle" />-->
+    <!--android:key="verifyPassword"-->
+    <!--android:summaryOff="@string/verifyPasswordOff"-->
+    <!--android:summaryOn="@string/verifyPasswordOn"-->
+    <!--android:title="@string/verifyPasswordTitle" />-->
 
     <de.devland.masterpassword.ui.preferences.LanguagePreference
         android:entries="@array/pref_language_titles"
@@ -12,7 +12,7 @@
         android:key="language"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:title="@string/languageTitle" />
+        android:title="@string/languageTitle"/>
 
     <ListPreference
         android:entries="@array/passwordTypeValues"
@@ -20,7 +20,7 @@
         android:key="defaultPasswordType"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:title="@string/defaultPasswordTypeTitle" />
+        android:title="@string/defaultPasswordTypeTitle"/>
 
     <ListPreference
         android:entries="@array/pref_clipboardDuration_titles"
@@ -28,7 +28,7 @@
         android:key="clipboardDuration"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:title="@string/clipboardDurationTitle" />
+        android:title="@string/clipboardDurationTitle"/>
 
     <ListPreference
         android:entries="@array/pref_autoLogoutDuration_titles"
@@ -36,6 +36,10 @@
         android:key="autoLogoutDuration"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:title="@string/autoLogoutDurationTitle" />
+        android:title="@string/autoLogoutDurationTitle"/>
+
+    <SwitchPreference
+        android:key="hidePasswords"
+        android:title="Hide Passwords"/>
 
 </PreferenceScreen>

@@ -10,7 +10,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.lyndir.lhunath.opal.system.util.StringUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -42,6 +43,7 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
     Handler handler = new Handler();
 
     DefaultPrefs defaultPrefs;
+    private String generatedPassword;
 
     public SiteCard(Context context, Site site) {
         super(context, R.layout.card_site);
@@ -66,9 +68,16 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
         } else {
             userName.setVisibility(View.VISIBLE);
         }
-        String generatedPassword = MasterPasswordHolder.INSTANCE.generatePassword(site.getPasswordType(), site.getSiteName(), site.getSiteCounter());
-        password.setText(generatedPassword);
-        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/RobotoSlab-Light.ttf");
+        generatedPassword = MasterPasswordHolder.INSTANCE
+                .generatePassword(site.getPasswordType(), site.getSiteName(),
+                        site.getSiteCounter());
+        if (defaultPrefs.hidePasswords()) {
+            password.setText(StringUtils.repeat("*", generatedPassword.length()));
+        } else {
+            password.setText(generatedPassword);
+        }
+        Typeface typeface = Typeface
+                .createFromAsset(getContext().getAssets(), "fonts/RobotoSlab-Light.ttf");
         password.setTypeface(typeface);
     }
 
@@ -80,8 +89,9 @@ public class SiteCard extends Card implements Card.OnSwipeListener {
 
     @OnClick(R.id.password)
     void copyPasswordToClipboard() {
-        final ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("password", password.getText());
+        final ClipboardManager clipboard = (ClipboardManager) getContext()
+                .getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("password", generatedPassword);
         clipboard.setPrimaryClip(clip);
 
         Intent service = new Intent(getContext(), ClearClipboardService.class);
