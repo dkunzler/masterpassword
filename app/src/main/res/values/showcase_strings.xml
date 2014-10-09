@@ -6,5 +6,5 @@
     <string name="content_login">The combination of your full name and a master password will be used to derive your different site passwords.</string>
     <string name="title_add">Add Site</string>
     <string name="content_add">Add a site you want to generate a password for.</string>
-    <string name="content_firstCard">Swipe to delete.\n Tap password to copy to clipboard.</string>
+    <string name="content_firstCard">Tap password to copy to clipboard.</string>
 </resources>

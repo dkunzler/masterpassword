@@ -6,5 +6,5 @@
     <string name="content_login">Die Kombination aus vollem Namen und Master Passwort wird verwendet um die verschiedenen Site Passwörter zu generieren.</string>
     <string name="title_add">Site hinzufügen</string>
     <string name="content_add">Füge eine Site hinzu, für die du ein Passwort generieren willst.</string>
-    <string name="content_firstCard">Wischen zum Löschen.\n Passwort antippen zum Kopieren.</string>
+    <string name="content_firstCard">Passwort antippen zum Kopieren.</string>
 </resources>
