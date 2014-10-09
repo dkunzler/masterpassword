@@ -16,7 +16,7 @@
     <string name="errorEmpty">Darf nicht leer sein</string>
     <string name="caption_save">Speichern</string>
     <string name="caption_cancel">Abbrechen</string>
-    <string name="msg_generateKey">Generiere Masterkey...</string>
+    <string name="msg_generateKey">Generiere Masterkey…</string>
     <string name="hint_password">Master Passwort</string>
     <string name="hint_fullName">Dein Name</string>
     <string name="msg_optional">optional</string>
@@ -30,4 +30,5 @@
     <string name="caption_showhide">Passwort zeigen/verstecken</string>
     <string name="caption_delete">Löschen</string>
     <string name="caption_increment">Zähler erhöhen</string>
+    <string name="title_feedback">Sende Feedback…</string>
 </resources>

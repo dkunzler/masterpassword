@@ -18,7 +18,7 @@
     <string name="errorEmpty">Cannot be empty</string>
     <string name="caption_save">Save</string>
     <string name="caption_cancel">Cancel</string>
-    <string name="msg_generateKey">Generating Master Key...</string>
+    <string name="msg_generateKey">Generating Master Key…</string>
     <string name="hint_password">Master Password</string>
     <string name="hint_fullName">Your Name</string>
     <string name="msg_optional">optional</string>
@@ -32,5 +32,6 @@
     <string name="caption_showhide">Show/Hide Password</string>
     <string name="caption_delete">Delete</string>
     <string name="caption_increment">Increase Counter</string>
+    <string name="title_feedback">Send Feedback…</string>
 
 </resources>
