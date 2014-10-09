@@ -29,5 +29,8 @@
     <string name="caption_sort_lastUsage">Sort by last usage</string>
     <string name="caption_sort_alphabetically">Sort alphabetically</string>
     <string name="caption_sort">Sort</string>
+    <string name="caption_showhide">Show/Hide Password</string>
+    <string name="caption_delete">Delete</string>
+    <string name="caption_increment">Increase Counter</string>
 
 </resources>

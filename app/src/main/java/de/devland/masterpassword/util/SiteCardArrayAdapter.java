@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.ui.DummyCard;
 import de.devland.masterpassword.ui.SiteCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
@@ -38,10 +39,15 @@ public class SiteCardArrayAdapter extends CardArrayAdapter {
                     int length = allCards.size();
                     int i = 0;
                     while (i < length) {
-                        SiteCard item = (SiteCard) allCards.get(i);
-                        Site site = item.getSite();
-                        if (site.getSiteName().toLowerCase().contains(String.valueOf(constraint).toLowerCase())) {
-                            tempList.add(item);
+                        Card card = allCards.get(i);
+                        if (card instanceof SiteCard) {
+                            SiteCard siteCard = (SiteCard) card;
+                            Site site = siteCard.getSite();
+                            if (site.getSiteName().toLowerCase().contains(String.valueOf(constraint).toLowerCase())) {
+                                tempList.add(siteCard);
+                            }
+                        } else if (card instanceof DummyCard) {
+                            tempList.add(card);
                         }
 
                         i++;

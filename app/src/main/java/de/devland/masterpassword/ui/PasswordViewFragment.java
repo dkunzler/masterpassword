@@ -143,7 +143,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, defaultPrefs.sortBy(), null);
         while (siteIterator.hasNext()) {
             Site site = siteIterator.next();
-            SiteCard siteCard = new SiteCard(getActivity(), site);
+            SiteCard siteCard = new SiteCard(getActivity(), site, adapter);
             siteCard.setOnUndoSwipeListListener(new Card.OnUndoSwipeListListener() {
                 @Override
                 public void onUndoSwipe(Card card) {
@@ -165,7 +165,6 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         cards.add(new DummyCard(getActivity()));
         adapter.clear();
         adapter.addAll(cards);
-        adapter.setEnableUndo(true);
         adapter.notifyDataSetChanged();
     }
 
@@ -185,7 +184,6 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         cardListView.setOnScrollListener(hideFloatingButtonScrollListener);
 
-        adapter.setEnableUndo(true);
         if (!getActivity().isFinishing()) {
             ShowCaseManager.INSTANCE.showAddShowCase(getActivity());
         }
