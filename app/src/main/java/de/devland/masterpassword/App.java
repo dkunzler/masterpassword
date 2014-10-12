@@ -4,9 +4,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 
-import com.lyndir.masterpassword.MPElementType;
 import com.orm.Database;
 import com.orm.SugarApp;
+import com.squareup.otto.Bus;
 
 import java.lang.reflect.Field;
 import java.util.Locale;
@@ -15,6 +15,7 @@ import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.UpgradeManager;
+import lombok.Getter;
 import lombok.SneakyThrows;
 
 
@@ -28,6 +29,8 @@ public class App extends SugarApp {
 
     private DefaultPrefs defaultPrefs;
     private Locale targetLocale;
+    @Getter
+    private Bus bus;
 
 
     @Override
@@ -35,6 +38,7 @@ public class App extends SugarApp {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        bus = new Bus();
         ProKeyUtil.INSTANCE.initLicenseCheck();
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);

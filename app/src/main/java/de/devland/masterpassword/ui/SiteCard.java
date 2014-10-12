@@ -19,12 +19,14 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
+import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
@@ -90,6 +92,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
 
         Intent service = new Intent(getContext(), ClearClipboardService.class);
         getContext().startService(service);
+        App.get().getBus().post(new PasswordCopyEvent());
     }
 
 
