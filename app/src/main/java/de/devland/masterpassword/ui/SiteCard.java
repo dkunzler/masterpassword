@@ -33,7 +33,7 @@ import lombok.Getter;
 /**
  * Created by David Kunzler on 24.08.2014.
  */
-public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.OnClickCardHeaderPopupMenuListener {
+public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupMenuListener {
 
     @Getter
     protected Site site;
@@ -56,7 +56,6 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
         this.site = site;
         this.adapter = adapter;
         this.setId(String.valueOf(site.getId()));
-        this.setOnSwipeListener(this);
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
         CardHeader header = new CardHeader(context);
         header.setPopupMenu(R.menu.card_site, this);
@@ -79,12 +78,6 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
         Typeface typeface = Typeface
                 .createFromAsset(getContext().getAssets(), "fonts/RobotoSlab-Light.ttf");
         password.setTypeface(typeface);
-    }
-
-    @Override
-    public void onSwipe(Card card) {
-        site.delete();
-        site.setId(null);
     }
 
     @OnClick(R.id.password)
