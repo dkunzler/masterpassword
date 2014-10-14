@@ -1,6 +1,8 @@
 package de.devland.masterpassword.util;
 
 import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Filter;
 
 import java.util.ArrayList;
@@ -70,9 +72,34 @@ public class SiteCardArrayAdapter extends CardArrayAdapter {
     }
 
     @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        Card card = getItem(position);
+        if (card instanceof SiteCard) {
+            return ((SiteCard) card).getSite().getId();
+        } else if (card instanceof DummyCard) {
+            return -1l;
+        } else {
+            return super.getItemId(position);
+        }
+    }
+
+    @Override
     public void add(Card object) {
         super.add(object);
         allCards.add(object);
+    }
+
+    @Override
+    public void insert(Card card, int index) {
+        super.clear();
+        allCards.add(index, card);
+        super.addAll(allCards);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -97,6 +124,22 @@ public class SiteCardArrayAdapter extends CardArrayAdapter {
     public void remove(Card object) {
         super.remove(object);
         allCards.remove(object);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
+        Object tag = null;
+        if (convertView != null) {
+            tag = convertView.getTag();
+        }
+        if (convertView != null && tag != null && (Boolean) tag) {
+            view = super.getView(position, null, parent);
+        } else {
+           view = super.getView(position, convertView, parent);
+        }
+
+        return view;
     }
 
     @Override

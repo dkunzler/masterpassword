@@ -35,7 +35,6 @@ import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.view.CardListView;
 import it.gmariotti.cardslib.library.view.listener.SwipeOnScrollListener;
 import lombok.NoArgsConstructor;
 
@@ -46,7 +45,7 @@ import lombok.NoArgsConstructor;
 public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener, SearchView.OnQueryTextListener {
 
     @InjectView(R.id.cardList)
-    protected CardListView cardListView;
+    protected InsertionAnimationCardListView cardListView;
     @InjectView(R.id.floating_action_add)
     protected FloatingActionButton addButton;
 
@@ -142,15 +141,24 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         refreshCards();
     }
 
+
     @Subscribe
     public void onPasswordCopy(PasswordCopyEvent e) {
-        if (Site.LAST_USED.equals(defaultPrefs.sortBy())) {
-            this.refreshCards();
+        if (defaultPrefs.sortBy().contains(Site.LAST_USED)) {
+            final SiteCard card = e.getCard();
+            final SiteCard newCard = new SiteCard(getActivity(), card.getSite(), adapter);
+
+            if (adapter.getPosition(card) != 0) {
+
+                cardListView.addRow(newCard);
+                adapter.remove(card);
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 
     private void refreshCards() {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
 
         Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, defaultPrefs.sortBy(), null);
         while (siteIterator.hasNext()) {
@@ -192,6 +200,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.setBackgroundResource(R.color.card_list_background_light);
         cardListView.setAdapter(adapter);
 
         cardListView.setOnScrollListener(hideFloatingButtonScrollListener);

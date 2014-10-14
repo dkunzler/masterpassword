@@ -5,7 +5,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +29,7 @@ import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
+import it.gmariotti.cardslib.library.view.CardView;
 import lombok.Getter;
 
 /**
@@ -48,8 +48,6 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
     @InjectView(R.id.password)
     TextView password;
 
-    Handler handler = new Handler();
-
     DefaultPrefs defaultPrefs;
     private String generatedPassword;
 
@@ -67,7 +65,8 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
-        ButterKnife.inject(this, getCardView());
+        CardView cardView = getCardView();
+        ButterKnife.inject(this, cardView);
         siteName.setText(site.getSiteName());
         siteName.setTypeface(Typeface.DEFAULT_BOLD);
         userName.setText(site.getUserName());
@@ -92,7 +91,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
 
         Intent service = new Intent(getContext(), ClearClipboardService.class);
         getContext().startService(service);
-        App.get().getBus().post(new PasswordCopyEvent());
+        App.get().getBus().post(new PasswordCopyEvent(this));
     }
 
 
@@ -102,7 +101,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
             case R.id.card_menu_delete:
                 site.delete();
                 site.setId(null);
-                collapse();
+                collapseView(null);
                 // TODO undobar
                 break;
             case R.id.card_menu_show:
@@ -120,9 +119,10 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
         }
     }
 
-    private void collapse() {
+    protected void collapseView(Animation.AnimationListener animationListener) {
         final View v = getCardView();
         final int initialHeight = v.getMeasuredHeight();
+        v.setTag(true);
 
         Animation anim = new Animation() {
             @Override
@@ -141,6 +141,9 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
             }
         };
 
+        if (animationListener != null) {
+            anim.setAnimationListener(animationListener);
+        }
         anim.setDuration(200);
         v.startAnimation(anim);
     }
