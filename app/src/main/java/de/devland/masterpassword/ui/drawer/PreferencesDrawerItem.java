@@ -28,7 +28,9 @@ public class PreferencesDrawerItem extends SettingsDrawerItem {
 
     @Override
     public void onClick(Context context) {
-        drawerLayout.closeDrawers();
+        if (drawerLayout != null) {
+            drawerLayout.closeDrawers();
+        }
         Intent intent = new Intent(context, SettingsActivity.class);
         context.startActivity(intent);
     }
