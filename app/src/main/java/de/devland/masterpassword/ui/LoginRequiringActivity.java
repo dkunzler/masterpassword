@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.receiver.ClearPasswordReceiver;
 import de.devland.masterpassword.util.MasterPasswordHolder;
@@ -27,6 +28,7 @@ public class LoginRequiringActivity extends Activity {
             this.finish();
             this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
+        App.get().getBus().register(this);
     }
 
     @Override
@@ -43,5 +45,11 @@ public class LoginRequiringActivity extends Activity {
                 alarmManager.set(AlarmManager.RTC, triggerTime, broadcast);
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.get().getBus().unregister(this);
     }
 }

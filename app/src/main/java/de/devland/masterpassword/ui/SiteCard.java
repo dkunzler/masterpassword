@@ -5,7 +5,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,21 +18,24 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
+import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
+import it.gmariotti.cardslib.library.view.CardView;
 import lombok.Getter;
 
 /**
  * Created by David Kunzler on 24.08.2014.
  */
-public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.OnClickCardHeaderPopupMenuListener {
+public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupMenuListener {
 
     @Getter
     protected Site site;
@@ -46,8 +48,6 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
     @InjectView(R.id.password)
     TextView password;
 
-    Handler handler = new Handler();
-
     DefaultPrefs defaultPrefs;
     private String generatedPassword;
 
@@ -56,7 +56,6 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
         this.site = site;
         this.adapter = adapter;
         this.setId(String.valueOf(site.getId()));
-        this.setOnSwipeListener(this);
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
         CardHeader header = new CardHeader(context);
         header.setPopupMenu(R.menu.card_site, this);
@@ -66,7 +65,8 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
-        ButterKnife.inject(this, getCardView());
+        CardView cardView = getCardView();
+        ButterKnife.inject(this, cardView);
         siteName.setText(site.getSiteName());
         siteName.setTypeface(Typeface.DEFAULT_BOLD);
         userName.setText(site.getUserName());
@@ -81,12 +81,6 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
         password.setTypeface(typeface);
     }
 
-    @Override
-    public void onSwipe(Card card) {
-        site.delete();
-        site.setId(null);
-    }
-
     @OnClick(R.id.password)
     void copyPasswordToClipboard() {
         site.touch();
@@ -97,6 +91,7 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
 
         Intent service = new Intent(getContext(), ClearClipboardService.class);
         getContext().startService(service);
+        App.get().getBus().post(new PasswordCopyEvent(this));
     }
 
 
@@ -106,7 +101,7 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
             case R.id.card_menu_delete:
                 site.delete();
                 site.setId(null);
-                collapse();
+                collapseView(null);
                 // TODO undobar
                 break;
             case R.id.card_menu_show:
@@ -124,9 +119,10 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
         }
     }
 
-    private void collapse() {
+    protected void collapseView(Animation.AnimationListener animationListener) {
         final View v = getCardView();
         final int initialHeight = v.getMeasuredHeight();
+        v.setTag(true);
 
         Animation anim = new Animation() {
             @Override
@@ -145,6 +141,9 @@ public class SiteCard extends Card implements Card.OnSwipeListener, CardHeader.O
             }
         };
 
+        if (animationListener != null) {
+            anim.setAnimationListener(animationListener);
+        }
         anim.setDuration(200);
         v.startAnimation(anim);
     }

@@ -19,48 +19,36 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-    <!--TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@android:id/text1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:textColor="#000"
-        android:background="?android:attr/activatedBackgroundIndicator"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall" /-->
     <ImageView
+        android:id="@+id/imageView_settingsIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView_settingsIcon"
-        android:src="@drawable/ic_drawer_logout"
-        android:layout_margin="5dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_drawer_logout" />
 
     <TextView
+        android:id="@+id/textView_settingsItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:text="Small Text"
-        android:textColor="#ff787878"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:id="@+id/textView_settingsItem"
         android:layout_toEndOf="@+id/imageView_settingsIcon"
         android:layout_toRightOf="@+id/imageView_settingsIcon"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="#ff787878" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ff787878"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:background="#ff787878" />
 </RelativeLayout>
 
 

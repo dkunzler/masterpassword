@@ -1,51 +1,59 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="de.devland.masterpassword.ui.LoginActivity$PlaceholderFragment">
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="de.devland.masterpassword.ui.LoginActivity$PlaceholderFragment">
 
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/relativeLayout">
+        android:layout_centerVertical="true">
 
         <EditText
+            android:id="@+id/editText_masterPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:layout_centerHorizontal="true"
             android:ems="10"
-            android:id="@+id/editText_masterPassword"
             android:hint="@string/hint_password"
-            android:layout_centerHorizontal="true">
+            android:inputType="textPassword">
 
-            <requestFocus/>
+            <requestFocus />
         </EditText>
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
             android:id="@+id/editText_fullName"
-            android:hint="@string/hint_fullName"
-            android:layout_below="@+id/editText_masterPassword"
-            android:layout_centerHorizontal="true"/>
-
-        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView_login"
-            android:src="@drawable/ic_go"
+            android:layout_below="@+id/editText_masterPassword"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="@string/hint_fullName"
+            android:inputType="text" />
+
+        <com.andexert.library.RippleView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/editText_fullName"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
+            android:layout_gravity="bottom|right"
+            android:layout_marginTop="20dp"
+            ripple:centered="true">
+
+            <ImageView
+                android:id="@+id/imageView_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_go" />
+        </com.andexert.library.RippleView>
 
     </RelativeLayout>
 

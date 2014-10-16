@@ -17,6 +17,7 @@ import android.widget.AbsListView;
 import android.widget.SearchView;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,13 +27,14 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
+import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.view.CardListView;
 import it.gmariotti.cardslib.library.view.listener.SwipeOnScrollListener;
 import lombok.NoArgsConstructor;
 
@@ -43,7 +45,7 @@ import lombok.NoArgsConstructor;
 public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener, SearchView.OnQueryTextListener {
 
     @InjectView(R.id.cardList)
-    protected CardListView cardListView;
+    protected InsertionAnimationCardListView cardListView;
     @InjectView(R.id.floating_action_add)
     protected FloatingActionButton addButton;
 
@@ -89,6 +91,8 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         adapter = new SiteCardArrayAdapter(getActivity(), new ArrayList<Card>());
 
+        App.get().getBus().register(this);
+
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
     }
@@ -111,7 +115,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         switch (id) {
             case R.id.menuSortAlphabetically:
-                 defaultPrefs.sortBy(Site.SITE_NAME);
+                defaultPrefs.sortBy(Site.SITE_NAME);
                 break;
             case R.id.menuSortLastUsed:
                 defaultPrefs.sortBy(Site.LAST_USED + " DESC");
@@ -137,8 +141,24 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         refreshCards();
     }
 
+
+    @Subscribe
+    public void onPasswordCopy(PasswordCopyEvent e) {
+        if (defaultPrefs.sortBy().contains(Site.LAST_USED)) {
+            final SiteCard card = e.getCard();
+            final SiteCard newCard = new SiteCard(getActivity(), card.getSite(), adapter);
+
+            if (adapter.getPosition(card) != 0) {
+
+                cardListView.addRow(newCard);
+                adapter.remove(card);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
     private void refreshCards() {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
 
         Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, defaultPrefs.sortBy(), null);
         while (siteIterator.hasNext()) {
@@ -180,6 +200,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.setBackgroundResource(R.color.card_list_background_light);
         cardListView.setAdapter(adapter);
 
         cardListView.setOnScrollListener(hideFloatingButtonScrollListener);
@@ -215,4 +236,9 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         return true;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        App.get().getBus().unregister(this);
+    }
 }

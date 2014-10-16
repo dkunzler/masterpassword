@@ -16,6 +16,8 @@
     <string name="errorEmpty">Darf nicht leer sein</string>
     <string name="caption_save">Speichern</string>
     <string name="caption_cancel">Abbrechen</string>
+    <string name="caption_import">Import</string>
+    <string name="caption_export">Export</string>
     <string name="msg_generateKey">Generiere Masterkey…</string>
     <string name="hint_password">Master Passwort</string>
     <string name="hint_fullName">Dein Name</string>

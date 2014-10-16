@@ -7,7 +7,9 @@ import android.os.Build;
 import android.preference.Preference;
 import android.util.AttributeSet;
 
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.prefs.DefaultPrefs;
 
 /**
  * Created by David Kunzler on 09.10.2014.
@@ -27,10 +29,14 @@ public class FeedbackPreference extends Preference {
 
     @Override
     protected void onClick() {
+        DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getContext());
+
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "info@devland.de", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Master Password Feedback");
         String mailTemplate = "\n\n\n-----\n" +
+                "App Version: %s\n" +
+                "App Version Code: %d\n" +
                 "OS Version: %s\n" +
                 "API Level: %d\n" +
                 "Android Version: %s\n" +
@@ -38,6 +44,8 @@ public class FeedbackPreference extends Preference {
                 "Device Codename: %s\n" +
                 "Device Model: %s";
         String mailText = String.format(mailTemplate,
+                defaultPrefs.versionName(),
+                defaultPrefs.versionCode(),
                 System.getProperty("os.version"),
                 Build.VERSION.SDK_INT,
                 Build.VERSION.RELEASE,
