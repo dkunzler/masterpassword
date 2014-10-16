@@ -20,14 +20,6 @@ public class UpgradeManager {
     }
 
     public void onUpgrade(int oldVersion, int newVersion) {
-        switch (oldVersion) {
-            case 4:
-                DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
-                if (defaultPrefs.defaultPasswordType().equals("\"GeneratedMaximum\"")) {
-                    defaultPrefs.defaultPasswordType(MPElementType.GeneratedMaximum.toString());
-                }
-                defaultPrefs.hidePasswords(defaultPrefs.hidePasswords());
-        }
     }
 
 }

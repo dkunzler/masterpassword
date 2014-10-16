@@ -44,8 +44,8 @@ public class App extends SugarApp {
         }
         defaultPrefs.versionName(pInfo.versionName);
         defaultPrefs.versionCode(pInfo.versionCode);
+        defaultPrefs.initDefaults();
         if (defaultPrefs.firstStart()) {
-            defaultPrefs.initDefaults();
             defaultPrefs.firstStart(false);
         }
 
