@@ -1,11 +1,11 @@
 package de.devland.masterpassword.ui;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
@@ -16,7 +16,7 @@ import de.devland.masterpassword.util.MasterPasswordHolder;
 /**
  * Created by David Kunzler on 23.08.2014.
  */
-public class LoginRequiringActivity extends Activity {
+public class LoginRequiringActivity extends ActionBarActivity {
 
     protected DefaultPrefs defaultPrefs;
 

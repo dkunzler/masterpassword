@@ -16,7 +16,7 @@ public class EditActivity extends LoginRequiringActivity {
         if (savedInstanceState == null) {
             fragment = new EditFragment();
             fragment.setArguments(getIntent().getExtras());
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, fragment)
                     .commit();
         }

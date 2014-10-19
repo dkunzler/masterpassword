@@ -1,10 +1,12 @@
 package de.devland.masterpassword.ui;
 
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.SearchView;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.otto.Subscribe;
@@ -104,7 +105,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         searchItem = menu.findItem(R.id.action_search);
         searchItem.setVisible(true);
-        searchView = (SearchView) searchItem.getActionView();
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
     }
 
@@ -200,8 +201,8 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.setBackgroundResource(R.color.card_list_background_light);
         cardListView.setAdapter(adapter);
+        cardListView.setBackgroundResource(R.color.card_list_background_light);
 
         cardListView.setOnScrollListener(hideFloatingButtonScrollListener);
 

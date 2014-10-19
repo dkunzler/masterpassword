@@ -33,4 +33,5 @@
     <string name="caption_delete">Löschen</string>
     <string name="caption_increment">Zähler erhöhen</string>
     <string name="title_feedback">Sende Feedback…</string>
+    <string name="title_passwords">Passwörter</string>
 </resources>

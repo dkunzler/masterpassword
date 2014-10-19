@@ -33,7 +33,7 @@
 
         <activity
             android:name="de.devland.masterpassword.ui.PasswordViewActivity"
-            android:label="@string/app_name" >
+            android:label="@string/title_passwords" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

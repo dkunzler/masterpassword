@@ -1,7 +1,6 @@
 package de.devland.masterpassword.ui.preferences;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.content.res.Resources;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
@@ -10,8 +9,6 @@ import android.webkit.WebView;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import de.devland.masterpassword.R;
 
 /**
  * Created by David Kunzler on 07.09.2014.

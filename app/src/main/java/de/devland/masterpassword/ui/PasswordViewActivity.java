@@ -3,8 +3,8 @@ package de.devland.masterpassword.ui;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +37,7 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_view);
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PasswordViewFragment())
                     .commit();
         }
@@ -47,7 +47,6 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
             drawerToggle = new ActionBarDrawerToggle(
                     this,                  /* host Activity */
                     drawerLayout,         /* DrawerLayout object */
-                    R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
                     R.string.drawer_open,  /* "open drawer" description */
                     R.string.drawer_close  /* "close drawer" description */
             ) {
@@ -71,8 +70,8 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
 
             // Set the drawer toggle as the DrawerListener
             drawerLayout.setDrawerListener(drawerToggle);
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-            getActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
         }
 
         initializeDrawerItems();
