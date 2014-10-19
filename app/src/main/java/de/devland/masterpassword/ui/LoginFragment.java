@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.lambdaworks.crypto.SCryptUtil;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -31,9 +33,12 @@ public class LoginFragment extends Fragment {
     @InjectView(R.id.editText_fullName)
     protected EditText fullName;
 
+    protected DefaultPrefs defaultPrefs;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
         if (!MasterPasswordHolder.INSTANCE.needsLogin(false)) {
             Intent intent = new Intent(getActivity(), PasswordViewActivity.class);
             getActivity().startActivity(intent);
@@ -52,7 +57,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fullName.setText(Esperandro.getPreferences(DefaultPrefs.class, getActivity()).defaultUserName());
+        fullName.setText(
+                Esperandro.getPreferences(DefaultPrefs.class, getActivity()).defaultUserName());
 
         ShowCaseManager.INSTANCE.showLoginShowCase(getActivity(), masterPassword);
     }
@@ -60,29 +66,37 @@ public class LoginFragment extends Fragment {
     @OnClick(R.id.imageView_login)
     public void onClick() {
         if (checkInputs()) {
-            Esperandro.getPreferences(DefaultPrefs.class, getActivity()).defaultUserName(fullName.getText().toString());
-            GenerateUserKeysAsyncTask keysAsyncTask = new GenerateUserKeysAsyncTask(getActivity(), new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(getActivity(), PasswordViewActivity.class);
-                    getActivity().startActivity(intent);
-                    getActivity().finish();
-                }
-            });
-            keysAsyncTask.execute(fullName.getText().toString(), masterPassword.getText().toString());
+            Esperandro.getPreferences(DefaultPrefs.class, getActivity())
+                      .defaultUserName(fullName.getText().toString());
+            GenerateUserKeysAsyncTask keysAsyncTask = new GenerateUserKeysAsyncTask(getActivity(),
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(getActivity(), PasswordViewActivity.class);
+                            getActivity().startActivity(intent);
+                            getActivity().finish();
+                        }
+                    });
+            keysAsyncTask
+                    .execute(fullName.getText().toString(), masterPassword.getText().toString());
         }
     }
 
     private boolean checkInputs() {
         boolean result = true;
-        // TODO verify password if set
+
         if (masterPassword.getText() == null || masterPassword.getText().toString().equals("")) {
             result = false;
             masterPassword.setError(getActivity().getString(R.string.errorEmpty));
-        }
-        if (fullName.getText() == null || fullName.getText().toString().equals("")) {
+        } else if (fullName.getText() == null || fullName.getText().toString().equals("")) {
             result = false;
             fullName.setError(getActivity().getString(R.string.errorEmpty));
+        } else if (defaultPrefs.verifyPassword()) {
+            result = SCryptUtil
+                    .check(masterPassword.getText().toString(), defaultPrefs.masterPasswordHash());
+            if (!result) {
+                masterPassword.setError("Password incorrect");
+            }
         }
         return result;
     }
