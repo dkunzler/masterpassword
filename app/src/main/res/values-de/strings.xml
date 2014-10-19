@@ -34,4 +34,6 @@
     <string name="caption_increment">Zähler erhöhen</string>
     <string name="title_feedback">Sende Feedback…</string>
     <string name="title_passwords">Passwörter</string>
+    <string name="hint_passwordConfirm">bestätigen</string>
+    <string name="hidePasswordsTitle">Verstecke Passwörter</string>
 </resources>

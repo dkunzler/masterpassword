@@ -1,11 +1,5 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<CheckBoxPreference-->
-    <!--android:key="verifyPassword"-->
-    <!--android:summaryOff="@string/verifyPasswordOff"-->
-    <!--android:summaryOn="@string/verifyPasswordOn"-->
-    <!--android:title="@string/verifyPasswordTitle" />-->
-
     <de.devland.masterpassword.ui.preferences.LanguagePreference
         android:entries="@array/pref_language_titles"
         android:entryValues="@array/pref_language_values"
@@ -40,6 +34,10 @@
 
     <SwitchPreference
         android:key="hidePasswords"
-        android:title="Hide Passwords"/>
+        android:title="@string/hidePasswordsTitle"/>
+
+    <de.devland.masterpassword.ui.preferences.VerifyPasswordPreference
+        android:key="verifyPassword"
+        android:title="@string/verifyPasswordTitle"/>
 
 </PreferenceScreen>

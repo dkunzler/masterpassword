@@ -1,17 +1,17 @@
 package de.devland.masterpassword.ui.preferences;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 
 import de.devland.esperandro.Esperandro;
@@ -28,7 +28,7 @@ public class LanguagePreference extends ListPreference {
     protected String oldLanguage;
     protected DefaultPrefs defaultPrefs;
     @Setter
-    protected Activity settingsActivity;
+    protected ActionBarActivity settingsActivity;
 
     public LanguagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -56,7 +56,7 @@ public class LanguagePreference extends ListPreference {
         super.onDismiss(dialog);
         if (!oldLanguage.equals(defaultPrefs.language())) {
             RestartDialog restartDialog = new RestartDialog();
-            restartDialog.show(settingsActivity.getFragmentManager(), null);
+            restartDialog.show(settingsActivity.getSupportFragmentManager(), null);
         }
     }
 

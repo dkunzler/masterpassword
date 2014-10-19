@@ -6,6 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 
 import de.devland.masterpassword.R;
 
@@ -55,9 +56,9 @@ public class SettingsFragment extends PreferenceFragment {
         getPreferenceScreen().addPreference(fakeHeader);
         addPreferencesFromResource(R.xml.pref_about);
 
-        bindPreferenceSummaryToValue(findPreference("verifyPassword"));
         bindPreferenceSummaryToValue(findPreference("language"));
-        ((LanguagePreference) findPreference("language")).setSettingsActivity(getActivity());
+        ((LanguagePreference) findPreference("language")).setSettingsActivity((ActionBarActivity) getActivity());
+        ((VerifyPasswordPreference) findPreference("verifyPassword")).setSettingsActivity((ActionBarActivity) getActivity());
         bindPreferenceSummaryToValue(findPreference("clipboardDuration"));
         bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));
         bindPreferenceSummaryToValue(findPreference("versionName"));

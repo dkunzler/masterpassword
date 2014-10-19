@@ -75,6 +75,7 @@ public class LoginFragment extends Fragment {
 
     private boolean checkInputs() {
         boolean result = true;
+        // TODO verify password if set
         if (masterPassword.getText() == null || masterPassword.getText().toString().equals("")) {
             result = false;
             masterPassword.setError(getActivity().getString(R.string.errorEmpty));
