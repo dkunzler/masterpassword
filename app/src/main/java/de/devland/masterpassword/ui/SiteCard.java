@@ -69,6 +69,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
         ButterKnife.inject(this, cardView);
         siteName.setText(site.getSiteName());
         siteName.setTypeface(Typeface.DEFAULT_BOLD);
+        siteName.setTextColor(getContext().getResources().getColor(R.color.text));
         userName.setText(site.getUserName());
         if (site.getUserName().isEmpty()) {
             userName.setVisibility(View.GONE);

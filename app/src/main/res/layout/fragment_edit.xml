@@ -21,19 +21,20 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:text="@string/caption_siteName"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/text" />
 
         <EditText
             android:id="@+id/editText_siteName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:inputType="textNoSuggestions"
             android:layout_below="@+id/textView_siteName"
-            android:layout_marginTop="@dimen/edittext_marginCaption" />
+            android:layout_marginTop="@dimen/edittext_marginCaption"
+            android:inputType="textNoSuggestions" />
 
         <TextView
             android:id="@+id/textView_userName"
@@ -44,7 +45,8 @@
             android:layout_below="@+id/editText_siteName"
             android:layout_marginTop="@dimen/edittext_margin_top"
             android:text="@string/caption_userName"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/text" />
 
         <AutoCompleteTextView
             android:id="@+id/editText_userName"
@@ -55,8 +57,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView_userName"
-            android:hint="@string/msg_optional"
-            android:layout_marginTop="@dimen/edittext_marginCaption" />
+            android:layout_marginTop="@dimen/edittext_marginCaption"
+            android:hint="@string/msg_optional" />
 
         <TextView
             android:id="@+id/textView_passwordType"
@@ -67,7 +69,8 @@
             android:layout_below="@+id/editText_userName"
             android:layout_marginTop="@dimen/edittext_margin_top"
             android:text="@string/caption_passwordType"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/text" />
 
         <Spinner
             android:id="@+id/spinner_passwordType"
@@ -78,8 +81,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView_passwordType"
-            android:entries="@array/passwordTypeValues"
-            android:layout_marginTop="@dimen/edittext_marginCaption" />
+            android:layout_marginTop="@dimen/edittext_marginCaption"
+            android:entries="@array/passwordTypeValues" />
 
         <TextView
             android:id="@+id/textView_siteCounter"
@@ -90,7 +93,8 @@
             android:layout_below="@+id/spinner_passwordType"
             android:layout_marginTop="@dimen/edittext_margin_top"
             android:text="@string/caption_siteCounter"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/text" />
 
         <NumberPicker
             android:id="@+id/numberPicker_siteCounter"

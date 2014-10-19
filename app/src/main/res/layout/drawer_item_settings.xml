@@ -42,13 +42,13 @@
         android:paddingRight="16dp"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="#ff787878" />
+        android:textColor="@color/text_secondary" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:background="#ff787878" />
+        android:background="@color/divider" />
 </RelativeLayout>
 
 

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -101,6 +102,7 @@ public class EditFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        ((ActionBarActivity)activity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         passwordTypeKeys = getResources().getStringArray(R.array.passwordTypeKeys);
     }
 
