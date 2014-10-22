@@ -20,8 +20,8 @@
     </style>
 
     <style name="ShowcaseLightTheme" parent="ShowcaseView">
-        <!--<item name="sv_backgroundColor">#5c000000</item>-->
-        <!--<item name="sv_showcaseColor">#ffaaaaaa</item>-->
+        <item name="sv_backgroundColor">#ddffffff</item>
+        <item name="sv_showcaseColor">@color/accent_light</item>
         <!--<item name="sv_tintButtonColor">false</item>-->
         <!--item name="sv_titleTextAppearance">@style/CustomTitle</item-->
     </style>
@@ -44,9 +44,9 @@
     <color name="primary_light">#b0bec5</color>
     <color name="primary_dark">#263238</color>
 
-    <color name="accent">#3d5afe</color>
-    <color name="accent_light">#a6baff</color>
-    <color name="accent_dark">#4d69ff</color>
+    <color name="accent">#259b24</color>
+    <color name="accent_light">#72d572</color>
+    <color name="accent_dark">#056f00</color>
 
     <color name="black">#000000</color>
     <color name="divider">#1e000000</color>
