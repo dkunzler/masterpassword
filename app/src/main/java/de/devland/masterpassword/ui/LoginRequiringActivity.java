@@ -5,10 +5,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import de.devland.esperandro.Esperandro;
-import de.devland.masterpassword.App;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.receiver.ClearPasswordReceiver;
 import de.devland.masterpassword.util.MasterPasswordHolder;
@@ -16,7 +14,7 @@ import de.devland.masterpassword.util.MasterPasswordHolder;
 /**
  * Created by David Kunzler on 23.08.2014.
  */
-public class LoginRequiringActivity extends ActionBarActivity {
+public class LoginRequiringActivity extends BaseActivity {
 
     protected DefaultPrefs defaultPrefs;
 
@@ -28,7 +26,6 @@ public class LoginRequiringActivity extends ActionBarActivity {
             this.finish();
             this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
-        App.get().getBus().register(this);
     }
 
     @Override
@@ -47,9 +44,5 @@ public class LoginRequiringActivity extends ActionBarActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        App.get().getBus().unregister(this);
-    }
+
 }

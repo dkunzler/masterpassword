@@ -2,35 +2,20 @@ package de.devland.masterpassword.ui.drawer;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import android.support.v4.widget.DrawerLayout;
 
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.export.ExportType;
+import de.devland.masterpassword.export.Exporter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Created by David Kunzler on 06.10.2014.
  */
+@RequiredArgsConstructor(suppressConstructorProperties = true)
 public class ExportDrawerItem extends SettingsDrawerItem {
-    public static final int REQUEST_CODE_EXPORT = 2345;
-
-    private Activity activity;
-
-    public ExportDrawerItem(Activity activity) {
-        this.activity = activity;
-    }
+    private final Activity activity;
+    private final DrawerLayout drawerLayout;
 
     @Override
     public int getImageRes() {
@@ -44,56 +29,11 @@ public class ExportDrawerItem extends SettingsDrawerItem {
 
     @Override
     public void onClick(Context context) {
-        // TODO pre 19
+        if (drawerLayout != null) {
+            drawerLayout.closeDrawers();
+        }
         // TODO dialog to choose file format
-        Date now = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
-        String fileName = dateFormat.format(now) + "_export.mpsites";
-
-
-        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-
-        // Filter to only show results that can be "opened", such as
-        // a file (as opposed to a list of contacts or timezones).
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        // Create a file with the requested MIME type.
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TITLE, fileName);
-        activity.startActivityForResult(intent, REQUEST_CODE_EXPORT);
-    }
-
-    public void doExport(Intent data) {
-        // TODO
-        File exportFile = new File(data.getData().getPath());
-        String exportData = null;
-        switch (ExportType.fromUri(data.getData())) {
-            case MPSITES:
-                // TODO
-                break;
-            case JSON:
-                List<Site> sites = Site.listAll(Site.class);
-                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-                                             .serializeNulls().create();
-                exportData = gson.toJson(sites);
-                break;
-            default:
-                // TODO error message
-                return;
-        }
-
-        OutputStreamWriter outputStreamWriter;
-        try {
-            if (exportData != null) {
-                outputStreamWriter = new OutputStreamWriter(new FileOutputStream(exportFile));
-                outputStreamWriter.write(exportData);
-                outputStreamWriter.close();
-                // TODO done message
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            // TODO error message
-        }
-
+        Exporter exporter = new Exporter();
+        exporter.startExportIntent(activity, ExportType.JSON);
     }
 }

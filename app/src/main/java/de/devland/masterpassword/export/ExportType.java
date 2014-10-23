@@ -8,6 +8,10 @@ import android.net.Uri;
 public enum ExportType {
     JSON, MPSITES;
 
+    public String getFileExtension() {
+        return this.toString().toLowerCase();
+    }
+
     public static ExportType fromUri(Uri uri) {
         String uriPath = uri.getPath();
         if (uriPath.endsWith(".mpsites")) {

@@ -1,6 +1,5 @@
 package de.devland.masterpassword.ui;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -26,7 +25,6 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
-    private ListView drawerList;
     private DrawerItemAdapter drawerItemAdapter;
 
     private ImportDrawerItem importDrawerItem;
@@ -42,7 +40,7 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
                     .commit();
         }
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList = (ListView) findViewById(R.id.left_drawer);
+        ListView drawerList = (ListView) findViewById(R.id.left_drawer);
         if (drawerLayout != null) {
             drawerToggle = new ActionBarDrawerToggle(
                     this,                  /* host Activity */
@@ -78,10 +76,12 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
 
         drawerList.setAdapter(drawerItemAdapter);
         drawerList.setOnItemClickListener(this);
+
+        getSupportActionBar().setTitle(R.string.title_passwords);
     }
 
     private void initializeDrawerItems() {
-        List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
+        List<DrawerItem> drawerItems = new ArrayList<>();
         importDrawerItem = new ImportDrawerItem(this);
         exportDrawerItem = new ExportDrawerItem(this);
         drawerItems.add(importDrawerItem);
@@ -128,20 +128,4 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
         drawerItemAdapter.getItem(i).onClick(this);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case ImportDrawerItem.REQUEST_CODE_IMPORT:
-                if (resultCode == RESULT_OK) {
-                    importDrawerItem.doImport(data);
-                }
-                break;
-            case ExportDrawerItem.REQUEST_CODE_EXPORT:
-                if (resultCode == RESULT_OK) {
-                    exportDrawerItem.doExport(data);
-                }
-                break;
-        }
-    }
 }

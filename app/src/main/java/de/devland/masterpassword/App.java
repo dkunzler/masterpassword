@@ -13,9 +13,11 @@ import java.util.Locale;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.ui.BaseActivity;
 import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.UpgradeManager;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 
 
@@ -31,6 +33,9 @@ public class App extends SugarApp {
     private Locale targetLocale;
     @Getter
     private Bus bus;
+    @Getter
+    @Setter
+    private BaseActivity currentForegroundActivity;
 
 
     @Override
