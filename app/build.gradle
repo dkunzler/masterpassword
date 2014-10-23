@@ -51,23 +51,27 @@ repositories {
 }
 
 dependencies {
-    //compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.+'
-//    compile 'com.android.support:support-v4:21.0.+'
 
+    // import, export
     compile(name:'aFileChooser', ext:'aar') // Apache v2.0
+    compile 'com.google.code.gson:gson:2.3' // Apache v2.0
 
+    // styling
     compile 'com.github.gabrielemariotti.cards:library:1.9.1' // Apache v2.0
     compile 'com.melnykov:floatingactionbutton:1.0.4' // MIT
     compile 'com.github.traex.rippleeffect:library:1.2.1' // MIT
+    compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
+
+    // tools
     compile 'com.jakewharton:butterknife:5.1.2' // Apache v2.0
     compile 'com.squareup:otto:1.3.5' // Apache v2.0
     compile 'de.devland.esperandro:esperandro-api:2.1.0' // Apache v2.0
     compile 'de.devland.esperandro:esperandro-gson-addon:2.1.0' // Apache v2.0
-    compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
     compile 'com.github.satyan:sugar:1.3' // MIT
     compile files('libs/lombok-api-1.14.0.jar') // MIT
 
+    // annotation processors
     apt 'org.projectlombok:lombok:1.14.0' // MIT
     apt 'de.devland.esperandro:esperandro:2.1.0' // Apache v2.0
 
