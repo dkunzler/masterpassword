@@ -2,6 +2,7 @@ package de.devland.masterpassword.model;
 
 import android.database.Cursor;
 
+import com.google.gson.annotations.Expose;
 import com.lyndir.masterpassword.MPElementType;
 import com.orm.SugarRecord;
 
@@ -27,14 +28,19 @@ public class Site extends SugarRecord<Site> {
     public static final String CATEGORY = "CATEGORY";
     public static final String LAST_USED = "LAST_USED";
 
+    @Expose
     protected String siteName = "";
+    @Expose
     protected String userName = "";
+    @Expose
     protected int siteCounter = 0;
+    @Expose
     protected MPElementType passwordType = MPElementType.GeneratedMaximum;
+    @Expose
     protected Date lastUsed = new Date(0);
-    protected String storedPassword;
-
+    @Expose
     protected String category;
+    protected String storedPassword;
 
     public boolean complete() {
         boolean complete = true;

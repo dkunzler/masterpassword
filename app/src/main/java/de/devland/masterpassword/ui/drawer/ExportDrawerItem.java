@@ -3,15 +3,22 @@ package de.devland.masterpassword.ui.drawer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
-import com.ipaulpro.afilechooser.utils.FileUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.export.ExportType;
 
 /**
  * Created by David Kunzler on 06.10.2014.
@@ -38,6 +45,7 @@ public class ExportDrawerItem extends SettingsDrawerItem {
     @Override
     public void onClick(Context context) {
         // TODO pre 19
+        // TODO dialog to choose file format
         Date now = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
         String fileName = dateFormat.format(now) + "_export.mpsites";
@@ -55,9 +63,37 @@ public class ExportDrawerItem extends SettingsDrawerItem {
         activity.startActivityForResult(intent, REQUEST_CODE_EXPORT);
     }
 
-    public void doExport(Uri fileUri) {
+    public void doExport(Intent data) {
         // TODO
-        String path = FileUtils.getPath(activity, fileUri);
+        File exportFile = new File(data.getData().getPath());
+        String exportData = null;
+        switch (ExportType.fromUri(data.getData())) {
+            case MPSITES:
+                // TODO
+                break;
+            case JSON:
+                List<Site> sites = Site.listAll(Site.class);
+                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+                                             .serializeNulls().create();
+                exportData = gson.toJson(sites);
+                break;
+            default:
+                // TODO error message
+                return;
+        }
+
+        OutputStreamWriter outputStreamWriter;
+        try {
+            if (exportData != null) {
+                outputStreamWriter = new OutputStreamWriter(new FileOutputStream(exportFile));
+                outputStreamWriter.write(exportData);
+                outputStreamWriter.close();
+                // TODO done message
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // TODO error message
+        }
 
     }
 }

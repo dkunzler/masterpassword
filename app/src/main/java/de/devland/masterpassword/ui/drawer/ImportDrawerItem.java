@@ -40,7 +40,7 @@ public class ImportDrawerItem extends SettingsDrawerItem {
         activity.startActivityForResult(intent, REQUEST_CODE_IMPORT);
     }
 
-    public void doImport(Uri fileUri) {
+    public void doImport(Intent data) {
         // TODO
     }
 }

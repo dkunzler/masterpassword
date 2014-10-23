@@ -134,12 +134,12 @@ public class PasswordViewActivity extends LoginRequiringActivity implements Adap
         switch (requestCode) {
             case ImportDrawerItem.REQUEST_CODE_IMPORT:
                 if (resultCode == RESULT_OK) {
-                    importDrawerItem.doImport(data.getData());
+                    importDrawerItem.doImport(data);
                 }
                 break;
             case ExportDrawerItem.REQUEST_CODE_EXPORT:
                 if (resultCode == RESULT_OK) {
-                    exportDrawerItem.doExport(data.getData());
+                    exportDrawerItem.doExport(data);
                 }
                 break;
         }
