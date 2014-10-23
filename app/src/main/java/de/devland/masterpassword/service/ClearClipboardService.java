@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class ClearClipboardService extends Service {
 
@@ -25,10 +27,10 @@ public class ClearClipboardService extends Service {
         // TODO handler injection
         int clipboardDuration = Integer.parseInt(defaultPrefs.clipboardDuration());
         if (clipboardDuration > 0) {
-            Toast.makeText(getApplicationContext(),
+            Crouton.makeText(App.get().getCurrentForegroundActivity(),
                     String.format(getApplicationContext().getString(
-                            R.string.copiedToClipboardWithDuration),
-                            clipboardDuration), Toast.LENGTH_SHORT).show();
+                                    R.string.copiedToClipboardWithDuration),
+                            clipboardDuration), Style.INFO).show();
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -39,7 +41,7 @@ public class ClearClipboardService extends Service {
                 }
             }, clipboardDuration * 1000);
         } else {
-            Toast.makeText(getApplicationContext(), R.string.copiedToClipboard, Toast.LENGTH_SHORT).show();
+            Crouton.makeText(App.get().getCurrentForegroundActivity(), R.string.copiedToClipboard, Style.INFO).show();
         }
         return Service.START_STICKY;
     }
