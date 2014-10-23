@@ -38,5 +38,7 @@
     <string name="hidePasswordsTitle">Hide Passwords</string>
     <string name="errorPasswordMatch">Passwords don\'t match</string>
     <string name="title_confirmPassword">Enter your password</string>
+    <string name="error_generic">An error occurred.</string>
+    <string name="msg_exportDone">Export succeeded.</string>
 
 </resources>

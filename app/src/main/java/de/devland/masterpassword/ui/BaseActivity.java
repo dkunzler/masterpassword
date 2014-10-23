@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.util.RequestCodeManager;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
 
 /**
  * Created by David Kunzler on 23.10.2014.
@@ -33,6 +34,7 @@ public class BaseActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Crouton.cancelAllCroutons();
         App.get().getBus().unregister(this);
     }
 }

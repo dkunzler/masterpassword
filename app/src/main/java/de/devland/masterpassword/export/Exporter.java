@@ -15,8 +15,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.util.RequestCodeManager;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Created by David Kunzler on 23.10.2014.
@@ -68,7 +71,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                 exportData = gson.toJson(sites);
                 break;
             default:
-                // TODO error message
+                Crouton.showText(activity, R.string.error_generic, Style.ALERT);
                 return;
         }
 
@@ -81,12 +84,11 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                 fileOutputStream.write(exportData.getBytes());
                 fileOutputStream.close();
                 pfd.close();
-                // TODO done message
-                // TODO close drawer
+                Crouton.showText(activity, R.string.msg_exportDone, Style.CONFIRM);
             }
         } catch (IOException e) {
             e.printStackTrace();
-            // TODO error message
+            Crouton.showText(activity, R.string.error_generic, Style.ALERT);
         }
     }
 }
