@@ -40,5 +40,10 @@
     <string name="title_confirmPassword">Enter your password</string>
     <string name="error_generic">An error occurred.</string>
     <string name="msg_exportDone">Export succeeded.</string>
+    <string name="caption_json">JSON</string>
+    <string name="caption_mpsites">MPSITES (coming soon)</string>
+    <string name="hint_mpsites">proprietary format\n (compatible with iOS/Mac-app)</string>
+    <string name="hint_json">simple, easy to read</string>
+    <string name="title_exportFormat">Export Format</string>
 
 </resources>

@@ -44,7 +44,8 @@ public enum RequestCodeManager {
         int packageHash = App.get().getPackageManager().getApplicationInfo(App.get().getPackageName(), PackageManager.GET_META_DATA).uid;
         int seed = getBaseSeed();
         int classHash = clazz.getName().hashCode();
-        return clientRequestCode + classHash * seed * packageHash;
+        short toShort = (short) (clientRequestCode + classHash * seed * packageHash);
+        return Math.abs(toShort);
     }
 
     public int addRequest(int internalRequestCode, Class clazz, RequestCodeCallback callback, Bundle data) {

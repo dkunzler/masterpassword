@@ -8,8 +8,8 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="de.devland.masterpassword.INITIATELICENSECHECK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
 
     <application
         android:name="de.devland.masterpassword.App"

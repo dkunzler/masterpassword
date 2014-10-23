@@ -50,45 +50,47 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
 
         Bundle extraData = new Bundle();
         extraData.putSerializable(EXTRA_EXPORT_TYPE, type);
-
-        int requestCode = RequestCodeManager.INSTANCE.addRequest(REQUEST_CODE_EXPORT, this.getClass(), this, extraData);
+        int requestCode = RequestCodeManager.INSTANCE
+                .addRequest(REQUEST_CODE_EXPORT, this.getClass(), this, extraData);
 
         activity.startActivityForResult(intent, requestCode);
     }
 
     @Override
     public void run(int resultCode, Intent intent, Bundle data) {
-        String exportData = null;
-        switch ((ExportType) data.getSerializable(EXTRA_EXPORT_TYPE)) {
-            case MPSITES:
-                // TODO
-                // TODO not implemented message
-                break;
-            case JSON:
-                List<Site> sites = Site.listAll(Site.class);
-                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-                        .serializeNulls().create();
-                exportData = gson.toJson(sites);
-                break;
-            default:
-                Crouton.showText(activity, R.string.error_generic, Style.ALERT);
-                return;
-        }
-
-        try {
-            if (exportData != null) {
-                ParcelFileDescriptor pfd = activity.getContentResolver().
-                        openFileDescriptor(intent.getData(), "w");
-
-                FileOutputStream fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
-                fileOutputStream.write(exportData.getBytes());
-                fileOutputStream.close();
-                pfd.close();
-                Crouton.showText(activity, R.string.msg_exportDone, Style.CONFIRM);
+        if (resultCode == Activity.RESULT_OK) {
+            String exportData = null;
+            switch ((ExportType) data.getSerializable(EXTRA_EXPORT_TYPE)) {
+                case MPSITES:
+                    // TODO
+                    break;
+                case JSON:
+                    List<Site> sites = Site.listAll(Site.class);
+                    Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+                                                 .serializeNulls().create();
+                    exportData = gson.toJson(sites);
+                    break;
+                default:
+                    Crouton.showText(activity, R.string.error_generic, Style.ALERT);
+                    return;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Crouton.showText(activity, R.string.error_generic, Style.ALERT);
+
+            try {
+                if (exportData != null) {
+                    ParcelFileDescriptor pfd = activity.getContentResolver().
+                            openFileDescriptor(intent.getData(), "w");
+
+                    FileOutputStream fileOutputStream = new FileOutputStream(
+                            pfd.getFileDescriptor());
+                    fileOutputStream.write(exportData.getBytes());
+                    fileOutputStream.close();
+                    pfd.close();
+                    Crouton.showText(activity, R.string.msg_exportDone, Style.CONFIRM);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Crouton.showText(activity, R.string.error_generic, Style.ALERT);
+            }
         }
     }
 }
