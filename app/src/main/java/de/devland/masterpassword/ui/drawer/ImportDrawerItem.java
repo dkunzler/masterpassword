@@ -1,25 +1,37 @@
 package de.devland.masterpassword.ui.drawer;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RadioButton;
 
 import com.ipaulpro.afilechooser.utils.FileUtils;
 
+import butterknife.ButterKnife;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.export.ImportType;
+import de.devland.masterpassword.export.Importer;
+import de.devland.masterpassword.ui.BaseActivity;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Created by David Kunzler on 06.10.2014.
  */
+@RequiredArgsConstructor(suppressConstructorProperties = true)
 public class ImportDrawerItem extends SettingsDrawerItem {
     public static final int REQUEST_CODE_IMPORT = 1234;
 
-    private Activity activity;
-
-    public ImportDrawerItem(Activity activity) {
-        this.activity = activity;
-    }
+    private final BaseActivity activity;
+    private final DrawerLayout drawerLayout;
 
     @Override
     public int getImageRes() {
@@ -33,14 +45,44 @@ public class ImportDrawerItem extends SettingsDrawerItem {
 
     @Override
     public void onClick(Context context) {
-        Intent getContentIntent = FileUtils.createGetContentIntent();
-        getContentIntent.setType("text/plain");
+        if (drawerLayout != null) {
+            drawerLayout.closeDrawers();
+        }
 
-        Intent intent = Intent.createChooser(getContentIntent, "Select a file");
-        activity.startActivityForResult(intent, REQUEST_CODE_IMPORT);
+        ImportTypeDialog dialog = new ImportTypeDialog();
+        dialog.show(activity.getSupportFragmentManager(), null);
     }
 
-    public void doImport(Intent data) {
-        // TODO
+    @SuppressLint("ValidFragment")
+    public class ImportTypeDialog extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            LayoutInflater layoutInflater = LayoutInflater.from(activity);
+            View dialogView = layoutInflater.inflate(R.layout.dialog_importtype, null);
+            final RadioButton appendRadio = ButterKnife
+                    .findById(dialogView, R.id.radioButton_append);
+            final RadioButton overrideRadio = ButterKnife
+                    .findById(dialogView, R.id.radioButton_override);
+            appendRadio.setChecked(true);
+            builder.setView(dialogView);
+            builder.setTitle(R.string.title_importType);
+            builder.setNegativeButton(android.R.string.cancel, null);
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Importer importer = new Importer();
+                    ImportType importType = ImportType.APPEND;
+                    if (overrideRadio.isChecked()) {
+                        importType = ImportType.OVERRIDE;
+                    }
+                    importer.startImportIntent(activity, importType);
+                    dismiss();
+                }
+            });
+
+            return builder.create();
+        }
     }
 }
