@@ -66,8 +66,10 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     break;
                 case JSON:
                     List<Site> sites = Site.listAll(Site.class);
-                    Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-                                                 .serializeNulls().create();
+                    Gson gson = new GsonBuilder()
+                            .setPrettyPrinting()
+                            .excludeFieldsWithoutExposeAnnotation()
+                            .serializeNulls().create();
                     exportData = gson.toJson(sites);
                     break;
                 default:

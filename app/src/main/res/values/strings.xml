@@ -51,5 +51,6 @@
     <string name="hint_append">keep existing sites</string>
     <string name="title_exportFormat">Export Format</string>
     <string name="title_importType">Import Type</string>
+    <string name="caption_selectFile">Select a file</string>
 
 </resources>

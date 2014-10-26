@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.ipaulpro.afilechooser.utils.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,28 +34,15 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
     public void startImportIntent(Activity activity, ImportType importType) {
         this.activity = activity;
-        // TODO pre 19
 
-        //Intent getContentIntent = FileUtils.createGetContentIntent();
-        //getContentIntent.setType("text/plain");
+        Intent getContentIntent = FileUtils.createGetContentIntent();
+        getContentIntent.setType("text/plain");
 
-        //Intent intent = Intent.createChooser(getContentIntent, "Select a file");
-        //activity.startActivityForResult(intent, REQUEST_CODE_IMPORT);
-
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-
-        // Filter to only show results that can be "opened", such as
-        // a file (as opposed to a list of contacts or timezones).
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        // Create a file with the requested MIME type.
-        intent.setType("text/plain");
-
+        Intent intent = Intent.createChooser(getContentIntent, activity.getString(R.string.caption_selectFile));
         Bundle extraData = new Bundle();
         extraData.putSerializable(EXTRA_IMPORT_TYPE, importType);
         int requestCode = RequestCodeManager.INSTANCE
                 .addRequest(REQUEST_CODE_IMPORT, this.getClass(), this, extraData);
-
         activity.startActivityForResult(intent, requestCode);
     }
 
@@ -68,7 +56,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
             try {
                 InputStream inputStream = activity.getContentResolver()
-                                                  .openInputStream(intent.getData());
+                        .openInputStream(intent.getData());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder fileContent = new StringBuilder("");
                 String line;
@@ -96,8 +84,10 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         break;
                     case JSON:
                         List<Site> gsonSites;
-                        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-                                                     .serializeNulls().create();
+                        Gson gson = new GsonBuilder()
+                                .setPrettyPrinting()
+                                .excludeFieldsWithoutExposeAnnotation()
+                                .serializeNulls().create();
                         Type listType = new TypeToken<ArrayList<Site>>() {
                         }.getType();
                         gsonSites = gson.fromJson(contents, listType);
