@@ -54,7 +54,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.+'
 
     // import, export
-    compile(name:'aFileChooser', ext:'aar') // Apache v2.0
+    compile(name:'aFileChooser-release', ext:'aar') // Apache v2.0
     compile 'com.google.code.gson:gson:2.3' // Apache v2.0 TODO add to licenses.html
 
     // styling
