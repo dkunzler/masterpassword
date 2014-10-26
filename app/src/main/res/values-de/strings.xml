@@ -36,4 +36,19 @@
     <string name="title_passwords">Passwörter</string>
     <string name="hint_passwordConfirm">bestätigen</string>
     <string name="hidePasswordsTitle">Verstecke Passwörter</string>
+    <string name="caption_append">Importierte Sites hinzufügen</string>
+    <string name="caption_json">JSON</string>
+    <string name="caption_mpsites">MPSITES (folgt)</string>
+    <string name="caption_override">Überschreiben</string>
+    <string name="errorPasswordMatch">Passwörter stimmen nicht überein</string>
+    <string name="error_generic">Ein Fehler ist aufgetreten</string>
+    <string name="hint_append">Existierende Sites behalten</string>
+    <string name="hint_json">einfach zu lesen</string>
+    <string name="hint_mpsites">proprietär\n (kompatibel mit iOS/Mac-App)</string>
+    <string name="hint_override">aktuelle Sites vor Import löschen</string>
+    <string name="msg_exportDone">Export erfolgreich</string>
+    <string name="msg_importDone">Import erfolgreich</string>
+    <string name="title_confirmPassword">Password eingeben</string>
+    <string name="title_exportFormat">Export Format</string>
+    <string name="title_importType">Import Typ</string>
 </resources>
