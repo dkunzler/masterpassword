@@ -55,14 +55,14 @@ dependencies {
 
     // import, export
     compile(name:'aFileChooser-release', ext:'aar') // Apache v2.0
-    compile 'com.google.code.gson:gson:2.3' // Apache v2.0 TODO add to licenses.html
+    compile 'com.google.code.gson:gson:2.3' // Apache v2.0
 
     // styling
     compile 'com.github.gabrielemariotti.cards:library:1.9.1' // Apache v2.0
     compile 'com.melnykov:floatingactionbutton:1.0.4' // MIT
     compile 'com.github.traex.rippleeffect:library:1.2.1' // MIT
     compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
-    compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') { // Apache v2.0 TODO add to licenses.html
+    compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') { // Apache v2.0
         exclude group: 'com.google.android', module: 'support-v4'
     }
 
