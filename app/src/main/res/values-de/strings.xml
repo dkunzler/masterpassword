@@ -51,4 +51,6 @@
     <string name="title_confirmPassword">Password eingeben</string>
     <string name="title_exportFormat">Export Format</string>
     <string name="title_importType">Import Typ</string>
+    <string name="caption_selectFile">Datei auswählen</string>
+    <string name="caption_selectFolder">Verzeichnis wählen</string>
 </resources>

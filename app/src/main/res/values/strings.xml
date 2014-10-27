@@ -52,5 +52,6 @@
     <string name="title_exportFormat">Export Format</string>
     <string name="title_importType">Import Type</string>
     <string name="caption_selectFile">Select a file</string>
+    <string name="caption_selectFolder">Select Folder</string>
 
 </resources>

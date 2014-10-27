@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -63,7 +64,10 @@ public class ExportDrawerItem extends SettingsDrawerItem {
             builder.setView(dialogView);
             builder.setTitle(R.string.title_exportFormat);
             builder.setNegativeButton(android.R.string.cancel, null);
-            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            int okButtonTextResource = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+                    ? android.R.string.ok
+                    : R.string.caption_selectFolder;
+            builder.setPositiveButton(okButtonTextResource, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     Exporter exporter = new Exporter();
