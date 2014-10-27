@@ -60,6 +60,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
         CardHeader header = new CardHeader(context);
         header.setPopupMenu(R.menu.card_site, this);
         addCardHeader(header);
+        setBackgroundResourceId(android.R.color.white);
     }
 
     @Override
