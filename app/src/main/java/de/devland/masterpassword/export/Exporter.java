@@ -79,7 +79,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         // Create a file with the requested MIME type.
-        intent.setType("text/plain");
+        intent.setType("*/*");
         intent.putExtra(Intent.EXTRA_TITLE, fileName);
         return intent;
     }
