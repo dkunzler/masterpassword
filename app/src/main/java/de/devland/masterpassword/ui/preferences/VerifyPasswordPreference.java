@@ -6,8 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.SwitchPreference;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -28,7 +28,7 @@ import lombok.Setter;
 /**
  * Created by David Kunzler on 16.10.2014.
  */
-public class VerifyPasswordPreference extends SwitchPreference implements Preference.OnPreferenceChangeListener {
+public class VerifyPasswordPreference extends CheckBoxPreference implements Preference.OnPreferenceChangeListener {
 
     protected DefaultPrefs defaultPrefs;
     @Setter
@@ -97,9 +97,17 @@ public class VerifyPasswordPreference extends SwitchPreference implements Prefer
                     okButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if (masterPassword.getText() == null || masterPassword.getText().toString().equals("")) {
+                                masterPassword.setError(getActivity().getString(R.string.errorEmpty));
+                                return;
+                            } else if (masterPasswordConfirm.getText() == null || masterPasswordConfirm.getText().toString().equals("")) {
+                                masterPasswordConfirm.setError(getActivity().getString(R.string.errorEmpty));
+                                return;
+                            }
+
                             String password = masterPassword.getText().toString();
                             String passwordConfirm = masterPasswordConfirm.getText().toString();
-                            // TODO check empty
+
                             if (password.equals(passwordConfirm)) {
                                 // TODO tune parameters
                                 String passwordHash = SCryptUtil.scrypt(password,

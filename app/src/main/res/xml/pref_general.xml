@@ -32,7 +32,7 @@
         android:positiveButtonText="@null"
         android:title="@string/autoLogoutDurationTitle"/>
 
-    <SwitchPreference
+    <CheckBoxPreference
         android:key="hidePasswords"
         android:title="@string/hidePasswordsTitle"/>
 
