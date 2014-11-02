@@ -3,6 +3,7 @@ package de.devland.masterpassword.export;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
+import com.williammora.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,8 +26,6 @@ import java.util.List;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.util.RequestCodeManager;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Created by deekay on 26/10/14.
@@ -69,9 +69,12 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
     private Intent getLegacyFileChooserIntent() {
         Intent getContentIntent = FileUtils.createGetContentIntent();
-        getContentIntent.putStringArrayListExtra(FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS, new ArrayList<>(Arrays.asList(".json", ".mpsites")));
+        getContentIntent
+                .putStringArrayListExtra(FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS,
+                        new ArrayList<>(Arrays.asList(".json", ".mpsites")));
         getContentIntent.setType("text/plain");
-        Intent intent = Intent.createChooser(getContentIntent, activity.getString(R.string.caption_selectFile));
+        Intent intent = Intent
+                .createChooser(getContentIntent, activity.getString(R.string.caption_selectFile));
         return intent;
     }
 
@@ -85,7 +88,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
             try {
                 InputStream inputStream = activity.getContentResolver()
-                        .openInputStream(intent.getData());
+                                                  .openInputStream(intent.getData());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder fileContent = new StringBuilder("");
                 String line;
@@ -98,7 +101,10 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                 contents = fileContent.toString();
             } catch (IOException e) {
                 e.printStackTrace();
-                Crouton.showText(activity, R.string.error_generic, Style.ALERT);
+                Snackbar.with(activity)
+                        .text(activity.getString(R.string.error_generic))
+                        .textColor(Color.RED)
+                        .show(activity);
             }
 
             if (contents != null) {
@@ -113,21 +119,26 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         break;
                     case JSON:
                         List<Site> gsonSites;
-                        Gson gson = new GsonBuilder()
-                                .setPrettyPrinting()
-                                .excludeFieldsWithoutExposeAnnotation()
-                                .serializeNulls().create();
+                        Gson gson = new GsonBuilder().setPrettyPrinting()
+                                                     .excludeFieldsWithoutExposeAnnotation()
+                                                     .serializeNulls().create();
                         Type listType = new TypeToken<ArrayList<Site>>() {
                         }.getType();
                         gsonSites = gson.fromJson(contents, listType);
                         if (gsonSites != null) {
                             importedSites = gsonSites;
                         } else {
-                            Crouton.showText(activity, R.string.error_generic, Style.ALERT);
+                            Snackbar.with(activity)
+                                    .text(activity.getString(R.string.error_generic))
+                                    .textColor(Color.RED)
+                                    .show(activity);
                         }
                         break;
                     default:
-                        Crouton.showText(activity, R.string.error_generic, Style.ALERT);
+                        Snackbar.with(activity)
+                                .text(activity.getString(R.string.error_generic))
+                                .textColor(Color.RED)
+                                .show(activity);
                         return;
                 }
 
@@ -136,7 +147,9 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                     site.save();
                 }
 
-                Crouton.showText(activity, R.string.msg_importDone, Style.CONFIRM);
+                Snackbar.with(activity)
+                        .text(activity.getString(R.string.msg_importDone))
+                        .show(activity);
             }
 
 

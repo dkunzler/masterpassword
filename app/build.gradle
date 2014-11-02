@@ -22,9 +22,9 @@ android {
 
     defaultConfig {
         applicationId "de.devland.masterpassword"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 21
-        versionCode 10
+        versionCode 12
         versionName "1.2.1 Beta"
     }
 
@@ -62,9 +62,7 @@ dependencies {
     compile 'com.melnykov:floatingactionbutton:1.0.4' // MIT
     compile 'com.github.traex.rippleeffect:library:1.2.1' // MIT
     compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
-    compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') { // Apache v2.0
-        exclude group: 'com.google.android', module: 'support-v4'
-    }
+    compile 'com.williammora:snackbar:1.4.0' // MIT
 
     // tools
     compile 'com.jakewharton:butterknife:5.1.2' // Apache v2.0
