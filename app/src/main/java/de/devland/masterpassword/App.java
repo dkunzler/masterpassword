@@ -7,11 +7,14 @@ import android.content.res.Configuration;
 import com.orm.Database;
 import com.orm.SugarApp;
 import com.squareup.otto.Bus;
+import com.squareup.otto.ThreadEnforcer;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.ui.BaseActivity;
 import de.devland.masterpassword.util.ProKeyUtil;
@@ -43,7 +46,7 @@ public class App extends SugarApp {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        bus = new Bus();
+        bus = new Bus(ThreadEnforcer.ANY);
         ProKeyUtil.INSTANCE.initLicenseCheck();
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -54,6 +57,9 @@ public class App extends SugarApp {
         defaultPrefs.versionName(pInfo.versionName);
         defaultPrefs.versionCode(pInfo.versionCode);
         defaultPrefs.initDefaults();
+        if (defaultPrefs.categories() == null) {
+            defaultPrefs.categories(new ArrayList<Category>());
+        }
         if (defaultPrefs.firstStart()) {
             defaultPrefs.firstStart(false);
         }

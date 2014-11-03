@@ -13,6 +13,7 @@
     <string name="caption_settings">Settings</string>
     <string name="caption_import">Import</string>
     <string name="caption_export">Export</string>
+    <string name="caption_addcategory">Add Category</string>
     <string name="copiedToClipboardWithDuration">Copied password to clipboard for %d seconds.</string>
     <string name="copiedToClipboard">Copied password to clipboard.</string>
     <string name="errorEmpty">Cannot be empty</string>
@@ -22,6 +23,7 @@
     <string name="hint_password">Master Password</string>
     <string name="hint_passwordConfirm">Confirm</string>
     <string name="hint_fullName">Your Name</string>
+    <string name="hint_category">Category Title</string>
     <string name="msg_optional">optional</string>
     <string name="drawer_open">Open Menu</string>
     <string name="drawer_close">Close Menu</string>
@@ -33,11 +35,13 @@
     <string name="caption_showhide">Show/Hide Password</string>
     <string name="caption_delete">Delete</string>
     <string name="caption_increment">Increase Counter</string>
+    <string name="caption_category">Category</string>
     <string name="title_feedback">Send Feedback…</string>
     <string name="title_passwords">Passwords</string>
     <string name="hidePasswordsTitle">Hide Passwords</string>
     <string name="errorPasswordMatch">Passwords don\'t match</string>
     <string name="title_confirmPassword">Enter your password</string>
+    <string name="title_addCategory">Add Category</string>
     <string name="error_generic">An error occurred.</string>
     <string name="msg_exportDone">Export succeeded.</string>
     <string name="msg_importDone">Import succeeded.</string>
@@ -53,5 +57,6 @@
     <string name="title_importType">Import Type</string>
     <string name="caption_selectFile">Select a file</string>
     <string name="caption_selectFolder">Select Folder</string>
+    <string name="category_all">All</string>
 
 </resources>

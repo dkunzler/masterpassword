@@ -53,4 +53,9 @@
     <string name="title_importType">Import Typ</string>
     <string name="caption_selectFile">Datei auswählen</string>
     <string name="caption_selectFolder">Verzeichnis wählen</string>
+    <string name="category_all">Alle</string>
+    <string name="caption_addcategory">Kategorie hinzufügen</string>
+    <string name="hint_category">Kategorie-Name</string>
+    <string name="title_addCategory">Kategorie hinzufügen</string>
+    <string name="caption_category">Kategorie</string>
 </resources>

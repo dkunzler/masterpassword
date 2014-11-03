@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.lyndir.masterpassword.MPElementType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
@@ -31,6 +32,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.ShowCaseManager;
@@ -54,13 +56,17 @@ public class EditFragment extends Fragment {
     protected AutoCompleteTextView userName;
     @InjectView(R.id.spinner_passwordType)
     protected Spinner passwordType;
+    @InjectView(R.id.spinner_category)
+    protected Spinner categorySpiner;
     @InjectView(R.id.numberPicker_siteCounter)
     protected NumberPicker siteCounter;
 
     private String[] passwordTypeKeys;
+    private ArrayAdapter<String> categoryAdapter;
 
     private long siteId = -1;
     private Site site;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,7 +108,7 @@ public class EditFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((ActionBarActivity)activity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((ActionBarActivity) activity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         passwordTypeKeys = getResources().getStringArray(R.array.passwordTypeKeys);
     }
 
@@ -132,9 +138,23 @@ public class EditFragment extends Fragment {
             sortedUserNames.add(siteUserName);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, sortedUserNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.select_dialog_item, sortedUserNames);
         userName.setAdapter(adapter);
         userName.setThreshold(1);
+
+        List<Category> categories = defaultPrefs.categories();
+        Collections.sort(categories);
+        List<String> categoryNames = new ArrayList<>();
+        categoryNames.add("");
+        for (Category cat : categories) {
+            categoryNames.add(cat.getName());
+        }
+        categoryAdapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item,
+                categoryNames);
+        categoryAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        categorySpiner.setAdapter(categoryAdapter);
 
         return rootView;
     }
@@ -152,7 +172,18 @@ public class EditFragment extends Fragment {
         siteName.setText(site.getSiteName());
         userName.setText(site.getUserName());
         updatePasswordTypeSpinner(site.getPasswordType());
+        updateCategorySpinner(site.getCategory());
         siteCounter.setValue(site.getSiteCounter());
+    }
+
+    private void updateCategorySpinner(String category) {
+        for (int i = 0; i < categoryAdapter.getCount(); i++) {
+            String spinnerCategory = categoryAdapter.getItem(i);
+            if (spinnerCategory.equals(category)) {
+                categorySpiner.setSelection(i, true);
+                break;
+            }
+        }
     }
 
     private void updatePasswordTypeSpinner(MPElementType passwordTypeEnum) {
@@ -172,6 +203,7 @@ public class EditFragment extends Fragment {
         int passwordTypeIndex = passwordType.getSelectedItemPosition();
         site.setPasswordType(MPElementType.valueOf(passwordTypeKeys[passwordTypeIndex]));
         site.setSiteCounter(siteCounter.getValue());
+        site.setCategory(categorySpiner.getSelectedItem().toString());
         if (site.complete()) {
             site.touch();
         }

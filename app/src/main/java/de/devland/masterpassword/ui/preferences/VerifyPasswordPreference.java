@@ -101,7 +101,6 @@ public class VerifyPasswordPreference extends SwitchPreference implements Prefer
                             String passwordConfirm = masterPasswordConfirm.getText().toString();
                             // TODO check empty
                             if (password.equals(passwordConfirm)) {
-                                // TODO tune parameters
                                 String passwordHash = SCryptUtil.scrypt(password,
                                         1024, // N
                                         8, // r

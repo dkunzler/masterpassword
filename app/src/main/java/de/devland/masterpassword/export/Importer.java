@@ -23,9 +23,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.RequestCodeManager;
+import de.devland.masterpassword.util.event.ReloadDrawerEvent;
 
 /**
  * Created by deekay on 26/10/14.
@@ -35,9 +40,11 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
     public static final String EXTRA_IMPORT_TYPE = "de.devland.export.Exporter.IMPORT_TYPE";
 
     private Activity activity;
+    private DefaultPrefs defaultPrefs;
 
     public void startImportIntent(Activity activity, ImportType importType) {
         this.activity = activity;
+        this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
 
         Intent intent;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -108,9 +115,6 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
             }
 
             if (contents != null) {
-                if (importType == ImportType.OVERRIDE) {
-                    Site.deleteAll(Site.class);
-                }
                 List<Site> importedSites = new ArrayList<>();
 
                 switch (exportType) {
@@ -142,14 +146,29 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         return;
                 }
 
+                if (importType == ImportType.OVERRIDE) {
+                    Site.deleteAll(Site.class);
+                    defaultPrefs.categories(new ArrayList<Category>());
+                }
+
+                List<Category> categories = defaultPrefs.categories();
 
                 for (Site site : importedSites) {
                     site.save();
+                    if (site.getCategory() != null) {
+                        Category category = new Category(site.getCategory());
+                        if (!categories.contains(category)) {
+                            categories.add(category);
+                        }
+                    }
                 }
+                defaultPrefs.categories(categories);
+                App.get().getBus().post(new ReloadDrawerEvent());
 
                 Snackbar.with(activity)
                         .text(activity.getString(R.string.msg_importDone))
                         .show(activity);
+
             }
 
 

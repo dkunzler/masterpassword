@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.squareup.otto.Produce;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -30,10 +31,12 @@ import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
+import de.devland.masterpassword.util.event.CategoryChangeEvent;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.listener.SwipeOnScrollListener;
@@ -43,7 +46,9 @@ import lombok.NoArgsConstructor;
  * A simple {@link Fragment} subclass.
  */
 @NoArgsConstructor
-public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener, SearchView.OnQueryTextListener {
+public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener,
+        SearchView.OnQueryTextListener {
+    private static final String STATE_CATEGORY = "de.devland.PasswordViewFragment.STATE_CATEGORY";
 
     @InjectView(R.id.cardList)
     protected InsertionAnimationCardListView cardListView;
@@ -53,6 +58,7 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     protected MenuItem searchItem;
     protected SearchView searchView;
     protected DefaultPrefs defaultPrefs;
+    protected Category activeCategory;
 
     protected SiteCardArrayAdapter adapter;
     SwipeOnScrollListener hideFloatingButtonScrollListener = new SwipeOnScrollListener() {
@@ -65,7 +71,8 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         }
 
         @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                             int totalItemCount) {
             super.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
             int newScrollY = getListViewScrollY();
             if (newScrollY == mScrollY) {
@@ -88,6 +95,12 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(STATE_CATEGORY)) {
+                activeCategory = new Category(savedInstanceState.getString(STATE_CATEGORY));
+            }
+        }
+
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
 
         adapter = new SiteCardArrayAdapter(getActivity(), new ArrayList<Card>());
@@ -96,6 +109,15 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (activeCategory != null) {
+            outState.putString(STATE_CATEGORY,
+                    activeCategory.getName());
+        }
     }
 
     @Override
@@ -161,7 +183,13 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     private void refreshCards() {
         List<Card> cards = new ArrayList<>();
 
-        Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null, defaultPrefs.sortBy(), null);
+        String where = null;
+        if (activeCategory != null && !activeCategory.equals(Category.all(getActivity()))) {
+            where = Site.CATEGORY + " = '" + activeCategory.getName() + "'";
+        }
+
+        Iterator<Site> siteIterator = Site.findAsIterator(Site.class, where, null, null,
+                defaultPrefs.sortBy(), null);
         while (siteIterator.hasNext()) {
             Site site = siteIterator.next();
             SiteCard siteCard = new SiteCard(getActivity(), site, adapter);
@@ -235,6 +263,25 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
     public boolean onQueryTextChange(String s) {
         adapter.getFilter().filter(s);
         return true;
+    }
+
+    @Subscribe
+    public void onCategoryChange(CategoryChangeEvent event) {
+        if (this.activeCategory != event.getCategory()) {
+            this.activeCategory = event.getCategory();
+            refreshCards();
+        }
+    }
+
+    @Produce
+    public CategoryChangeEvent retrieveActiveCategory() {
+        CategoryChangeEvent event;
+        if (activeCategory != null) {
+            event = new CategoryChangeEvent(activeCategory);
+        } else {
+            event = new CategoryChangeEvent(Category.all(getActivity()));
+        }
+        return event;
     }
 
     @Override
