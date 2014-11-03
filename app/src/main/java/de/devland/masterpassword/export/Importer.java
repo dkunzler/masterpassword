@@ -70,7 +70,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         // Create a file with the requested MIME type.
-        intent.setType("text/plain");
+        intent.setType("*/*");
         return intent;
     }
 
