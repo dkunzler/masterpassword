@@ -3,6 +3,7 @@ package de.devland.masterpassword.export;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
@@ -11,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
+import com.williammora.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,8 +27,6 @@ import java.util.List;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.util.RequestCodeManager;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Created by David Kunzler on 23.10.2014.
@@ -64,7 +64,9 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
     private Intent getLegacyFolderChooserIntent() {
         Intent getContentIntent = new Intent(activity, FileChooserActivity.class);
         // do not show any files by selecting an invalid file extension to filter
-        getContentIntent.putStringArrayListExtra(FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS, new ArrayList<>(Arrays.asList("./")));
+        getContentIntent.putStringArrayListExtra(
+                FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS,
+                new ArrayList<>(Arrays.asList("./")));
         getContentIntent.putExtra(FileChooserActivity.EXTRA_SELECT_FOLDER, true);
         getContentIntent.setType("text/plain");
         return getContentIntent;
@@ -102,7 +104,10 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     exportData = gson.toJson(sites);
                     break;
                 default:
-                    Crouton.showText(activity, R.string.error_generic, Style.ALERT);
+                    Snackbar.with(activity)
+                            .text(activity.getString(R.string.error_generic))
+                            .textColor(Color.RED)
+                            .show(activity);
                     return;
             }
 
@@ -125,11 +130,16 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     if (pfd != null) {
                         pfd.close();
                     }
-                    Crouton.showText(activity, R.string.msg_exportDone, Style.CONFIRM);
+                    Snackbar.with(activity)
+                            .text(activity.getString(R.string.msg_exportDone))
+                            .show(activity);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                Crouton.showText(activity, R.string.error_generic, Style.ALERT);
+                Snackbar.with(activity)
+                        .text(activity.getString(R.string.error_generic))
+                        .textColor(Color.RED)
+                        .show(activity);
             }
         }
     }

@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import com.squareup.otto.Bus;
+
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.util.RequestCodeManager;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
 
 /**
  * Created by David Kunzler on 23.10.2014.
  */
-public class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends ActionBarActivity {
+
+    protected Bus bus;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -23,6 +27,7 @@ public class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.get().getBus().register(this);
+        bus = App.get().getBus();
     }
 
     @Override
@@ -34,7 +39,6 @@ public class BaseActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Crouton.cancelAllCroutons();
         App.get().getBus().unregister(this);
     }
 }

@@ -5,16 +5,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
-
-import com.ipaulpro.afilechooser.utils.FileUtils;
 
 import butterknife.ButterKnife;
 import de.devland.masterpassword.R;
@@ -59,8 +55,7 @@ public class ImportDrawerItem extends SettingsDrawerItem {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            LayoutInflater layoutInflater = LayoutInflater.from(activity);
-            View dialogView = layoutInflater.inflate(R.layout.dialog_importtype, null);
+            View dialogView = View.inflate(activity, R.layout.dialog_importtype, null);
             final RadioButton appendRadio = ButterKnife
                     .findById(dialogView, R.id.radioButton_append);
             final RadioButton overrideRadio = ButterKnife

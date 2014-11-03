@@ -1,5 +1,6 @@
 package de.devland.masterpassword.service;
 
+import android.app.Activity;
 import android.app.Service;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -8,29 +9,36 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 
+import com.williammora.snackbar.Snackbar;
+
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class ClearClipboardService extends Service {
 
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getApplicationContext());
+        DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class,
+                getApplicationContext());
         Handler handler = new Handler();
-        final ClipboardManager clipboard = (ClipboardManager) getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        final ClipboardManager clipboard = (ClipboardManager) getApplicationContext().getSystemService(
+                Context.CLIPBOARD_SERVICE);
 
         // TODO handler injection
         int clipboardDuration = Integer.parseInt(defaultPrefs.clipboardDuration());
+        Activity activity = App.get().getCurrentForegroundActivity();
         if (clipboardDuration > 0) {
-            Crouton.makeText(App.get().getCurrentForegroundActivity(),
-                    String.format(getApplicationContext().getString(
-                                    R.string.copiedToClipboardWithDuration),
-                            clipboardDuration), Style.INFO).show();
+            if (activity != null) {
+                Snackbar.with(activity)
+                        .text(String.format(getApplicationContext().getString(
+                                        R.string.copiedToClipboardWithDuration),
+                                clipboardDuration))
+                        .type(Snackbar.SnackbarType.MULTI_LINE)
+                        .show(activity);
+            }
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -41,7 +49,11 @@ public class ClearClipboardService extends Service {
                 }
             }, clipboardDuration * 1000);
         } else {
-            Crouton.makeText(App.get().getCurrentForegroundActivity(), R.string.copiedToClipboard, Style.INFO).show();
+            if (activity != null) {
+                Snackbar.with(activity)
+                        .text(activity.getString(R.string.copiedToClipboard))
+                        .show(activity);
+            }
         }
         return Service.START_STICKY;
     }
