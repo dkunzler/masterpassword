@@ -1,8 +1,13 @@
 package de.devland.masterpassword.ui;
 
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +72,7 @@ public class LoginFragment extends Fragment {
     public void onClick() {
         if (checkInputs()) {
             Esperandro.getPreferences(DefaultPrefs.class, getActivity())
-                      .defaultUserName(fullName.getText().toString());
+                    .defaultUserName(fullName.getText().toString());
             GenerateUserKeysAsyncTask keysAsyncTask = new GenerateUserKeysAsyncTask(getActivity(),
                     new Runnable() {
                         @Override
@@ -92,12 +97,37 @@ public class LoginFragment extends Fragment {
             result = false;
             fullName.setError(getActivity().getString(R.string.errorEmpty));
         } else if (defaultPrefs.verifyPassword()) {
-            result = SCryptUtil
-                    .check(masterPassword.getText().toString(), defaultPrefs.masterPasswordHash());
-            if (!result) {
-                masterPassword.setError("Password incorrect");
+            try {
+                result = SCryptUtil
+                        .check(masterPassword.getText().toString(), defaultPrefs.masterPasswordHash());
+                if (!result) {
+                    masterPassword.setError(getActivity().getString(R.string.error_incorrectPassword));
+                }
+            } catch (Exception e) {
+                result = false;
+                defaultPrefs.masterPasswordHash(null);
+                defaultPrefs.verifyPassword(false);
+                VerificationFailedDialog verificationFailedDialog = new VerificationFailedDialog();
+                verificationFailedDialog.show(getActivity().getSupportFragmentManager(), null);
             }
         }
         return result;
+    }
+
+    @SuppressLint("ValidFragment")
+    public class VerificationFailedDialog extends DialogFragment {
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setPositiveButton(android.R.string.ok, null);
+
+            builder.setTitle(R.string.title_verifyError);
+            builder.setMessage(R.string.msg_verifyError);
+            Dialog dialog = builder.create();
+
+            return dialog;
+        }
     }
 }

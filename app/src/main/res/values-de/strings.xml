@@ -58,4 +58,7 @@
     <string name="hint_category">Kategorie-Name</string>
     <string name="title_addCategory">Kategorie hinzufügen</string>
     <string name="caption_category">Kategorie</string>
+    <string name="title_verifyError">Verifikationsfehler</string>
+    <string name="msg_verifyError">Die Passwordüberprüfung ist auf Grund eines unbekannten Fehlers fehlgeschlagen. Passwortverifikation wurde deaktiviert, bitte in den Einstellungen wieder aktivieren wenn gewünscht.\nBitte kontaktieren Sie mich unter info@devland.de falls dieser Fehler weiterhin besteht.\n\nVielen Dank.</string>
+    <string name="error_incorrectPassword">Falsches Passwort</string>
 </resources>

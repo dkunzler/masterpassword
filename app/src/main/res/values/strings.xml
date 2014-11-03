@@ -42,6 +42,8 @@
     <string name="errorPasswordMatch">Passwords don\'t match</string>
     <string name="title_confirmPassword">Enter your password</string>
     <string name="title_addCategory">Add Category</string>
+    <string name="title_verifyError">Verification Error</string>
+    <string name="msg_verifyError">Verification failed due to an unknown error. Verification was disabled, please reenable in settings if desired.\nIf this error persists please contact me at info@devland.de\n\nThank you</string>
     <string name="error_generic">An error occurred.</string>
     <string name="msg_exportDone">Export succeeded.</string>
     <string name="msg_importDone">Import succeeded.</string>
@@ -58,5 +60,6 @@
     <string name="caption_selectFile">Select a file</string>
     <string name="caption_selectFolder">Select Folder</string>
     <string name="category_all">All</string>
+    <string name="error_incorrectPassword">Password incorrect</string>
 
 </resources>
