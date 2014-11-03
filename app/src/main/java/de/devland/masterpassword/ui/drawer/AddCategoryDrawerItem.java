@@ -43,8 +43,7 @@ public class AddCategoryDrawerItem extends DrawerItem {
     @Override
     public View getView(Context context, ViewGroup root) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.drawer_item_addcategory, root, false);
-        return view;
+        return inflater.inflate(R.layout.drawer_item_addcategory, root, false);
     }
 
     @Override
@@ -63,8 +62,7 @@ public class AddCategoryDrawerItem extends DrawerItem {
             builder.setNegativeButton(android.R.string.cancel, null);
             builder.setCancelable(false);
             builder.setTitle(R.string.title_addCategory);
-            LayoutInflater layoutInflater = LayoutInflater.from(activity);
-            View dialogView = layoutInflater.inflate(R.layout.dialog_addcategory, null);
+            View dialogView = View.inflate(activity, R.layout.dialog_addcategory, null);
             final EditText category = ButterKnife.findById(dialogView,
                     R.id.editText_category);
             builder.setView(dialogView);
@@ -81,9 +79,7 @@ public class AddCategoryDrawerItem extends DrawerItem {
                 }
             });
 
-            final AlertDialog dialog = builder.create();
-
-            return dialog;
+            return builder.create();
         }
     }
 }

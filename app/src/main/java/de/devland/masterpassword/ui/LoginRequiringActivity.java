@@ -14,7 +14,7 @@ import de.devland.masterpassword.util.MasterPasswordHolder;
 /**
  * Created by David Kunzler on 23.08.2014.
  */
-public class LoginRequiringActivity extends BaseActivity {
+public abstract class LoginRequiringActivity extends BaseActivity {
 
     protected DefaultPrefs defaultPrefs;
 

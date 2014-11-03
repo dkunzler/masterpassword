@@ -80,9 +80,8 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                 .putStringArrayListExtra(FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS,
                         new ArrayList<>(Arrays.asList(".json", ".mpsites")));
         getContentIntent.setType("text/plain");
-        Intent intent = Intent
+        return Intent
                 .createChooser(getContentIntent, activity.getString(R.string.caption_selectFile));
-        return intent;
     }
 
     @Override

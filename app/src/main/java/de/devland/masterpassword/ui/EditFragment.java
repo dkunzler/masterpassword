@@ -122,7 +122,7 @@ public class EditFragment extends Fragment {
         siteCounter.setMaxValue(Integer.MAX_VALUE);
         siteCounter.setWrapSelectorWheel(false);
 
-        SortedSet<String> userNames = new TreeSet<String>();
+        SortedSet<String> userNames = new TreeSet<>();
 
         Iterator<Site> siteIterator = Site.findAll(Site.class);
         while (siteIterator.hasNext()) {
@@ -133,12 +133,12 @@ public class EditFragment extends Fragment {
             }
         }
 
-        List<String> sortedUserNames = new ArrayList<String>();
+        List<String> sortedUserNames = new ArrayList<>();
         for (String siteUserName : userNames) {
             sortedUserNames.add(siteUserName);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.select_dialog_item, sortedUserNames);
         userName.setAdapter(adapter);
         userName.setThreshold(1);

@@ -26,14 +26,14 @@ public class SiteCardArrayAdapter extends CardArrayAdapter {
 
     public SiteCardArrayAdapter(Context context, List<Card> cards) {
         super(context, cards);
-        allCards = new ArrayList<Card>();
+        allCards = new ArrayList<>();
         allCards.addAll(cards);
 
         filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
-                ArrayList<Card> tempList = new ArrayList<Card>();
+                ArrayList<Card> tempList = new ArrayList<>();
                 //constraint is the result from text you want to filter against.
                 //objects is your data set you will filter from
                 if (constraint != null) {

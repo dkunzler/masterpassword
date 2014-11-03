@@ -32,7 +32,6 @@ public class App extends SugarApp {
     private static App instance;
     private static Database db;
 
-    private DefaultPrefs defaultPrefs;
     private Locale targetLocale;
     @Getter
     private Bus bus;
@@ -48,7 +47,7 @@ public class App extends SugarApp {
         instance = this;
         bus = new Bus(ThreadEnforcer.ANY);
         ProKeyUtil.INSTANCE.initLicenseCheck();
-        defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
+        DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         if (pInfo.versionCode != defaultPrefs.versionCode()) {
             UpgradeManager upgradeManager = new UpgradeManager(this);

@@ -12,7 +12,7 @@ import de.devland.masterpassword.util.RequestCodeManager;
 /**
  * Created by David Kunzler on 23.10.2014.
  */
-public class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends ActionBarActivity {
 
     protected Bus bus;
 
