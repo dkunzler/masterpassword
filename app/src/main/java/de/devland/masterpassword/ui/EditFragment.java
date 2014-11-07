@@ -42,7 +42,7 @@ import lombok.NoArgsConstructor;
  * A simple {@link Fragment} subclass.
  */
 @NoArgsConstructor
-public class EditFragment extends Fragment {
+public class EditFragment extends BaseFragment {
 
     public static final String ARG_SITE_ID = "de.devland.masterpassword.EditFragment.siteId";
 

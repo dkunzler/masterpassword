@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
  * A simple {@link Fragment} subclass.
  */
 @NoArgsConstructor
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFragment {
 
     @InjectView(R.id.editText_masterPassword)
     protected EditText masterPassword;

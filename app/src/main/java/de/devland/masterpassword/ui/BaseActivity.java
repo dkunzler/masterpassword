@@ -26,19 +26,19 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.get().getBus().register(this);
         bus = App.get().getBus();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        App.get().getBus().register(this);
         App.get().setCurrentForegroundActivity(this);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         App.get().getBus().unregister(this);
     }
 }

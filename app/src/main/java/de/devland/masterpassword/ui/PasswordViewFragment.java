@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
-import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
@@ -46,7 +45,7 @@ import lombok.NoArgsConstructor;
  * A simple {@link Fragment} subclass.
  */
 @NoArgsConstructor
-public class PasswordViewFragment extends Fragment implements Card.OnCardClickListener,
+public class PasswordViewFragment extends BaseFragment implements Card.OnCardClickListener,
         SearchView.OnQueryTextListener {
     private static final String STATE_CATEGORY = "de.devland.PasswordViewFragment.STATE_CATEGORY";
 
@@ -104,8 +103,6 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
 
         adapter = new SiteCardArrayAdapter(getActivity(), new ArrayList<Card>());
-
-        App.get().getBus().register(this);
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
@@ -282,11 +279,5 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
             event = new CategoryChangeEvent(Category.all(getActivity()));
         }
         return event;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        App.get().getBus().unregister(this);
     }
 }
