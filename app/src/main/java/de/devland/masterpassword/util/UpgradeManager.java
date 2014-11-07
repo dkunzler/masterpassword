@@ -5,6 +5,7 @@ import android.content.Context;
 import com.lyndir.masterpassword.MPElementType;
 
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 
 /**
@@ -22,6 +23,9 @@ public class UpgradeManager {
         DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
         if (defaultPrefs.defaultPasswordType().equals("\"GeneratedMaximum\"")) {
             defaultPrefs.defaultPasswordType(MPElementType.GeneratedMaximum.toString());
+        }
+        if (defaultPrefs.sortBy().equals(Site.SITE_NAME)) {
+            defaultPrefs.sortBy(Site.SITE_NAME + Site.NOCASE_ORDER_SUFFIX);
         }
     }
 

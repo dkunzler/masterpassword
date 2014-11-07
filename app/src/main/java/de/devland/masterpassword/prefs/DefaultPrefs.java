@@ -58,7 +58,7 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     String language();
     void language(String language);
 
-    @Default(ofString = Site.SITE_NAME)
+    @Default(ofString = Site.SITE_NAME + Site.NOCASE_ORDER_SUFFIX)
     String sortBy();
     void sortBy(String sortBy);
 }

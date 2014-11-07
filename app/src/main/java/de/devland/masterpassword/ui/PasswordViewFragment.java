@@ -138,10 +138,10 @@ public class PasswordViewFragment extends Fragment implements Card.OnCardClickLi
 
         switch (id) {
             case R.id.menuSortAlphabetically:
-                defaultPrefs.sortBy(Site.SITE_NAME);
+                defaultPrefs.sortBy(Site.SITE_NAME + Site.NOCASE_ORDER_SUFFIX);
                 break;
             case R.id.menuSortLastUsed:
-                defaultPrefs.sortBy(Site.LAST_USED + " DESC");
+                defaultPrefs.sortBy(Site.LAST_USED + Site.DESC_ORDER_SUFFIX);
                 break;
         }
 

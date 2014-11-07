@@ -20,6 +20,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Site extends SugarRecord<Site> {
 
+    public static final String NOCASE_ORDER_SUFFIX = " COLLATE NOCASE";
+    public static final String DESC_ORDER_SUFFIX = " DESC";
+
     public static final String ID = "ID";
     public static final String SITE_NAME = "SITE_NAME";
     public static final String USER_NAME = "USER_NAME";
