@@ -2,6 +2,7 @@ package de.devland.masterpassword.ui;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -41,7 +42,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
     protected Site site;
     protected SiteCardArrayAdapter adapter;
 
-    @InjectView(R.id.card_header_inner_simple_title)
+    @InjectView(R.id.siteName)
     TextView siteName;
     @InjectView(R.id.userName)
     TextView userName;
@@ -66,7 +67,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
-        CardView cardView = getCardView();
+        CardView cardView = (CardView) getCardView();
         ButterKnife.inject(this, cardView);
         siteName.setText(site.getSiteName());
         siteName.setTypeface(Typeface.DEFAULT_BOLD);
@@ -118,11 +119,16 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
                 site.touch();
                 updatePassword();
                 break;
+            case R.id.card_menu_inputstick:
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setComponent(new ComponentName("de.devland.masterpassword.pro","de.devland.masterpassword.pro.inputstick.ChooseInputStickActivity"));
+                getContext().startActivity(intent);
+                break;
         }
     }
 
     protected void collapseView(Animation.AnimationListener animationListener) {
-        final View v = getCardView();
+        final View v = (View) getCardView();
         final int initialHeight = v.getMeasuredHeight();
         v.setTag(true);
 

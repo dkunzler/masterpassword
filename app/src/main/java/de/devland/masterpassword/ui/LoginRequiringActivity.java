@@ -9,6 +9,7 @@ import android.os.Bundle;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.receiver.ClearPasswordReceiver;
+import de.devland.masterpassword.shared.ui.BaseActivity;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 
 /**

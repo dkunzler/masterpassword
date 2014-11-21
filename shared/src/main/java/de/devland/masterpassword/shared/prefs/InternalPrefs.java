@@ -1,4 +1,4 @@
-package de.devland.masterpassword.prefs;
+package de.devland.masterpassword.shared.prefs;
 
 import de.devland.esperandro.annotations.SharedPreferences;
 

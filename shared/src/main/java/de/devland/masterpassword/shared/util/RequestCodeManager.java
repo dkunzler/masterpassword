@@ -1,4 +1,4 @@
-package de.devland.masterpassword.util;
+package de.devland.masterpassword.shared.util;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Random;
 
 import de.devland.esperandro.Esperandro;
-import de.devland.masterpassword.App;
-import de.devland.masterpassword.prefs.InternalPrefs;
+import de.devland.masterpassword.shared.BaseApp;
+import de.devland.masterpassword.shared.prefs.InternalPrefs;
 import lombok.SneakyThrows;
 
 /**
@@ -26,7 +26,7 @@ public enum RequestCodeManager {
     RequestCodeManager() {
         callbackData = new HashMap<>();
         callbacks = new HashMap<>();
-        internalPrefs = Esperandro.getPreferences(InternalPrefs.class, App.get());
+        internalPrefs = Esperandro.getPreferences(InternalPrefs.class, BaseApp.get());
     }
 
     private int getBaseSeed() {
@@ -41,7 +41,7 @@ public enum RequestCodeManager {
 
     @SneakyThrows(PackageManager.NameNotFoundException.class)
     public int getRequestCode(Class clazz, int clientRequestCode) {
-        int packageHash = App.get().getPackageManager().getApplicationInfo(App.get().getPackageName(), PackageManager.GET_META_DATA).uid;
+        int packageHash = BaseApp.get().getPackageManager().getApplicationInfo(BaseApp.get().getPackageName(), PackageManager.GET_META_DATA).uid;
         int seed = getBaseSeed();
         int classHash = clazz.getName().hashCode();
         short toShort = (short) (clientRequestCode + classHash * seed * packageHash);

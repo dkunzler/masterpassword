@@ -3,6 +3,7 @@ package de.devland.masterpassword.util;
 import android.content.Intent;
 
 import de.devland.masterpassword.App;
+import de.devland.masterpassword.shared.BaseApp;
 
 /**
  * Created by David Kunzler on 31/08/14.
@@ -22,7 +23,7 @@ public enum ProKeyUtil {
     }
 
     public void initLicenseCheck() {
-        App app = App.get();
+        BaseApp app = App.get();
         Intent broadcast = new Intent();
         broadcast.setAction("de.devland.masterpassword.initiatelicensecheck");
         app.sendBroadcast(broadcast);

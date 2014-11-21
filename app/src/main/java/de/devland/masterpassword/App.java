@@ -4,48 +4,30 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 
-import com.orm.Database;
-import com.orm.SugarApp;
-import com.squareup.otto.Bus;
-import com.squareup.otto.ThreadEnforcer;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.devland.masterpassword.ui.BaseActivity;
+import de.devland.masterpassword.shared.BaseApp;
 import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.UpgradeManager;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 
 
 /**
  * Created by David Kunzler on 23.08.2014.
  */
-public class App extends SugarApp {
-
-    private static App instance;
-    private static Database db;
+public class App extends BaseApp {
 
     private Locale targetLocale;
-    @Getter
-    private Bus bus;
-    @Getter
-    @Setter
-    private BaseActivity currentForegroundActivity;
 
 
     @Override
     @SneakyThrows(PackageManager.NameNotFoundException.class)
     public void onCreate() {
         super.onCreate();
-        instance = this;
-        bus = new Bus(ThreadEnforcer.ANY);
         ProKeyUtil.INSTANCE.initLicenseCheck();
         DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -85,19 +67,5 @@ public class App extends SugarApp {
             Locale.setDefault(targetLocale);
             getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
         }
-    }
-
-    public static App get() {
-        return instance;
-    }
-
-    @SneakyThrows({NoSuchFieldException.class, IllegalAccessException.class})
-    public static Database getDb() {
-        if (db == null) {
-            Field database = SugarApp.class.getDeclaredField("database");
-            database.setAccessible(true);
-            db = (Database) database.get(App.get());
-        }
-        return db;
     }
 }

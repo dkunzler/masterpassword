@@ -1,4 +1,4 @@
-package de.devland.masterpassword.ui;
+package de.devland.masterpassword.shared.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.squareup.otto.Bus;
 
-import de.devland.masterpassword.App;
-import de.devland.masterpassword.util.RequestCodeManager;
+import de.devland.masterpassword.shared.BaseApp;
+import de.devland.masterpassword.shared.util.RequestCodeManager;
+
 
 /**
  * Created by David Kunzler on 23.10.2014.
@@ -26,19 +27,19 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bus = App.get().getBus();
+        bus = BaseApp.get().getBus();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        App.get().getBus().register(this);
-        App.get().setCurrentForegroundActivity(this);
+        BaseApp.get().getBus().register(this);
+        BaseApp.get().setCurrentForegroundActivity(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        App.get().getBus().unregister(this);
+        BaseApp.get().getBus().unregister(this);
     }
 }

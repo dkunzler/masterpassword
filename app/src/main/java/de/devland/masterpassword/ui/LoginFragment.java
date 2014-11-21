@@ -22,6 +22,7 @@ import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.shared.ui.BaseFragment;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ShowCaseManager;

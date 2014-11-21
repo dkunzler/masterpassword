@@ -1,11 +1,11 @@
-package de.devland.masterpassword.ui;
+package de.devland.masterpassword.shared.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.squareup.otto.Bus;
 
-import de.devland.masterpassword.App;
+import de.devland.masterpassword.shared.BaseApp;
 
 /**
  * Created by David Kunzler on 07.11.2014.
@@ -17,18 +17,18 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bus = App.get().getBus();
+        bus = BaseApp.get().getBus();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        App.get().getBus().register(this);
+        BaseApp.get().getBus().register(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        App.get().getBus().unregister(this);
+        BaseApp.get().getBus().unregister(this);
     }
 }

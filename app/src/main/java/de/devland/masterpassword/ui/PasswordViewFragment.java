@@ -34,6 +34,7 @@ import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.shared.ui.BaseFragment;
 import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.CategoryChangeEvent;

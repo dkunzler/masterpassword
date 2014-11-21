@@ -26,7 +26,7 @@ import java.util.List;
 
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
-import de.devland.masterpassword.util.RequestCodeManager;
+import de.devland.masterpassword.shared.util.RequestCodeManager;
 
 /**
  * Created by David Kunzler on 23.10.2014.
