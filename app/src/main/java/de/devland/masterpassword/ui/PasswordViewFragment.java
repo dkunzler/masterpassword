@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.BuildConfig;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
@@ -104,8 +105,10 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
 
         adapter = new SiteCardArrayAdapter(getActivity(), new ArrayList<Card>());
 
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE);
+        if (!BuildConfig.DEBUG) {
+            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                    WindowManager.LayoutParams.FLAG_SECURE);
+        }
     }
 
     @Override
