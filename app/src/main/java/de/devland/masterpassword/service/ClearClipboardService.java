@@ -9,7 +9,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 
-import com.williammora.snackbar.Snackbar;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.enums.SnackbarType;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
@@ -36,7 +37,7 @@ public class ClearClipboardService extends Service {
                         .text(String.format(getApplicationContext().getString(
                                         R.string.copiedToClipboardWithDuration),
                                 clipboardDuration))
-                        .type(Snackbar.SnackbarType.MULTI_LINE)
+                        .type(SnackbarType.MULTI_LINE)
                         .show(activity);
             }
 

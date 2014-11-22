@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
-import com.williammora.snackbar.Snackbar;
+import com.nispok.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileOutputStream;

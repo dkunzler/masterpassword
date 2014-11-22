@@ -2,9 +2,14 @@ package de.devland.masterpassword.util;
 
 import android.content.Context;
 
+import com.google.common.base.Strings;
 import com.lyndir.masterpassword.MPElementType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 
@@ -26,6 +31,16 @@ public class UpgradeManager {
         }
         if (defaultPrefs.sortBy().equals(Site.SITE_NAME)) {
             defaultPrefs.sortBy(Site.SITE_NAME + Site.NOCASE_ORDER_SUFFIX);
+        }
+        List<Category> categories = defaultPrefs.categories();
+        List<Category> toRemove = new ArrayList<>();
+        if (categories != null) {
+            for (Category category : categories) {
+                if (Strings.isNullOrEmpty(category.getName())) {
+                    toRemove.add(category);
+                }
+            }
+            categories.removeAll(toRemove);
         }
     }
 

@@ -7,12 +7,13 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
-import com.williammora.snackbar.Snackbar;
+import com.nispok.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -94,7 +95,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
             try {
                 InputStream inputStream = activity.getContentResolver()
-                                                  .openInputStream(intent.getData());
+                        .openInputStream(intent.getData());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder fileContent = new StringBuilder("");
                 String line;
@@ -123,8 +124,8 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                     case JSON:
                         List<Site> gsonSites;
                         Gson gson = new GsonBuilder().setPrettyPrinting()
-                                                     .excludeFieldsWithoutExposeAnnotation()
-                                                     .serializeNulls().create();
+                                .excludeFieldsWithoutExposeAnnotation()
+                                .serializeNulls().create();
                         Type listType = new TypeToken<ArrayList<Site>>() {
                         }.getType();
                         gsonSites = gson.fromJson(contents, listType);
@@ -154,7 +155,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
                 for (Site site : importedSites) {
                     site.save();
-                    if (site.getCategory() != null) {
+                    if (!Strings.isNullOrEmpty(site.getCategory())) {
                         Category category = new Category(site.getCategory());
                         if (!categories.contains(category)) {
                             categories.add(category);

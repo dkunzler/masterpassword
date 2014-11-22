@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.common.base.Strings;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -47,7 +48,7 @@ public class CategoryDrawerItem extends DrawerItem {
     public CategoryDrawerItem(Category category) {
         super(DrawerItemType.CATEGORY);
         this.category = category;
-        this.firstLetter = category.getName().substring(0, 1);
+        this.firstLetter = Strings.isNullOrEmpty(category.getName()) ? "" : category.getName().substring(0, 1);
         bus = App.get().getBus();
         bus.register(this);
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, App.get());

@@ -59,10 +59,10 @@ dependencies {
 
     // styling
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1' // Apache v2.0
-    compile 'com.melnykov:floatingactionbutton:1.0.4' // MIT
-    compile 'com.github.traex.rippleeffect:library:1.2.1' // MIT
+    compile 'com.melnykov:floatingactionbutton:1.0.7' // MIT
+    compile 'com.github.traex.rippleeffect:library:1.2.2' // MIT
     compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
-    compile 'com.williammora:snackbar:1.4.0' // MIT
+    compile 'com.nispok:snackbar:2.2.0' // MIT
 
     // tools
     compile 'com.jakewharton:butterknife:6.0.0' // Apache v2.0
