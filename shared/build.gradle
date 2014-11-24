@@ -11,7 +11,7 @@ android {
     }
     defaultConfig {
         applicationId "de.devland.masterpassword.shared"
-        minSdkVersion 7
+        minSdkVersion 9
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"

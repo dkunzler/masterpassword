@@ -42,7 +42,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
     protected Site site;
     protected SiteCardArrayAdapter adapter;
 
-    @InjectView(R.id.siteName)
+    @InjectView(R.id.card_header_inner_simple_title)
     TextView siteName;
     @InjectView(R.id.userName)
     TextView userName;
