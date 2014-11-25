@@ -2,7 +2,6 @@ package de.devland.masterpassword.ui;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -118,11 +117,6 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
                 site.setSiteCounter(site.getSiteCounter() + 1);
                 site.touch();
                 updatePassword();
-                break;
-            case R.id.card_menu_inputstick:
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(new ComponentName("de.devland.masterpassword.pro","de.devland.masterpassword.pro.inputstick.ChooseInputStickActivity"));
-                getContext().startActivity(intent);
                 break;
         }
     }
