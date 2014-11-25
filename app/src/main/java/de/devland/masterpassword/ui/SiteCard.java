@@ -2,7 +2,6 @@ package de.devland.masterpassword.ui;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -24,6 +23,7 @@ import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
+import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
@@ -120,9 +120,12 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
                 updatePassword();
                 break;
             case R.id.card_menu_inputstick:
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(new ComponentName("de.devland.masterpassword.pro","de.devland.masterpassword.pro.inputstick.ChooseInputStickActivity"));
-                getContext().startActivity(intent);
+                Intent broadcast = new Intent();
+                broadcast.setAction("de.devland.masterpassword.sendtoinputstick");
+                broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
+
+                // TODO extras
+                getContext().sendBroadcast(broadcast);
                 break;
         }
     }

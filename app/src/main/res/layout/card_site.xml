@@ -6,6 +6,28 @@
     android:padding="15dp">
 
     <TextView
+        android:id="@+id/siteName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Large Text"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/imageButton"
+        android:layout_alignTop="@+id/siteName"
+
+        android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+         />
+
+    <TextView
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,6 +35,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/siteName"
+        android:layout_marginTop="10dp"
         android:text="Medium Text"
         android:textColor="@color/text_secondary"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -33,4 +57,6 @@
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
+
+
 </RelativeLayout>

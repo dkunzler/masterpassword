@@ -2,7 +2,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <permission
+        android:name="de.devland.masterpassword.debug.ANSWERLICENSECHECK"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="de.devland.masterpassword.debug.SENDMESSAGE"
+        android:protectionLevel="signature" />
+
     <application>
+        <receiver
+            android:name="de.devland.masterpassword.receiver.LicenseCheckReceiver"
+            android:enabled="true"
+            android:exported="true"
+            tools:replace="android:permission"
+            android:permission="de.devland.masterpassword.debug.ANSWERLICENSECHECK">
+            <intent-filter>
+                <action android:name="de.devland.masterpassword.answerlicensecheck" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="de.devland.masterpassword.receiver.SnackbarReceiver"
+            android:enabled="true"
+            android:exported="true"
+            tools:replace="android:permission"
+            android:permission="de.devland.masterpassword.debug.SENDMESSAGE">
+            <intent-filter>
+                <action android:name="de.devland.masterpassword.sendmessage" />
+            </intent-filter>
+        </receiver>
+
         <provider
             android:name="com.ianhanniballake.localstorage.LocalStorageProvider"
             android:authorities="de.devland.masterpassword.debug.provider.localstorage.documents"

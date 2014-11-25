@@ -5,5 +5,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="msg_typedSuccessfully">Typed password successfully.</string>
+    <string name="msg_inputstickFailed">Connection to InputStick failed. See InputStickUtility for details.</string>
+    <string name="title_inputstick">Inputstick</string>
+    <string name="msg_connecting">Connecting...</string>
 
 </resources>
