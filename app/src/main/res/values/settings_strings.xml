@@ -35,7 +35,7 @@
     <string name="inputstickKeyMapTitle">Host Keyboard Layout</string>
     <string-array name="pref_inputstickKeymap_titles">
         <item>German</item>
-        <item>US/English</item>
+        <item>English (US)</item>
         <item>French</item>
         <item>Spanish</item>
         <item>Norwegian</item>
@@ -44,7 +44,7 @@
         <item>Russian</item>
         <item>Slovak</item>
         <item>Swedish</item>
-        <item>US/English (Dvorak)</item>
+        <item>English Dvorak (US)</item>
     </string-array>
 
     <string name="pref_header_general">General</string>

@@ -2,8 +2,6 @@
 <resources>
     <string name="title_activity_settings">Einstellungen</string>
 
-    <string name="pref_header_general">Allgemein</string>
-
     <string name="verifyPasswordTitle">Passwort beim Login überprüfen</string>
     <string name="verifyPasswordOff">Du kannst dich mit falschem Passwort einloggen. Die gezeigten Site-Passwörter sind dann falsch.</string>
     <string name="verifyPasswordOn">Dein Passwort wird beim Login überprüft. Verringert die Sicherheit.</string>
@@ -34,9 +32,27 @@
         <item>Deutsch</item>
     </string-array>
 
+    <string name="inputstickKeyMapTitle">PC Tastatur Layout</string>
+    <string-array name="pref_inputstickKeymap_titles">
+        <item>Deutsch</item>
+        <item>Englisch (USA)</item>
+        <item>Französisch</item>
+        <item>Spanisch</item>
+        <item>Norwegisch</item>
+        <item>Polnisch</item>
+        <item>Portugiesiesch (Brasilien)</item>
+        <item>Russisch</item>
+        <item>Slovakisch</item>
+        <item>Schwedisch</item>
+        <item>Englisch Dvorak (USA)</item>
+    </string-array>
+
+    <string name="pref_header_general">Allgemein</string>
+    <string name="pref_header_about">Über</string>
+    <string name="pref_header_security">Sicherheit</string>
+    <string name="pref_header_inputstick">InputStick</string>
 
     <string name="defaultPasswordTypeTitle">Standard Passwort-Typ</string>
-    <string name="pref_header_about">Über</string>
     <string name="appVersionTitle">App Version</string>
     <string name="opensourceLicensesTitle">Open-Source-Lizenzen</string>
 </resources>
