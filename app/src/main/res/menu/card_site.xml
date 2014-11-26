@@ -10,7 +10,5 @@
     <item
         android:id="@+id/card_menu_increment"
         android:title="@string/caption_increment" />
-    <item
-        android:id="@+id/card_menu_inputstick"
-        android:title="InputStick" />
+
 </menu>
