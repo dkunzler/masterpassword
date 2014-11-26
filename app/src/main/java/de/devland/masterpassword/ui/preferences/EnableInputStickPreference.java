@@ -5,13 +5,11 @@ import android.content.Context;
 import android.os.Build;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.ProKeyUtil;
-import lombok.Setter;
 
 /**
  * Created by David Kunzler on 26.11.2014.
@@ -19,8 +17,7 @@ import lombok.Setter;
 public class EnableInputStickPreference extends CheckBoxPreference implements Preference.OnPreferenceChangeListener {
 
     protected DefaultPrefs defaultPrefs;
-    @Setter
-    protected ActionBarActivity settingsActivity;
+    protected BaseSettingsFragment settingsFragment;
 
     public EnableInputStickPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -48,15 +45,26 @@ public class EnableInputStickPreference extends CheckBoxPreference implements Pr
         setOnPreferenceChangeListener(this);
     }
 
+    public void setSettingsFragment(BaseSettingsFragment settingsFragment) {
+        this.settingsFragment = settingsFragment;
+        updatePreferenceEnabledStatus(isChecked());
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if ((Boolean) newValue) {
             if (!ProKeyUtil.INSTANCE.isPro()) {
                 setChecked(false);
-                ProKeyUtil.INSTANCE.showGoProDialog(settingsActivity);
+                ProKeyUtil.INSTANCE.showGoProDialog(settingsFragment.getActionBarActivity());
+            } else {
+                updatePreferenceEnabledStatus((Boolean) newValue);
             }
         }
 
         return false;
+    }
+
+    private void updatePreferenceEnabledStatus(boolean enabled) {
+        settingsFragment.findPreference("inputstickKeymap").setEnabled(enabled);
     }
 }

@@ -1,7 +1,6 @@
 package de.devland.masterpassword.ui.preferences;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import de.devland.masterpassword.R;
 
@@ -23,9 +22,9 @@ public class SettingsFragment extends BaseSettingsFragment {
         // Add 'about' preferences
         addPreferencesFromResource(R.xml.pref_about);
 
-        ((LanguagePreference) findPreference("language")).setSettingsActivity((ActionBarActivity) getActivity());
-        ((VerifyPasswordPreference) findPreference("verifyPassword")).setSettingsActivity((ActionBarActivity) getActivity());
-        ((InputStickPreference) findPreference("inputstick")).setSettingsActivity((ActionBarActivity) getActivity());
+        ((LanguagePreference) findPreference("language")).setSettingsActivity(getActionBarActivity());
+        ((VerifyPasswordPreference) findPreference("verifyPassword")).setSettingsActivity(getActionBarActivity());
+        ((InputStickPreference) findPreference("inputstick")).setSettingsActivity(getActionBarActivity());
         bindPreferenceSummaryToValue(findPreference("language"));
         bindPreferenceSummaryToValue(findPreference("clipboardDuration"));
         bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));

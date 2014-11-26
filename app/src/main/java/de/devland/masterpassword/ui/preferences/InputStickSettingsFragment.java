@@ -1,7 +1,6 @@
 package de.devland.masterpassword.ui.preferences;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import de.devland.masterpassword.R;
 
@@ -15,7 +14,7 @@ public class InputStickSettingsFragment extends BaseSettingsFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.pref_inputstick);
 
-        ((EnableInputStickPreference) findPreference("inputstickEnabled")).setSettingsActivity((ActionBarActivity) getActivity());
+        ((EnableInputStickPreference) findPreference("inputstickEnabled")).setSettingsFragment(this);
         bindPreferenceSummaryToValue(findPreference("inputstickKeymap"));
     }
 }

@@ -55,4 +55,6 @@
     <string name="defaultPasswordTypeTitle">Standard Passwort-Typ</string>
     <string name="appVersionTitle">App Version</string>
     <string name="opensourceLicensesTitle">Open-Source-Lizenzen</string>
+    <string name="inputstickDeactivated_title">Deaktiviert</string>
+    <string name="inputstickActivated_title">Aktiviert</string>
 </resources>
