@@ -4,7 +4,7 @@
 
     <string name="pref_header_general">Allgemein</string>
 
-    <string name="verifyPasswordTitle">Password beim Login überprüfen</string>
+    <string name="verifyPasswordTitle">Passwort beim Login überprüfen</string>
     <string name="verifyPasswordOff">Du kannst dich mit falschem Passwort einloggen. Die gezeigten Site-Passwörter sind dann falsch.</string>
     <string name="verifyPasswordOn">Dein Passwort wird beim Login überprüft. Verringert die Sicherheit.</string>
 

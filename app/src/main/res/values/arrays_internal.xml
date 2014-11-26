@@ -29,4 +29,17 @@
         <item>en</item>
         <item>de</item>
     </string-array>
+    <string-array translatable="false" name="pref_inputstickKeymap_values">
+        <item>de-DE</item>
+        <item>en-US</item>
+        <item>fr-FR</item>
+        <item>es-ES</item>
+        <item>nb-NO</item>
+        <item>pl-PL</item>
+        <item>pt-BR</item>
+        <item>ru-RU</item>
+        <item>sk-SK</item>
+        <item>sv-SV</item>
+        <item>en-DV</item>
+    </string-array>
 </resources>

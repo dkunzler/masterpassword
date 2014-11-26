@@ -61,5 +61,8 @@
     <string name="caption_selectFolder">Select Folder</string>
     <string name="category_all">All</string>
     <string name="error_incorrectPassword">Password incorrect</string>
+    <string name="caption_playStore">Play Store</string>
+    <string name="title_proFeature">Pro Feature</string>
+    <string name="msg_proFeature">This feature is only available in the Pro Version. You can unlock the functionality by downloading the Pro Key from the PlayStore.</string>
 
 </resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_header_security">
+        <ListPreference
+            android:entries="@array/passwordTypeValues"
+            android:entryValues="@array/passwordTypeKeys"
+            android:key="defaultPasswordType"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/defaultPasswordTypeTitle" />
+
+        <ListPreference
+            android:entries="@array/pref_clipboardDuration_titles"
+            android:entryValues="@array/pref_clipboardDuration_values"
+            android:key="clipboardDuration"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/clipboardDurationTitle" />
+
+        <ListPreference
+            android:entries="@array/pref_autoLogoutDuration_titles"
+            android:entryValues="@array/pref_autoLogoutDuration_values"
+            android:key="autoLogoutDuration"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/autoLogoutDurationTitle" />
+
+        <CheckBoxPreference
+            android:key="hidePasswords"
+            android:title="@string/hidePasswordsTitle" />
+
+        <de.devland.masterpassword.ui.preferences.VerifyPasswordPreference
+            android:key="verifyPassword"
+            android:title="@string/verifyPasswordTitle" />
+        <de.devland.masterpassword.ui.preferences.InputStickPreference
+            android:key="inputstick"
+            android:title="@string/pref_header_inputstick" />
+    </PreferenceCategory>
+</PreferenceScreen>

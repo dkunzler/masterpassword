@@ -61,4 +61,5 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     @Default(ofString = Site.SITE_NAME + Site.NOCASE_ORDER_SUFFIX)
     String sortBy();
     void sortBy(String sortBy);
+
 }
