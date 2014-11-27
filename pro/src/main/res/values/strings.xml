@@ -6,5 +6,6 @@
     <string name="msg_inputstickFailed">Connection to InputStick failed. See InputStickUtility for details.</string>
     <string name="title_inputstick">InputStick</string>
     <string name="msg_connecting">Connecting…</string>
+    <string name="msg_inputstickUtilityDownload">This functionality requires to download the InputStickUtility. You can downloat it from the PlayStore or the official InputStick Homepage.</string>
 
 </resources>

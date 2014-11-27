@@ -9,7 +9,7 @@
     tools:context="de.devland.masterpassword.pro.MainActivity">
 
     <TextView
-        android:text="@string/hello_world"
+        android:text="Hello World"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

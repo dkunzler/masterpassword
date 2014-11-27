@@ -28,7 +28,6 @@ public class ClearClipboardService extends Service {
         final ClipboardManager clipboard = (ClipboardManager) getApplicationContext().getSystemService(
                 Context.CLIPBOARD_SERVICE);
 
-        // TODO handler injection
         int clipboardDuration = Integer.parseInt(defaultPrefs.clipboardDuration());
         Activity activity = App.get().getCurrentForegroundActivity();
         if (clipboardDuration > 0) {

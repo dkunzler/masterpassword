@@ -61,7 +61,6 @@
     <string name="title_verifyError">Verifikationsfehler</string>
     <string name="msg_verifyError">Die Passwordüberprüfung ist auf Grund eines unbekannten Fehlers fehlgeschlagen. Passwortverifikation wurde deaktiviert, bitte in den Einstellungen wieder aktivieren wenn gewünscht.\nBitte kontaktieren Sie mich unter info@devland.de falls dieser Fehler weiterhin besteht.\n\nVielen Dank.</string>
     <string name="error_incorrectPassword">Falsches Passwort</string>
-    <string name="caption_playStore">Play Store</string>
     <string name="msg_proFeature">Diese Funktionalität ist nur in der Pro Version verfügbar. Sie können diese Funktionalität freischalten indem sie den Pro Schlüssel aus dem PlayStore installieren.</string>
     <string name="title_proFeature">Pro Funktionalität</string>
 </resources>

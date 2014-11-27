@@ -22,6 +22,7 @@ import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.util.MasterPasswordHolder;
@@ -43,13 +44,15 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
     protected SiteCardArrayAdapter adapter;
 
     @InjectView(R.id.card_header_inner_simple_title)
-    TextView siteName;
+    protected TextView siteName;
     @InjectView(R.id.userName)
-    TextView userName;
+    protected TextView userName;
     @InjectView(R.id.password)
-    TextView password;
+    protected TextView password;
 
-    DefaultPrefs defaultPrefs;
+    protected InputStickPrefs inputStickPrefs;
+    protected DefaultPrefs defaultPrefs;
+
     private String generatedPassword;
 
     public SiteCard(Context context, Site site, SiteCardArrayAdapter adapter) {
@@ -58,6 +61,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
         this.adapter = adapter;
         this.setId(String.valueOf(site.getId()));
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
+        this.inputStickPrefs = Esperandro.getPreferences(InputStickPrefs.class, context);
         CardHeader header = new CardHeader(context);
         header.setPopupMenu(R.menu.card_site, this);
         addCardHeader(header);
@@ -123,8 +127,8 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
                 Intent broadcast = new Intent();
                 broadcast.setAction("de.devland.masterpassword.sendtoinputstick");
                 broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
+                broadcast.putExtra(Intents.EXTRA_LAYOUT, inputStickPrefs.inputstickKeymap());
 
-                // TODO extras
                 getContext().sendBroadcast(broadcast);
                 break;
         }

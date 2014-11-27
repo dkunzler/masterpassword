@@ -1,9 +1,18 @@
 package de.devland.masterpassword.pro.inputstick;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
 import com.inputstick.api.ConnectionManager;
@@ -55,7 +64,8 @@ public class SendToInputStickActivity extends BaseActivity implements DialogInte
                 type();
             }
         } else {
-            // TODO dialog to download inputstickutility
+            InputStickUtilityDownloadDialog downloadDialog = new InputStickUtilityDownloadDialog(this);
+            downloadDialog.show(getSupportFragmentManager(), null);
         }
     }
 
@@ -107,5 +117,51 @@ public class SendToInputStickActivity extends BaseActivity implements DialogInte
     protected void onDestroy() {
         super.onDestroy();
         InputStickHID.removeStateListener(this);
+    }
+
+    @SuppressLint("ValidFragment")
+    private class InputStickUtilityDownloadDialog extends DialogFragment {
+        private ActionBarActivity activity;
+
+        public InputStickUtilityDownloadDialog(ActionBarActivity activity) {
+            this.activity = activity;
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+            builder.setTitle(R.string.title_inputstick);
+            builder.setMessage(R.string.msg_inputstickUtilityDownload);
+            builder.setCancelable(true);
+            builder.setNeutralButton("Homepage", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://inputstick.com/index.php/developers/download")));
+                    finish();
+                }
+            });
+            builder.setPositiveButton(R.string.caption_playStore, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + INPUTSTICK_PACKAGENAME)));
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + INPUTSTICK_PACKAGENAME)));
+                    }
+                    finish();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            return dialog;
+        }
+
+        @Override
+        public void onDismiss(DialogInterface dialog) {
+            super.onDismiss(dialog);
+            finish();
+        }
     }
 }

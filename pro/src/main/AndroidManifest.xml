@@ -46,7 +46,7 @@
 
         <activity
             android:name="de.devland.masterpassword.pro.MainActivity"
-            android:label="@string/title_activity_main">
+            android:label="MP Pro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

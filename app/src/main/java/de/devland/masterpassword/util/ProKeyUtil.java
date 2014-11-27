@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarActivity;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.shared.BaseApp;
+import de.devland.masterpassword.util.event.ProStatusChangeEvent;
 
 /**
  * Created by David Kunzler on 31/08/14.
@@ -29,7 +30,7 @@ public enum ProKeyUtil {
 
     public void setPro(boolean isPro) {
         this.isPro = isPro;
-        // TODO send event to update UI
+        App.get().getBus().post(new ProStatusChangeEvent(isPro));
     }
 
     public boolean isPro() {
@@ -69,11 +70,11 @@ public enum ProKeyUtil {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-            builder.setTitle(activity.getString(R.string.title_proFeature));
-            builder.setMessage(activity.getString(R.string.msg_proFeature));
+            builder.setTitle(R.string.title_proFeature);
+            builder.setMessage(R.string.msg_proFeature);
             builder.setCancelable(true);
             builder.setNegativeButton(android.R.string.cancel, null);
-            builder.setPositiveButton(activity.getString(R.string.caption_playStore), new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.caption_playStore, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
