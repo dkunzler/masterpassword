@@ -5,11 +5,13 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
@@ -29,21 +31,19 @@ import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import it.gmariotti.cardslib.library.view.CardView;
 import lombok.Getter;
 
 /**
  * Created by David Kunzler on 24.08.2014.
  */
-public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupMenuListener {
+public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener {
 
     @Getter
     protected Site site;
     protected SiteCardArrayAdapter adapter;
 
-    @InjectView(R.id.card_header_inner_simple_title)
+    @InjectView(R.id.siteName)
     protected TextView siteName;
     @InjectView(R.id.userName)
     protected TextView userName;
@@ -62,9 +62,6 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
         this.setId(String.valueOf(site.getId()));
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
         this.inputStickPrefs = Esperandro.getPreferences(InputStickPrefs.class, context);
-        CardHeader header = new CardHeader(context);
-        header.setPopupMenu(R.menu.card_site, this);
-        addCardHeader(header);
         setBackgroundResourceId(android.R.color.white);
     }
 
@@ -101,9 +98,17 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
         App.get().getBus().post(new PasswordCopyEvent(this));
     }
 
+    @OnClick(R.id.imageMore)
+    void showMoreMenu(ImageView imageMore) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), imageMore);
+        popupMenu.inflate(R.menu.card_site);
+        popupMenu.setOnMenuItemClickListener(this);
+        popupMenu.show();
+    }
 
     @Override
-    public void onMenuItemClick(BaseCard baseCard, MenuItem menuItem) {
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        boolean result = true;
         switch (menuItem.getItemId()) {
             case R.id.card_menu_delete:
                 site.delete();
@@ -131,7 +136,11 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
 
                 getContext().sendBroadcast(broadcast);
                 break;
+            default:
+                result = false;
+                break;
         }
+        return result;
     }
 
     protected void collapseView(Animation.AnimationListener animationListener) {
