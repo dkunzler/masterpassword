@@ -13,12 +13,14 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
@@ -28,6 +30,7 @@ import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.util.MasterPasswordHolder;
+import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
@@ -49,6 +52,8 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     protected TextView userName;
     @InjectView(R.id.password)
     protected TextView password;
+    @InjectView(R.id.imageInputstick)
+    protected ImageView imageInputStick;
 
     protected InputStickPrefs inputStickPrefs;
     protected DefaultPrefs defaultPrefs;
@@ -79,6 +84,11 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         } else {
             userName.setVisibility(View.VISIBLE);
         }
+        if (inputStickPrefs.inputstickEnabled()) {
+            imageInputStick.setVisibility(View.VISIBLE);
+        } else {
+            imageInputStick.setVisibility(View.GONE);
+        }
         updatePassword();
         Typeface typeface = Typeface
                 .createFromAsset(getContext().getAssets(), "fonts/RobotoSlab-Light.ttf");
@@ -106,6 +116,28 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         popupMenu.show();
     }
 
+    @OnClick(R.id.imageInputstick)
+    void sentToInputStick() {
+        if (ProKeyUtil.INSTANCE.isPro()) {
+            Intent broadcast = new Intent();
+            broadcast.setAction("de.devland.masterpassword.sendtoinputstick");
+            broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
+            broadcast.putExtra(Intents.EXTRA_LAYOUT, inputStickPrefs.inputstickKeymap());
+
+            getContext().sendBroadcast(broadcast);
+        } else {
+            ProKeyUtil.INSTANCE.showGoProDialog(App.get().getCurrentForegroundActivity());
+        }
+        // TODO deactivate when not pro
+    }
+
+    @OnLongClick(R.id.imageInputstick)
+    public boolean showInputStickToast() {
+        // TODO show inputstick toast
+        Toast.makeText(getContext(), "Send to InputStick", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         boolean result = true;
@@ -127,14 +159,6 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
                 site.setSiteCounter(site.getSiteCounter() + 1);
                 site.touch();
                 updatePassword();
-                break;
-            case R.id.card_menu_inputstick:
-                Intent broadcast = new Intent();
-                broadcast.setAction("de.devland.masterpassword.sendtoinputstick");
-                broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
-                broadcast.putExtra(Intents.EXTRA_LAYOUT, inputStickPrefs.inputstickKeymap());
-
-                getContext().sendBroadcast(broadcast);
                 break;
             default:
                 result = false;

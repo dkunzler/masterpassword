@@ -20,6 +20,23 @@
     <com.andexert.library.RippleView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/siteName"
+        android:layout_toLeftOf="@+id/rippleMore"
+        ripple:rv_centered="true"
+        ripple:rv_color="@color/ripple_material_light"
+        ripple:rv_rippleDuration="100">
+
+        <ImageView
+            android:id="@+id/imageInputstick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_inputstick" />
+    </com.andexert.library.RippleView>
+
+    <com.andexert.library.RippleView
+        android:id="@+id/rippleMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/siteName"
