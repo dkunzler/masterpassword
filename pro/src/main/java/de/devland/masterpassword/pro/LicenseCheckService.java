@@ -10,6 +10,8 @@ import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
 import com.google.android.vending.licensing.ServerManagedPolicy;
 
+import de.devland.masterpassword.shared.util.Intents;
+
 public class LicenseCheckService extends Service implements LicenseCheckerCallback {
 
     private static final String PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlS+ieEhEqoilomfeVVc5TEThaool3voySeFZMnXI8FYHH4RfHn+ocIMEpTEEYIfi3vCTx/J3sJ/l7yesvhumEQHrncjXhlqUU6Y5+7HgrFO28WZHFs2eZOBy+5k0TgvNp46MGsApZVZYM2yFLGGn2/iUzPlLU3ZEmTEd/v2Dfds1Ycjyvyhz1p88wlSIq2iTQYV5XEQ0v6aR7Xv/mtV8K5a9uTiHhGXWsdCypV1/IfMub/UK8E8spwbv4L2O13KSB1Wu6AwHbNgIfYpiLrYuLfSa7L8lkTusupr0BJJ446l/sME3xrrKtl/Ml3P728/8A37GLijK9pFgeMcORci9HQIDAQAB";
@@ -36,14 +38,14 @@ public class LicenseCheckService extends Service implements LicenseCheckerCallba
 
     private Intent getAnswerLicenseIntent() {
         Intent broadcast = new Intent();
-        broadcast.setAction("de.devland.masterpassword.answerlicensecheck");
+        broadcast.setAction(Intents.ACTION_ANSERLICENSECHECK);
         return broadcast;
     }
 
     @Override
     public void allow(int reason) {
         Intent broadcast = getAnswerLicenseIntent();
-        broadcast.putExtra("de.devland.masterpassword.EXTRA_LICENSE", true);
+        broadcast.putExtra(Intents.EXTRA_LICENSE, true);
         this.sendBroadcast(broadcast);
         this.stopSelf();
     }
@@ -51,7 +53,7 @@ public class LicenseCheckService extends Service implements LicenseCheckerCallba
     @Override
     public void dontAllow(int reason) {
         Intent broadcast = getAnswerLicenseIntent();
-        broadcast.putExtra("de.devland.masterpassword.EXTRA_LICENSE", false);
+        broadcast.putExtra(Intents.EXTRA_LICENSE, false);
         this.sendBroadcast(broadcast);
         this.stopSelf();
     }
@@ -59,7 +61,7 @@ public class LicenseCheckService extends Service implements LicenseCheckerCallba
     @Override
     public void applicationError(int errorCode) {
         Intent broadcast = getAnswerLicenseIntent();
-        broadcast.putExtra("de.devland.masterpassword.EXTRA_LICENSE", false);
+        broadcast.putExtra(Intents.EXTRA_LICENSE, false);
         this.sendBroadcast(broadcast);
         this.stopSelf();
     }

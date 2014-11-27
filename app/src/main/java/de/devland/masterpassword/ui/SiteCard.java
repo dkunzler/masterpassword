@@ -42,6 +42,7 @@ import lombok.Getter;
  */
 public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener {
 
+    public static final String PASSWORD_DOT = "•";
     @Getter
     protected Site site;
     protected SiteCardArrayAdapter adapter;
@@ -120,7 +121,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     void sentToInputStick() {
         if (ProKeyUtil.INSTANCE.isPro()) {
             Intent broadcast = new Intent();
-            broadcast.setAction("de.devland.masterpassword.sendtoinputstick");
+            broadcast.setAction(Intents.ACTION_SENDTOINPUTSTICK);
             broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
             broadcast.putExtra(Intents.EXTRA_LAYOUT, inputStickPrefs.inputstickKeymap());
 
@@ -128,13 +129,11 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         } else {
             ProKeyUtil.INSTANCE.showGoProDialog(App.get().getCurrentForegroundActivity());
         }
-        // TODO deactivate when not pro
     }
 
     @OnLongClick(R.id.imageInputstick)
     public boolean showInputStickToast() {
-        // TODO show inputstick toast
-        Toast.makeText(getContext(), "Send to InputStick", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.msg_sentToInputstick, Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -150,7 +149,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
                 break;
             case R.id.card_menu_show:
                 if (password.getText().equals(generatedPassword)) {
-                    password.setText(StringUtils.repeat("•", generatedPassword.length()));
+                    password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
                 } else {
                     password.setText(generatedPassword);
                 }
@@ -201,7 +200,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
                 .generatePassword(site.getPasswordType(), site.getSiteName(),
                         site.getSiteCounter());
         if (defaultPrefs.hidePasswords()) {
-            password.setText(StringUtils.repeat("•", generatedPassword.length()));
+            password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
         } else {
             password.setText(generatedPassword);
         }

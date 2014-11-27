@@ -39,6 +39,7 @@ import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.CategoryChangeEvent;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
+import de.devland.masterpassword.util.event.ProStatusChangeEvent;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.listener.SwipeOnScrollListener;
 import lombok.NoArgsConstructor;
@@ -173,12 +174,16 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
             final SiteCard newCard = new SiteCard(getActivity(), card.getSite(), adapter);
 
             if (adapter.getPosition(card) != 0) {
-
                 cardListView.addRow(newCard);
                 adapter.remove(card);
                 adapter.notifyDataSetChanged();
             }
         }
+    }
+
+    @Subscribe
+    public void onProStatusChange(ProStatusChangeEvent e) {
+        refreshCards();
     }
 
     private void refreshCards() {

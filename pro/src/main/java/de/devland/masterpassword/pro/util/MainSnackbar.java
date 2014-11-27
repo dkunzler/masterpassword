@@ -11,7 +11,7 @@ import de.devland.masterpassword.shared.util.Intents;
 public class MainSnackbar {
     public static void send(Context context, String message) {
         Intent broadcast = new Intent();
-        broadcast.setAction("de.devland.masterpassword.sendmessage");
+        broadcast.setAction(Intents.ACTION_SENDMESSAGE);
         broadcast.putExtra(Intents.EXTRA_MESSAGE, message);
         context.sendBroadcast(broadcast);
     }

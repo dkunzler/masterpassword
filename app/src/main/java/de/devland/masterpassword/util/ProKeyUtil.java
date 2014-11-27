@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarActivity;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.shared.BaseApp;
+import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.util.event.ProStatusChangeEvent;
 
 /**
@@ -24,7 +25,7 @@ import de.devland.masterpassword.util.event.ProStatusChangeEvent;
 public enum ProKeyUtil {
     INSTANCE;
 
-    protected static final String PRO_PACKAGE_NAME = "de.devland.masterpassword.initiatelicensecheck";
+    protected static final String PRO_PACKAGE_NAME = "de.devland.masterpassword.pro";
 
     protected boolean isPro = false;
 
@@ -48,7 +49,7 @@ public enum ProKeyUtil {
         setPro(exists);
         BaseApp app = App.get();
         Intent broadcast = new Intent();
-        broadcast.setAction(PRO_PACKAGE_NAME);
+        broadcast.setAction(Intents.ACTION_INITLICENSECHECK);
         app.sendBroadcast(broadcast);
     }
 
