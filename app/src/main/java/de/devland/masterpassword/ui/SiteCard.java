@@ -5,50 +5,60 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
+import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.util.MasterPasswordHolder;
+import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import it.gmariotti.cardslib.library.view.CardView;
 import lombok.Getter;
 
 /**
  * Created by David Kunzler on 24.08.2014.
  */
-public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupMenuListener {
+public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener {
 
+    public static final String PASSWORD_DOT = "•";
     @Getter
     protected Site site;
     protected SiteCardArrayAdapter adapter;
 
-    @InjectView(R.id.card_header_inner_simple_title)
-    TextView siteName;
+    @InjectView(R.id.siteName)
+    protected TextView siteName;
     @InjectView(R.id.userName)
-    TextView userName;
+    protected TextView userName;
     @InjectView(R.id.password)
-    TextView password;
+    protected TextView password;
+    @InjectView(R.id.imageInputstick)
+    protected ImageView imageInputStick;
 
-    DefaultPrefs defaultPrefs;
+    protected InputStickPrefs inputStickPrefs;
+    protected DefaultPrefs defaultPrefs;
+
     private String generatedPassword;
 
     public SiteCard(Context context, Site site, SiteCardArrayAdapter adapter) {
@@ -57,9 +67,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
         this.adapter = adapter;
         this.setId(String.valueOf(site.getId()));
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
-        CardHeader header = new CardHeader(context);
-        header.setPopupMenu(R.menu.card_site, this);
-        addCardHeader(header);
+        this.inputStickPrefs = Esperandro.getPreferences(InputStickPrefs.class, context);
         setBackgroundResourceId(android.R.color.white);
     }
 
@@ -76,6 +84,11 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
             userName.setVisibility(View.GONE);
         } else {
             userName.setVisibility(View.VISIBLE);
+        }
+        if (inputStickPrefs.inputstickEnabled()) {
+            imageInputStick.setVisibility(View.VISIBLE);
+        } else {
+            imageInputStick.setVisibility(View.GONE);
         }
         updatePassword();
         Typeface typeface = Typeface
@@ -96,9 +109,37 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
         App.get().getBus().post(new PasswordCopyEvent(this));
     }
 
+    @OnClick(R.id.imageMore)
+    void showMoreMenu(ImageView imageMore) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), imageMore);
+        popupMenu.inflate(R.menu.card_site);
+        popupMenu.setOnMenuItemClickListener(this);
+        popupMenu.show();
+    }
+
+    @OnClick(R.id.imageInputstick)
+    void sentToInputStick() {
+        if (ProKeyUtil.INSTANCE.isPro()) {
+            Intent broadcast = new Intent();
+            broadcast.setAction(Intents.ACTION_SENDTOINPUTSTICK);
+            broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
+            broadcast.putExtra(Intents.EXTRA_LAYOUT, inputStickPrefs.inputstickKeymap());
+
+            getContext().sendBroadcast(broadcast);
+        } else {
+            ProKeyUtil.INSTANCE.showGoProDialog(App.get().getCurrentForegroundActivity());
+        }
+    }
+
+    @OnLongClick(R.id.imageInputstick)
+    public boolean showInputStickToast() {
+        Toast.makeText(getContext(), R.string.msg_sentToInputstick, Toast.LENGTH_SHORT).show();
+        return true;
+    }
 
     @Override
-    public void onMenuItemClick(BaseCard baseCard, MenuItem menuItem) {
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        boolean result = true;
         switch (menuItem.getItemId()) {
             case R.id.card_menu_delete:
                 site.delete();
@@ -108,7 +149,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
                 break;
             case R.id.card_menu_show:
                 if (password.getText().equals(generatedPassword)) {
-                    password.setText(StringUtils.repeat("•", generatedPassword.length()));
+                    password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
                 } else {
                     password.setText(generatedPassword);
                 }
@@ -118,7 +159,11 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
                 site.touch();
                 updatePassword();
                 break;
+            default:
+                result = false;
+                break;
         }
+        return result;
     }
 
     protected void collapseView(Animation.AnimationListener animationListener) {
@@ -155,7 +200,7 @@ public class SiteCard extends Card implements CardHeader.OnClickCardHeaderPopupM
                 .generatePassword(site.getPasswordType(), site.getSiteName(),
                         site.getSiteCounter());
         if (defaultPrefs.hidePasswords()) {
-            password.setText(StringUtils.repeat("•", generatedPassword.length()));
+            password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
         } else {
             password.setText(generatedPassword);
         }

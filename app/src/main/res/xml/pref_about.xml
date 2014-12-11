@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_header_about">
+        <de.devland.masterpassword.ui.preferences.FeedbackPreference android:title="@string/title_feedback" />
 
-    <de.devland.masterpassword.ui.preferences.FeedbackPreference android:title="@string/title_feedback" />
+        <Preference
+            android:key="versionName"
+            android:title="@string/appVersionTitle" />
 
-    <Preference
-        android:key="versionName"
-        android:title="@string/appVersionTitle" />
-
-    <de.devland.masterpassword.ui.preferences.InformationDialogPreference
-        content="raw/licenses"
-        android:title="@string/opensourceLicensesTitle" />
-
+        <de.devland.masterpassword.ui.preferences.InformationDialogPreference
+            content="raw/licenses"
+            android:title="@string/opensourceLicensesTitle" />
+    </PreferenceCategory>
 </PreferenceScreen>

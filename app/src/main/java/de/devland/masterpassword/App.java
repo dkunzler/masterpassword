@@ -10,6 +10,7 @@ import java.util.Locale;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.shared.BaseApp;
 import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.UpgradeManager;
@@ -30,6 +31,7 @@ public class App extends BaseApp {
         super.onCreate();
         ProKeyUtil.INSTANCE.initLicenseCheck();
         DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
+        InputStickPrefs inputStickPrefs = Esperandro.getPreferences(InputStickPrefs.class, this);
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         if (pInfo.versionCode != defaultPrefs.versionCode()) {
             UpgradeManager upgradeManager = new UpgradeManager(this);
@@ -38,6 +40,7 @@ public class App extends BaseApp {
         defaultPrefs.versionName(pInfo.versionName);
         defaultPrefs.versionCode(pInfo.versionCode);
         defaultPrefs.initDefaults();
+        inputStickPrefs.initDefaults();
         if (defaultPrefs.categories() == null) {
             defaultPrefs.categories(new ArrayList<Category>());
         }

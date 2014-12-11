@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Master Password Pro Key</string>
+    <string name="msg_connecting">Verbinden…</string>
+    <string name="msg_inputstickFailed">Verbindung zum InputStick fehlgeschlagen. InputStickUtility öffnen für Details.</string>
+    <string name="msg_typedSuccessfully">Password erfolgreich eingegeben.</string>
+    <string name="title_inputstick">InputStick</string>
+</resources>

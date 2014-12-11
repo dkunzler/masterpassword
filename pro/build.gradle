@@ -35,9 +35,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':lvl') // easyLVL: MIT
     compile project(':shared')
 
-    compile 'com.inputstick:inputstick-api:20140914' // no license
+    compile 'com.inputstick:inputstick-api:20140929' // no license
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_header_inputstick">
+        <de.devland.masterpassword.ui.preferences.EnableInputStickPreference
+            android:key="inputstickEnabled"
+            android:summaryOff="@string/inputstickDeactivated_title"
+            android:summaryOn="@string/inputstickActivated_title"
+            android:title="Inpustick support" />
+        <ListPreference
+            android:entries="@array/pref_inputstickKeymap_titles"
+            android:entryValues="@array/pref_inputstickKeymap_values"
+            android:key="inputstickKeymap"
+            android:title="@string/inputstickKeyMapTitle" />
+    </PreferenceCategory>
+</PreferenceScreen>
