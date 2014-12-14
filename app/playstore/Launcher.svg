@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg3005"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="Launcher.svg">
+  <defs
+     id="defs3007">
+    <filter
+       inkscape:collect="always"
+       id="filter3873"
+       x="-0.046609233"
+       width="1.0932185"
+       y="-0.15815775"
+       height="1.3163155">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.8070759"
+         id="feGaussianBlur3875" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3961">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="8.459324"
+         id="feGaussianBlur3963" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter4052"
+       x="-0.046609233"
+       width="1.0932185"
+       y="-0.15815775"
+       height="1.3163155">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.8070759"
+         id="feGaussianBlur4054" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="-240.41501"
+     inkscape:cy="727.44244"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3010">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3877"
+       transform="translate(-267.88477,-342.41198)"
+       inkscape:export-filename="E:\repos\MasterPassword\app\playstore\launcher_base.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         ry="40"
+         y="353.79077"
+         x="278.57144"
+         height="192"
+         width="192"
+         id="rect3013"
+         style="fill:#37474f;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot3857"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:-2.97947049000000020px;word-spacing:0px;opacity:0.20000000000000001;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         transform="matrix(1.6781505,0,0,1.6781505,-48.30036,122.49553)"><flowRegion
+           id="flowRegion3859"><rect
+             id="rect3861"
+             width="141.42856"
+             height="124.28571"
+             x="181.42857"
+             y="175.21933"
+             style="letter-spacing:-2.97947049px;fill:#000000;fill-opacity:1" /></flowRegion><flowPara
+           id="flowPara3863"
+           style="font-size:90px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;letter-spacing:-2.97947049px;text-anchor:middle;baseline-shift:baseline;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans">***</flowPara></flowRoot>      <flowRoot
+         transform="matrix(1.6781505,0,0,1.6781505,-48.30036,116.49525)"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:-2.97947049px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+         id="flowRoot3783"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3785"><rect
+             style="letter-spacing:-2.97947049px;fill:#ffffff;fill-opacity:1"
+             y="175.21933"
+             x="181.42857"
+             height="124.28571"
+             width="141.42856"
+             id="rect3787" /></flowRegion><flowPara
+           style="font-size:90px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;letter-spacing:-2.97947049px;text-anchor:middle;baseline-shift:baseline;fill:#ffffff;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
+           id="flowPara3789">***</flowPara></flowRoot>    </g>
+    <rect
+       ry="40"
+       y="261.37485"
+       x="12.003209"
+       height="192"
+       width="192"
+       id="rect3890"
+       style="fill:#37474f;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       inkscape:export-filename="E:\repos\MasterPassword\app\playstore\launcher_pro_base.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3892"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:-2.97947049px;word-spacing:0px;opacity:0.19899998;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="matrix(1.6781505,0,0,1.6781505,-314.86859,30.079637)"
+       inkscape:export-filename="E:\repos\MasterPassword\app\playstore\launcher_pro_base.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><flowRegion
+         id="flowRegion3894"><rect
+           id="rect3896"
+           width="141.42856"
+           height="124.28571"
+           x="181.42857"
+           y="175.21933"
+           style="letter-spacing:-2.97947049px;fill:#000000;fill-opacity:1" /></flowRegion><flowPara
+         id="flowPara3898"
+         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;letter-spacing:-2.97947049px;text-anchor:middle;baseline-shift:baseline;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans">***</flowPara></flowRoot>    <flowRoot
+       transform="matrix(1.6781505,0,0,1.6781505,-314.86859,24.079357)"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:-2.97947049px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+       id="flowRoot3900"
+       xml:space="preserve"
+       inkscape:export-filename="E:\repos\MasterPassword\app\playstore\launcher_pro_base.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><flowRegion
+         id="flowRegion3902"><rect
+           style="letter-spacing:-2.97947049px;fill:#ffffff;fill-opacity:1"
+           y="175.21933"
+           x="181.42857"
+           height="124.28571"
+           width="141.42856"
+           id="rect3904" /></flowRegion><flowPara
+         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;letter-spacing:-2.97947049px;text-anchor:middle;baseline-shift:baseline;fill:#ffffff;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
+         id="flowPara3906">***</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.70867634,0.70867634,-0.70867634,0.70867634,279.97426,-7.0613869)"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.2;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter3961);font-family:Sans"
+       id="flowRoot3953"
+       xml:space="preserve"
+       inkscape:export-filename="E:\repos\MasterPassword\app\playstore\launcher_pro_base.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><flowRegion
+         id="flowRegion3955"><rect
+           style="fill:#000000;fill-opacity:1"
+           y="315.93362"
+           x="96.785713"
+           height="79.64286"
+           width="137.85715"
+           id="rect3957" /></flowRegion><flowPara
+         style="fill:#000000;fill-opacity:1"
+         id="flowPara3959">PRO</flowPara></flowRoot>    <path
+       inkscape:connector-curvature="0"
+       style="fill:#b0bec5;fill-opacity:1;stroke:none"
+       d="m 52.008929,261.38393 c -1.171547,0 -2.323349,0.0273 -3.46875,0.125 l 155.312501,155.3125 c 0.096,-1.1353 0.15625,-2.27654 0.15625,-3.4375 l 0,-58.6875 -93.3125,-93.3125 -58.687501,0 z"
+       id="rect3916"
+       inkscape:export-filename="E:\repos\MasterPassword\app\playstore\launcher_pro_base.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <g
+       id="flowRoot3908"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#37474f;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="matrix(0.70867634,0.70867634,-0.70867634,0.70867634,279.97426,-13.061019)"
+       inkscape:export-filename="E:\repos\MasterPassword\app\playstore\launcher_pro_base.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4019"
+         style="fill:#37474f"
+         d="m 99.867187,349.36044 0,-28.63281 10.800783,0 c 1.90102,3e-5 3.35285,0.0912 4.35547,0.27343 1.40623,0.23441 2.58461,0.68037 3.53515,1.33789 0.9505,0.65758 1.71548,1.57881 2.29493,2.76368 0.5794,1.18492 0.86911,2.487 0.86914,3.90625 -3e-5,2.43491 -0.77477,4.49546 -2.32422,6.18164 -1.5495,1.68621 -4.34898,2.52931 -8.39844,2.52929 l -7.34375,0 0,11.64063 z m 3.789063,-15.01953 7.40234,0 c 2.4479,10e-6 4.18618,-0.45572 5.21485,-1.36719 1.02862,-0.91144 1.54295,-2.19399 1.54297,-3.84766 -2e-5,-1.19789 -0.30276,-2.22328 -0.90821,-3.07617 -0.60549,-0.85284 -1.40301,-1.41599 -2.39257,-1.68945 -0.63804,-0.16925 -1.81643,-0.25388 -3.53516,-0.25391 l -7.32422,0 z" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4021"
+         style="fill:#37474f"
+         d="m 126.64453,349.36044 0,-28.63281 12.69531,0 c 2.55207,3e-5 4.49217,0.25719 5.82032,0.77148 1.3281,0.51435 2.3893,1.42255 3.18359,2.72461 0.79425,1.30211 1.19138,2.74091 1.19141,4.31641 -3e-5,2.03127 -0.65758,3.7435 -1.97266,5.13672 -1.31513,1.39324 -3.34637,2.27865 -6.09375,2.65625 1.00259,0.48178 1.7643,0.95704 2.28516,1.42578 1.10675,1.01563 2.15492,2.28516 3.14453,3.80859 l 4.98047,7.79297 -4.76563,0 -3.78906,-5.95703 c -1.10679,-1.71874 -2.01825,-3.03385 -2.73438,-3.94531 -0.71616,-0.91145 -1.35743,-1.54947 -1.92382,-1.91407 -0.56643,-0.36457 -1.1426,-0.61847 -1.72852,-0.76172 -0.4297,-0.0911 -1.13282,-0.1367 -2.10938,-0.13671 l -4.39453,0 0,12.71484 z m 3.78906,-15.99609 8.14453,0 c 1.73176,10e-6 3.08592,-0.17902 4.0625,-0.53711 0.97655,-0.35806 1.71873,-0.93098 2.22657,-1.71875 0.50779,-0.78775 0.76169,-1.64386 0.76172,-2.56836 -3e-5,-1.35415 -0.49156,-2.46743 -1.47461,-3.33985 -0.9831,-0.87237 -2.53583,-1.30857 -4.65821,-1.30859 l -9.0625,0 z" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4023"
+         style="fill:#37474f"
+         d="m 154.33984,335.41513 c 0,-4.75259 1.27604,-8.47329 3.82813,-11.16211 2.55207,-2.68878 5.84634,-4.03318 9.88281,-4.03321 2.64321,3e-5 5.02602,0.63154 7.14844,1.89454 2.12237,1.26304 3.74021,3.02411 4.85351,5.2832 1.11326,2.25913 1.6699,4.82098 1.66993,7.68555 -3e-5,2.90365 -0.58597,5.50131 -1.75782,7.79296 -1.1719,2.29167 -2.83205,4.0267 -4.98047,5.20508 -2.14845,1.17839 -4.46616,1.76758 -6.95312,1.76758 -2.69533,0 -5.10418,-0.65104 -7.22656,-1.95312 -2.1224,-1.30209 -3.73048,-3.07943 -4.82422,-5.33204 -1.09375,-2.25259 -1.64063,-4.6354 -1.64063,-7.14843 z m 3.90625,0.0586 c 0,3.45053 0.92773,6.16863 2.78321,8.1543 1.85546,1.98568 4.18293,2.97852 6.98242,2.97851 2.85154,1e-5 5.19855,-1.0026 7.04101,-3.00781 1.84243,-2.0052 2.76365,-4.85025 2.76368,-8.53516 -3e-5,-2.33071 -0.39391,-4.36521 -1.18164,-6.10351 -0.78779,-1.73826 -1.94013,-3.08592 -3.45704,-4.04297 -1.51694,-0.95701 -3.21941,-1.43552 -5.10742,-1.43555 -2.6823,3e-5 -4.99024,0.92125 -6.92383,2.76367 -1.9336,1.84247 -2.90039,4.91864 -2.90039,9.22852 z" />
+    </g>
+  </g>
+</svg>
