@@ -11,7 +11,6 @@ import java.util.Random;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.shared.BaseApp;
 import de.devland.masterpassword.shared.prefs.InternalPrefs;
-import lombok.SneakyThrows;
 
 /**
  * Created by David Kunzler on 23.10.2014.
@@ -39,13 +38,18 @@ public enum RequestCodeManager {
         return i;
     }
 
-    @SneakyThrows(PackageManager.NameNotFoundException.class)
+    //@SneakyThrows(PackageManager.NameNotFoundException.class)
     public int getRequestCode(Class clazz, int clientRequestCode) {
-        int packageHash = BaseApp.get().getPackageManager().getApplicationInfo(BaseApp.get().getPackageName(), PackageManager.GET_META_DATA).uid;
-        int seed = getBaseSeed();
-        int classHash = clazz.getName().hashCode();
-        short toShort = (short) (clientRequestCode + classHash * seed * packageHash);
-        return Math.abs(toShort);
+        try {
+            int packageHash = BaseApp.get().getPackageManager().getApplicationInfo(BaseApp.get().getPackageName(), PackageManager.GET_META_DATA).uid;
+            int seed = getBaseSeed();
+            int classHash = clazz.getName().hashCode();
+            short toShort = (short) (clientRequestCode + classHash * seed * packageHash);
+            return Math.abs(toShort);
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public int addRequest(int internalRequestCode, Class clazz, RequestCodeCallback callback, Bundle data) {

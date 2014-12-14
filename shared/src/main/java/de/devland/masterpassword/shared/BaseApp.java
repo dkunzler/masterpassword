@@ -5,22 +5,20 @@ import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
 import de.devland.masterpassword.shared.ui.BaseActivity;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Created by David Kunzler on 21.11.2014.
  */
 public class BaseApp extends SugarApp {
 
-    @Getter
     private static BaseApp instance;
 
-    @Getter
     private Bus bus;
-    @Getter
-    @Setter
     private BaseActivity currentForegroundActivity;
+
+    public static BaseApp getInstance() {
+        return BaseApp.instance;
+    }
 
     public void onCreate() {
         super.onCreate();
@@ -30,5 +28,17 @@ public class BaseApp extends SugarApp {
 
     public static BaseApp get() {
         return instance;
+    }
+
+    public Bus getBus() {
+        return this.bus;
+    }
+
+    public BaseActivity getCurrentForegroundActivity() {
+        return this.currentForegroundActivity;
+    }
+
+    public void setCurrentForegroundActivity(BaseActivity currentForegroundActivity) {
+        this.currentForegroundActivity = currentForegroundActivity;
     }
 }
