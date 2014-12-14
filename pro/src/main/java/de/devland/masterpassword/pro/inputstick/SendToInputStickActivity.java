@@ -135,7 +135,7 @@ public class SendToInputStickActivity extends BaseActivity implements DialogInte
             builder.setTitle(R.string.title_inputstick);
             builder.setMessage(R.string.msg_inputstickUtilityDownload);
             builder.setCancelable(true);
-            builder.setNeutralButton("Homepage", new DialogInterface.OnClickListener() {
+            builder.setNeutralButton(getString(R.string.caption_homepage), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://inputstick.com/index.php/developers/download")));
