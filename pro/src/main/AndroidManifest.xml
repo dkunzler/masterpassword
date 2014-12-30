@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.devland.masterpassword.pro">
 
-     <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
 
     <application
         android:name="de.devland.masterpassword.shared.BaseApp"
@@ -18,8 +18,8 @@
 
         <activity
             android:name="de.devland.masterpassword.pro.MainActivity"
-            android:label="MP Pro"
-            android:enabled="true">
+            android:enabled="true"
+            android:label="MP Pro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,9 +29,10 @@
 
         <activity
             android:name=".inputstick.SendToInputStickActivity"
+            android:excludeFromRecents="true"
             android:exported="true"
-            android:theme="@style/AppTheme.Translucent"
             android:noHistory="true"
-            android:excludeFromRecents="true"/>    </application>
+            android:theme="@style/AppTheme.Translucent" />
+    </application>
 
 </manifest>

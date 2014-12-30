@@ -7,4 +7,5 @@
     <string name="title_inputstick">InputStick</string>
     <string name="caption_homepage">Homepage</string>
     <string name="msg_inputstickUtilityDownload">Diese Funktionalität benötigt die App InputStickUtility. Sie können Sie vom PlayStore oder der offiziellen InputStick Homepage runterladen.</string>
+    <string name="msg_thankYou">Vielen Dank, dass die die weitere Entwicklung durch den Kauf dieser App unterstützen. Alle Pro Funktionalitäten sollten nun in der Haupt App funktionieren. Sollten irgendwelche Probleme auftauchen, scheuen Sie nicht mich zu kontaktieren: info@devland.de</string>
 </resources>
