@@ -2,13 +2,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <permission
-        android:name="de.devland.masterpassword.ANSWERLICENSECHECK"
+        android:name="de.devland.masterpassword.permission.ANSWERLICENSECHECK"
         android:protectionLevel="signature" />
     <permission
-        android:name="de.devland.masterpassword.SENDMESSAGE"
+        android:name="de.devland.masterpassword.permission.SENDMESSAGE"
         android:protectionLevel="signature" />
 
+    <uses-permission android:name="de.devland.masterpassword.permission.INITIATELICENSECHECK" />
+    <uses-permission android:name="de.devland.masterpassword.permission.SENDTOINPUTSTICK" />
+
     <application>
+        <receiver
+            android:name="de.devland.masterpassword.receiver.LicenseCheckReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="de.devland.masterpassword.permission.ANSWERLICENSECHECK">
+            <intent-filter>
+                <action android:name="de.devland.masterpassword.answerlicensecheck" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="de.devland.masterpassword.receiver.SnackbarReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="de.devland.masterpassword.permission.SENDMESSAGE">
+            <intent-filter>
+                <action android:name="de.devland.masterpassword.sendmessage" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

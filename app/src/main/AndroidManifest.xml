@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="de.devland.masterpassword">
 
-    <uses-permission android:name="de.devland.masterpassword.INITIATELICENSECHECK" />
-    <uses-permission android:name="de.devland.masterpassword.SENDTOINPUTSTICK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -68,26 +66,6 @@
         <receiver
             android:name="de.devland.masterpassword.receiver.ClearPasswordReceiver"
             android:exported="false" />
-
-        <receiver
-            android:name="de.devland.masterpassword.receiver.LicenseCheckReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="de.devland.masterpassword.ANSWERLICENSECHECK">
-            <intent-filter>
-                <action android:name="de.devland.masterpassword.answerlicensecheck" />
-            </intent-filter>
-        </receiver>
-
-        <receiver
-            android:name="de.devland.masterpassword.receiver.SnackbarReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="de.devland.masterpassword.SENDMESSAGE">
-            <intent-filter>
-                <action android:name="de.devland.masterpassword.sendmessage" />
-            </intent-filter>
-        </receiver>
 
         <service
             android:name="de.devland.masterpassword.service.ClearClipboardService"

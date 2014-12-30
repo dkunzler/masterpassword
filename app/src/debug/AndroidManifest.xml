@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <permission
-        android:name="de.devland.masterpassword.debug.ANSWERLICENSECHECK"
+        android:name="de.devland.masterpassword.permission.debug.ANSWERLICENSECHECK"
         android:protectionLevel="signature" />
     <permission
-        android:name="de.devland.masterpassword.debug.SENDMESSAGE"
+        android:name="de.devland.masterpassword.permission.debug.SENDMESSAGE"
         android:protectionLevel="signature" />
+
+    <uses-permission android:name="de.devland.masterpassword.permission.debug.INITIATELICENSECHECK" />
+    <uses-permission android:name="de.devland.masterpassword.permission.debug.SENDTOINPUTSTICK" />
 
     <application>
         <receiver
@@ -15,7 +18,7 @@
             android:enabled="true"
             android:exported="true"
             tools:replace="android:permission"
-            android:permission="de.devland.masterpassword.debug.ANSWERLICENSECHECK">
+            android:permission="de.devland.masterpassword.permission.debug.ANSWERLICENSECHECK">
             <intent-filter>
                 <action android:name="de.devland.masterpassword.answerlicensecheck" />
             </intent-filter>
@@ -26,7 +29,7 @@
             android:enabled="true"
             android:exported="true"
             tools:replace="android:permission"
-            android:permission="de.devland.masterpassword.debug.SENDMESSAGE">
+            android:permission="de.devland.masterpassword.permission.debug.SENDMESSAGE">
             <intent-filter>
                 <action android:name="de.devland.masterpassword.sendmessage" />
             </intent-filter>

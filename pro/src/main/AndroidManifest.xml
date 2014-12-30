@@ -2,17 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.devland.masterpassword.pro">
 
-    <permission
-        android:name="de.devland.masterpassword.INITIATELICENSECHECK"
-        android:protectionLevel="signature" />
-    <permission
-        android:name="de.devland.masterpassword.SENDTOINPUTSTICK"
-        android:protectionLevel="signature" />
-
-    <uses-permission android:name="de.devland.masterpassword.ANSWERLICENSECHECK" />
-    <uses-permission android:name="de.devland.masterpassword.SENDMESSAGE" />
-
-    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+     <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
 
     <application
         android:name="de.devland.masterpassword.shared.BaseApp"
@@ -20,24 +10,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <receiver
-            android:name="de.devland.masterpassword.pro.InitiateLicenseCheckReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="de.devland.masterpassword.INITIATELICENSECHECK">
-            <intent-filter>
-                <action android:name="de.devland.masterpassword.initiatelicensecheck" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="de.devland.masterpassword.pro.inputstick.SendToInputStickReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="de.devland.masterpassword.SENDTOINPUTSTICK">
-            <intent-filter>
-                <action android:name="de.devland.masterpassword.sendtoinputstick" />
-            </intent-filter>
-        </receiver>
 
         <service
             android:name="de.devland.masterpassword.pro.LicenseCheckService"
@@ -46,7 +18,8 @@
 
         <activity
             android:name="de.devland.masterpassword.pro.MainActivity"
-            android:label="MP Pro">
+            android:label="MP Pro"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
