@@ -5,6 +5,9 @@ package de.devland.masterpassword.shared.util;
  */
 public interface Intents {
 
+    public static final String PACKAGE_NAME_PRO = "de.devland.masterpassword.pro";
+    public static final String PACKAGE_NAME_PRO_DEBUG = "de.devland.masterpassword.pro.debug";
+
     public static final String EXTRA_PASSWORD = "de.devland.masterpassword.EXTRA_PASSWORD";
     public static final String EXTRA_LAYOUT = "de.devland.masterpassword.EXTRA_INPUTSTICK_LAYOUT";
     public static final String EXTRA_MESSAGE = "de.devland.masterpassword.EXTRA_MESSAGE";

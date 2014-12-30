@@ -13,7 +13,7 @@ public class LicenseCheckReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.hasExtra(Intents.EXTRA_LICENSE)) {
             boolean hasLicense = intent.getBooleanExtra(Intents.EXTRA_LICENSE, false);
-            ProKeyUtil.INSTANCE.setPro(hasLicense);
+            ProKeyUtil.INSTANCE.setPro(hasLicense, true);
         }
     }
 }

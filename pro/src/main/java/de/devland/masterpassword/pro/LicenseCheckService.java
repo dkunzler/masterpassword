@@ -67,6 +67,12 @@ public class LicenseCheckService extends Service implements LicenseCheckerCallba
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        checker.onDestroy();
+    }
+
+    @Override
     public IBinder onBind(Intent intent) {
         throw new UnsupportedOperationException("Not yet implemented");
     }

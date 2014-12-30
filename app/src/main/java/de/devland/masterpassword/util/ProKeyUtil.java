@@ -13,8 +13,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 
+import java.util.Date;
+
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
+import de.devland.masterpassword.BuildConfig;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.prefs.ProPrefs;
 import de.devland.masterpassword.shared.BaseApp;
 import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.util.event.ProStatusChangeEvent;
@@ -25,13 +30,18 @@ import de.devland.masterpassword.util.event.ProStatusChangeEvent;
 public enum ProKeyUtil {
     INSTANCE;
 
-    protected static final String PRO_PACKAGE_NAME = "de.devland.masterpassword.pro";
+    private static final long _24_HOURS = 1000 * 60 * 60 * 24;
 
     protected boolean isPro = false;
 
-    public void setPro(boolean isPro) {
+    public void setPro(boolean isPro, boolean remote) {
         this.isPro = isPro;
         App.get().getBus().post(new ProStatusChangeEvent(isPro));
+        if (remote) {
+            ProPrefs proPrefs = proPrefs();
+            proPrefs.lastRemoteCheck((new Date()).getTime());
+            proPrefs.lastRemoteStatus(isPro);
+        }
     }
 
     public boolean isPro() {
@@ -42,20 +52,37 @@ public enum ProKeyUtil {
         boolean exists = true;
         PackageManager pm = App.get().getPackageManager();
         try {
-            pm.getPackageInfo(PRO_PACKAGE_NAME, PackageManager.GET_META_DATA);
+            if (BuildConfig.DEBUG) {
+                pm.getPackageInfo(Intents.PACKAGE_NAME_PRO_DEBUG, PackageManager.GET_META_DATA);
+            } else {
+                pm.getPackageInfo(Intents.PACKAGE_NAME_PRO, PackageManager.GET_META_DATA);
+            }
         } catch (PackageManager.NameNotFoundException e) {
             exists = false;
         }
-        setPro(exists);
-        BaseApp app = App.get();
-        Intent broadcast = new Intent();
-        broadcast.setAction(Intents.ACTION_INITLICENSECHECK);
-        app.sendBroadcast(broadcast);
+        if (exists) {
+            ProPrefs proPrefs = proPrefs();
+            Date then = new Date(proPrefs.lastRemoteCheck());
+            Date now = new Date();
+            if (then.before(new Date(now.getTime() - _24_HOURS)) || !proPrefs.lastRemoteStatus()) {
+                setPro(exists, false);
+                BaseApp app = App.get();
+                Intent broadcast = new Intent();
+                broadcast.setAction(Intents.ACTION_INITLICENSECHECK);
+                app.sendBroadcast(broadcast);
+            } else {
+                setPro(exists && proPrefs.lastRemoteStatus(), false);
+            }
+        }
     }
 
     public void showGoProDialog(ActionBarActivity activity) {
         GoProDialog goProDialog = new GoProDialog(activity);
         goProDialog.show(activity.getSupportFragmentManager(), null);
+    }
+
+    private ProPrefs proPrefs() {
+        return Esperandro.getPreferences(ProPrefs.class, App.get());
     }
 
     @SuppressLint("ValidFragment")
@@ -79,9 +106,9 @@ public enum ProKeyUtil {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + PRO_PACKAGE_NAME)));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + Intents.PACKAGE_NAME_PRO)));
                     } catch (ActivityNotFoundException e) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + PRO_PACKAGE_NAME)));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + Intents.PACKAGE_NAME_PRO)));
                     }
                 }
             });

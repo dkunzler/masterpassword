@@ -26,6 +26,7 @@ import de.devland.masterpassword.ui.drawer.ExportDrawerItem;
 import de.devland.masterpassword.ui.drawer.ImportDrawerItem;
 import de.devland.masterpassword.ui.drawer.LogoutDrawerItem;
 import de.devland.masterpassword.ui.drawer.PreferencesDrawerItem;
+import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.event.CategoryChangeEvent;
 import de.devland.masterpassword.util.event.ReloadDrawerEvent;
 
@@ -42,6 +43,7 @@ public class PasswordViewActivity extends LoginRequiringActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ProKeyUtil.INSTANCE.initLicenseCheck();
         setContentView(R.layout.activity_password_view);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
