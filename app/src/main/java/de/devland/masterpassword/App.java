@@ -39,6 +39,7 @@ public class App extends BaseApp {
         }
         defaultPrefs.versionName(pInfo.versionName);
         defaultPrefs.versionCode(pInfo.versionCode);
+        defaultPrefs.versionString(String.format("%s (%d)", pInfo.versionName, pInfo.versionCode));
         defaultPrefs.initDefaults();
         inputStickPrefs.initDefaults();
         if (defaultPrefs.categories() == null) {

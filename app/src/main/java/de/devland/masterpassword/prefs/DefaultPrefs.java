@@ -43,6 +43,9 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     String versionName();
     void versionName(String versionName);
 
+    String versionString();
+    void versionString(String versionString);
+
     @Default(ofBoolean = false)
     boolean hidePasswords();
     void hidePasswords(boolean hidePasswords);

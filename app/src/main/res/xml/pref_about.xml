@@ -5,7 +5,7 @@
         <de.devland.masterpassword.ui.preferences.FeedbackPreference android:title="@string/title_feedback" />
 
         <Preference
-            android:key="versionName"
+            android:key="versionString"
             android:title="@string/appVersionTitle" />
 
         <de.devland.masterpassword.ui.preferences.InformationDialogPreference

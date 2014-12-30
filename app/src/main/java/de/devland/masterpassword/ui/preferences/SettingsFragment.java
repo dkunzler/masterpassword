@@ -28,7 +28,7 @@ public class SettingsFragment extends BaseSettingsFragment {
         bindPreferenceSummaryToValue(findPreference("language"));
         bindPreferenceSummaryToValue(findPreference("clipboardDuration"));
         bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));
-        bindPreferenceSummaryToValue(findPreference("versionName"));
+        bindPreferenceSummaryToValue(findPreference("versionString"));
         bindPreferenceSummaryToValue(findPreference("defaultPasswordType"));
     }
 
