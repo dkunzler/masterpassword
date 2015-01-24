@@ -63,6 +63,8 @@
     <string name="error_incorrectPassword">Password incorrect</string>
     <string name="title_proFeature">Pro Feature</string>
     <string name="msg_proFeature">This feature is only available in the Pro Version. You can unlock the functionality by downloading the Pro Key from the PlayStore.</string>
+    <string name="title_proVerificationError">Pro Verification Failed</string>
+    <string name="msg_proVerificationError">Your Pro Key could not be verified, please check your internet connection. If this error persists please send feedback.</string>
     <string name="msg_sentToInputstick">Send to InputStick</string>
 
 </resources>

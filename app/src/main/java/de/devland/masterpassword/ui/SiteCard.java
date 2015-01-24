@@ -163,6 +163,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
                 result = false;
                 break;
         }
+
         return result;
     }
 
