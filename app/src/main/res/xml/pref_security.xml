@@ -32,6 +32,12 @@
         <de.devland.masterpassword.ui.preferences.VerifyPasswordPreference
             android:key="verifyPassword"
             android:title="@string/verifyPasswordTitle" />
+
+        <CheckBoxPreference
+            android:key="legacyMode"
+            android:title="@string/title_legacyMode"
+            android:summary="@string/summary_legacyMode"/>
+
         <de.devland.masterpassword.ui.preferences.InputStickPreference
             android:key="inputstick"
             android:title="@string/pref_header_inputstick" />

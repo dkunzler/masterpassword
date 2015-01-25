@@ -27,4 +27,8 @@ public interface ShowCasePrefs extends SharedPreferenceActions {
     boolean firstCardShown();
     void firstCardShown(boolean firstCardShown);
 
+    @Default(ofBoolean = false)
+    boolean legacyModeDialogShown();
+    void legacyModeDialogShown(boolean legacyModeDialogShown);
+
 }

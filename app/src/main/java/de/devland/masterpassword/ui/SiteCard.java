@@ -199,7 +199,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     private void updatePassword() {
         generatedPassword = MasterPasswordHolder.INSTANCE
                 .generatePassword(site.getPasswordType(), site.getSiteName(),
-                        site.getSiteCounter());
+                        site.getSiteCounter(), defaultPrefs.legacyMode());
         if (defaultPrefs.hidePasswords()) {
             password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
         } else {

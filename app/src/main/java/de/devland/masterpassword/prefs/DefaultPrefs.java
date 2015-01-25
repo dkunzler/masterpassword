@@ -57,6 +57,10 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     String defaultPasswordType();
     void defaultPasswordType(String defaultPasswordType);
 
+    @Default(ofBoolean = false)
+    boolean legacyMode();
+    void legacyMode(boolean legacyMode);
+
     @Default(ofString = "")
     String language();
     void language(String language);

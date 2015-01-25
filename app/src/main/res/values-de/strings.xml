@@ -66,4 +66,8 @@
     <string name="msg_sentToInputstick">An InputStick schicken</string>
     <string name="title_proVerificationError">Pro Prüfung fehlgeschlagen</string>
     <string name="msg_proVerificationError">Deine Pro Version konnte nicht verifiziert werden, bitte überprüfen Sie ihre Internet Verbindung. Wenn dieser Fehler bestehen bleibt, sende ein Feedback.</string>
+    <string name="summary_legacyMode">Verwende das alte Verhalten für spezielle Zeichen. (impliziert neu-Login)</string>
+    <string name="title_legacyMode">Kompatibilitätsmodus</string>
+    <string name="title_legacyModeDialog">Kompatibilitätsmodus</string>
+    <string name="msg_legacyModeDialog">Das Verhalten des Passwort-Algorithmus wurde angepasst. Wenn du spezielle Zeichen (z.B. Umlaute) in deinem Namen, Passwort oder einem Site-Namen hast, kann es sein, dass andere Passwörter generiert werden. Du kannst das alte Verhalten in den Einstellungen aktivieren wenn gewünscht.</string>
 </resources>
