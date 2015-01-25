@@ -54,7 +54,7 @@
     <string name="defaultPasswordTypeTitle">Default password type</string>
     <string name="appVersionTitle">App Version</string>
     <string name="title_legacyMode">Legacy Mode</string>
-    <string name="summary_legacyMode">Use old behaviour for special characters. (needs re-login)</string>
+    <string name="summary_legacyMode">Use old (broken) behaviour for special characters. (needs re-login)</string>
     <string name="opensourceLicensesTitle">Open-Source-Licenses</string>
     <string name="inputstickDeactivated_title">Deactivated</string>
     <string name="inputstickActivated_title">Activated</string>
