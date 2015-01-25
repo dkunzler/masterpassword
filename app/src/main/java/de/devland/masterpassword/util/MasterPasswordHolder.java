@@ -2,7 +2,8 @@ package de.devland.masterpassword.util;
 
 import android.content.Intent;
 
-import com.lyndir.masterpassword.MPElementType;
+import com.lyndir.masterpassword.MPSiteType;
+import com.lyndir.masterpassword.MPSiteVariant;
 import com.lyndir.masterpassword.MasterKey;
 
 import de.devland.masterpassword.App;
@@ -40,10 +41,10 @@ public enum MasterPasswordHolder {
         }
     }
 
-    public String generatePassword(MPElementType passwordType, String siteName, int siteCounter) {
+    public String generatePassword(MPSiteType passwordType, String siteName, int siteCounter) {
         String result = "";
         if (masterKey != null) {
-            result = masterKey.encode(siteName.trim(), passwordType, siteCounter);
+            result = masterKey.encode(siteName.trim(), passwordType, siteCounter, MPSiteVariant.Password, null);
         } else {
             Intent loginIntent = new Intent(App.get(), LoginActivity.class);
             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);

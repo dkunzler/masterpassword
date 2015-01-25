@@ -19,7 +19,7 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.lyndir.masterpassword.MPElementType;
+import com.lyndir.masterpassword.MPSiteType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,7 +81,7 @@ public class EditFragment extends BaseFragment {
         site = Site.findById(Site.class, siteId);
         if (site == null) {
             site = new Site();
-            site.setPasswordType(MPElementType.valueOf(defaultPrefs.defaultPasswordType()));
+            site.setPasswordType(MPSiteType.valueOf(defaultPrefs.defaultPasswordType()));
         }
     }
 
@@ -187,7 +187,7 @@ public class EditFragment extends BaseFragment {
         }
     }
 
-    private void updatePasswordTypeSpinner(MPElementType passwordTypeEnum) {
+    private void updatePasswordTypeSpinner(MPSiteType passwordTypeEnum) {
         String passwordTypeName = passwordTypeEnum.toString();
         for (int i = 0; i < passwordTypeKeys.length; i++) {
             String passwordTypeKey = passwordTypeKeys[i];
@@ -202,7 +202,7 @@ public class EditFragment extends BaseFragment {
         site.setSiteName(siteName.getText().toString());
         site.setUserName(userName.getText().toString());
         int passwordTypeIndex = passwordType.getSelectedItemPosition();
-        site.setPasswordType(MPElementType.valueOf(passwordTypeKeys[passwordTypeIndex]));
+        site.setPasswordType(MPSiteType.valueOf(passwordTypeKeys[passwordTypeIndex]));
         site.setSiteCounter(siteCounter.getValue());
         site.setCategory(categorySpiner.getSelectedItem().toString());
         if (site.complete()) {
