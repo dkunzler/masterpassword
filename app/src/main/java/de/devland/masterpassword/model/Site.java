@@ -3,7 +3,7 @@ package de.devland.masterpassword.model;
 import android.database.Cursor;
 
 import com.google.gson.annotations.Expose;
-import com.lyndir.masterpassword.MPSiteType;
+import com.lyndir.masterpassword.MPElementType;
 import com.orm.SugarRecord;
 
 import java.util.Date;
@@ -38,7 +38,7 @@ public class Site extends SugarRecord<Site> {
     @Expose
     protected int siteCounter = 0;
     @Expose
-    protected MPSiteType passwordType = MPSiteType.GeneratedMaximum;
+    protected MPElementType passwordType = MPElementType.GeneratedMaximum;
     @Expose
     protected Date lastUsed = new Date(0);
     @Expose
@@ -63,7 +63,7 @@ public class Site extends SugarRecord<Site> {
         result.setSiteName(cursor.getString(cursor.getColumnIndex(SITE_NAME)));
         result.setUserName(cursor.getString(cursor.getColumnIndex(USER_NAME)));
         result.setSiteCounter(cursor.getInt(cursor.getColumnIndex(SITE_COUNTER)));
-        result.setPasswordType(MPSiteType.valueOf(cursor.getString(cursor.getColumnIndex(PASSWORD_TYPE))));
+        result.setPasswordType(MPElementType.valueOf(cursor.getString(cursor.getColumnIndex(PASSWORD_TYPE))));
         result.setCategory(cursor.getString(cursor.getColumnIndex(CATEGORY)));
         result.setId(cursor.getLong(cursor.getColumnIndex(ID)));
         return result;

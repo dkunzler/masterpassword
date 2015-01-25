@@ -24,8 +24,8 @@ android {
         applicationId "de.devland.masterpassword"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 18
-        versionName "1.4.0"
+        versionCode 19
+        versionName "1.4.1"
     }
 
     compileOptions {
@@ -73,7 +73,7 @@ dependencies {
     apt 'de.devland.esperandro:esperandro:2.1.0' // Apache v2.0
 
     // MasterPassword dependencies
-    compile('com.lyndir.masterpassword:masterpassword-algorithm:c7ac5087') { // GPL v3
+    compile('com.lyndir.masterpassword:masterpassword-algorithm:398f7bdb') { // GPL v3
         exclude module: 'jsr305' // problems while dexing
     }
     compile 'org.slf4j:slf4j-android:1.7.7' // MIT
