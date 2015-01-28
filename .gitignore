@@ -1,5 +1,6 @@
 release.jks
 **/*.apk
+**/manifest-merger-release-report.txt
 .gradle
 /local.properties
 *.iml
