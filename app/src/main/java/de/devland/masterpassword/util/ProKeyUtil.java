@@ -142,8 +142,8 @@ public enum ProKeyUtil {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-            builder.setTitle(R.string.title_proFeature);
-            builder.setMessage(R.string.msg_proFeature);
+            builder.setTitle(R.string.title_proVerificationError);
+            builder.setMessage(R.string.msg_proVerificationError);
             builder.setCancelable(true);
             builder.setNegativeButton(R.string.title_feedback, new DialogInterface.OnClickListener() {
                 @Override

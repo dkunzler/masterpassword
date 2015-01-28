@@ -4,6 +4,9 @@ import android.database.Cursor;
 
 import com.google.gson.annotations.Expose;
 import com.lyndir.masterpassword.MPSiteType;
+import com.lyndir.masterpassword.MasterKey;
+import com.lyndir.masterpassword.model.MPSite;
+import com.lyndir.masterpassword.model.MPUser;
 import com.orm.SugarRecord;
 
 import java.util.Date;
@@ -56,6 +59,13 @@ public class Site extends SugarRecord<Site> {
     public void touch() {
         lastUsed = new Date();
         this.save();
+    }
+
+    public MPSite toMPSite(MPUser user) {
+        MPSite mpSite = new MPSite(user, getSiteName(), getPasswordType(), getSiteCounter());
+        mpSite.setLoginName(getUserName());
+        mpSite.setMPVersion(MasterKey.ALGORITHM);
+        return mpSite;
     }
 
     public static Site fromCursor(Cursor cursor) {

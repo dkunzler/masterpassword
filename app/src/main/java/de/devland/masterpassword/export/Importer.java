@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
+import com.lyndir.masterpassword.model.MPSiteUnmarshaller;
 import com.nispok.snackbar.Snackbar;
 
 import java.io.BufferedReader;
@@ -91,21 +92,19 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
             ImportType importType = (ImportType) data.getSerializable(EXTRA_IMPORT_TYPE);
             ExportType exportType = ExportType.JSON; // TODO from url or data
 
-            String contents = null;
+            List<String> lines = new ArrayList<>();
 
             try {
                 InputStream inputStream = activity.getContentResolver()
                         .openInputStream(intent.getData());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder fileContent = new StringBuilder("");
+
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    fileContent.append(line);
+                    lines.add(line);
                 }
                 reader.close();
                 inputStream.close();
-
-                contents = fileContent.toString();
             } catch (IOException e) {
                 e.printStackTrace();
                 Snackbar.with(activity)
@@ -114,21 +113,26 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         .show(activity);
             }
 
-            if (contents != null) {
+            if (lines.size() > 0) {
                 List<Site> importedSites = new ArrayList<>();
 
                 switch (exportType) {
                     case MPSITES:
+                        MPSiteUnmarshaller unmarshaller = MPSiteUnmarshaller.unmarshall(lines);
                         // TODO
                         break;
                     case JSON:
+                        StringBuilder fileContent = new StringBuilder("");
+                        for (String line : lines) {
+                            fileContent.append(line);
+                        }
                         List<Site> gsonSites;
                         Gson gson = new GsonBuilder().setPrettyPrinting()
                                 .excludeFieldsWithoutExposeAnnotation()
                                 .serializeNulls().create();
                         Type listType = new TypeToken<ArrayList<Site>>() {
                         }.getType();
-                        gsonSites = gson.fromJson(contents, listType);
+                        gsonSites = gson.fromJson(fileContent.toString(), listType);
                         if (gsonSites != null) {
                             importedSites = gsonSites;
                         } else {

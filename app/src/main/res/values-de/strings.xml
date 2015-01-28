@@ -38,7 +38,7 @@
     <string name="hidePasswordsTitle">Verstecke Passwörter</string>
     <string name="caption_append">Importierte Sites hinzufügen</string>
     <string name="caption_json">JSON</string>
-    <string name="caption_mpsites">MPSITES (folgt)</string>
+    <string name="caption_mpsites">MPSITES</string>
     <string name="caption_override">Überschreiben</string>
     <string name="errorPasswordMatch">Passwörter stimmen nicht überein</string>
     <string name="error_generic">Ein Fehler ist aufgetreten</string>

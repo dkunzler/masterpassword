@@ -73,7 +73,10 @@ dependencies {
     apt 'de.devland.esperandro:esperandro:2.1.0' // Apache v2.0
 
     // MasterPassword dependencies
-    compile('com.lyndir.masterpassword:masterpassword-algorithm:c7ac5087') { // GPL v3
+    compile('com.lyndir.masterpassword:masterpassword-model:2858133') { // GPL v3
+        exclude module: 'jsr305' // problems while dexing
+    }
+    compile('com.lyndir.masterpassword:masterpassword-algorithm:2858133') { // GPL v3
         exclude module: 'jsr305' // problems while dexing
     }
     compile('com.lyndir.masterpassword:masterpassword-algorithm-legacy:1.0-legacy') { // GPL v3

@@ -2,6 +2,7 @@ package de.devland.masterpassword.util;
 
 import android.content.Intent;
 
+import com.lyndir.lhunath.opal.system.CodeUtils;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.MPSiteVariant;
 import com.lyndir.masterpassword.MasterKey;
@@ -9,6 +10,7 @@ import com.lyndir.masterpassword.legacy.MPElementType;
 
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.ui.LoginActivity;
+import lombok.Getter;
 
 /**
  * Created by David Kunzler on 23.08.2014.
@@ -18,6 +20,10 @@ public enum MasterPasswordHolder {
 
     private boolean needsLogin = true;
 
+    @Getter
+    private String fullName;
+    @Getter
+    private byte[] keyId;
     private MasterKey masterKey;
     private com.lyndir.masterpassword.legacy.MasterKey legacyMasterKey;
 
@@ -33,11 +39,15 @@ public enum MasterPasswordHolder {
     public void setMasterKey(MasterKey masterKey) {
         this.masterKey = masterKey;
         needsLogin = false;
+        fullName = masterKey.getFullName();
+        keyId = masterKey.getKeyID();
     }
 
     public void setLegacyMasterKey(com.lyndir.masterpassword.legacy.MasterKey masterKey) {
         this.legacyMasterKey = masterKey;
         needsLogin = false;
+        fullName = legacyMasterKey.getUserName();
+        keyId = CodeUtils.decodeHex(legacyMasterKey.getKeyID());
     }
 
     public void clear() {
