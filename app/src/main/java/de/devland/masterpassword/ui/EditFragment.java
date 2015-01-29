@@ -83,6 +83,7 @@ public class EditFragment extends BaseFragment {
             site = new Site();
             site.setPasswordType(MPSiteType.valueOf(defaultPrefs.defaultPasswordType()));
         }
+        // TODO receive shared website
     }
 
     @Override

@@ -3,9 +3,10 @@ package de.devland.masterpassword.ui;
 import android.os.Bundle;
 
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.shared.ui.BaseActivity;
 
 
-public class EditActivity extends LoginRequiringActivity {
+public class EditActivity extends BaseActivity {
 
     EditFragment fragment;
 
@@ -20,6 +21,7 @@ public class EditActivity extends LoginRequiringActivity {
                     .add(R.id.container, fragment)
                     .commit();
         }
+        getSupportActionBar().setTitle(R.string.title_activity_edit);
     }
 
     @Override

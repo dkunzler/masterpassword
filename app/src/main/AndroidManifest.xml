@@ -43,13 +43,18 @@
 
         <activity
             android:name="de.devland.masterpassword.ui.EditActivity"
-            android:label="@string/title_activity_edit"
+            android:label="@string/app_name"
             android:parentActivityName="de.devland.masterpassword.ui.PasswordViewActivity"
             android:windowSoftInputMode="stateUnchanged"
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
 
 
