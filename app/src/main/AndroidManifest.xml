@@ -50,13 +50,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.devland.masterpassword.ui.PasswordViewActivity" />
+        </activity>
+        <activity-alias
+            android:name="de.devland.masterpassword.ui.AddSiteActivity"
+            android:targetActivity="de.devland.masterpassword.ui.EditActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
-        </activity>
-
+        </activity-alias>
 
         <activity
             android:name="de.devland.masterpassword.ui.preferences.SettingsActivity"

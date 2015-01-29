@@ -46,6 +46,7 @@ import lombok.NoArgsConstructor;
 public class EditFragment extends BaseFragment {
 
     public static final String ARG_SITE_ID = "de.devland.masterpassword.EditFragment.siteId";
+    public static final String ARG_HOSTNAME = "de.devland.masterpassword.EditFragment.hostnamae";
 
     protected DefaultPrefs defaultPrefs;
 
@@ -75,15 +76,19 @@ public class EditFragment extends BaseFragment {
         setHasOptionsMenu(true);
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
         Bundle arguments = getArguments();
+        String hostname = null;
         if (arguments != null) {
             siteId = arguments.getLong(ARG_SITE_ID, -1);
+            hostname = arguments.getString(ARG_HOSTNAME, null);
         }
         site = Site.findById(Site.class, siteId);
         if (site == null) {
             site = new Site();
             site.setPasswordType(MPSiteType.valueOf(defaultPrefs.defaultPasswordType()));
         }
-        // TODO receive shared website
+        if (hostname != null) {
+            site.setSiteName(hostname);
+        }
     }
 
     @Override
