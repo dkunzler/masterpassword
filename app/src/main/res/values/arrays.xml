@@ -9,6 +9,13 @@
         <item>PIN</item>
     </string-array>
 
+    <string-array translatable="false" name="algorithmVersionValues">
+        <item>Version 0</item>
+        <item>Version 1</item>
+        <item>Version 2</item>
+        <item>Version 3</item>
+    </string-array>
+
     <string-array name="emptyArray">
         <item></item>
     </string-array>

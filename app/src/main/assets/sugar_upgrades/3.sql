@@ -1,0 +1,2 @@
+alter table SITE add ALGORITHM_VERSION TEXT;
+update SITE set ALGORITHM_VERSION='V1' where ALGORITHM_VERSION is null;

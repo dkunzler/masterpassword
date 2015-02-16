@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.lyndir.masterpassword.MPSiteType;
+import com.lyndir.masterpassword.MasterKey;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,12 +59,15 @@ public class EditFragment extends BaseFragment {
     protected AutoCompleteTextView userName;
     @InjectView(R.id.spinner_passwordType)
     protected Spinner passwordType;
+    @InjectView(R.id.spinner_algorithmVersion)
+    protected Spinner algorithmVersion;
     @InjectView(R.id.spinner_category)
     protected Spinner categorySpiner;
     @InjectView(R.id.numberPicker_siteCounter)
     protected NumberPicker siteCounter;
 
     private String[] passwordTypeKeys;
+    private String[] algorithmVersionKeys;
     private ArrayAdapter<String> categoryAdapter;
 
     private long siteId = -1;
@@ -117,6 +121,7 @@ public class EditFragment extends BaseFragment {
         super.onAttach(activity);
         ((ActionBarActivity) activity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         passwordTypeKeys = getResources().getStringArray(R.array.passwordTypeKeys);
+        algorithmVersionKeys = getResources().getStringArray(R.array.algorithmVersionKeys);
     }
 
     @Override
@@ -180,6 +185,7 @@ public class EditFragment extends BaseFragment {
         userName.setText(site.getUserName());
         updatePasswordTypeSpinner(site.getPasswordType());
         updateCategorySpinner(site.getCategory());
+        updateAlgorithmVersionSpinner(site.getAlgorithmVersion());
         siteCounter.setValue(site.getSiteCounter());
     }
 
@@ -204,11 +210,24 @@ public class EditFragment extends BaseFragment {
         }
     }
 
+    private void updateAlgorithmVersionSpinner(MasterKey.Version algorithmVersionEnum) {
+        String algorithmVersionName = algorithmVersionEnum.toString();
+        for (int i = 0; i < algorithmVersionKeys.length; i++) {
+            String algorithmVersionKey = algorithmVersionKeys[i];
+            if (algorithmVersionKey.equals(algorithmVersionName)) {
+                algorithmVersion.setSelection(i, true);
+                break;
+            }
+        }
+    }
+
     private void writeValues() {
         site.setSiteName(siteName.getText().toString());
         site.setUserName(userName.getText().toString());
         int passwordTypeIndex = passwordType.getSelectedItemPosition();
         site.setPasswordType(MPSiteType.valueOf(passwordTypeKeys[passwordTypeIndex]));
+        int algorithmVersionIndex = algorithmVersion.getSelectedItemPosition();
+        site.setAlgorithmVersion(MasterKey.Version.valueOf(algorithmVersionKeys[algorithmVersionIndex]));
         site.setSiteCounter(siteCounter.getValue());
         site.setCategory(categorySpiner.getSelectedItem().toString());
         if (site.complete()) {

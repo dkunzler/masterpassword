@@ -20,5 +20,8 @@ allprojects {
         maven {
             url "http://maven.devland.de"
         }
+        maven {
+            url "http://maven.lyndir.com"
+        }
     }
 }

@@ -43,6 +43,8 @@ public class Site extends SugarRecord<Site> {
     @Expose
     protected MPSiteType passwordType = MPSiteType.GeneratedMaximum;
     @Expose
+    protected MasterKey.Version algorithmVersion = MasterKey.Version.CURRENT;
+    @Expose
     protected Date lastUsed = new Date(0);
     @Expose
     protected String category;
@@ -64,7 +66,7 @@ public class Site extends SugarRecord<Site> {
     public MPSite toMPSite(MPUser user) {
         MPSite mpSite = new MPSite(user, getSiteName(), getPasswordType(), getSiteCounter());
         mpSite.setLoginName(getUserName());
-        mpSite.setMPVersion(MasterKey.ALGORITHM);
+        //mpSite.setMPVersion(MasterKey.ALGORITHM);
         return mpSite;
     }
 

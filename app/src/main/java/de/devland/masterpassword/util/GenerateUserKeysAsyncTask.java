@@ -34,10 +34,13 @@ public class GenerateUserKeysAsyncTask extends AsyncTask<String, Integer, Object
 
     @Override
     protected Object doInBackground(String... strings) {
+        String name = strings[0];
+        String password = strings[1];
+
         if (defaultPrefs.legacyMode()) {
             return new com.lyndir.masterpassword.legacy.MasterKey(strings[0].trim(), strings[1].trim());
         } else {
-            return new MasterKey(strings[0].trim(), strings[1].trim());
+            return MasterKey.create(name, password.toCharArray());
         }
     }
 

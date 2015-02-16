@@ -109,12 +109,36 @@
             android:entries="@array/passwordTypeValues"/>
 
         <TextView
-            android:id="@+id/textView_siteCounter"
+            android:id="@+id/textView_algorithmVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/spinner_passwordType"
+            android:layout_marginTop="@dimen/edittext_margin_top"
+            android:text="@string/caption_algorithmVersion"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/text"/>
+
+        <Spinner
+            android:id="@+id/spinner_algorithmVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView_algorithmVersion"
+            android:layout_marginTop="@dimen/edittext_marginCaption"
+            android:entries="@array/algorithmVersionValues"/>
+
+        <TextView
+            android:id="@+id/textView_siteCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spinner_algorithmVersion"
             android:layout_marginTop="@dimen/edittext_margin_top"
             android:text="@string/caption_siteCounter"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -123,6 +147,7 @@
         <NumberPicker
             android:id="@+id/numberPicker_siteCounter"
             android:layout_width="wrap_content"
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_siteCounter"
             android:layout_centerHorizontal="true"
