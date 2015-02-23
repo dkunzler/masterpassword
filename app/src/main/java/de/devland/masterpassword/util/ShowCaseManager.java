@@ -1,14 +1,7 @@
 package de.devland.masterpassword.util;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.graphics.Point;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Display;
 import android.view.View;
 
@@ -101,31 +94,4 @@ public enum ShowCaseManager {
         }
     }
 
-    public void showLegacyModeDialog(ActionBarActivity activity) {
-        if (!showCasePrefs.legacyModeDialogShown()) {
-            try {
-                LegacyModeDialog legacyModeDialog = new LegacyModeDialog();
-                legacyModeDialog.show(activity.getSupportFragmentManager(), null);
-            } finally {
-                showCasePrefs.legacyModeDialogShown(true);
-            }
-        }
-    }
-
-    @SuppressLint("ValidFragment")
-    public class LegacyModeDialog extends DialogFragment {
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setPositiveButton(android.R.string.ok, null);
-
-            builder.setTitle(R.string.title_legacyModeDialog);
-            builder.setMessage(R.string.msg_legacyModeDialog);
-            Dialog dialog = builder.create();
-
-            return dialog;
-        }
-    }
 }

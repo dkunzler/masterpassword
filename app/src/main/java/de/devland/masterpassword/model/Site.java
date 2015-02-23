@@ -29,8 +29,10 @@ public class Site extends SugarRecord<Site> {
     public static final String ID = "ID";
     public static final String SITE_NAME = "SITE_NAME";
     public static final String USER_NAME = "USER_NAME";
+    public static final String GENERATED_USER_NAME = "GENERATED_USER_NAME";
     public static final String SITE_COUNTER = "SITE_COUNTER";
     public static final String PASSWORD_TYPE = "PASSWORD_TYPE";
+    public static final String ALGORITHM_VERSION = "ALGORITHM_VERSION";
     public static final String CATEGORY = "CATEGORY";
     public static final String LAST_USED = "LAST_USED";
 

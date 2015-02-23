@@ -12,7 +12,6 @@ import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.devland.masterpassword.prefs.ShowCasePrefs;
 
 /**
  * Created by deekay on 01/10/14.
@@ -27,7 +26,6 @@ public class UpgradeManager {
 
     public void onUpgrade(int oldVersion, int newVersion) {
         DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
-        ShowCasePrefs showCasePrefs = Esperandro.getPreferences(ShowCasePrefs.class, context);
         if (defaultPrefs.defaultPasswordType().equals("\"GeneratedMaximum\"")) {
             defaultPrefs.defaultPasswordType(MPSiteType.GeneratedMaximum.toString());
         }
@@ -43,10 +41,6 @@ public class UpgradeManager {
                 }
             }
             categories.removeAll(toRemove);
-        }
-
-        if (oldVersion < 20) {
-            showCasePrefs.legacyModeDialogShown(false);
         }
     }
 

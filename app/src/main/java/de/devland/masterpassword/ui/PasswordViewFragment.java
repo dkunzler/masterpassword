@@ -242,7 +242,6 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
 
         if (!getActivity().isFinishing()) {
             ShowCaseManager.INSTANCE.showAddShowCase(getActivity());
-            ShowCaseManager.INSTANCE.showLegacyModeDialog((android.support.v7.app.ActionBarActivity) getActivity());
         }
     }
 

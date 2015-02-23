@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
+import com.lyndir.masterpassword.MPSiteVariant;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -197,9 +198,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     }
 
     private void updatePassword() {
-        generatedPassword = MasterPasswordHolder.INSTANCE
-                .generatePassword(site.getPasswordType(), site.getSiteName(),
-                        site.getSiteCounter(), defaultPrefs.legacyMode());
+        generatedPassword = MasterPasswordHolder.INSTANCE.generate(site.getPasswordType(), MPSiteVariant.Password, site.getSiteName(), site.getSiteCounter(), site.getAlgorithmVersion());
         if (defaultPrefs.hidePasswords()) {
             password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
         } else {

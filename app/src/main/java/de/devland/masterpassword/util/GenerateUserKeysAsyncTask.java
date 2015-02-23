@@ -6,24 +6,26 @@ import android.os.AsyncTask;
 
 import com.lyndir.masterpassword.MasterKey;
 
-import de.devland.esperandro.Esperandro;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.model.Site;
 
 /**
  * Created by David Kunzler on 25/08/14.
  */
-public class GenerateUserKeysAsyncTask extends AsyncTask<String, Integer, Object> {
+public class GenerateUserKeysAsyncTask extends AsyncTask<String, Integer, Boolean> {
 
     private Context context;
     private ProgressDialog dialog;
     private Runnable callback;
-    private DefaultPrefs defaultPrefs;
 
     public GenerateUserKeysAsyncTask(Context context, Runnable callback) {
         this.context = context;
         this.callback = callback;
-        this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
     }
 
     @Override
@@ -33,26 +35,55 @@ public class GenerateUserKeysAsyncTask extends AsyncTask<String, Integer, Object
     }
 
     @Override
-    protected Object doInBackground(String... strings) {
+    protected Boolean doInBackground(String... strings) {
         String name = strings[0];
         String password = strings[1];
 
-        if (defaultPrefs.legacyMode()) {
-            return new com.lyndir.masterpassword.legacy.MasterKey(strings[0].trim(), strings[1].trim());
-        } else {
-            return MasterKey.create(name, password.toCharArray());
+        Set<MasterKey.Version> versions = new TreeSet<>();
+        versions.add(MasterKey.Version.CURRENT);
+
+        List<Site> sitesDistinctVersions = Site.find(Site.class, null, null, Site.ALGORITHM_VERSION, null, null);
+        for (Site site : sitesDistinctVersions) {
+            versions.add(site.getAlgorithmVersion());
         }
+
+        List<Thread> threads = new ArrayList<>();
+
+        for (MasterKey.Version version : versions) {
+            Thread thread = createThread(name, password, version);
+            thread.start();
+            threads.add(thread);
+        }
+
+        while (!threads.isEmpty()) {
+            // join until no threads left
+            Thread thread = threads.get(0);
+            try {
+                thread.join();
+                threads.remove(thread);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        return true;
+    }
+
+    private Thread createThread(final String name, final String password, final MasterKey.Version version) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                MasterKey masterKey = MasterKey.create(version, name, password.toCharArray());
+                MasterPasswordHolder.INSTANCE.setMasterKey(version, masterKey);
+            }
+        };
+        return new Thread(runnable);
     }
 
     @Override
-    protected void onPostExecute(Object masterKey) {
-        super.onPostExecute(masterKey);
-        if (defaultPrefs.legacyMode()) {
-            MasterPasswordHolder.INSTANCE.setLegacyMasterKey((com.lyndir.masterpassword.legacy.MasterKey) masterKey);
-        } else {
-            MasterPasswordHolder.INSTANCE.setMasterKey((MasterKey) masterKey);
-        }
-
+    protected void onPostExecute(Boolean success) {
+        super.onPostExecute(success);
         if (dialog != null) {
             dialog.dismiss();
         }
