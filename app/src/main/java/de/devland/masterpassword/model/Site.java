@@ -39,6 +39,8 @@ public class Site extends SugarRecord<Site> {
     @Expose
     protected String userName = "";
     @Expose
+    protected boolean generatedUserName = false;
+    @Expose
     protected int siteCounter = 0;
     @Expose
     protected MPSiteType passwordType = MPSiteType.GeneratedMaximum;

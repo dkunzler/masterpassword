@@ -2,15 +2,17 @@ package de.devland.masterpassword.util;
 
 import android.content.Intent;
 
-import com.lyndir.lhunath.opal.system.CodeUtils;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.MPSiteVariant;
 import com.lyndir.masterpassword.MasterKey;
-import com.lyndir.masterpassword.legacy.MPElementType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.ui.LoginActivity;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by David Kunzler on 23.08.2014.
@@ -20,12 +22,12 @@ public enum MasterPasswordHolder {
 
     private boolean needsLogin = true;
 
+    @Setter
     @Getter
     private String fullName;
-    @Getter
-    private byte[] keyId;
-    private MasterKey masterKey;
-    private com.lyndir.masterpassword.legacy.MasterKey legacyMasterKey;
+
+    private Map<MasterKey.Version, MasterKey> masterkeys = new HashMap<>();
+
 
     public boolean needsLogin(boolean redirect) {
         if (needsLogin && redirect) {
@@ -36,38 +38,21 @@ public enum MasterPasswordHolder {
         return needsLogin;
     }
 
-    public void setMasterKey(MasterKey masterKey) {
-        this.masterKey = masterKey;
+    public void setMasterKey(MasterKey.Version version, MasterKey masterKey) {
+        masterkeys.put(version, masterKey);
         needsLogin = false;
-        fullName = masterKey.getFullName();
-        keyId = masterKey.getKeyID();
-    }
-
-    public void setLegacyMasterKey(com.lyndir.masterpassword.legacy.MasterKey masterKey) {
-        this.legacyMasterKey = masterKey;
-        needsLogin = false;
-        fullName = legacyMasterKey.getUserName();
-        keyId = CodeUtils.decodeHex(legacyMasterKey.getKeyID());
     }
 
     public void clear() {
         needsLogin = true;
-        if (masterKey != null) {
-            masterKey.invalidate();
-            masterKey = null;
-        }
-        if (legacyMasterKey != null) {
-            legacyMasterKey.invalidate();
-            legacyMasterKey = null;
-        }
+        masterkeys.clear();
     }
 
-    public String generatePassword(MPSiteType passwordType, String siteName, int siteCounter, boolean legacy) {
+    public String generatePassword(MPSiteType passwordType, MPSiteVariant variant, String siteName, int siteCounter, MasterKey.Version version) {
         String result = "";
-        if (legacy && legacyMasterKey != null) {
-            result = legacyMasterKey.encode(siteName.trim(), MPElementType.valueOf(passwordType.name()), siteCounter);
-        } else if (!legacy && masterKey != null) {
-            result = masterKey.encode(siteName.trim(), passwordType, siteCounter, MPSiteVariant.Password, null);
+        MasterKey masterKey = masterkeys.get(version);
+        if (masterKey != null) {
+            result = masterKey.encode(siteName.trim(), passwordType, siteCounter, variant, null);
         } else {
             needsLogin = true;
             Intent loginIntent = new Intent(App.get(), LoginActivity.class);
