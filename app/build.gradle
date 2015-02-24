@@ -24,8 +24,8 @@ android {
         applicationId "de.devland.masterpassword"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 20
-        versionName "1.4.2"
+        versionCode 21
+        versionName "1.5.0 Beta 1"
     }
 
     compileOptions {
