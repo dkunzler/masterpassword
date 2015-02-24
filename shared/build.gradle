@@ -10,7 +10,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -25,6 +25,8 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:21.0.+'
+
+    compile 'com.nispok:snackbar:2.2.0' // MIT
 
     // tools
     compile 'com.squareup:otto:1.3.5' // Apache v2.0

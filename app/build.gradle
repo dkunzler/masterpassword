@@ -61,8 +61,8 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1' // Apache v2.0
     compile 'com.melnykov:floatingactionbutton:1.0.7' // MIT
     compile 'com.github.traex.rippleeffect:library:1.2.2' // MIT
-    compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
-    compile 'com.nispok:snackbar:2.2.0' // MIT
+//    compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
+    compile(name:'showcaseview-git', ext:'aar') // Apache v2.0
 
     // tools
     compile 'com.jakewharton:butterknife:6.0.0' // Apache v2.0

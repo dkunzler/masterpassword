@@ -70,4 +70,6 @@
     <string name="title_legacyMode">Kompatibilitätsmodus</string>
     <string name="title_legacyModeDialog">Kompatibilitätsmodus</string>
     <string name="msg_legacyModeDialog">Das Verhalten des Passwort-Algorithmus wurde angepasst. Wenn du spezielle Zeichen (z.B. Umlaute) in deinem Namen, Passwort oder einem Site-Namen hast, kann es sein, dass andere Passwörter generiert werden. Du kannst das alte Verhalten in den Einstellungen aktivieren wenn gewünscht.</string>
+    <string name="caption_algorithmVersion">Version des Algorithmus</string>
+    <string name="msg_algorithmVersionNotPrecalculated">Neu einloggen um andere Algorithmus Version zu verwenden.</string>
 </resources>

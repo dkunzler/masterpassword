@@ -5,12 +5,13 @@ import android.content.Intent;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.MPSiteVariant;
 import com.lyndir.masterpassword.MasterKey;
-import com.nispok.snackbar.Snackbar;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import de.devland.masterpassword.App;
+import de.devland.masterpassword.R;
+import de.devland.masterpassword.shared.ui.BaseActivity;
 import de.devland.masterpassword.ui.LoginActivity;
 import lombok.Getter;
 import lombok.Setter;
@@ -60,8 +61,8 @@ public enum MasterPasswordHolder {
             needsLogin = true;
             Intent loginIntent = new Intent(App.get(), LoginActivity.class);
             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            loginIntent.putExtra(BaseActivity.EXTRA_SNACKBAR_MESSAGE, App.get().getString(R.string.msg_algorithmVersionNotPrecalculated));
             App.get().startActivity(loginIntent);
-            Snackbar.with(App.get().getCurrentForegroundActivity()).text("Password version not set").show(App.get().getCurrentForegroundActivity());
         }
         return result;
     }
