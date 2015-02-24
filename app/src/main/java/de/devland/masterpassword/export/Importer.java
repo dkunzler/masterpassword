@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
@@ -34,6 +35,7 @@ import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.util.RequestCodeManager;
+import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.event.ReloadDrawerEvent;
 
 /**
@@ -43,10 +45,10 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
     public static final int REQUEST_CODE_IMPORT = 12345;
     public static final String EXTRA_IMPORT_TYPE = "de.devland.export.Exporter.IMPORT_TYPE";
 
-    private Activity activity;
+    private ActionBarActivity activity;
     private DefaultPrefs defaultPrefs;
 
-    public void startImportIntent(Activity activity, ImportType importType) {
+    public void startImportIntent(ActionBarActivity activity, ImportType importType) {
         this.activity = activity;
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
 
@@ -125,6 +127,10 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
                 switch (exportType) {
                     case MPSITES:
+                        if (!ProKeyUtil.INSTANCE.isPro()) {
+                            ProKeyUtil.INSTANCE.showGoProDialog(activity);
+                            return;
+                        }
                         try {
                             MPSiteUnmarshaller unmarshaller = MPSiteUnmarshaller.unmarshall(lines);
                             MPUser user = unmarshaller.getUser();
