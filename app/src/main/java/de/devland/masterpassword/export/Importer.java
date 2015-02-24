@@ -13,7 +13,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
+import com.lyndir.masterpassword.model.MPSite;
 import com.lyndir.masterpassword.model.MPSiteUnmarshaller;
+import com.lyndir.masterpassword.model.MPUser;
 import com.nispok.snackbar.Snackbar;
 
 import java.io.BufferedReader;
@@ -101,6 +103,10 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
                 String line;
                 while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("##")) {
+                        // found header declaration
+                        exportType = ExportType.MPSITES;
+                    }
                     lines.add(line);
                 }
                 reader.close();
@@ -111,6 +117,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         .text(activity.getString(R.string.error_generic))
                         .textColor(Color.RED)
                         .show(activity);
+                return;
             }
 
             if (lines.size() > 0) {
@@ -118,8 +125,21 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
                 switch (exportType) {
                     case MPSITES:
-                        MPSiteUnmarshaller unmarshaller = MPSiteUnmarshaller.unmarshall(lines);
-                        // TODO
+                        try {
+                            MPSiteUnmarshaller unmarshaller = MPSiteUnmarshaller.unmarshall(lines);
+                            MPUser user = unmarshaller.getUser();
+                            defaultPrefs.defaultPasswordType(user.getDefaultType().toString());
+                            defaultPrefs.defaultUserName(user.getFullName());
+                            for (MPSite mpSite : user.getSites()) {
+                                importedSites.add(Site.fromMPSite(mpSite));
+                            }
+                        } catch (Exception e) {
+                            Snackbar.with(activity)
+                                    .text(activity.getString(R.string.error_generic))
+                                    .textColor(Color.RED)
+                                    .show(activity);
+                            return;
+                        }
                         break;
                     case JSON:
                         StringBuilder fileContent = new StringBuilder("");
@@ -140,6 +160,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                                     .text(activity.getString(R.string.error_generic))
                                     .textColor(Color.RED)
                                     .show(activity);
+                            return;
                         }
                         break;
                     default:

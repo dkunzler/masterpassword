@@ -47,6 +47,12 @@ public enum ProKeyUtil {
     }
 
     public boolean isPro() {
+        if (BuildConfig.DEBUG) {
+            DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, App.get());
+            if (defaultPrefs.debugIsPro()) {
+                return true;
+            }
+        }
         return isPro;
     }
 

@@ -68,10 +68,21 @@ public class Site extends SugarRecord<Site> {
     }
 
     public MPSite toMPSite(MPUser user) {
-        MPSite mpSite = new MPSite(user, getSiteName(), getPasswordType(), getSiteCounter());
-        mpSite.setLoginName(getUserName());
-        //mpSite.setMPVersion(MasterKey.ALGORITHM);
+        MPSite mpSite = new MPSite(user, siteName, passwordType, siteCounter);
+        mpSite.setLoginName(userName);
+        mpSite.setAlgorithmVersion(algorithmVersion);
         return mpSite;
+    }
+
+    public static Site fromMPSite(MPSite mpSite) {
+        Site site = new Site();
+        site.algorithmVersion = mpSite.getAlgorithmVersion();
+        site.lastUsed = mpSite.getLastUsed().toDate();
+        site.passwordType = mpSite.getSiteType();
+        site.siteCounter = mpSite.getSiteCounter();
+        site.siteName = mpSite.getSiteName();
+        site.userName = mpSite.getLoginName();
+        return site;
     }
 
     public static Site fromCursor(Cursor cursor) {

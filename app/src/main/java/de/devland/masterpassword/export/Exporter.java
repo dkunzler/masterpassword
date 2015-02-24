@@ -12,6 +12,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
+import com.lyndir.masterpassword.MPSiteType;
+import com.lyndir.masterpassword.model.MPSiteMarshaller;
+import com.lyndir.masterpassword.model.MPUser;
 import com.nispok.snackbar.Snackbar;
 
 import java.io.File;
@@ -24,9 +27,12 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.util.RequestCodeManager;
+import de.devland.masterpassword.util.MasterPasswordHolder;
 
 /**
  * Created by David Kunzler on 23.10.2014.
@@ -94,14 +100,13 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
             List<Site> sites = Site.listAll(Site.class);
             switch ((ExportType) data.getSerializable(EXTRA_EXPORT_TYPE)) {
                 case MPSITES:
-                    exportData = null;
-//                    DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
-//                    MPUser user = new MPUser(MasterPasswordHolder.INSTANCE.getFullName(), MasterPasswordHolder.INSTANCE.getKeyId());
-//                    user.setDefaultType(MPSiteType.valueOf(defaultPrefs.defaultPasswordType()));
-//                    for (Site site : sites) {
-//                        user.addSite(site.toMPSite(user));
-//                    }
-//                    exportData = MPSiteMarshaller.marshallSafe(user).getExport();
+                    DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
+                    MPUser user = new MPUser(defaultPrefs.defaultUserName(), MasterPasswordHolder.INSTANCE.getKeyId());
+                    user.setDefaultType(MPSiteType.valueOf(defaultPrefs.defaultPasswordType()));
+                    for (Site site : sites) {
+                        user.addSite(site.toMPSite(user));
+                    }
+                    exportData = MPSiteMarshaller.marshallSafe(user).getExport();
                     break;
                 case JSON:
                     Gson gson = new GsonBuilder()

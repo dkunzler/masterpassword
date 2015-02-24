@@ -13,8 +13,6 @@ import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.shared.ui.BaseActivity;
 import de.devland.masterpassword.ui.LoginActivity;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.Synchronized;
 
 /**
@@ -24,11 +22,6 @@ public enum MasterPasswordHolder {
     INSTANCE;
 
     private boolean needsLogin = true;
-
-    @Setter
-    @Getter
-    private String fullName;
-
     private Map<MasterKey.Version, MasterKey> masterkeys = new HashMap<>();
 
 
@@ -45,6 +38,10 @@ public enum MasterPasswordHolder {
     public void setMasterKey(MasterKey.Version version, MasterKey masterKey) {
         masterkeys.put(version, masterKey);
         needsLogin = false;
+    }
+
+    public byte[] getKeyId() {
+        return masterkeys.get(MasterKey.Version.CURRENT).getKeyID();
     }
 
     public void clear() {

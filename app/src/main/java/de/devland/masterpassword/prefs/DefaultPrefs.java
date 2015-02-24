@@ -65,4 +65,8 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     String sortBy();
     void sortBy(String sortBy);
 
+    @Default(ofBoolean = false)
+    boolean debugIsPro();
+    void debugIsPro(boolean debugIsPro);
+
 }
