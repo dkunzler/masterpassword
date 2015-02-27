@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.shared.util.Utils;
+import lombok.Setter;
 
 /**
  * Created by deekay on 27/02/15.
@@ -27,6 +28,8 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
     protected Button minus;
 
     protected int minValue = 1;
+    @Setter
+    protected TextWatcher onChangeListener;
 
     public SiteCounterView(Context context) {
         super(context);
@@ -110,13 +113,22 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
         } catch (NumberFormatException e) {
             counter.setText(String.valueOf(minValue));
         }
+        if (onChangeListener != null) {
+            onChangeListener.afterTextChanged(editable);
+        }
     }
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        if (onChangeListener != null) {
+            onChangeListener.beforeTextChanged(charSequence, i, i2, i3);
+        }
     }
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        if (onChangeListener != null) {
+            onChangeListener.onTextChanged(charSequence, i, i2, i3);
+        }
     }
 }

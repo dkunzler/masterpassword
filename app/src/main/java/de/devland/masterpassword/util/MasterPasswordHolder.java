@@ -40,6 +40,11 @@ public enum MasterPasswordHolder {
         needsLogin = false;
     }
 
+    @Synchronized
+    public MasterKey getMasterKey(MasterKey.Version version) {
+        return masterkeys.get(version);
+    }
+
     public byte[] getKeyId() {
         return masterkeys.get(MasterKey.Version.CURRENT).getKeyID();
     }
@@ -55,10 +60,12 @@ public enum MasterPasswordHolder {
         if (masterKey != null) {
             result = masterKey.encode(siteName.trim(), type, siteCounter, variant, null);
         } else {
-            needsLogin = true;
             Intent loginIntent = new Intent(App.get(), LoginActivity.class);
             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            loginIntent.putExtra(BaseActivity.EXTRA_SNACKBAR_MESSAGE, App.get().getString(R.string.msg_algorithmVersionNotPrecalculated));
+            if (!needsLogin) {
+                needsLogin = true;
+                loginIntent.putExtra(BaseActivity.EXTRA_SNACKBAR_MESSAGE, App.get().getString(R.string.msg_algorithmVersionNotPrecalculated));
+            }
             App.get().startActivity(loginIntent);
         }
         return result;

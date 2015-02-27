@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -19,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.lyndir.masterpassword.MPSiteType;
+import com.lyndir.masterpassword.MPSiteVariant;
 import com.lyndir.masterpassword.MasterKey;
 
 import java.util.ArrayList;
@@ -37,6 +41,7 @@ import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.ui.BaseFragment;
 import de.devland.masterpassword.ui.view.SiteCounterView;
+import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ShowCaseManager;
 import lombok.NoArgsConstructor;
 
@@ -65,6 +70,8 @@ public class EditFragment extends BaseFragment {
     protected Spinner categorySpiner;
     @InjectView(R.id.numberPicker_siteCounter)
     protected SiteCounterView siteCounter;
+    @InjectView(R.id.password)
+    protected TextView password;
 
     private String[] passwordTypeKeys;
     private String[] algorithmVersionKeys;
@@ -172,8 +179,73 @@ public class EditFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         readValues();
+        updatePassword();
+        siteName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updatePassword();
+            }
+        });
+        siteCounter.setOnChangeListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updatePassword();
+            }
+        });
+        passwordType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updatePassword();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        algorithmVersion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updatePassword();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         ShowCaseManager.INSTANCE.showEditShowCase(getActivity(), userNameText);
+    }
+
+    private void updatePassword() {
+        int passwordTypeIndex = passwordType.getSelectedItemPosition();
+        MPSiteType siteType = MPSiteType.valueOf(passwordTypeKeys[passwordTypeIndex]);
+        String name = siteName.getText().toString();
+        int counter = siteCounter.getValue();
+        int algorithmVersionIndex = algorithmVersion.getSelectedItemPosition();
+        MasterKey.Version version = MasterKey.Version.valueOf(algorithmVersionKeys[algorithmVersionIndex]);
+        if (name != null && name.length() > 0 && MasterPasswordHolder.INSTANCE.getMasterKey(version) != null) {
+            password.setVisibility(View.VISIBLE);
+            String generatedPassword = MasterPasswordHolder.INSTANCE.generate(siteType, MPSiteVariant.Password, name, counter, version);
+            password.setText(generatedPassword);
+        } else {
+            password.setVisibility(View.GONE);
+        }
     }
 
     private void readValues() {
