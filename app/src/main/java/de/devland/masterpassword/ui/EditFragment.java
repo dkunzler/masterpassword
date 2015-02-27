@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -37,6 +36,7 @@ import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.ui.BaseFragment;
+import de.devland.masterpassword.ui.view.SiteCounterView;
 import de.devland.masterpassword.util.ShowCaseManager;
 import lombok.NoArgsConstructor;
 
@@ -64,7 +64,7 @@ public class EditFragment extends BaseFragment {
     @InjectView(R.id.spinner_category)
     protected Spinner categorySpiner;
     @InjectView(R.id.numberPicker_siteCounter)
-    protected NumberPicker siteCounter;
+    protected SiteCounterView siteCounter;
 
     private String[] passwordTypeKeys;
     private String[] algorithmVersionKeys;
@@ -129,10 +129,6 @@ public class EditFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit, container, false);
         ButterKnife.inject(this, rootView);
-
-        siteCounter.setMinValue(1);
-        siteCounter.setMaxValue(Integer.MAX_VALUE);
-        siteCounter.setWrapSelectorWheel(false);
 
         SortedSet<String> userNames = new TreeSet<>();
 
