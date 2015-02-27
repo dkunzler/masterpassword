@@ -1,8 +1,13 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="de.devland.masterpassword.ui.EditFragment">
+
+<ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="de.devland.masterpassword.ui.EditFragment">
+            >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -144,15 +149,34 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/text"/>
 
-        <NumberPicker
+        <de.devland.masterpassword.ui.view.SiteCounterView
             android:id="@+id/numberPicker_siteCounter"
-            android:layout_width="wrap_content"
-            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_siteCounter"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/edittext_marginCaption"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/numberPicker_siteCounter" />
 
     </RelativeLayout>
+
+
 </ScrollView>
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:background="@color/primary_dark"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+</FrameLayout>
