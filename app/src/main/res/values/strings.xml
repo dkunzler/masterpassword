@@ -70,5 +70,6 @@
     <string name="msg_proVerificationError">Your Pro Key could not be verified, please check your internet connection. If this error persists please send feedback.</string>
     <string name="msg_sentToInputstick">Send to InputStick</string>
     <string name="msg_algorithmVersionNotPrecalculated">Re-login to use other algorithm version.</string>
+    <string name="msg_noUrlFound">Could not find URL to add</string>
 
 </resources>

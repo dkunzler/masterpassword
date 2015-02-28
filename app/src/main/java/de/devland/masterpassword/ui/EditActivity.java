@@ -3,6 +3,9 @@ package de.devland.masterpassword.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.enums.SnackbarType;
+
 import java.util.regex.Matcher;
 
 import de.devland.masterpassword.R;
@@ -50,7 +53,7 @@ public class EditActivity extends BaseActivity {
                     String hostname = matcher.group(2);
                     return hostname;
                 } else {
-                    // TODO Snackbar
+                    Snackbar.with(this).type(SnackbarType.MULTI_LINE).text(getString(R.string.msg_noUrlFound)).show(this);
                 }
             }
         }
