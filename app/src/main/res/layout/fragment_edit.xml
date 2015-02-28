@@ -4,9 +4,10 @@
     android:layout_height="match_parent"
     tools:context="de.devland.masterpassword.ui.EditFragment">
 
-    <ScrollView
+    <de.devland.masterpassword.ui.view.OffsetScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -158,13 +159,13 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/numberPicker_siteCounter" />
 
         </RelativeLayout>
 
 
-    </ScrollView>
+    </de.devland.masterpassword.ui.view.OffsetScrollView>
 
     <TextView
         android:id="@+id/password"

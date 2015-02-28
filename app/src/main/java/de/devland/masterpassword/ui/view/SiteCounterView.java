@@ -68,7 +68,7 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
         counter.setEllipsize(TextUtils.TruncateAt.START);
         counter.setGravity(Gravity.CENTER);
         counter.setEms(10);
-        counter.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
+        counter.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
         counter.addTextChangedListener(this);
         LayoutParams counterLayoutParams = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
         counterLayoutParams.setMargins(_4dp, 0, _4dp, 0);

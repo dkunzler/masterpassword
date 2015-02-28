@@ -2,6 +2,10 @@ package de.devland.masterpassword.ui;
 
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
@@ -34,12 +38,17 @@ import java.util.TreeSet;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.shared.ui.BaseFragment;
+import de.devland.masterpassword.shared.util.Utils;
+import de.devland.masterpassword.ui.view.OffsetScrollView;
 import de.devland.masterpassword.ui.view.SiteCounterView;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ShowCaseManager;
@@ -56,6 +65,8 @@ public class EditFragment extends BaseFragment {
 
     protected DefaultPrefs defaultPrefs;
 
+    @InjectView(R.id.scrollView)
+    protected OffsetScrollView scrollView;
     @InjectView(R.id.editText_siteName)
     protected EditText siteName;
     @InjectView(R.id.textView_userName)
@@ -126,7 +137,7 @@ public class EditFragment extends BaseFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((ActionBarActivity) activity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+         ((ActionBarActivity) activity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         passwordTypeKeys = getResources().getStringArray(R.array.passwordTypeKeys);
         algorithmVersionKeys = getResources().getStringArray(R.array.algorithmVersionKeys);
     }
@@ -136,6 +147,8 @@ public class EditFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit, container, false);
         ButterKnife.inject(this, rootView);
+
+        scrollView.setScrollOffset(Math.round(Utils.convertDpToPixel(58f, App.get())));
 
         SortedSet<String> userNames = new TreeSet<>();
 
@@ -246,6 +259,17 @@ public class EditFragment extends BaseFragment {
         } else {
             password.setVisibility(View.GONE);
         }
+    }
+
+    @OnClick(R.id.password)
+    void copyPasswordToClipboard() {
+        final ClipboardManager clipboard = (ClipboardManager) App.get()
+                .getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("password", password.getText());
+        clipboard.setPrimaryClip(clip);
+
+        Intent service = new Intent(App.get(), ClearClipboardService.class);
+        App.get().startService(service);
     }
 
     private void readValues() {
