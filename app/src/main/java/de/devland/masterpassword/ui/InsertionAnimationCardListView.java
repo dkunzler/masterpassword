@@ -81,7 +81,7 @@ public class InsertionAnimationCardListView extends CardListView {
      * to the first item of the ListView. The new cell is then animated into place from
      * above the bounds of the ListView.
      */
-    public void addRow(SiteCard newObj) {
+    public void addRow(SiteCard newObj, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         final SiteCardArrayAdapter adapter = (SiteCardArrayAdapter) getAdapter();
 
@@ -217,6 +217,9 @@ public class InsertionAnimationCardListView extends CardListView {
                         mCellBitmapDrawables.clear();
                         setEnabled(true);
                         invalidate();
+                        if (animatorListenerAdapter != null) {
+                            animatorListenerAdapter.onAnimationEnd(animation);
+                        }
                     }
                 });
                 set.start();

@@ -1,6 +1,8 @@
 package de.devland.masterpassword.ui;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -174,7 +176,12 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
             final SiteCard newCard = new SiteCard(getActivity(), card.getSite(), adapter);
 
             if (adapter.getPosition(card) != 0) {
-                cardListView.addRow(newCard);
+                cardListView.addRow(newCard, new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        refreshCards();
+                    }
+                });
                 adapter.remove(card);
                 adapter.notifyDataSetChanged();
             }
