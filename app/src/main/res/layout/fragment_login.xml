@@ -37,7 +37,7 @@
             android:layout_centerHorizontal="true"
             android:ems="10"
             android:hint="@string/hint_fullName"
-            android:inputType="text" />
+            android:inputType="textVisiblePassword" />
 
         <com.andexert.library.RippleView
             android:layout_width="wrap_content"

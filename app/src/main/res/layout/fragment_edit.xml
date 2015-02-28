@@ -1,171 +1,170 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="de.devland.masterpassword.ui.EditFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.devland.masterpassword.ui.EditFragment">
 
-<ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:layout_height="match_parent">
 
-
-        <TextView
-            android:id="@+id/textView_siteName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/caption_siteName"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/text"/>
-
-        <EditText
-            android:id="@+id/editText_siteName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_siteName"
-            android:layout_marginTop="@dimen/edittext_marginCaption"
-            android:inputType="textNoSuggestions"/>
-
-        <TextView
-            android:id="@+id/textView_userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/editText_siteName"
-            android:layout_marginTop="@dimen/edittext_margin_top"
-            android:text="@string/caption_userName"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/text"/>
-
-        <AutoCompleteTextView
-            android:id="@+id/editText_userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_userName"
-            android:layout_marginTop="@dimen/edittext_marginCaption"
-            android:hint="@string/msg_optional"/>
-
-        <TextView
-            android:id="@+id/textView_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/editText_userName"
-            android:layout_marginTop="@dimen/edittext_margin_top"
-            android:text="@string/caption_category"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/text"/>
-
-        <Spinner
-            android:id="@+id/spinner_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_category"
-            android:layout_marginTop="@dimen/edittext_marginCaption"
-            android:entries="@array/emptyArray"/>
-
-        <TextView
-            android:id="@+id/textView_passwordType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/spinner_category"
-            android:layout_marginTop="@dimen/edittext_margin_top"
-            android:text="@string/caption_passwordType"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/text"/>
-
-        <Spinner
-            android:id="@+id/spinner_passwordType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_passwordType"
-            android:layout_marginTop="@dimen/edittext_marginCaption"
-            android:entries="@array/passwordTypeValues"/>
-
-        <TextView
-            android:id="@+id/textView_algorithmVersion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/spinner_passwordType"
-            android:layout_marginTop="@dimen/edittext_margin_top"
-            android:text="@string/caption_algorithmVersion"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/text"/>
-
-        <Spinner
-            android:id="@+id/spinner_algorithmVersion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_algorithmVersion"
-            android:layout_marginTop="@dimen/edittext_marginCaption"
-            android:entries="@array/algorithmVersionValues"/>
-
-        <TextView
-            android:id="@+id/textView_siteCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/spinner_algorithmVersion"
-            android:layout_marginTop="@dimen/edittext_margin_top"
-            android:text="@string/caption_siteCounter"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/text"/>
-
-        <de.devland.masterpassword.ui.view.SiteCounterView
-            android:id="@+id/numberPicker_siteCounter"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_siteCounter"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/edittext_marginCaption"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_below="@+id/numberPicker_siteCounter" />
-
-    </RelativeLayout>
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
 
-</ScrollView>
+            <TextView
+                android:id="@+id/textView_siteName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/caption_siteName"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/text" />
+
+            <EditText
+                android:id="@+id/editText_siteName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_siteName"
+                android:layout_marginTop="@dimen/edittext_marginCaption"
+                android:inputType="textVisiblePassword" />
+
+            <TextView
+                android:id="@+id/textView_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/editText_siteName"
+                android:layout_marginTop="@dimen/edittext_margin_top"
+                android:text="@string/caption_userName"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/text" />
+
+            <AutoCompleteTextView
+                android:id="@+id/editText_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_userName"
+                android:layout_marginTop="@dimen/edittext_marginCaption"
+                android:hint="@string/msg_optional" />
+
+            <TextView
+                android:id="@+id/textView_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/editText_userName"
+                android:layout_marginTop="@dimen/edittext_margin_top"
+                android:text="@string/caption_category"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/text" />
+
+            <Spinner
+                android:id="@+id/spinner_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_category"
+                android:layout_marginTop="@dimen/edittext_marginCaption"
+                android:entries="@array/emptyArray" />
+
+            <TextView
+                android:id="@+id/textView_passwordType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/spinner_category"
+                android:layout_marginTop="@dimen/edittext_margin_top"
+                android:text="@string/caption_passwordType"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/text" />
+
+            <Spinner
+                android:id="@+id/spinner_passwordType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_passwordType"
+                android:layout_marginTop="@dimen/edittext_marginCaption"
+                android:entries="@array/passwordTypeValues" />
+
+            <TextView
+                android:id="@+id/textView_algorithmVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/spinner_passwordType"
+                android:layout_marginTop="@dimen/edittext_margin_top"
+                android:text="@string/caption_algorithmVersion"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/text" />
+
+            <Spinner
+                android:id="@+id/spinner_algorithmVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_algorithmVersion"
+                android:layout_marginTop="@dimen/edittext_marginCaption"
+                android:entries="@array/algorithmVersionValues" />
+
+            <TextView
+                android:id="@+id/textView_siteCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/spinner_algorithmVersion"
+                android:layout_marginTop="@dimen/edittext_margin_top"
+                android:text="@string/caption_siteCounter"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/text" />
+
+            <de.devland.masterpassword.ui.view.SiteCounterView
+                android:id="@+id/numberPicker_siteCounter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView_siteCounter"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/edittext_marginCaption" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/numberPicker_siteCounter" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/password"
