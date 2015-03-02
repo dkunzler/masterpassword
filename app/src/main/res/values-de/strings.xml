@@ -73,4 +73,5 @@
     <string name="caption_algorithmVersion">Version des Algorithmus</string>
     <string name="msg_algorithmVersionNotPrecalculated">Neu einloggen um andere Algorithmus Version zu verwenden.</string>
     <string name="msg_noUrlFound">Keine URL zum Hinzufügen gefunden</string>
+    <string name="msg_pwdPreviewNotAvailable">Keine Passwort Vorschau verfügbar</string>
 </resources>

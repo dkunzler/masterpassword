@@ -71,5 +71,6 @@
     <string name="msg_sentToInputstick">Send to InputStick</string>
     <string name="msg_algorithmVersionNotPrecalculated">Re-login to use other algorithm version.</string>
     <string name="msg_noUrlFound">Could not find URL to add</string>
+    <string name="msg_pwdPreviewNotAvailable">No password preview available</string>
 
 </resources>

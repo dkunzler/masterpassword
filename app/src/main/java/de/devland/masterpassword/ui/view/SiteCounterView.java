@@ -21,12 +21,14 @@ import lombok.Setter;
 /**
  * Created by deekay on 27/02/15.
  */
-public class SiteCounterView extends LinearLayout implements View.OnClickListener, TextWatcher {
+public class SiteCounterView extends LinearLayout implements View.OnClickListener, TextWatcher,
+        View.OnFocusChangeListener {
 
     protected EditText counter;
     protected Button plus;
     protected Button minus;
 
+    @Setter
     protected int minValue = 1;
     @Setter
     protected TextWatcher onChangeListener;
@@ -60,7 +62,7 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
 
         minus = new Button(getContext());
         minus.setText("-");
-        minus.setBackgroundResource(R.color.accent_light);
+        minus.setBackgroundResource(R.color.accent);
         minus.setOnClickListener(this);
         this.addView(minus, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
@@ -70,20 +72,25 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
         counter.setEms(10);
         counter.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
         counter.addTextChangedListener(this);
+        counter.setOnFocusChangeListener(this);
         LayoutParams counterLayoutParams = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
         counterLayoutParams.setMargins(_4dp, 0, _4dp, 0);
         this.addView(counter, counterLayoutParams);
 
         plus = new Button(getContext());
         plus.setText("+");
-        plus.setBackgroundResource(R.color.accent_light);
+        plus.setBackgroundResource(R.color.accent);
         plus.setOnClickListener(this);
         this.addView(plus, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
     }
 
 
     public int getValue() {
-        return Integer.parseInt(counter.getText().toString());
+        try {
+            return Integer.parseInt(counter.getText().toString());
+        } catch (NumberFormatException e) {
+            return minValue;
+        }
     }
 
     public void setValue(int value) {
@@ -105,13 +112,15 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
 
     @Override
     public void afterTextChanged(Editable editable) {
-        try {
-            int count = Integer.parseInt(editable.toString());
-            if (count < minValue) {
+        if (editable.length() != 0) {
+            try {
+                int count = Integer.parseInt(editable.toString());
+                if (count < minValue) {
+                    counter.setText(String.valueOf(minValue));
+                }
+            } catch (NumberFormatException e) {
                 counter.setText(String.valueOf(minValue));
             }
-        } catch (NumberFormatException e) {
-            counter.setText(String.valueOf(minValue));
         }
         if (onChangeListener != null) {
             onChangeListener.afterTextChanged(editable);
@@ -129,6 +138,17 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
     public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
         if (onChangeListener != null) {
             onChangeListener.onTextChanged(charSequence, i, i2, i3);
+        }
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean focus) {
+        if (!focus) {
+            try {
+                Integer.parseInt(counter.getText().toString());
+            } catch (NumberFormatException e) {
+                counter.setText(String.valueOf(minValue));
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -91,6 +92,32 @@ public class EditFragment extends BaseFragment {
     private long siteId = -1;
     private Site site;
 
+    private TextWatcher updatePasswordTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            updatePassword();
+        }
+    };
+    private AdapterView.OnItemSelectedListener updatePasswordItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            updatePassword();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    };
+    private ActionBar actionBar;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -137,7 +164,10 @@ public class EditFragment extends BaseFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-         ((ActionBarActivity) activity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        actionBar = ((ActionBarActivity) activity).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         passwordTypeKeys = getResources().getStringArray(R.array.passwordTypeKeys);
         algorithmVersionKeys = getResources().getStringArray(R.array.algorithmVersionKeys);
     }
@@ -193,54 +223,10 @@ public class EditFragment extends BaseFragment {
 
         readValues();
         updatePassword();
-        siteName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updatePassword();
-            }
-        });
-        siteCounter.setOnChangeListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updatePassword();
-            }
-        });
-        passwordType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                updatePassword();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        algorithmVersion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                updatePassword();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        siteName.addTextChangedListener(updatePasswordTextWatcher);
+        siteCounter.setOnChangeListener(updatePasswordTextWatcher);
+        passwordType.setOnItemSelectedListener(updatePasswordItemSelectedListener);
+        algorithmVersion.setOnItemSelectedListener(updatePasswordItemSelectedListener);
 
         ShowCaseManager.INSTANCE.showEditShowCase(getActivity(), userNameText);
     }
@@ -253,11 +239,11 @@ public class EditFragment extends BaseFragment {
         int algorithmVersionIndex = algorithmVersion.getSelectedItemPosition();
         MasterKey.Version version = MasterKey.Version.valueOf(algorithmVersionKeys[algorithmVersionIndex]);
         if (name != null && name.length() > 0 && MasterPasswordHolder.INSTANCE.getMasterKey(version) != null) {
-            password.setVisibility(View.VISIBLE);
+            //password.setVisibility(View.VISIBLE);
             String generatedPassword = MasterPasswordHolder.INSTANCE.generate(siteType, MPSiteVariant.Password, name, counter, version);
             password.setText(generatedPassword);
         } else {
-            password.setVisibility(View.GONE);
+            password.setText(R.string.msg_pwdPreviewNotAvailable);
         }
     }
 
