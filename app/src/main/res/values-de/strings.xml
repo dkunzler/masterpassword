@@ -59,13 +59,13 @@
     <string name="title_addCategory">Kategorie hinzufügen</string>
     <string name="caption_category">Kategorie</string>
     <string name="title_verifyError">Verifikationsfehler</string>
-    <string name="msg_verifyError">Die Passwordüberprüfung ist auf Grund eines unbekannten Fehlers fehlgeschlagen. Passwortverifikation wurde deaktiviert, bitte in den Einstellungen wieder aktivieren wenn gewünscht.\nBitte kontaktieren Sie mich unter info@devland.de falls dieser Fehler weiterhin besteht.\n\nVielen Dank.</string>
+    <string name="msg_verifyError">Die Passwordüberprüfung ist auf Grund eines unbekannten Fehlers fehlgeschlagen. Passwortverifikation wurde deaktiviert, bitte in den Einstellungen wieder aktivieren wenn gewünscht.\nBitte kontaktiere mich unter info@devland.de falls dieser Fehler weiterhin besteht.\n\nVielen Dank.</string>
     <string name="error_incorrectPassword">Falsches Passwort</string>
-    <string name="msg_proFeature">Diese Funktionalität ist nur in der Pro Version verfügbar. Sie können diese Funktionalität freischalten indem sie den Pro Schlüssel aus dem PlayStore installieren.</string>
+    <string name="msg_proFeature">Diese Funktionalität ist nur in der Pro Version verfügbar. Du kannst diese Funktionalität freischalten indem du den Pro Schlüssel aus dem PlayStore installierst.</string>
     <string name="title_proFeature">Pro Funktionalität</string>
     <string name="msg_sentToInputstick">An InputStick schicken</string>
     <string name="title_proVerificationError">Pro Prüfung fehlgeschlagen</string>
-    <string name="msg_proVerificationError">Deine Pro Version konnte nicht verifiziert werden, bitte überprüfen Sie ihre Internet Verbindung. Wenn dieser Fehler bestehen bleibt, sende ein Feedback.</string>
+    <string name="msg_proVerificationError">Deine Pro Version konnte nicht verifiziert werden, bitte überprüfe deine Internet Verbindung. Wenn dieser Fehler bestehen bleibt, sende ein Feedback.</string>
     <string name="summary_legacyMode">Verwende das alte (defekte) Verfahren für spezielle Zeichen. (impliziert neu-Login)</string>
     <string name="title_legacyMode">Kompatibilitätsmodus</string>
     <string name="title_legacyModeDialog">Kompatibilitätsmodus</string>
