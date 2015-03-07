@@ -45,8 +45,6 @@
     <string name="title_addCategory">Add Category</string>
     <string name="title_verifyError">Verification Error</string>
     <string name="msg_verifyError">Verification failed due to an unknown error. Verification was disabled, please reenable in settings if desired.\nIf this error persists please contact me at info@devland.de\n\nThank you</string>
-    <string name="title_legacyModeDialog">Legacy Mode</string>
-    <string name="msg_legacyModeDialog">The behaviour of the password algorithm has changed. If you have special characters in your name, password or site name there will perhaps different passwords get generated. You can enable the old behaviour in the settings.</string>
     <string name="error_generic">An error occurred.</string>
     <string name="msg_exportDone">Export succeeded.</string>
     <string name="msg_importDone">Import succeeded.</string>

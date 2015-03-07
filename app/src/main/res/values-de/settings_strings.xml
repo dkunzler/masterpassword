@@ -3,8 +3,8 @@
     <string name="title_activity_settings">Einstellungen</string>
 
     <string name="verifyPasswordTitle">Passwort beim Login überprüfen</string>
-    <string name="verifyPasswordOff">Du kannst dich mit falschem Passwort einloggen. Die gezeigten Site-Passwörter sind dann falsch.</string>
-    <string name="verifyPasswordOn">Dein Passwort wird beim Login überprüft. Verringert die Sicherheit.</string>
+    <string name="verifyPasswordOff">Sie können sich mit falschem Passwort einloggen. Die gezeigten Site-Passwörter sind dann falsch.</string>
+    <string name="verifyPasswordOn">Ihr Passwort wird beim Login überprüft. Verringert die Sicherheit.</string>
 
     <string name="clipboardDurationTitle">Passwörter kopieren für</string>
     <string-array name="pref_clipboardDuration_titles">
