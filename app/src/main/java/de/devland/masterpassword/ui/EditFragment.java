@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
@@ -221,6 +222,9 @@ public class EditFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Typeface typeface = Typeface
+                .createFromAsset(getActivity().getAssets(), "fonts/RobotoSlab-Light.ttf");
+        password.setTypeface(typeface);
         readValues();
         updatePassword();
         siteName.addTextChangedListener(updatePasswordTextWatcher);
