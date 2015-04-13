@@ -11,7 +11,7 @@ public interface Constants {
             "^" +
                     // protocol identifier
                     "(?:(?:https?|ftp)://)" +
-                    "(www\\.)?([\\.a-z\\u00a1-\\uffff0-9]*)((:?)|(/?)).*"
+                    "(www\\.)?([-\\.a-z\\u00a1-\\uffff0-9]*)((:?)|(/?)).*"
     );
 
 }
