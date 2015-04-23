@@ -11,6 +11,10 @@ import android.support.v7.app.ActionBarActivity;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
@@ -26,6 +30,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import de.devland.esperandro.Esperandro;
@@ -47,6 +52,14 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
     private ActionBarActivity activity;
     private DefaultPrefs defaultPrefs;
+
+    JsonDeserializer<Date> timeStampDeserializer = new JsonDeserializer<Date>() {
+        @Override
+        public Date deserialize(JsonElement json, Type typeOfT,
+                                JsonDeserializationContext context) throws JsonParseException {
+            return json == null ? null : new Date(json.getAsLong());
+        }
+    };
 
     public void startImportIntent(ActionBarActivity activity, ImportType importType) {
         this.activity = activity;
@@ -154,6 +167,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         }
                         List<Site> gsonSites;
                         Gson gson = new GsonBuilder().setPrettyPrinting()
+                                .registerTypeAdapter(Date.class, timeStampDeserializer)
                                 .excludeFieldsWithoutExposeAnnotation()
                                 .serializeNulls().create();
                         Type listType = new TypeToken<ArrayList<Site>>() {

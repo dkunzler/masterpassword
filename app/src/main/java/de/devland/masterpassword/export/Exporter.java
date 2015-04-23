@@ -1,5 +1,6 @@
 package de.devland.masterpassword.export;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +11,10 @@ import android.os.ParcelFileDescriptor;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.lyndir.masterpassword.MPSiteType;
@@ -20,6 +25,7 @@ import com.nispok.snackbar.Snackbar;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,10 +50,18 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
 
     private Activity activity;
 
+    JsonSerializer<Date> timeStampSerializer = new JsonSerializer<Date>() {
+        @Override
+        public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext
+                context) {
+            return src == null ? null : new JsonPrimitive(src.getTime());
+        }
+    };
+
     public void startExportIntent(Activity activity, ExportType type) {
         this.activity = activity;
         Date now = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
         String fileName = dateFormat.format(now) + "_export." + type.getFileExtension();
 
 
@@ -111,6 +125,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                 case JSON:
                     Gson gson = new GsonBuilder()
                             .setPrettyPrinting()
+                            .registerTypeAdapter(Date.class, timeStampSerializer)
                             .excludeFieldsWithoutExposeAnnotation()
                             .serializeNulls().create();
                     exportData = gson.toJson(sites);
