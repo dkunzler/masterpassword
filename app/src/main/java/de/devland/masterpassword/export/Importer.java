@@ -15,6 +15,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
@@ -28,10 +29,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
@@ -54,10 +60,42 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
     private DefaultPrefs defaultPrefs;
 
     JsonDeserializer<Date> timeStampDeserializer = new JsonDeserializer<Date>() {
+        private final DateFormat enUsFormat
+                = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.US);
+        private final DateFormat localFormat
+                = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT);
+        private final DateFormat iso8601Format = buildIso8601Format();
+
+        private DateFormat buildIso8601Format() {
+            DateFormat iso8601Format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+            iso8601Format.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return iso8601Format;
+        }
+
+        private Date parseAsTimeStamp(JsonElement json) {
+            return json == null ? null : new Date(json.getAsLong());
+        }
+
         @Override
         public Date deserialize(JsonElement json, Type typeOfT,
                                 JsonDeserializationContext context) throws JsonParseException {
-            return json == null ? null : new Date(json.getAsLong());
+            try {
+                return parseAsTimeStamp(json);
+            } catch (Exception ignored) {
+            }
+            try {
+                return localFormat.parse(json.getAsString());
+            } catch (ParseException ignored) {
+            }
+            try {
+                return enUsFormat.parse(json.getAsString());
+            } catch (ParseException ignored) {
+            }
+            try {
+                return iso8601Format.parse(json.getAsString());
+            } catch (ParseException e) {
+                throw new JsonSyntaxException(json.getAsString(), e);
+            }
         }
     };
 

@@ -67,16 +67,21 @@ dependencies {
 //    compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
     compile(name:'showcaseview-git', ext:'aar') // Apache v2.0
 
+    // annotation processors
+    apt 'org.projectlombok:lombok:1.14.0' // MIT
+    apt 'de.devland.esperandro:esperandro:2.2.0' // Apache v2.0
+
     // tools
     compile 'com.jakewharton:butterknife:6.1.0' // Apache v2.0
+//    compile 'com.google.guava:guava:18.0'
 
     // MasterPassword dependencies
-//    compile('com.lyndir.masterpassword:masterpassword-model:20150209') { // GPL v3
-    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-model:d854f19') {
+    compile('com.lyndir.masterpassword:masterpassword-model:20150209') { // GPL v3
+//    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-model:d854f19') {
         exclude module: 'jsr305' // problems while dexing
     }
-//    compile('com.lyndir.masterpassword:masterpassword-algorithm:20150209') { // GPL v3
-    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-algorithm:d854f19') {
+    compile('com.lyndir.masterpassword:masterpassword-algorithm:20150209') { // GPL v3
+//    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-algorithm:d854f19') {
         exclude module: 'jsr305' // problems while dexing
     }
     compile 'org.slf4j:slf4j-android:1.7.12' // MIT
