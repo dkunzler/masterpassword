@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 
+import com.lyndir.lhunath.opal.system.util.StringUtils;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.otto.Produce;
 import com.squareup.otto.Subscribe;
@@ -63,6 +64,7 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
     protected SearchView searchView;
     protected DefaultPrefs defaultPrefs;
     protected Category activeCategory;
+    protected String filter;
 
     protected SiteCardArrayAdapter adapter;
     SwipeOnScrollListener hideFloatingButtonScrollListener = new SwipeOnScrollListener() {
@@ -227,6 +229,9 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
         cards.add(new DummyCard(getActivity()));
         adapter.clear();
         adapter.addAll(cards);
+        if (!StringUtils.isEmpty(filter)) {
+            adapter.getFilter().filter(filter);
+        }
         adapter.notifyDataSetChanged();
     }
 
@@ -274,6 +279,7 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
 
     @Override
     public boolean onQueryTextChange(String s) {
+        filter = s;
         adapter.getFilter().filter(s);
         return true;
     }
