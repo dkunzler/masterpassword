@@ -2,7 +2,7 @@ package de.devland.masterpassword.shared.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
@@ -15,7 +15,7 @@ import de.devland.masterpassword.shared.util.RequestCodeManager;
 /**
  * Created by David Kunzler on 23.10.2014.
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     public static final String EXTRA_SNACKBAR_MESSAGE = "de.devland.masterpassword.shared.ui.BaseActivity.MESSAGE";
 

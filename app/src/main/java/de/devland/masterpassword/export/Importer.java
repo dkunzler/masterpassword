@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
@@ -56,7 +56,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
     public static final int REQUEST_CODE_IMPORT = 12345;
     public static final String EXTRA_IMPORT_TYPE = "de.devland.export.Exporter.IMPORT_TYPE";
 
-    private ActionBarActivity activity;
+    private AppCompatActivity activity;
     private DefaultPrefs defaultPrefs;
 
     JsonDeserializer<Date> timeStampDeserializer = new JsonDeserializer<Date>() {
@@ -99,7 +99,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
         }
     };
 
-    public void startImportIntent(ActionBarActivity activity, ImportType importType) {
+    public void startImportIntent(AppCompatActivity activity, ImportType importType) {
         this.activity = activity;
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
 

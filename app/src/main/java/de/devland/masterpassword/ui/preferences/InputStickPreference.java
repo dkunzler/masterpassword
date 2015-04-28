@@ -4,7 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.preference.Preference;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 
 import de.devland.masterpassword.R;
@@ -16,7 +16,7 @@ import lombok.Setter;
 public class InputStickPreference extends Preference {
 
     @Setter
-    protected ActionBarActivity settingsActivity;
+    protected AppCompatActivity settingsActivity;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public InputStickPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {

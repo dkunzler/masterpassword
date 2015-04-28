@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 
 import de.devland.esperandro.Esperandro;
@@ -28,7 +28,7 @@ public class LanguagePreference extends ListPreference {
     protected String oldLanguage;
     protected DefaultPrefs defaultPrefs;
     @Setter
-    protected ActionBarActivity settingsActivity;
+    protected AppCompatActivity settingsActivity;
 
     public LanguagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);

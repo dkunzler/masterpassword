@@ -22,9 +22,9 @@ public class SettingsFragment extends BaseSettingsFragment {
         // Add 'about' preferences
         addPreferencesFromResource(R.xml.pref_about);
 
-        ((LanguagePreference) findPreference("language")).setSettingsActivity(getActionBarActivity());
-        ((VerifyPasswordPreference) findPreference("verifyPassword")).setSettingsActivity(getActionBarActivity());
-        ((InputStickPreference) findPreference("inputstick")).setSettingsActivity(getActionBarActivity());
+        ((LanguagePreference) findPreference("language")).setSettingsActivity(getAppCompatActivity());
+        ((VerifyPasswordPreference) findPreference("verifyPassword")).setSettingsActivity(getAppCompatActivity());
+        ((InputStickPreference) findPreference("inputstick")).setSettingsActivity(getAppCompatActivity());
         bindPreferenceSummaryToValue(findPreference("language"));
         bindPreferenceSummaryToValue(findPreference("clipboardDuration"));
         bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));

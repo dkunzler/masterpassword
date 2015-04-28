@@ -12,7 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.inputstick.api.ConnectionManager;
@@ -121,9 +121,9 @@ public class SendToInputStickActivity extends BaseActivity implements DialogInte
 
     @SuppressLint("ValidFragment")
     private class InputStickUtilityDownloadDialog extends DialogFragment {
-        private ActionBarActivity activity;
+        private AppCompatActivity activity;
 
-        public InputStickUtilityDownloadDialog(ActionBarActivity activity) {
+        public InputStickUtilityDownloadDialog(AppCompatActivity activity) {
             this.activity = activity;
         }
 

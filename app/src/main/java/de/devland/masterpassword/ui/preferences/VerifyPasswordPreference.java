@@ -10,7 +10,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +31,7 @@ public class VerifyPasswordPreference extends CheckBoxPreference implements Pref
 
     protected DefaultPrefs defaultPrefs;
     @Setter
-    protected ActionBarActivity settingsActivity;
+    protected AppCompatActivity settingsActivity;
 
     public VerifyPasswordPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

@@ -55,7 +55,7 @@ public class EnableInputStickPreference extends CheckBoxPreference implements Pr
         if ((Boolean) newValue) {
             if (!ProKeyUtil.INSTANCE.isPro()) {
                 setChecked(false);
-                ProKeyUtil.INSTANCE.showGoProDialog(settingsFragment.getActionBarActivity());
+                ProKeyUtil.INSTANCE.showGoProDialog(settingsFragment.getAppCompatActivity());
                 return false;
             } else {
                 updatePreferenceEnabledStatus((Boolean) newValue);

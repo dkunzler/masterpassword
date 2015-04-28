@@ -12,7 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.Date;
 
@@ -89,7 +89,7 @@ public enum ProKeyUtil {
         return exists;
     }
 
-    public void showGoProDialog(ActionBarActivity activity) {
+    public void showGoProDialog(AppCompatActivity activity) {
         if (proExists()) {
             ProVerificationProblemDialog proVerificationProblemDialog = new ProVerificationProblemDialog(activity);
             proVerificationProblemDialog.show(activity.getSupportFragmentManager(), null);
@@ -105,9 +105,9 @@ public enum ProKeyUtil {
 
     @SuppressLint("ValidFragment")
     private class GoProDialog extends DialogFragment {
-        private ActionBarActivity activity;
+        private AppCompatActivity activity;
 
-        public GoProDialog(ActionBarActivity activity) {
+        public GoProDialog(AppCompatActivity activity) {
             this.activity = activity;
         }
 
@@ -137,9 +137,9 @@ public enum ProKeyUtil {
 
     @SuppressLint("ValidFragment")
     private class ProVerificationProblemDialog extends DialogFragment {
-        private ActionBarActivity activity;
+        private AppCompatActivity activity;
 
-        public ProVerificationProblemDialog(ActionBarActivity activity) {
+        public ProVerificationProblemDialog(AppCompatActivity activity) {
             this.activity = activity;
         }
 
