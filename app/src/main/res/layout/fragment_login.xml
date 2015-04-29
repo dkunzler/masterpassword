@@ -17,11 +17,21 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true">
 
+        <TextView
+            android:id="@+id/textView_identicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+
+            tools:text="Identicon" />
+
         <EditText
             android:id="@+id/editText_masterPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_identicon"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:ems="10"
             android:hint="@string/hint_password"
             android:inputType="textPassword">
