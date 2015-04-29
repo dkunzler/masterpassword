@@ -24,8 +24,8 @@ android {
         applicationId "de.devland.masterpassword"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 23
-        versionName "1.5.1"
+        versionCode 24
+        versionName "1.5.2"
     }
 
     compileOptions {
@@ -36,10 +36,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
 
         debug {
             applicationIdSuffix ".debug"
+            signingConfig signingConfigs.debug
         }
     }
 }
