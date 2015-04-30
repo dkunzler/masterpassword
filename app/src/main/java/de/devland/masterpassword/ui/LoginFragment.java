@@ -4,8 +4,6 @@ package de.devland.masterpassword.ui;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 
 import com.lambdaworks.crypto.SCryptUtil;
 import com.lyndir.lhunath.opal.system.util.StringUtils;
-import com.lyndir.masterpassword.MPIdenticon;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -31,6 +28,7 @@ import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.ui.BaseFragment;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
+import de.devland.masterpassword.util.Identicon;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ShowCaseManager;
 import lombok.NoArgsConstructor;
@@ -74,10 +72,8 @@ public class LoginFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            fullName.addTextChangedListener(credentialsChangeWatcher);
-            masterPassword.addTextChangedListener(credentialsChangeWatcher);
-        }
+        fullName.addTextChangedListener(credentialsChangeWatcher);
+        masterPassword.addTextChangedListener(credentialsChangeWatcher);
         fullName.setText(
                 Esperandro.getPreferences(DefaultPrefs.class, getActivity()).defaultUserName());
 
@@ -145,32 +141,9 @@ public class LoginFragment extends BaseFragment {
             String password = masterPassword.getText().toString();
             String name = fullName.getText().toString();
             if (!StringUtils.isEmpty(password) && !StringUtils.isEmpty(name)) {
-                MPIdenticon mpIdenticon = new MPIdenticon(name, password);
+                Identicon mpIdenticon = new Identicon(name, password);
                 identicon.setText(mpIdenticon.getText());
-                int textColor = Color.BLACK;
-                switch (mpIdenticon.getColor()) {
-                    case RED:
-                        textColor = Color.argb(255, 220, 50, 47);
-                        break;
-                    case GREEN:
-                        textColor = Color.argb(255, 133, 153, 0);
-                        break;
-                    case YELLOW:
-                        textColor = Color.argb(255, 181, 137, 0);
-                        break;
-                    case BLUE:
-                        textColor = Color.argb(255, 38, 139, 210);
-                        break;
-                    case MAGENTA:
-                        textColor = Color.argb(255, 211, 54, 130);
-                        break;
-                    case CYAN:
-                        textColor = Color.argb(255, 42, 161, 152);
-                        break;
-                    case MONO:
-                        textColor = Color.argb(255, 88, 110, 117);
-                        break;
-                }
+                int textColor = mpIdenticon.getColor().getColorCode();
                 identicon.setTextColor(textColor);
             } else {
                 identicon.setText("");
