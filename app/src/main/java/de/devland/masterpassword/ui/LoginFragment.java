@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -73,8 +74,10 @@ public class LoginFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fullName.addTextChangedListener(credentialsChangeWatcher);
-        masterPassword.addTextChangedListener(credentialsChangeWatcher);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            fullName.addTextChangedListener(credentialsChangeWatcher);
+            masterPassword.addTextChangedListener(credentialsChangeWatcher);
+        }
         fullName.setText(
                 Esperandro.getPreferences(DefaultPrefs.class, getActivity()).defaultUserName());
 
