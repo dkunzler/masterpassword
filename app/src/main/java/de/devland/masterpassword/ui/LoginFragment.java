@@ -4,6 +4,7 @@ package de.devland.masterpassword.ui;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -72,6 +73,9 @@ public class LoginFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Typeface typeface = Typeface
+                .createFromAsset(getActivity().getAssets(), "fonts/Emoticons-Regular.ttf");
+        identicon.setTypeface(typeface);
         fullName.addTextChangedListener(credentialsChangeWatcher);
         masterPassword.addTextChangedListener(credentialsChangeWatcher);
         fullName.setText(
