@@ -70,5 +70,7 @@
     <string name="msg_algorithmVersionNotPrecalculated">Re-login to use other algorithm version.</string>
     <string name="msg_noUrlFound">Could not find URL to add</string>
     <string name="msg_pwdPreviewNotAvailable">No password preview available</string>
+    <string name="showPasswordCanarytitle">Show Verification Code</string>
+    <string name="showPasswordCanarySummary">Shows a small code in the menu to let you verify your password manually</string>
 
 </resources>
