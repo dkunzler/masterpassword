@@ -3,9 +3,7 @@ package de.devland.masterpassword.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.enums.SnackbarType;
+import android.support.design.widget.Snackbar;
 
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.shared.ui.BaseActivity;
@@ -19,7 +17,10 @@ public class SnackbarReceiver extends BroadcastReceiver {
             String message = intent.getStringExtra(Intents.EXTRA_MESSAGE);
             BaseActivity currentForegroundActivity = App.get().getCurrentForegroundActivity();
             if (currentForegroundActivity != null) {
-                Snackbar.with(context).type(SnackbarType.MULTI_LINE).text(message).show(currentForegroundActivity);
+                Snackbar.make(currentForegroundActivity.findViewById(android.R.id.content),
+                        message,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
             }
         }
     }

@@ -18,6 +18,10 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     boolean firstStart();
     void firstStart(boolean firstStart);
 
+    @Default(ofBoolean = true)
+    boolean saveUserName();
+    void saveUserName(boolean saveUserName);
+
     @Default
     String defaultUserName();
     void defaultUserName(String userName);
@@ -68,5 +72,9 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     @Default(ofBoolean = false)
     boolean debugIsPro();
     void debugIsPro(boolean debugIsPro);
+
+    @Default(ofBoolean = false)
+    boolean showCanary();
+    void showCanary(boolean showCanary);
 
 }

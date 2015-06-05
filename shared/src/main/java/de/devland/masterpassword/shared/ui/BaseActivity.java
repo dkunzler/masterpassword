@@ -2,10 +2,9 @@ package de.devland.masterpassword.shared.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.enums.SnackbarType;
 import com.squareup.otto.Bus;
 
 import de.devland.masterpassword.shared.BaseApp;
@@ -43,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (extras != null) {
             if (extras.containsKey(EXTRA_SNACKBAR_MESSAGE)) {
                 String message = extras.getString(EXTRA_SNACKBAR_MESSAGE);
-                Snackbar.with(this).type(SnackbarType.MULTI_LINE).text(message).show(this);
+                Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
                 extras.remove(EXTRA_SNACKBAR_MESSAGE);
             }
         }

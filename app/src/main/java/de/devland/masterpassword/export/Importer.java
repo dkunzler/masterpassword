@@ -3,9 +3,9 @@ package de.devland.masterpassword.export;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.common.base.Strings;
@@ -22,7 +22,6 @@ import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.lyndir.masterpassword.model.MPSite;
 import com.lyndir.masterpassword.model.MPSiteUnmarshaller;
 import com.lyndir.masterpassword.model.MPUser;
-import com.nispok.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -166,10 +165,11 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                 inputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
-                Snackbar.with(activity)
-                        .text(activity.getString(R.string.error_generic))
-                        .textColor(Color.RED)
-                        .show(activity);
+                Snackbar.make(
+                        activity.findViewById(android.R.id.content),
+                        R.string.error_generic,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
                 return;
             }
 
@@ -191,10 +191,11 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                                 importedSites.add(Site.fromMPSite(mpSite));
                             }
                         } catch (Exception e) {
-                            Snackbar.with(activity)
-                                    .text(activity.getString(R.string.error_generic))
-                                    .textColor(Color.RED)
-                                    .show(activity);
+                            Snackbar.make(
+                                    activity.findViewById(android.R.id.content),
+                                    R.string.error_generic,
+                                    Snackbar.LENGTH_SHORT)
+                                    .show();
                             return;
                         }
                         break;
@@ -214,18 +215,20 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         if (gsonSites != null) {
                             importedSites = gsonSites;
                         } else {
-                            Snackbar.with(activity)
-                                    .text(activity.getString(R.string.error_generic))
-                                    .textColor(Color.RED)
-                                    .show(activity);
+                            Snackbar.make(
+                                    activity.findViewById(android.R.id.content),
+                                    R.string.error_generic,
+                                    Snackbar.LENGTH_SHORT)
+                                    .show();
                             return;
                         }
                         break;
                     default:
-                        Snackbar.with(activity)
-                                .text(activity.getString(R.string.error_generic))
-                                .textColor(Color.RED)
-                                .show(activity);
+                        Snackbar.make(
+                                activity.findViewById(android.R.id.content),
+                                R.string.error_generic,
+                                Snackbar.LENGTH_SHORT)
+                                .show();
                         return;
                 }
 
@@ -248,10 +251,11 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                 defaultPrefs.categories(categories);
                 App.get().getBus().post(new ReloadDrawerEvent());
 
-                Snackbar.with(activity)
-                        .text(activity.getString(R.string.msg_importDone))
-                        .show(activity);
-
+                Snackbar.make(
+                        activity.findViewById(android.R.id.content),
+                        R.string.msg_importDone,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
             }
 
 

@@ -78,8 +78,9 @@ public class LoginFragment extends BaseFragment {
         identicon.setTypeface(typeface);
         fullName.addTextChangedListener(credentialsChangeWatcher);
         masterPassword.addTextChangedListener(credentialsChangeWatcher);
-        fullName.setText(
-                Esperandro.getPreferences(DefaultPrefs.class, getActivity()).defaultUserName());
+        if (defaultPrefs.saveUserName()) {
+            fullName.setText(defaultPrefs.defaultUserName());
+        }
 
         ShowCaseManager.INSTANCE.showLoginShowCase(getActivity(), masterPassword);
     }
@@ -87,8 +88,9 @@ public class LoginFragment extends BaseFragment {
     @OnClick(R.id.imageView_login)
     public void onClick() {
         if (checkInputs()) {
-            Esperandro.getPreferences(DefaultPrefs.class, getActivity())
-                    .defaultUserName(fullName.getText().toString());
+            if (defaultPrefs.saveUserName()) {
+                defaultPrefs.defaultUserName(fullName.getText().toString());
+            }
             GenerateUserKeysAsyncTask keysAsyncTask = new GenerateUserKeysAsyncTask(getActivity(),
                     new Runnable() {
                         @Override

@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.support.design.widget.Snackbar;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,7 +20,6 @@ import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.model.MPSiteMarshaller;
 import com.lyndir.masterpassword.model.MPUser;
-import com.nispok.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -131,10 +130,11 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     exportData = gson.toJson(sites);
                     break;
                 default:
-                    Snackbar.with(activity)
-                            .text(activity.getString(R.string.error_generic))
-                            .textColor(Color.RED)
-                            .show(activity);
+                    Snackbar.make(
+                            activity.findViewById(android.R.id.content),
+                            R.string.error_generic,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
                     return;
             }
 
@@ -157,16 +157,19 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     if (pfd != null) {
                         pfd.close();
                     }
-                    Snackbar.with(activity)
-                            .text(activity.getString(R.string.msg_exportDone))
-                            .show(activity);
+                    Snackbar.make(
+                            activity.findViewById(android.R.id.content),
+                            R.string.msg_exportDone,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                Snackbar.with(activity)
-                        .text(activity.getString(R.string.error_generic))
-                        .textColor(Color.RED)
-                        .show(activity);
+                Snackbar.make(
+                        activity.findViewById(android.R.id.content),
+                        R.string.error_generic,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
             }
         }
     }

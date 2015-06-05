@@ -8,9 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
-
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.enums.SnackbarType;
+import android.support.design.widget.Snackbar;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
@@ -32,12 +30,13 @@ public class ClearClipboardService extends Service {
         Activity activity = App.get().getCurrentForegroundActivity();
         if (clipboardDuration > 0) {
             if (activity != null) {
-                Snackbar.with(activity)
-                        .text(String.format(getApplicationContext().getString(
+                Snackbar.make(
+                        activity.findViewById(android.R.id.content),
+                        String.format(getApplicationContext().getString(
                                         R.string.copiedToClipboardWithDuration),
-                                clipboardDuration))
-                        .type(SnackbarType.MULTI_LINE)
-                        .show(activity);
+                                clipboardDuration),
+                        Snackbar.LENGTH_SHORT)
+                        .show();
             }
 
             handler.postDelayed(new Runnable() {
@@ -50,9 +49,10 @@ public class ClearClipboardService extends Service {
             }, clipboardDuration * 1000);
         } else {
             if (activity != null) {
-                Snackbar.with(activity)
-                        .text(activity.getString(R.string.copiedToClipboard))
-                        .show(activity);
+                Snackbar.make(activity.findViewById(android.R.id.content),
+                        R.string.copiedToClipboard,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
             }
         }
         return Service.START_STICKY;
