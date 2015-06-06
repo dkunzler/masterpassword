@@ -6,6 +6,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
@@ -20,7 +21,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
-import com.melnykov.fab.FloatingActionButton;
 import com.squareup.otto.Produce;
 import com.squareup.otto.Subscribe;
 
@@ -58,8 +58,7 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
     @InjectView(R.id.cardList)
     protected InsertionAnimationCardListView cardListView;
     @InjectView(R.id.floating_action_add)
-//    protected FloatingActionButton addButton;
-    protected android.support.design.widget.FloatingActionButton addButton;
+    protected FloatingActionButton addButton;
 
     protected MenuItem searchItem;
     protected SearchView searchView;
