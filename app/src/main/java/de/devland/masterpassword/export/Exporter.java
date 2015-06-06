@@ -37,6 +37,7 @@ import de.devland.masterpassword.R;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.util.RequestCodeManager;
+import de.devland.masterpassword.shared.util.SnackbarUtil;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 
 /**
@@ -130,11 +131,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     exportData = gson.toJson(sites);
                     break;
                 default:
-                    Snackbar.make(
-                            activity.findViewById(android.R.id.content),
-                            R.string.error_generic,
-                            Snackbar.LENGTH_SHORT)
-                            .show();
+                    SnackbarUtil.showShort(activity, R.string.error_generic);
                     return;
             }
 
@@ -157,19 +154,11 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     if (pfd != null) {
                         pfd.close();
                     }
-                    Snackbar.make(
-                            activity.findViewById(android.R.id.content),
-                            R.string.msg_exportDone,
-                            Snackbar.LENGTH_SHORT)
-                            .show();
+                    SnackbarUtil.showShort(activity, R.string.msg_exportDone);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                Snackbar.make(
-                        activity.findViewById(android.R.id.content),
-                        R.string.error_generic,
-                        Snackbar.LENGTH_SHORT)
-                        .show();
+                SnackbarUtil.showShort(activity, R.string.error_generic);
             }
         }
     }

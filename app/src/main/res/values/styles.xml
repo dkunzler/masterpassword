@@ -17,7 +17,5 @@
         <!--<item name="android:textColor">#ff000000</item>-->
     </style>
 
-    <color name="floating_button_normal">@color/accent</color>
-    <color name="floating_button_pressed">@color/accent_dark</color>
     <color name="card_list_background_light">#e5e5e5</color>
 </resources>

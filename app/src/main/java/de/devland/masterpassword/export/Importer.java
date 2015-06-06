@@ -45,6 +45,7 @@ import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.util.RequestCodeManager;
+import de.devland.masterpassword.shared.util.SnackbarUtil;
 import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.event.ReloadDrawerEvent;
 
@@ -165,11 +166,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                 inputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
-                Snackbar.make(
-                        activity.findViewById(android.R.id.content),
-                        R.string.error_generic,
-                        Snackbar.LENGTH_SHORT)
-                        .show();
+                SnackbarUtil.showShort(activity, R.string.error_generic);
                 return;
             }
 
@@ -191,11 +188,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                                 importedSites.add(Site.fromMPSite(mpSite));
                             }
                         } catch (Exception e) {
-                            Snackbar.make(
-                                    activity.findViewById(android.R.id.content),
-                                    R.string.error_generic,
-                                    Snackbar.LENGTH_SHORT)
-                                    .show();
+                            SnackbarUtil.showShort(activity, R.string.error_generic);
                             return;
                         }
                         break;
@@ -215,20 +208,12 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         if (gsonSites != null) {
                             importedSites = gsonSites;
                         } else {
-                            Snackbar.make(
-                                    activity.findViewById(android.R.id.content),
-                                    R.string.error_generic,
-                                    Snackbar.LENGTH_SHORT)
-                                    .show();
+                            SnackbarUtil.showShort(activity, R.string.error_generic);
                             return;
                         }
                         break;
                     default:
-                        Snackbar.make(
-                                activity.findViewById(android.R.id.content),
-                                R.string.error_generic,
-                                Snackbar.LENGTH_SHORT)
-                                .show();
+                        SnackbarUtil.showShort(activity, R.string.error_generic);
                         return;
                 }
 
@@ -251,11 +236,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                 defaultPrefs.categories(categories);
                 App.get().getBus().post(new ReloadDrawerEvent());
 
-                Snackbar.make(
-                        activity.findViewById(android.R.id.content),
-                        R.string.msg_importDone,
-                        Snackbar.LENGTH_SHORT)
-                        .show();
+                SnackbarUtil.showShort(activity, R.string.msg_importDone);
             }
 
 

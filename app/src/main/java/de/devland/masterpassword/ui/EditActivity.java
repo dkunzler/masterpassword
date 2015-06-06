@@ -2,15 +2,14 @@ package de.devland.masterpassword.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.enums.SnackbarType;
+import android.support.design.widget.Snackbar;
 
 import java.util.regex.Matcher;
 
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.shared.ui.BaseActivity;
 import de.devland.masterpassword.shared.util.Constants;
+import de.devland.masterpassword.shared.util.SnackbarUtil;
 
 
 public class EditActivity extends BaseActivity {
@@ -53,7 +52,7 @@ public class EditActivity extends BaseActivity {
                     String hostname = matcher.group(2);
                     return hostname;
                 } else {
-                    Snackbar.with(this).type(SnackbarType.MULTI_LINE).text(getString(R.string.msg_noUrlFound)).show(this);
+                    SnackbarUtil.showShort(this, R.string.msg_noUrlFound);
                 }
             }
         }

@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 
 import de.devland.masterpassword.App;
+import de.devland.masterpassword.R;
 import de.devland.masterpassword.shared.ui.BaseActivity;
 import de.devland.masterpassword.shared.util.Intents;
+import de.devland.masterpassword.shared.util.SnackbarUtil;
 
 public class SnackbarReceiver extends BroadcastReceiver {
 
@@ -17,10 +19,7 @@ public class SnackbarReceiver extends BroadcastReceiver {
             String message = intent.getStringExtra(Intents.EXTRA_MESSAGE);
             BaseActivity currentForegroundActivity = App.get().getCurrentForegroundActivity();
             if (currentForegroundActivity != null) {
-                Snackbar.make(currentForegroundActivity.findViewById(android.R.id.content),
-                        message,
-                        Snackbar.LENGTH_SHORT)
-                        .show();
+                SnackbarUtil.showShort(currentForegroundActivity, message);
             }
         }
     }

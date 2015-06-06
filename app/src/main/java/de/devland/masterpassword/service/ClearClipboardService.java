@@ -14,6 +14,7 @@ import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.shared.util.SnackbarUtil;
 
 public class ClearClipboardService extends Service {
 
@@ -30,13 +31,9 @@ public class ClearClipboardService extends Service {
         Activity activity = App.get().getCurrentForegroundActivity();
         if (clipboardDuration > 0) {
             if (activity != null) {
-                Snackbar.make(
-                        activity.findViewById(android.R.id.content),
-                        String.format(getApplicationContext().getString(
-                                        R.string.copiedToClipboardWithDuration),
-                                clipboardDuration),
-                        Snackbar.LENGTH_SHORT)
-                        .show();
+                SnackbarUtil.showShort(activity, String.format(getApplicationContext().getString(
+                                R.string.copiedToClipboardWithDuration),
+                        clipboardDuration));
             }
 
             handler.postDelayed(new Runnable() {
@@ -49,10 +46,7 @@ public class ClearClipboardService extends Service {
             }, clipboardDuration * 1000);
         } else {
             if (activity != null) {
-                Snackbar.make(activity.findViewById(android.R.id.content),
-                        R.string.copiedToClipboard,
-                        Snackbar.LENGTH_SHORT)
-                        .show();
+                SnackbarUtil.showShort(activity, R.string.copiedToClipboard);
             }
         }
         return Service.START_STICKY;

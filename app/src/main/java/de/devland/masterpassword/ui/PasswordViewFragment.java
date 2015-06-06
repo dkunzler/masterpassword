@@ -58,7 +58,8 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
     @InjectView(R.id.cardList)
     protected InsertionAnimationCardListView cardListView;
     @InjectView(R.id.floating_action_add)
-    protected FloatingActionButton addButton;
+//    protected FloatingActionButton addButton;
+    protected android.support.design.widget.FloatingActionButton addButton;
 
     protected MenuItem searchItem;
     protected SearchView searchView;
@@ -87,10 +88,10 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
 
             if (newScrollY > mScrollY) {
                 // Scrolling up
-                addButton.hide();
+//                addButton.hide();
             } else if (newScrollY < mScrollY) {
                 // Scrolling down
-                addButton.show();
+//                addButton.show();
             }
             mScrollY = newScrollY;
         }
