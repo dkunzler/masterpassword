@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -49,8 +50,6 @@ import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.shared.ui.BaseFragment;
-import de.devland.masterpassword.shared.util.Utils;
-import de.devland.masterpassword.ui.view.OffsetScrollView;
 import de.devland.masterpassword.ui.view.SiteCounterView;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ShowCaseManager;
@@ -68,7 +67,7 @@ public class EditFragment extends BaseFragment {
     protected DefaultPrefs defaultPrefs;
 
     @InjectView(R.id.scrollView)
-    protected OffsetScrollView scrollView;
+    protected ScrollView scrollView;
     @InjectView(R.id.editText_siteName)
     protected EditText siteName;
     @InjectView(R.id.textView_userName)
@@ -178,8 +177,6 @@ public class EditFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit, container, false);
         ButterKnife.inject(this, rootView);
-
-        scrollView.setScrollOffset(Math.round(Utils.convertDpToPixel(58f, App.get())));
 
         SortedSet<String> userNames = new TreeSet<>();
 

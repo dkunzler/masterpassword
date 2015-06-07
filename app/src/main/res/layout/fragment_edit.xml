@@ -1,13 +1,16 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="de.devland.masterpassword.ui.EditFragment">
 
-    <de.devland.masterpassword.ui.view.OffsetScrollView
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clipToPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -156,27 +159,20 @@
                 android:layout_below="@+id/textView_siteCounter"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/edittext_marginCaption" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/numberPicker_siteCounter" />
-
         </RelativeLayout>
 
-
-    </de.devland.masterpassword.ui.view.OffsetScrollView>
+    </ScrollView>
 
     <TextView
+        android:elevation="4sp"
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
         android:background="@color/primary_dark"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
-</FrameLayout>
+        android:textColor="@android:color/white"
+        tools:text="Large Text" />
+</LinearLayout>
