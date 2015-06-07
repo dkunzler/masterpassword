@@ -1,4 +1,4 @@
-package de.devland.masterpassword.ui;
+package de.devland.masterpassword.ui.passwordlist;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -8,9 +8,6 @@ import android.graphics.Typeface;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,87 +29,78 @@ import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ProKeyUtil;
-import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.view.CardView;
+import de.devland.masterpassword.util.event.SiteCardClickEvent;
+import de.devland.masterpassword.util.event.SiteDeleteEvent;
 import lombok.Getter;
 
 /**
- * Created by David Kunzler on 24.08.2014.
+ * Created by deekay on 07.06.2015.
  */
 public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener {
-
     public static final String PASSWORD_DOT = "•";
+
+
     @Getter
     protected Site site;
-    protected SiteCardArrayAdapter adapter;
+    protected SiteCardViewHolder currentViewHolder;
 
-    @InjectView(R.id.siteName)
-    protected TextView siteName;
-    @InjectView(R.id.userName)
-    protected TextView userName;
-    @InjectView(R.id.password)
-    protected TextView password;
-    @InjectView(R.id.imageInputstick)
-    protected ImageView imageInputStick;
-
+    protected Context context;
     protected InputStickPrefs inputStickPrefs;
     protected DefaultPrefs defaultPrefs;
 
     private String generatedPassword;
 
-    public SiteCard(Context context, Site site, SiteCardArrayAdapter adapter) {
-        super(context, R.layout.card_site);
+    public SiteCard(Context context, Site site) {
+        super(R.layout.card_site);
+        this.context = context;
         this.site = site;
-        this.adapter = adapter;
-        this.setId(String.valueOf(site.getId()));
+
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
         this.inputStickPrefs = Esperandro.getPreferences(InputStickPrefs.class, context);
-        setBackgroundResourceId(android.R.color.white);
     }
 
     @Override
-    public void setupInnerViewElements(ViewGroup parent, View view) {
-        super.setupInnerViewElements(parent, view);
-        CardView cardView = (CardView) getCardView();
-        ButterKnife.inject(this, cardView);
-        siteName.setText(site.getSiteName());
-        siteName.setTypeface(Typeface.DEFAULT_BOLD);
-        siteName.setTextColor(getContext().getResources().getColor(R.color.text));
-        userName.setText(site.getUserName());
+    public void bindViewHolder(CardAdapter.CardViewHolder cardViewHolder) {
+        SiteCardViewHolder viewHolder = (SiteCardViewHolder) cardViewHolder;
+        currentViewHolder = viewHolder;
+        ButterKnife.inject(this, viewHolder.itemView);
+        viewHolder.siteName.setText(site.getSiteName());
+        viewHolder.siteName.setTypeface(Typeface.DEFAULT_BOLD);
+        viewHolder.siteName.setTextColor(context.getResources().getColor(R.color.text));
+        viewHolder.userName.setText(site.getUserName());
         if (site.getUserName().isEmpty()) {
-            userName.setVisibility(View.GONE);
+            viewHolder.userName.setVisibility(View.GONE);
         } else {
-            userName.setVisibility(View.VISIBLE);
+            viewHolder.userName.setVisibility(View.VISIBLE);
         }
         if (inputStickPrefs.inputstickEnabled()) {
-            imageInputStick.setVisibility(View.VISIBLE);
+            viewHolder.imageInputStick.setVisibility(View.VISIBLE);
         } else {
-            imageInputStick.setVisibility(View.GONE);
+            viewHolder.imageInputStick.setVisibility(View.GONE);
         }
         updatePassword();
         Typeface typeface = Typeface
-                .createFromAsset(getContext().getAssets(), "fonts/RobotoSlab-Light.ttf");
-        password.setTypeface(typeface);
+                .createFromAsset(context.getAssets(), "fonts/RobotoSlab-Light.ttf");
+        viewHolder.password.setTypeface(typeface);
     }
 
     @OnClick(R.id.password)
     void copyPasswordToClipboard() {
         site.touch();
-        final ClipboardManager clipboard = (ClipboardManager) getContext()
+        final ClipboardManager clipboard = (ClipboardManager) context
                 .getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("password", generatedPassword);
         clipboard.setPrimaryClip(clip);
 
-        Intent service = new Intent(getContext(), ClearClipboardService.class);
-        getContext().startService(service);
+        Intent service = new Intent(context, ClearClipboardService.class);
+        context.startService(service);
         App.get().getBus().post(new PasswordCopyEvent(this));
     }
 
     @OnClick(R.id.imageMore)
     void showMoreMenu(ImageView imageMore) {
-        PopupMenu popupMenu = new PopupMenu(getContext(), imageMore);
+        PopupMenu popupMenu = new PopupMenu(context, imageMore);
         popupMenu.inflate(R.menu.card_site);
         popupMenu.setOnMenuItemClickListener(this);
         popupMenu.show();
@@ -126,15 +114,20 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
             broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
             broadcast.putExtra(Intents.EXTRA_LAYOUT, inputStickPrefs.inputstickKeymap());
 
-            getContext().sendBroadcast(broadcast);
+            context.sendBroadcast(broadcast);
         } else {
             ProKeyUtil.INSTANCE.showGoProDialog(App.get().getCurrentForegroundActivity());
         }
     }
 
+    @OnClick(R.id.card)
+    void onSiteCardClick() {
+        App.get().getBus().post(new SiteCardClickEvent(this));
+    }
+
     @OnLongClick(R.id.imageInputstick)
     public boolean showInputStickToast() {
-        Toast.makeText(getContext(), R.string.msg_sentToInputstick, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.msg_sentToInputstick, Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -145,14 +138,14 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
             case R.id.card_menu_delete:
                 site.delete();
                 site.setId(null);
-                collapseView(null);
+                App.get().getBus().post(new SiteDeleteEvent(this));
                 // TODO undobar
                 break;
             case R.id.card_menu_show:
-                if (password.getText().equals(generatedPassword)) {
-                    password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
+                if (currentViewHolder.password.getText().equals(generatedPassword)) {
+                    currentViewHolder.password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
                 } else {
-                    password.setText(generatedPassword);
+                    currentViewHolder.password.setText(generatedPassword);
                 }
                 break;
             case R.id.card_menu_increment:
@@ -168,41 +161,27 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         return result;
     }
 
-    protected void collapseView(Animation.AnimationListener animationListener) {
-        final View v = (View) getCardView();
-        final int initialHeight = v.getMeasuredHeight();
-        v.setTag(true);
-
-        Animation anim = new Animation() {
-            @Override
-            protected void applyTransformation(float interpolatedTime, Transformation t) {
-                if (interpolatedTime == 1) {
-                    v.setVisibility(View.GONE);
-                } else {
-                    v.getLayoutParams().height = initialHeight - (int) (initialHeight * interpolatedTime);
-                    v.requestLayout();
-                }
-            }
-
-            @Override
-            public boolean willChangeBounds() {
-                return true;
-            }
-        };
-
-        if (animationListener != null) {
-            anim.setAnimationListener(animationListener);
-        }
-        anim.setDuration(200);
-        v.startAnimation(anim);
-    }
-
     private void updatePassword() {
         generatedPassword = MasterPasswordHolder.INSTANCE.generate(site.getPasswordType(), MPSiteVariant.Password, site.getSiteName(), site.getSiteCounter(), site.getAlgorithmVersion());
         if (defaultPrefs.hidePasswords()) {
-            password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
+            currentViewHolder.password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
         } else {
-            password.setText(generatedPassword);
+            currentViewHolder.password.setText(generatedPassword);
+        }
+    }
+
+    public static class SiteCardViewHolder extends CardAdapter.CardViewHolder {
+        @InjectView(R.id.siteName)
+        protected TextView siteName;
+        @InjectView(R.id.userName)
+        protected TextView userName;
+        @InjectView(R.id.password)
+        protected TextView password;
+        @InjectView(R.id.imageInputstick)
+        protected ImageView imageInputStick;
+
+        public SiteCardViewHolder(View itemView) {
+            super(itemView);
         }
     }
 }

@@ -5,10 +5,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Created by David Kunzler on 12.10.2014.
+ * Created by deekay on 07.06.2015.
  */
+@Getter
 @RequiredArgsConstructor(suppressConstructorProperties = true)
-public class PasswordCopyEvent {
-    @Getter
+public class SiteDeleteEvent {
     private final SiteCard card;
 }

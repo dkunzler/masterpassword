@@ -1,14 +1,14 @@
 package de.devland.masterpassword.ui;
 
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 import com.squareup.otto.Produce;
@@ -38,25 +37,28 @@ import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.ui.BaseFragment;
+import de.devland.masterpassword.ui.passwordlist.Card;
+import de.devland.masterpassword.ui.passwordlist.CardAdapter;
+import de.devland.masterpassword.ui.passwordlist.DummyCard;
+import de.devland.masterpassword.ui.passwordlist.SiteCard;
 import de.devland.masterpassword.util.ShowCaseManager;
-import de.devland.masterpassword.util.SiteCardArrayAdapter;
 import de.devland.masterpassword.util.event.CategoryChangeEvent;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import de.devland.masterpassword.util.event.ProStatusChangeEvent;
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.view.listener.SwipeOnScrollListener;
+import de.devland.masterpassword.util.event.SiteCardClickEvent;
+import de.devland.masterpassword.util.event.SiteDeleteEvent;
 import lombok.NoArgsConstructor;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 @NoArgsConstructor
-public class PasswordViewFragment extends BaseFragment implements Card.OnCardClickListener,
+public class PasswordViewFragment extends BaseFragment implements
         SearchView.OnQueryTextListener {
     private static final String STATE_CATEGORY = "de.devland.PasswordViewFragment.STATE_CATEGORY";
 
     @InjectView(R.id.cardList)
-    protected InsertionAnimationCardListView cardListView;
+    protected RecyclerView cardListView;
     @InjectView(R.id.floating_action_add)
     protected FloatingActionButton addButton;
 
@@ -66,35 +68,36 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
     protected Category activeCategory;
     protected String filter;
 
-    protected SiteCardArrayAdapter adapter;
-    SwipeOnScrollListener hideFloatingButtonScrollListener = new SwipeOnScrollListener() {
-        private int mScrollY = 0;
-
-        protected int getListViewScrollY() {
-            View topChild = cardListView.getChildAt(0);
-            return topChild == null ? 0 : cardListView.getFirstVisiblePosition() * topChild.getHeight() -
-                    topChild.getTop();
-        }
-
-        @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
-                             int totalItemCount) {
-            super.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-            int newScrollY = getListViewScrollY();
-            if (newScrollY == mScrollY) {
-                return;
-            }
-
-            if (newScrollY > mScrollY) {
-                // Scrolling up
-//                addButton.hide();
-            } else if (newScrollY < mScrollY) {
-                // Scrolling down
-//                addButton.show();
-            }
-            mScrollY = newScrollY;
-        }
-    };
+    protected CardAdapter adapter;
+//    protected SiteCardArrayAdapter adapter;
+//    SwipeOnScrollListener hideFloatingButtonScrollListener = new SwipeOnScrollListener() {
+//        private int mScrollY = 0;
+//
+//        protected int getListViewScrollY() {
+//            View topChild = cardListView.getChildAt(0);
+//            return topChild == null ? 0 : cardListView.getFirstVisiblePosition() * topChild.getHeight() -
+//                    topChild.getTop();
+//        }
+//
+//        @Override
+//        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+//                             int totalItemCount) {
+//            super.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+//            int newScrollY = getListViewScrollY();
+//            if (newScrollY == mScrollY) {
+//                return;
+//            }
+//
+//            if (newScrollY > mScrollY) {
+//                // Scrolling up
+////                addButton.hide();
+//            } else if (newScrollY < mScrollY) {
+//                // Scrolling down
+////                addButton.show();
+//            }
+//            mScrollY = newScrollY;
+//        }
+//    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,7 +112,7 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
 
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
 
-        adapter = new SiteCardArrayAdapter(getActivity(), new ArrayList<Card>());
+        adapter = new CardAdapter();
 
         if (!BuildConfig.DEBUG) {
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
@@ -170,24 +173,27 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
         refreshCards();
     }
 
+    @Subscribe
+    public void onSiteDelete(SiteDeleteEvent e) {
+        int cardPosition = adapter.remove(e.getCard());
+        adapter.notifyItemRemoved(cardPosition);
+    }
 
     @Subscribe
     public void onPasswordCopy(PasswordCopyEvent e) {
         if (defaultPrefs.sortBy().contains(Site.LAST_USED)) {
-            final SiteCard card = e.getCard();
-            final SiteCard newCard = new SiteCard(getActivity(), card.getSite(), adapter);
-
-            if (adapter.getPosition(card) != 0) {
-                cardListView.addRow(newCard, new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        refreshCards();
-                    }
-                });
-                adapter.remove(card);
-                adapter.notifyDataSetChanged();
-            }
+            SiteCard card = e.getCard();
+            int oldPosition = adapter.move(card, 0);
+            adapter.notifyItemMoved(oldPosition, 0);
+            cardListView.scrollToPosition(0);
         }
+    }
+
+    @Subscribe
+    public void onSiteCardClick(SiteCardClickEvent e) {
+        Intent intent = new Intent(getActivity(), EditActivity.class);
+        intent.putExtra(EditFragment.ARG_SITE_ID, e.getCard().getSite().getId());
+        startActivity(intent);
     }
 
     @Subscribe
@@ -207,30 +213,18 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
                 defaultPrefs.sortBy(), null);
         while (siteIterator.hasNext()) {
             Site site = siteIterator.next();
-            SiteCard siteCard = new SiteCard(getActivity(), site, adapter);
-            siteCard.setOnUndoSwipeListListener(new Card.OnUndoSwipeListListener() {
-                @Override
-                public void onUndoSwipe(Card card) {
-                    if (card instanceof SiteCard) {
-                        SiteCard siteCard = (SiteCard) card;
-                        siteCard.getSite().save();
-                        refreshCards();
-                    }
-
-                }
-            });
-            siteCard.setOnClickListener(this);
+            SiteCard siteCard = new SiteCard(getActivity(), site);
             cards.add(siteCard);
         }
         if (cards.size() > 0) {
             ShowCaseManager.INSTANCE.showFirstCardShowCase(getActivity());
         }
 
-        cards.add(new DummyCard(getActivity()));
+        cards.add(new DummyCard());
         adapter.clear();
         adapter.addAll(cards);
         if (!StringUtils.isEmpty(filter)) {
-            adapter.getFilter().filter(filter);
+//            adapter.getFilter().filter(filter);
         }
         adapter.notifyDataSetChanged();
     }
@@ -247,24 +241,14 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cardListView.setAdapter(adapter);
+        cardListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        cardListView.swapAdapter(adapter, false);
         cardListView.setBackgroundResource(R.color.card_list_background_light);
 
-        cardListView.setOnScrollListener(hideFloatingButtonScrollListener);
+//        cardListView.setOnScrollListener(hideFloatingButtonScrollListener);
 
         if (!getActivity().isFinishing()) {
             ShowCaseManager.INSTANCE.showAddShowCase(getActivity());
-        }
-    }
-
-    @Override
-    public void onClick(Card card, View view) {
-        if (card instanceof SiteCard) {
-            SiteCard siteCard = (SiteCard) card;
-            Intent intent = new Intent(getActivity(), EditActivity.class);
-            intent.putExtra(EditFragment.ARG_SITE_ID, siteCard.getSite().getId());
-            startActivity(intent);
-
         }
     }
 
@@ -280,7 +264,7 @@ public class PasswordViewFragment extends BaseFragment implements Card.OnCardCli
     @Override
     public boolean onQueryTextChange(String s) {
         filter = s;
-        adapter.getFilter().filter(s);
+//        adapter.getFilter().filter(s);
         return true;
     }
 
