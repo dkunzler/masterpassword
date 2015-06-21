@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="4dp">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/minusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_float_minus"
+        app:borderWidth="0dp"
+        app:elevation="0sp" />
+
+    <EditText
+        android:id="@+id/editText_siteCounter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1"
+        android:ellipsize="start"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="numberSigned" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/plusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_float_plus"
+        app:borderWidth="0dp"
+        app:elevation="0sp" />
+</LinearLayout>

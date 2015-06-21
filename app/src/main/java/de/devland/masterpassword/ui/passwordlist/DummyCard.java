@@ -13,4 +13,9 @@ public class DummyCard extends Card {
     @Override
     public void bindViewHolder(CardAdapter.CardViewHolder cardViewHolder) {
     }
+
+    @Override
+    public boolean isVisible(String filter) {
+        return true;
+    }
 }

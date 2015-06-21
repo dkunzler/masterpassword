@@ -3,30 +3,31 @@ package de.devland.masterpassword.ui.view;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
-import android.text.InputType;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.shared.util.Utils;
 import lombok.Setter;
 
 /**
  * Created by deekay on 27/02/15.
  */
-public class SiteCounterView extends LinearLayout implements View.OnClickListener, TextWatcher,
-        View.OnFocusChangeListener {
+public class SiteCounterView extends LinearLayout implements TextWatcher, View.OnFocusChangeListener {
 
+    @InjectView(R.id.editText_siteCounter)
     protected EditText counter;
-    protected Button plus;
-    protected Button minus;
+    @InjectView(R.id.plusButton)
+    protected FloatingActionButton plus;
+    @InjectView(R.id.minusButton)
+    protected FloatingActionButton minus;
 
     @Setter
     protected int minValue = 1;
@@ -56,32 +57,39 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
 
 
     public void init() {
-        this.setOrientation(LinearLayout.HORIZONTAL);
-        int _4dp = Math.round(Utils.convertDpToPixel(4f, getContext()));
-        this.setPadding(_4dp, _4dp, _4dp, _4dp);
-
-        minus = new Button(getContext());
-        minus.setText("-");
-        minus.setBackgroundResource(R.color.accent);
-        minus.setOnClickListener(this);
-        this.addView(minus, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-
-        counter = new EditText(getContext());
-        counter.setEllipsize(TextUtils.TruncateAt.START);
-        counter.setGravity(Gravity.CENTER);
-        counter.setEms(10);
-        counter.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        inflate(getContext(), R.layout.view_sitecounter, this);
+        ButterKnife.inject(this);
         counter.addTextChangedListener(this);
         counter.setOnFocusChangeListener(this);
-        LayoutParams counterLayoutParams = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
-        counterLayoutParams.setMargins(_4dp, 0, _4dp, 0);
-        this.addView(counter, counterLayoutParams);
-
-        plus = new Button(getContext());
-        plus.setText("+");
-        plus.setBackgroundResource(R.color.accent);
-        plus.setOnClickListener(this);
-        this.addView(plus, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+//        this.setOrientation(LinearLayout.HORIZONTAL);
+//        int _4dp = Math.round(Utils.convertDpToPixel(4f, getContext()));
+//        this.setPadding(_4dp, _4dp, _4dp, _4dp);
+//
+//        minus = new Button(getContext());
+//        minus.setText("-");
+//        minus.setBackgroundResource(R.color.accent);
+//        minus.setOnClickListener(this);
+////        minus.set(10, 10, 10, 10);
+//        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//        params.setMargins(50,100,150,200);
+//        this.addView(minus, params);
+//
+//        counter = new EditText(getContext());
+//        counter.setEllipsize(TextUtils.TruncateAt.START);
+//        counter.setGravity(Gravity.CENTER);
+//        counter.setEms(10);
+//        counter.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+//        counter.addTextChangedListener(this);
+//        counter.setOnFocusChangeListener(this);
+//        LayoutParams counterLayoutParams = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
+//        counterLayoutParams.setMargins(_4dp, 0, _4dp, 0);
+//        this.addView(counter, counterLayoutParams);
+//
+//        plus = new Button(getContext());
+//        plus.setText("+");
+//        plus.setBackgroundResource(R.color.accent);
+//        plus.setOnClickListener(this);
+//        this.addView(plus, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
     }
 
 
@@ -100,7 +108,7 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
         counter.setText(String.valueOf(value));
     }
 
-    @Override
+    @OnClick({R.id.plusButton, R.id.minusButton})
     public void onClick(View view) {
         if (view == minus) {
             setValue(getValue() - 1);
@@ -109,6 +117,7 @@ public class SiteCounterView extends LinearLayout implements View.OnClickListene
             setValue(getValue() + 1);
         }
     }
+
 
     @Override
     public void afterTextChanged(Editable editable) {

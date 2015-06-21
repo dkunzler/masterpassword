@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Filter;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 import com.squareup.otto.Produce;
@@ -41,6 +42,7 @@ import de.devland.masterpassword.ui.passwordlist.Card;
 import de.devland.masterpassword.ui.passwordlist.CardAdapter;
 import de.devland.masterpassword.ui.passwordlist.DummyCard;
 import de.devland.masterpassword.ui.passwordlist.SiteCard;
+import de.devland.masterpassword.ui.view.HideOnScrollListener;
 import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.event.CategoryChangeEvent;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
@@ -66,38 +68,9 @@ public class PasswordViewFragment extends BaseFragment implements
     protected SearchView searchView;
     protected DefaultPrefs defaultPrefs;
     protected Category activeCategory;
-    protected String filter;
+    protected String filterText;
 
     protected CardAdapter adapter;
-//    protected SiteCardArrayAdapter adapter;
-//    SwipeOnScrollListener hideFloatingButtonScrollListener = new SwipeOnScrollListener() {
-//        private int mScrollY = 0;
-//
-//        protected int getListViewScrollY() {
-//            View topChild = cardListView.getChildAt(0);
-//            return topChild == null ? 0 : cardListView.getFirstVisiblePosition() * topChild.getHeight() -
-//                    topChild.getTop();
-//        }
-//
-//        @Override
-//        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
-//                             int totalItemCount) {
-//            super.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-//            int newScrollY = getListViewScrollY();
-//            if (newScrollY == mScrollY) {
-//                return;
-//            }
-//
-//            if (newScrollY > mScrollY) {
-//                // Scrolling up
-////                addButton.hide();
-//            } else if (newScrollY < mScrollY) {
-//                // Scrolling down
-////                addButton.show();
-//            }
-//            mScrollY = newScrollY;
-//        }
-//    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -221,12 +194,12 @@ public class PasswordViewFragment extends BaseFragment implements
         }
 
         cards.add(new DummyCard());
-        adapter.clear();
+        adapter = new CardAdapter();
         adapter.addAll(cards);
-        if (!StringUtils.isEmpty(filter)) {
-//            adapter.getFilter().filter(filter);
+        if (!StringUtils.isEmpty(filterText)) {
+            new CardFilter().filter(filterText);
         }
-        adapter.notifyDataSetChanged();
+        cardListView.swapAdapter(adapter, true);
     }
 
     @Override
@@ -245,7 +218,7 @@ public class PasswordViewFragment extends BaseFragment implements
         cardListView.swapAdapter(adapter, false);
         cardListView.setBackgroundResource(R.color.card_list_background_light);
 
-//        cardListView.setOnScrollListener(hideFloatingButtonScrollListener);
+        cardListView.addOnScrollListener(new HideOnScrollListener(addButton, 80));
 
         if (!getActivity().isFinishing()) {
             ShowCaseManager.INSTANCE.showAddShowCase(getActivity());
@@ -263,8 +236,8 @@ public class PasswordViewFragment extends BaseFragment implements
 
     @Override
     public boolean onQueryTextChange(String s) {
-        filter = s;
-//        adapter.getFilter().filter(s);
+        filterText = s;
+        new CardFilter().filter(s);
         return true;
     }
 
@@ -285,5 +258,63 @@ public class PasswordViewFragment extends BaseFragment implements
             event = new CategoryChangeEvent(Category.all(getActivity()));
         }
         return event;
+    }
+
+    class CardFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Card> cards = new ArrayList<>();
+
+            String where = null;
+            if (activeCategory != null && !activeCategory.equals(Category.all(getActivity()))) {
+                where = Site.CATEGORY + " = '" + activeCategory.getName() + "'";
+            }
+
+            Iterator<Site> siteIterator = Site.findAsIterator(Site.class, where, null, null,
+                    defaultPrefs.sortBy(), null);
+            while (siteIterator.hasNext()) {
+                Site site = siteIterator.next();
+                SiteCard siteCard = new SiteCard(getActivity(), site);
+                cards.add(siteCard);
+            }
+            if (cards.size() > 0) {
+                ShowCaseManager.INSTANCE.showFirstCardShowCase(getActivity());
+            }
+
+            cards.add(new DummyCard());
+
+
+            FilterResults filterResults = new FilterResults();
+            ArrayList<Card> tempList = new ArrayList<>();
+            //constraint is the result from text you want to filterText against.
+            //objects is your data set you will filterText from
+            if (constraint != null) {
+                // Live Site
+                int length = cards.size();
+                int i = 0;
+                while (i < length) {
+                    Card card = cards.get(i);
+                    if (card.isVisible(constraint.toString())) {
+                        tempList.add(card);
+                    }
+
+                    i++;
+                }
+                //following two lines is very important
+                //as publish result can only take FilterResults objects
+                filterResults.values = tempList;
+                filterResults.count = tempList.size();
+            }
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            CardAdapter adapter = new CardAdapter();
+            adapter.addAll((List<Card>) results.values);
+            PasswordViewFragment.this.adapter = adapter;
+            cardListView.swapAdapter(adapter, true);
+        }
     }
 }

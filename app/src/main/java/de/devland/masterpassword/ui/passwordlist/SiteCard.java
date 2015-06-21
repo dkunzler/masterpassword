@@ -85,6 +85,11 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         viewHolder.password.setTypeface(typeface);
     }
 
+    @Override
+    public boolean isVisible(String filter) {
+        return site.getSiteName().toLowerCase().contains(filter.toLowerCase());
+    }
+
     @OnClick(R.id.password)
     void copyPasswordToClipboard() {
         site.touch();

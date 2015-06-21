@@ -15,4 +15,6 @@ public abstract class Card {
 
     public abstract void bindViewHolder(CardAdapter.CardViewHolder cardViewHolder);
 
+    public abstract boolean isVisible(String filter);
+
 }

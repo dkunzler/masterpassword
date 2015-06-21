@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.support.design.widget.Snackbar;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -83,7 +82,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
 
     private Intent getLegacyFolderChooserIntent() {
         Intent getContentIntent = new Intent(activity, FileChooserActivity.class);
-        // do not show any files by selecting an invalid file extension to filter
+        // do not show any files by selecting an invalid file extension to filterText
         getContentIntent.putStringArrayListExtra(
                 FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS,
                 new ArrayList<>(Arrays.asList("./")));

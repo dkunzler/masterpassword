@@ -75,4 +75,5 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             ButterKnife.inject(this, itemView);
         }
     }
+
 }
