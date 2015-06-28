@@ -25,18 +25,18 @@
             android:positiveButtonText="@null"
             android:title="@string/autoLogoutDurationTitle" />
 
-        <SwitchPreference
+        <CheckBoxPreference
             android:key="saveUserName"
-            android:title="Save UserName" />
+            android:title="@string/title_saveUsername" />
 
         <CheckBoxPreference
             android:key="hidePasswords"
             android:title="@string/hidePasswordsTitle" />
 
-        <!--CheckBoxPreference
+        <CheckBoxPreference
             android:key="showCanary"
-            android:title="@string/showPasswordCanarytitle"
-            android:summary="@string/showPasswordCanarySummary"/-->
+            android:title="@string/showPasswordCanaryTitle"
+            android:summary="@string/showPasswordCanarySummary"/>
 
         <de.devland.masterpassword.ui.preferences.VerifyPasswordPreference
             android:key="verifyPassword"

@@ -146,13 +146,15 @@ public class LoginFragment extends BaseFragment {
         public void afterTextChanged(Editable editable) {
             String password = masterPassword.getText().toString();
             String name = fullName.getText().toString();
-            if (!StringUtils.isEmpty(password) && !StringUtils.isEmpty(name)) {
-                Identicon mpIdenticon = new Identicon(name, password);
-                identicon.setText(mpIdenticon.getText());
-                int textColor = mpIdenticon.getColor().getColorCode();
-                identicon.setTextColor(textColor);
-            } else {
-                identicon.setText("");
+            if (defaultPrefs.showCanary()) {
+                if (!StringUtils.isEmpty(password) && !StringUtils.isEmpty(name)) {
+                    Identicon mpIdenticon = new Identicon(name, password);
+                    identicon.setText(mpIdenticon.getText());
+                    int textColor = mpIdenticon.getColor().getColorCode();
+                    identicon.setTextColor(textColor);
+                } else {
+                    identicon.setText("");
+                }
             }
         }
     }

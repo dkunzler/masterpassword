@@ -73,7 +73,7 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     boolean debugIsPro();
     void debugIsPro(boolean debugIsPro);
 
-    @Default(ofBoolean = false)
+    @Default(ofBoolean = true)
     boolean showCanary();
     void showCanary(boolean showCanary);
 
