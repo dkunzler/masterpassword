@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        layout="@layout/rvfs_default_vertical_bar_handle_container"
+        android:id="@id/rvfs_scroll_bar_handle_container"
+        android:layout_toRightOf="@id/rvfs_scroll_section_indicator"
+        android:layout_toEndOf="@id/rvfs_scroll_section_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        />
+
+    <de.devland.masterpassword.ui.passwordlist.CardSectionIndicator
+        android:id="@id/rvfs_scroll_section_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+
+        custom:rvfs_backgroundColor="@android:color/white"
+        custom:rvfs_textColor="@android:color/black"
+        />
+</RelativeLayout>

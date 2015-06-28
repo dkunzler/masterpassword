@@ -90,6 +90,11 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         return site.getSiteName().toLowerCase().contains(filter.toLowerCase());
     }
 
+    @Override
+    public String getTitle() {
+        return site.getSiteName();
+    }
+
     @OnClick(R.id.password)
     void copyPasswordToClipboard() {
         site.touch();

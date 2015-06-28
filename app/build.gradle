@@ -68,6 +68,7 @@ dependencies {
     compile 'com.github.traex.rippleeffect:library:1.2.4' // MIT
 //    compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
     compile(name:'showcaseview-git', ext:'aar') // Apache v2.0
+    compile(name:'recyclerviewfastscroller-release', ext:'aar') // Apache v2.0
 
     // annotation processors
     apt 'org.projectlombok:lombok:1.14.0' // MIT

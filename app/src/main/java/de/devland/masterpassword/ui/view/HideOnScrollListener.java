@@ -30,12 +30,11 @@ public class HideOnScrollListener extends RecyclerView.OnScrollListener {
         super.onScrolled(recyclerView, dx, dy);
 
         if (scrolledDistance > HIDE_THRESHOLD && controlsVisible) {
-            onHide();
+            hide();
             controlsVisible = false;
             scrolledDistance = 0;
         } else if (scrolledDistance < -HIDE_THRESHOLD && !controlsVisible) {
-            onShow();
-            controlsVisible = true;
+            show();
             scrolledDistance = 0;
         }
 
@@ -44,13 +43,15 @@ public class HideOnScrollListener extends RecyclerView.OnScrollListener {
         }
     }
 
-    public void onHide() {
+    public void hide() {
         if (originalY == 0) {
             originalY = view.getY();
         }
         view.animate().y(originalY + Utils.convertDpToPixel(amountDp, view.getContext())).setDuration(200);
+        controlsVisible = false;
     }
-    public void onShow() {
+    public void show() {
         view.animate().y(originalY).setDuration(200);
+        controlsVisible = true;
     }
 }

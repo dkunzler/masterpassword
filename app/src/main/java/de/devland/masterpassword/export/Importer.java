@@ -197,19 +197,22 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                         for (String line : lines) {
                             fileContent.append(line);
                         }
-                        List<Site> gsonSites;
+                        List<Site> gsonSites = null;
                         Gson gson = new GsonBuilder().setPrettyPrinting()
                                 .registerTypeAdapter(Date.class, timeStampDeserializer)
                                 .excludeFieldsWithoutExposeAnnotation()
                                 .serializeNulls().create();
                         Type listType = new TypeToken<ArrayList<Site>>() {
                         }.getType();
-                        gsonSites = gson.fromJson(fileContent.toString(), listType);
-                        if (gsonSites != null) {
-                            importedSites = gsonSites;
-                        } else {
-                            SnackbarUtil.showShort(activity, R.string.error_generic);
-                            return;
+                        try {
+                            gsonSites = gson.fromJson(fileContent.toString(), listType);
+                        } finally {
+                            if (gsonSites != null) {
+                                importedSites = gsonSites;
+                            } else {
+                                SnackbarUtil.showShort(activity, R.string.error_generic);
+                                return;
+                            }
                         }
                         break;
                     default:

@@ -17,4 +17,8 @@ public abstract class Card {
 
     public abstract boolean isVisible(String filter);
 
+    public String getTitle() {
+        return "";
+    }
+
 }

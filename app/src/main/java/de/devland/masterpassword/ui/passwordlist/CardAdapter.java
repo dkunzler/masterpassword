@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SectionIndexer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import butterknife.ButterKnife;
 /**
  * Created by deekay on 07.06.2015.
  */
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
+public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> implements SectionIndexer {
 
     private List<Card> cards = new ArrayList<>();
 
@@ -66,6 +67,25 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             cards.add(newPosition, card);
         }
         return oldPosition;
+    }
+
+    @Override
+    public Object[] getSections() {
+        return cards.toArray();
+    }
+
+    @Override
+    public int getPositionForSection(int sectionIndex) {
+        return 0;
+    }
+
+    @Override
+    public int getSectionForPosition(int position) {
+        if (position >= cards.size()) {
+            position = cards.size() - 1;
+        }
+
+        return position;
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {

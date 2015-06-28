@@ -40,6 +40,7 @@ import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.ui.BaseFragment;
 import de.devland.masterpassword.ui.passwordlist.Card;
 import de.devland.masterpassword.ui.passwordlist.CardAdapter;
+import de.devland.masterpassword.ui.passwordlist.CardSectionIndicator;
 import de.devland.masterpassword.ui.passwordlist.DummyCard;
 import de.devland.masterpassword.ui.passwordlist.SiteCard;
 import de.devland.masterpassword.ui.view.HideOnScrollListener;
@@ -50,6 +51,7 @@ import de.devland.masterpassword.util.event.ProStatusChangeEvent;
 import de.devland.masterpassword.util.event.SiteCardClickEvent;
 import de.devland.masterpassword.util.event.SiteDeleteEvent;
 import lombok.NoArgsConstructor;
+import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +63,10 @@ public class PasswordViewFragment extends BaseFragment implements
 
     @InjectView(R.id.cardList)
     protected RecyclerView cardListView;
+    @InjectView(R.id.fast_scroller)
+    protected VerticalRecyclerViewFastScroller fastScroller;
+    @InjectView(R.id.rvfs_scroll_section_indicator)
+    protected CardSectionIndicator sectionIndicator;
     @InjectView(R.id.floating_action_add)
     protected FloatingActionButton addButton;
 
@@ -71,6 +77,7 @@ public class PasswordViewFragment extends BaseFragment implements
     protected String filterText;
 
     protected CardAdapter adapter;
+    private HideOnScrollListener onScrollListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,9 +128,14 @@ public class PasswordViewFragment extends BaseFragment implements
         switch (id) {
             case R.id.menuSortAlphabetically:
                 defaultPrefs.sortBy(Site.SITE_NAME + Site.NOCASE_ORDER_SUFFIX);
+                sectionIndicator.enable();
+//                fastScroller.setSectionIndicator(sectionIndicator);
                 break;
             case R.id.menuSortLastUsed:
                 defaultPrefs.sortBy(Site.LAST_USED + Site.DESC_ORDER_SUFFIX);
+                sectionIndicator.disable();
+//                fastScroller.setSectionIndicator(null);
+//                sectionIndicator.setVisibility(View.GONE);
                 break;
         }
 
@@ -170,7 +182,7 @@ public class PasswordViewFragment extends BaseFragment implements
     }
 
     @Subscribe
-    public void onProStatusChange(ProStatusChangeEvent e) {
+    public void onProStatusChange(@SuppressWarnings("UnusedParameters") ProStatusChangeEvent unused) {
         refreshCards();
     }
 
@@ -218,7 +230,13 @@ public class PasswordViewFragment extends BaseFragment implements
         cardListView.swapAdapter(adapter, false);
         cardListView.setBackgroundResource(R.color.card_list_background_light);
 
-        cardListView.addOnScrollListener(new HideOnScrollListener(addButton, 80));
+        onScrollListener = new HideOnScrollListener(addButton, 80);
+        cardListView.addOnScrollListener(onScrollListener);
+        fastScroller.setRecyclerView(cardListView);
+        if (!defaultPrefs.sortBy().startsWith(Site.SITE_NAME)) {
+            sectionIndicator.disable();
+        }
+        cardListView.addOnScrollListener(fastScroller.getOnScrollListener());
 
         if (!getActivity().isFinishing()) {
             ShowCaseManager.INSTANCE.showAddShowCase(getActivity());
@@ -238,6 +256,7 @@ public class PasswordViewFragment extends BaseFragment implements
     public boolean onQueryTextChange(String s) {
         filterText = s;
         new CardFilter().filter(s);
+        onScrollListener.show();
         return true;
     }
 
@@ -309,6 +328,7 @@ public class PasswordViewFragment extends BaseFragment implements
             return filterResults;
         }
 
+        @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             CardAdapter adapter = new CardAdapter();
