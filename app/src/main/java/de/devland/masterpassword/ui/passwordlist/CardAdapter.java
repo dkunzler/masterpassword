@@ -40,6 +40,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         return cards.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        if (position < cards.size() && position >= 0) {
+            return cards.get(position).getId();
+        } else {
+            return super.getItemId(position);
+        }
+    }
+
     public int remove(Card card) {
         int cardIndex = cards.indexOf(card);
         if (cardIndex >= 0) {

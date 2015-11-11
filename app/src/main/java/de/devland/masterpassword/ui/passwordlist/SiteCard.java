@@ -91,6 +91,15 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     }
 
     @Override
+    public long getId() {
+        if (site != null) {
+            return site.getId();
+        } else {
+            return -1;
+        }
+    }
+
+    @Override
     public String getTitle() {
         return site.getSiteName();
     }

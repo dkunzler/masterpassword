@@ -17,8 +17,11 @@ public abstract class Card {
 
     public abstract boolean isVisible(String filter);
 
+    public abstract long getId();
+
     public String getTitle() {
         return "";
     }
+
 
 }

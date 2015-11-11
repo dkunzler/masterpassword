@@ -43,7 +43,6 @@ import de.devland.masterpassword.ui.passwordlist.CardAdapter;
 import de.devland.masterpassword.ui.passwordlist.CardSectionIndicator;
 import de.devland.masterpassword.ui.passwordlist.DummyCard;
 import de.devland.masterpassword.ui.passwordlist.SiteCard;
-import de.devland.masterpassword.ui.view.HideOnScrollListener;
 import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.event.CategoryChangeEvent;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
@@ -60,6 +59,7 @@ import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScrol
 public class PasswordViewFragment extends BaseFragment implements
         SearchView.OnQueryTextListener {
     private static final String STATE_CATEGORY = "de.devland.PasswordViewFragment.STATE_CATEGORY";
+    private static final String STATE_FIRSTITEM = "de.devland.PasswordViewFragment.STATE_FIRSTITEM";
 
     @InjectView(R.id.cardList)
     protected RecyclerView cardListView;
@@ -77,18 +77,13 @@ public class PasswordViewFragment extends BaseFragment implements
     protected String filterText;
 
     protected CardAdapter adapter;
-    private HideOnScrollListener onScrollListener;
+    private LinearLayoutManager cardListLayoutManager;
+    private long currentVisibleItem = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(STATE_CATEGORY)) {
-                activeCategory = new Category(savedInstanceState.getString(STATE_CATEGORY));
-            }
-        }
 
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
 
@@ -101,12 +96,35 @@ public class PasswordViewFragment extends BaseFragment implements
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(STATE_CATEGORY)) {
+                activeCategory = new Category(savedInstanceState.getString(STATE_CATEGORY));
+            }
+            if (savedInstanceState.containsKey(STATE_FIRSTITEM)) {
+                currentVisibleItem = savedInstanceState.getLong(STATE_FIRSTITEM);
+            }
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        if (cardListLayoutManager != null) {
+            long firstVisibleItemId = getCurrentVisibleItemId();
+            outState.putLong(STATE_FIRSTITEM, firstVisibleItemId);
+        }
         if (activeCategory != null) {
             outState.putString(STATE_CATEGORY,
                     activeCategory.getName());
         }
+    }
+
+    private long getCurrentVisibleItemId() {
+        int firstVisibleItemPosition = cardListLayoutManager.findFirstVisibleItemPosition();
+        return adapter.getItemId(firstVisibleItemPosition);
     }
 
     @Override
@@ -187,6 +205,7 @@ public class PasswordViewFragment extends BaseFragment implements
     }
 
     private void refreshCards() {
+        currentVisibleItem = getCurrentVisibleItemId();
         List<Card> cards = new ArrayList<>();
 
         String where = null;
@@ -196,10 +215,16 @@ public class PasswordViewFragment extends BaseFragment implements
 
         Iterator<Site> siteIterator = Site.findAsIterator(Site.class, where, null, null,
                 defaultPrefs.sortBy(), null);
+        int currentVisible = 0;
+        int position = 0;
         while (siteIterator.hasNext()) {
             Site site = siteIterator.next();
+            if (site.getId() == currentVisibleItem) {
+                currentVisible = position;
+            }
             SiteCard siteCard = new SiteCard(getActivity(), site);
             cards.add(siteCard);
+            position++;
         }
         if (cards.size() > 0) {
             ShowCaseManager.INSTANCE.showFirstCardShowCase(getActivity());
@@ -211,6 +236,7 @@ public class PasswordViewFragment extends BaseFragment implements
         if (!StringUtils.isEmpty(filterText)) {
             new CardFilter().filter(filterText);
         }
+        cardListLayoutManager.scrollToPosition(currentVisible);
         cardListView.swapAdapter(adapter, true);
     }
 
@@ -226,12 +252,11 @@ public class PasswordViewFragment extends BaseFragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cardListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        cardListLayoutManager = new LinearLayoutManager(getActivity());
+        cardListView.setLayoutManager(cardListLayoutManager);
         cardListView.swapAdapter(adapter, false);
         cardListView.setBackgroundResource(R.color.card_list_background_light);
 
-        onScrollListener = new HideOnScrollListener(addButton, 80);
-        cardListView.addOnScrollListener(onScrollListener);
         fastScroller.setRecyclerView(cardListView);
         if (!defaultPrefs.sortBy().startsWith(Site.SITE_NAME)) {
             sectionIndicator.disable();
@@ -256,7 +281,7 @@ public class PasswordViewFragment extends BaseFragment implements
     public boolean onQueryTextChange(String s) {
         filterText = s;
         new CardFilter().filter(s);
-        onScrollListener.show();
+        //onScrollListener.show();
         return true;
     }
 

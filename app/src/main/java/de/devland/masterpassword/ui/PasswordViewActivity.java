@@ -2,6 +2,8 @@ package de.devland.masterpassword.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -39,6 +41,7 @@ public class PasswordViewActivity extends LoginRequiringActivity implements
     private DrawerItemAdapter drawerItemAdapter;
 
     private ListView drawerList;
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,13 @@ public class PasswordViewActivity extends LoginRequiringActivity implements
         ProKeyUtil.INSTANCE.initLicenseCheck();
         setContentView(R.layout.activity_password_view);
         if (savedInstanceState == null) {
+            fragment = new PasswordViewFragment();
             getSupportFragmentManager().beginTransaction()
-                                       .add(R.id.container, new PasswordViewFragment())
+                                       .add(R.id.container, fragment)
                                        .commit();
+        } else {
+            fragment = getSupportFragmentManager().getFragment(
+                    savedInstanceState, "fragment");
         }
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
@@ -88,6 +95,13 @@ public class PasswordViewActivity extends LoginRequiringActivity implements
         drawerList.setOnItemClickListener(this);
 
         getSupportActionBar().setTitle(R.string.title_passwords);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+        getSupportFragmentManager().putFragment(outState, "fragment", fragment);
     }
 
     @Subscribe
