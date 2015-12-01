@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.common.base.Strings;
@@ -18,7 +17,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
-import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.lyndir.masterpassword.model.MPSite;
 import com.lyndir.masterpassword.model.MPSiteUnmarshaller;
 import com.lyndir.masterpassword.model.MPUser;
@@ -132,13 +130,12 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
     }
 
     private Intent getLegacyFileChooserIntent() {
-        Intent getContentIntent = FileUtils.createGetContentIntent();
+        Intent getContentIntent = new Intent(activity, FileChooserActivity.class);
         getContentIntent
                 .putStringArrayListExtra(FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS,
                         new ArrayList<>(Arrays.asList(".json", ".mpsites")));
         getContentIntent.setType("text/plain");
-        return Intent
-                .createChooser(getContentIntent, activity.getString(R.string.caption_selectFile));
+        return getContentIntent;
     }
 
     @Override

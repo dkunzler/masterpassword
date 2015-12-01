@@ -84,7 +84,7 @@
         <activity
             android:name="com.ipaulpro.afilechooser.FileChooserActivity"
             android:enabled="true"
-            android:exported="@bool/use_activity"
+            android:exported="false"
             android:icon="@drawable/ic_chooser"
             android:label="@string/choose_file">
             <intent-filter>
