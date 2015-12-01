@@ -59,16 +59,17 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
 
     public void startExportIntent(Activity activity, ExportType type) {
         this.activity = activity;
+        DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
         Date now = new Date();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
         String fileName = dateFormat.format(now) + "_export." + type.getFileExtension();
 
 
         Intent intent;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            intent = getStorageAccessFrameworkIntent(fileName);
-        } else {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || defaultPrefs.useLegacyFileManager()) {
             intent = getLegacyFolderChooserIntent();
+        } else {
+            intent = getStorageAccessFrameworkIntent(fileName);
         }
 
         Bundle extraData = new Bundle();

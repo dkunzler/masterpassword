@@ -77,4 +77,8 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     boolean showCanary();
     void showCanary(boolean showCanary);
 
+    @Default(ofBoolean = false)
+    boolean useLegacyFileManager();
+    void useLegacyFileManager(boolean useLegacyFileManager);
+
 }

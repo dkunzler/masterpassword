@@ -1,6 +1,9 @@
 package de.devland.masterpassword.ui.preferences;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceCategory;
 
 import de.devland.masterpassword.R;
 
@@ -30,6 +33,10 @@ public class SettingsFragment extends BaseSettingsFragment {
         bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));
         bindPreferenceSummaryToValue(findPreference("versionString"));
         bindPreferenceSummaryToValue(findPreference("defaultPasswordType"));
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            PreferenceCategory categoryGeneral = (PreferenceCategory) findPreference("category_general");
+            categoryGeneral.removePreference(findPreference("useLegacyFileManager"));
+        }
     }
 
 

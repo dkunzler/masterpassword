@@ -73,4 +73,6 @@
     <string name="showPasswordCanaryTitle">Show Verification Code</string>
     <string name="showPasswordCanarySummary">Shows a small Emoticon at login to let you verify your password</string>
     <string name="title_saveUsername">Save Username</string>
+    <string name="title_builtinFileManager">Use built-in File Manager</string>
+    <string name="summary_useLegacyFilemanager">Use this if you encounter problems with the Android Documents App.</string>
 </resources>

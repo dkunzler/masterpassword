@@ -98,8 +98,8 @@ public class PasswordViewActivity extends LoginRequiringActivity implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
         getSupportFragmentManager().putFragment(outState, "fragment", fragment);
     }

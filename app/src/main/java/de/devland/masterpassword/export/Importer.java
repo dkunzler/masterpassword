@@ -104,10 +104,10 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
 
         Intent intent;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            intent = getStorageAccessFrameworkIntent();
-        } else {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || defaultPrefs.useLegacyFileManager()) {
             intent = getLegacyFileChooserIntent();
+        } else {
+            intent = getStorageAccessFrameworkIntent();
         }
 
         Bundle extraData = new Bundle();
