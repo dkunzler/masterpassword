@@ -70,7 +70,7 @@
     <string name="msg_algorithmVersionNotPrecalculated">Neu einloggen um andere Algorithmus Version zu verwenden.</string>
     <string name="msg_noUrlFound">Keine URL zum Hinzufügen gefunden</string>
     <string name="msg_pwdPreviewNotAvailable">Keine Passwort Vorschau verfügbar</string>
-    <string name="showPasswordCanaryTitle">Zeige Verifizieungscode</string>
+    <string name="showPasswordCanaryTitle">Zeige Verifizierungscode</string>
     <string name="showPasswordCanarySummary">Zeigt ein kleines Emoticon beim Login zur schnellen Überprüfung des Passworts</string>
     <string name="title_saveUsername">Speichere Benutzername</string>
     <string name="title_builtinFileManager">Verwende integrierten Dateimanager</string>

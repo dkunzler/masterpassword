@@ -17,6 +17,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
+import com.lyndir.masterpassword.MPSiteTypeClass;
 import com.lyndir.masterpassword.model.MPSite;
 import com.lyndir.masterpassword.model.MPSiteUnmarshaller;
 import com.lyndir.masterpassword.model.MPUser;
@@ -182,7 +183,9 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                             defaultPrefs.defaultPasswordType(user.getDefaultType().toString());
                             defaultPrefs.defaultUserName(user.getFullName());
                             for (MPSite mpSite : user.getSites()) {
-                                importedSites.add(Site.fromMPSite(mpSite));
+                                if (mpSite.getSiteType().getTypeClass() == MPSiteTypeClass.Generated) {
+                                    importedSites.add(Site.fromMPSite(mpSite));
+                                }
                             }
                         } catch (Exception e) {
                             SnackbarUtil.showShort(activity, R.string.error_generic);
