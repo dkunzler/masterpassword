@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Site extends SugarRecord<Site> {
+public class Site extends SugarRecord {
 
     public static final String NOCASE_ORDER_SUFFIX = " COLLATE NOCASE";
     public static final String DESC_ORDER_SUFFIX = " DESC";

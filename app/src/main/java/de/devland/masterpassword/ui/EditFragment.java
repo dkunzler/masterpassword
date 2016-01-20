@@ -39,8 +39,8 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
@@ -66,23 +66,23 @@ public class EditFragment extends BaseFragment {
 
     protected DefaultPrefs defaultPrefs;
 
-    @InjectView(R.id.scrollView)
+    @Bind(R.id.scrollView)
     protected ScrollView scrollView;
-    @InjectView(R.id.editText_siteName)
+    @Bind(R.id.editText_siteName)
     protected EditText siteName;
-    @InjectView(R.id.textView_userName)
+    @Bind(R.id.textView_userName)
     protected TextView userNameText;
-    @InjectView(R.id.editText_userName)
+    @Bind(R.id.editText_userName)
     protected AutoCompleteTextView userName;
-    @InjectView(R.id.spinner_passwordType)
+    @Bind(R.id.spinner_passwordType)
     protected Spinner passwordType;
-    @InjectView(R.id.spinner_algorithmVersion)
+    @Bind(R.id.spinner_algorithmVersion)
     protected Spinner algorithmVersion;
-    @InjectView(R.id.spinner_category)
+    @Bind(R.id.spinner_category)
     protected Spinner categorySpiner;
-    @InjectView(R.id.numberPicker_siteCounter)
+    @Bind(R.id.numberPicker_siteCounter)
     protected SiteCounterView siteCounter;
-    @InjectView(R.id.password)
+    @Bind(R.id.password)
     protected TextView password;
 
     private String[] passwordTypeKeys;
@@ -176,7 +176,7 @@ public class EditFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         SortedSet<String> userNames = new TreeSet<>();
 

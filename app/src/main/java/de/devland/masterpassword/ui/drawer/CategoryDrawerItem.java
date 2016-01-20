@@ -13,8 +13,8 @@ import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
@@ -36,11 +36,11 @@ public class CategoryDrawerItem extends DrawerItem {
     protected DefaultPrefs defaultPrefs;
 
     protected View rootView;
-    @InjectView(R.id.textView_categoryLetter)
+    @Bind(R.id.textView_categoryLetter)
     protected TextView categoryLetter;
-    @InjectView(R.id.textView_settingsItem)
+    @Bind(R.id.textView_settingsItem)
     protected TextView headerText;
-    @InjectView(R.id.imageView_deleteCategory)
+    @Bind(R.id.imageView_deleteCategory)
     protected ImageView deleteCategory;
 
     protected boolean active = false;
@@ -65,7 +65,7 @@ public class CategoryDrawerItem extends DrawerItem {
         LayoutInflater inflater = LayoutInflater.from(context);
         rootView = inflater.inflate(R.layout.drawer_item_category, root, false);
         updateActiveState();
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
         headerText.setText(category.getName());
         categoryLetter.setText(firstLetter);
         return rootView;

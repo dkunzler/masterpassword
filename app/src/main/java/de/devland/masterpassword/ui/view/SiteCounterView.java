@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.masterpassword.R;
 import lombok.Setter;
@@ -22,11 +22,11 @@ import lombok.Setter;
  */
 public class SiteCounterView extends LinearLayout implements TextWatcher, View.OnFocusChangeListener {
 
-    @InjectView(R.id.editText_siteCounter)
+    @Bind(R.id.editText_siteCounter)
     protected EditText counter;
-    @InjectView(R.id.plusButton)
+    @Bind(R.id.plusButton)
     protected FloatingActionButton plus;
-    @InjectView(R.id.minusButton)
+    @Bind(R.id.minusButton)
     protected FloatingActionButton minus;
 
     @Setter
@@ -58,7 +58,7 @@ public class SiteCounterView extends LinearLayout implements TextWatcher, View.O
 
     public void init() {
         inflate(getContext(), R.layout.view_sitecounter, this);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         counter.addTextChangedListener(this);
         counter.setOnFocusChangeListener(this);
 //        this.setOrientation(LinearLayout.HORIZONTAL);

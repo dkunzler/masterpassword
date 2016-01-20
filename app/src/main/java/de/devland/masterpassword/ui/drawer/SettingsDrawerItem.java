@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import de.devland.masterpassword.R;
 
 /**
@@ -16,9 +16,9 @@ import de.devland.masterpassword.R;
  */
 public abstract class SettingsDrawerItem extends DrawerItem {
 
-    @InjectView(R.id.textView_settingsItem)
+    @Bind(R.id.textView_settingsItem)
     protected TextView headerText;
-    @InjectView(R.id.imageView_settingsIcon)
+    @Bind(R.id.imageView_settingsIcon)
     protected ImageView settingsIcon;
 
 
@@ -30,7 +30,7 @@ public abstract class SettingsDrawerItem extends DrawerItem {
     public View getView(Context context, ViewGroup root) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.drawer_item_settings, root, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         headerText.setText(getHeaderRes());
         settingsIcon.setImageResource(getImageRes());
         return view;

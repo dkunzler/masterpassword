@@ -15,8 +15,8 @@ import android.widget.Toast;
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 import com.lyndir.masterpassword.MPSiteVariant;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 import de.devland.esperandro.Esperandro;
@@ -64,7 +64,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     public void bindViewHolder(CardAdapter.CardViewHolder cardViewHolder) {
         SiteCardViewHolder viewHolder = (SiteCardViewHolder) cardViewHolder;
         currentViewHolder = viewHolder;
-        ButterKnife.inject(this, viewHolder.itemView);
+        ButterKnife.bind(this, viewHolder.itemView);
         viewHolder.siteName.setText(site.getSiteName());
         viewHolder.siteName.setTypeface(Typeface.DEFAULT_BOLD);
         viewHolder.siteName.setTextColor(context.getResources().getColor(R.color.text));
@@ -190,13 +190,13 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     }
 
     public static class SiteCardViewHolder extends CardAdapter.CardViewHolder {
-        @InjectView(R.id.siteName)
+        @Bind(R.id.siteName)
         protected TextView siteName;
-        @InjectView(R.id.userName)
+        @Bind(R.id.userName)
         protected TextView userName;
-        @InjectView(R.id.password)
+        @Bind(R.id.password)
         protected TextView password;
-        @InjectView(R.id.imageInputstick)
+        @Bind(R.id.imageInputstick)
         protected ImageView imageInputStick;
 
         public SiteCardViewHolder(View itemView) {

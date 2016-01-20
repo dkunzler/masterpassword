@@ -25,7 +25,7 @@
             android:textSize="28sp"
             tools:text="Identicon" />
 
-        <EditText
+        <com.maksim88.passwordedittext.PasswordEditText
             android:id="@+id/editText_masterPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:inputType="textPassword">
 
             <requestFocus />
-        </EditText>
+        </com.maksim88.passwordedittext.PasswordEditText>
 
         <EditText
             android:id="@+id/editText_fullName"

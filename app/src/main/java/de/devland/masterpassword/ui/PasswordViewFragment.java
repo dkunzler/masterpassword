@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.BuildConfig;
@@ -61,13 +61,13 @@ public class PasswordViewFragment extends BaseFragment implements
     private static final String STATE_CATEGORY = "de.devland.PasswordViewFragment.STATE_CATEGORY";
     private static final String STATE_FIRSTITEM = "de.devland.PasswordViewFragment.STATE_FIRSTITEM";
 
-    @InjectView(R.id.cardList)
+    @Bind(R.id.cardList)
     protected RecyclerView cardListView;
-    @InjectView(R.id.fast_scroller)
+    @Bind(R.id.fast_scroller)
     protected VerticalRecyclerViewFastScroller fastScroller;
-    @InjectView(R.id.rvfs_scroll_section_indicator)
+    @Bind(R.id.rvfs_scroll_section_indicator)
     protected CardSectionIndicator sectionIndicator;
-    @InjectView(R.id.floating_action_add)
+    @Bind(R.id.floating_action_add)
     protected FloatingActionButton addButton;
 
     protected MenuItem searchItem;
@@ -244,7 +244,7 @@ public class PasswordViewFragment extends BaseFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_password_view, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         return rootView;
     }

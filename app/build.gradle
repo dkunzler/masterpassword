@@ -2,12 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'LICENSE'
+//        exclude 'META-INF/BCKEY.SF'
+//        exclude 'META-INF/BCKEY.DSA'
     }
 
     signingConfigs {
@@ -23,7 +25,7 @@ android {
     defaultConfig {
         applicationId "de.devland.masterpassword"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 32
         versionName "1.6.4"
     }
@@ -62,20 +64,21 @@ dependencies {
 
     // import, export
     compile(name:'aFileChooser-release', ext:'aar') // Apache v2.0
-    compile 'com.google.code.gson:gson:2.3.1' // Apache v2.0
+    compile 'com.google.code.gson:gson:2.5' // Apache v2.0
 
     // styling
-    compile 'com.github.traex.rippleeffect:library:1.2.4' // MIT
+//    compile 'com.github.traex.rippleeffect:library:1.2.4' // MIT
+    compile 'com.github.emanzanoaxa:RippleEffect:52ea2a0ab6'
 //    compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
     compile(name:'showcaseview-git', ext:'aar') // Apache v2.0
     compile(name:'recyclerviewfastscroller-release', ext:'aar') // Apache v2.0
 
     // annotation processors
     apt 'org.projectlombok:lombok:1.14.0' // MIT
-    apt 'de.devland.esperandro:esperandro:2.2.0' // Apache v2.0
+    apt 'de.devland.esperandro:esperandro:2.3.1' // Apache v2.0
 
     // tools
-    compile 'com.jakewharton:butterknife:6.1.0' // Apache v2.0
+    compile 'com.jakewharton:butterknife:7.0.1' // Apache v2.0
 //    compile 'com.google.guava:guava:18.0'
 
     // MasterPassword dependencies
@@ -87,5 +90,6 @@ dependencies {
 //    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-algorithm:d854f19') {
         exclude module: 'jsr305' // problems while dexing
     }
-    compile 'org.slf4j:slf4j-android:1.7.12' // MIT
+    compile 'org.slf4j:slf4j-android:1.7.13' // MIT
+    compile 'com.github.maksim88:PasswordEditText:v0.2' // MIT
 }

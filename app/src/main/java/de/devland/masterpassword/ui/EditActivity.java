@@ -2,7 +2,6 @@ package de.devland.masterpassword.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 
 import java.util.regex.Matcher;
 
@@ -31,6 +30,9 @@ public class EditActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction()
                                        .add(R.id.container, fragment)
                                        .commit();
+        } else {
+            fragment = (EditFragment) getSupportFragmentManager().getFragment(
+                    savedInstanceState, "fragment");
         }
         getSupportActionBar().setTitle(R.string.title_activity_edit);
         if (Intent.ACTION_SEND.equals(getIntent().getAction())) {
@@ -57,6 +59,13 @@ public class EditActivity extends BaseActivity {
             }
         }
         return null;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        getSupportFragmentManager().putFragment(outState, "fragment", fragment);
     }
 
     @Override

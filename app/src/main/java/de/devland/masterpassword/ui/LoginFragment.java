@@ -21,8 +21,8 @@ import android.widget.TextView;
 import com.lambdaworks.crypto.SCryptUtil;
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
@@ -40,11 +40,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginFragment extends BaseFragment {
 
-    @InjectView(R.id.editText_masterPassword)
+    @Bind(R.id.editText_masterPassword)
     protected EditText masterPassword;
-    @InjectView(R.id.editText_fullName)
+    @Bind(R.id.editText_fullName)
     protected EditText fullName;
-    @InjectView(R.id.textView_identicon)
+    @Bind(R.id.textView_identicon)
     protected TextView identicon;
 
     protected DefaultPrefs defaultPrefs;
@@ -66,7 +66,7 @@ public class LoginFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
         return rootView;
     }
 
