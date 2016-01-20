@@ -2,6 +2,7 @@ package de.devland.masterpassword.model;
 
 import android.database.Cursor;
 
+import com.google.common.primitives.UnsignedInteger;
 import com.google.gson.annotations.Expose;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.MasterKey;
@@ -68,7 +69,7 @@ public class Site extends SugarRecord {
     }
 
     public MPSite toMPSite(MPUser user) {
-        MPSite mpSite = new MPSite(user, siteName, passwordType, siteCounter);
+        MPSite mpSite = new MPSite(user, siteName, passwordType, UnsignedInteger.fromIntBits(siteCounter));
         mpSite.setLoginName(userName);
         mpSite.setAlgorithmVersion(algorithmVersion);
         return mpSite;
@@ -79,7 +80,7 @@ public class Site extends SugarRecord {
         site.algorithmVersion = mpSite.getAlgorithmVersion();
         site.lastUsed = mpSite.getLastUsed().toDate();
         site.passwordType = mpSite.getSiteType();
-        site.siteCounter = mpSite.getSiteCounter();
+        site.siteCounter = mpSite.getSiteCounter().intValue();
         site.siteName = mpSite.getSiteName();
         site.userName = mpSite.getLoginName();
         return site;

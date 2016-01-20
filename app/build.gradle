@@ -82,13 +82,13 @@ dependencies {
 //    compile 'com.google.guava:guava:18.0'
 
     // MasterPassword dependencies
-    compile('com.lyndir.masterpassword:masterpassword-model:2.3') { // GPL v3
+    compile('com.lyndir.masterpassword:masterpassword-model:2.3.1') { // GPL v3
 //    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-model:d854f19') {
-        exclude module: 'jsr305' // problems while dexing
+//        exclude module: 'jsr305' // problems while dexing
     }
-    compile('com.lyndir.masterpassword:masterpassword-algorithm:2.3') { // GPL v3
+    compile('com.lyndir.masterpassword:masterpassword-algorithm:2.3.1') { // GPL v3
 //    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-algorithm:d854f19') {
-        exclude module: 'jsr305' // problems while dexing
+//        exclude module: 'jsr305' // problems while dexing
     }
     compile 'org.slf4j:slf4j-android:1.7.13' // MIT
     compile 'com.github.maksim88:PasswordEditText:v0.2' // MIT
