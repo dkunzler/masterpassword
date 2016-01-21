@@ -7,6 +7,7 @@
         <item>Einfach</item>
         <item>Kurz</item>
         <item>PIN</item>
+        <item>Satz</item>
     </string-array>
 
     <string-array name="emptyArray">

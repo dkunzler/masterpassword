@@ -103,8 +103,8 @@ public class SendToInputStickActivity extends BaseActivity implements DialogInte
     private void type() {
         KeyboardLayout keyboardLayout = KeyboardLayout.getLayout(layout);
         keyboardLayout.type(password);
-        finish();
         MainSnackbar.send(getApplicationContext(), getString(R.string.msg_typedSuccessfully));
+        finish();
     }
 
     @Override
