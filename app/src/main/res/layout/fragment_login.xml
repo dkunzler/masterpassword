@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -34,6 +35,8 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:ems="10"
             android:hint="@string/hint_password"
+            app:iconShow="@drawable/ic_visibility"
+            app:iconHide="@drawable/ic_visibility_off"
             android:inputType="textPassword">
 
             <requestFocus />
