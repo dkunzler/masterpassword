@@ -32,7 +32,7 @@ public class InformationDialogPreference extends DialogPreference {
         webview.setHorizontalScrollbarOverlay(true);
         webview.setHorizontalScrollBarEnabled(true);
         webview.loadDataWithBaseURL(null, addXmlUtf8Header(content), "text/html", null, null);
-        builder.setTitle(getTitle()).setCancelable(false).setPositiveButton(0x104000a, null).setView(webview);
+        builder.setTitle(getTitle()).setCancelable(false).setPositiveButton(android.R.string.ok, null).setView(webview);
         super.onPrepareDialogBuilder(builder);
     }
 
