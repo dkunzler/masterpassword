@@ -33,17 +33,27 @@ public abstract class LoginRequiringActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(getLogoutPendingIntent());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
         if (!MasterPasswordHolder.INSTANCE.needsLogin(false)) {
             int autoLogoutDuration = Integer.parseInt(defaultPrefs.autoLogoutDuration());
             if (autoLogoutDuration > 0) {
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 long triggerTime = System.currentTimeMillis() + 1000 * 60 * autoLogoutDuration;
-                Intent intent = new Intent(this, ClearPasswordReceiver.class);
-                PendingIntent broadcast = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent broadcast = getLogoutPendingIntent();
                 alarmManager.set(AlarmManager.RTC, triggerTime, broadcast);
             }
         }
     }
 
-
+    private PendingIntent getLogoutPendingIntent() {
+        Intent intent = new Intent(this, ClearPasswordReceiver.class);
+        return PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
 }
