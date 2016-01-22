@@ -5,7 +5,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_edit">Site</string>
     <string name="caption_siteName">Site Name</string>
-    <string name="caption_userName">Login Benutzername</string>
+    <string name="caption_userName">Benutzername (optional)</string>
     <string name="caption_passwordType">Password-Typ</string>
     <string name="caption_siteCounter">Zähler</string>
     <string name="caption_add">Neu</string>
@@ -21,7 +21,6 @@
     <string name="msg_generateKey">Generiere Masterkey…</string>
     <string name="hint_password">Master Passwort</string>
     <string name="hint_fullName">Dein Name</string>
-    <string name="msg_optional">optional</string>
     <string name="drawer_open">Öffne Menü</string>
     <string name="drawer_close">Schließe Menü</string>
     <string name="title_restartApp">App Neustarten</string>
@@ -69,10 +68,12 @@
     <string name="caption_algorithmVersion">Version des Algorithmus</string>
     <string name="msg_algorithmVersionNotPrecalculated">Neu einloggen um andere Algorithmus Version zu verwenden.</string>
     <string name="msg_noUrlFound">Keine URL zum Hinzufügen gefunden</string>
-    <string name="msg_pwdPreviewNotAvailable">Keine Passwort Vorschau verfügbar</string>
+    <string name="msg_previewNotAvailable">Keine Vorschau verfügbar</string>
     <string name="showPasswordCanaryTitle">Zeige Verifizierungscode</string>
     <string name="showPasswordCanarySummary">Zeigt ein kleines Emoticon beim Login zur schnellen Überprüfung des Passworts</string>
     <string name="title_saveUsername">Speichere Benutzername</string>
     <string name="title_builtinFileManager">Verwende integrierten Dateimanager</string>
     <string name="summary_useLegacyFilemanager">Auswählen, wenn Sie Probleme mit der Android Dokumente App haben.</string>
+    <string name="caption_edit">Bearbeiten</string>
+    <string name="caption_generated">generiert</string>
 </resources>

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import com.google.common.primitives.UnsignedInteger;
 import com.google.gson.annotations.Expose;
 import com.lyndir.masterpassword.MPSiteType;
+import com.lyndir.masterpassword.MPSiteVariant;
 import com.lyndir.masterpassword.MasterKey;
 import com.lyndir.masterpassword.model.MPSite;
 import com.lyndir.masterpassword.model.MPUser;
@@ -12,6 +13,7 @@ import com.orm.SugarRecord;
 
 import java.util.Date;
 
+import de.devland.masterpassword.util.MasterPasswordHolder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -70,7 +72,14 @@ public class Site extends SugarRecord {
 
     public MPSite toMPSite(MPUser user) {
         MPSite mpSite = new MPSite(user, siteName, passwordType, UnsignedInteger.fromIntBits(siteCounter));
-        mpSite.setLoginName(userName);
+        if (generatedUserName) {
+            String generatedUserName = MasterPasswordHolder.INSTANCE.generate(
+                    MPSiteType.GeneratedName, MPSiteVariant.Login,
+                    siteName, siteCounter, algorithmVersion);
+            mpSite.setLoginName(generatedUserName);
+        } else {
+            mpSite.setLoginName(userName);
+        }
         mpSite.setAlgorithmVersion(algorithmVersion);
         return mpSite;
     }

@@ -197,6 +197,11 @@ public class PasswordViewFragment extends BaseFragment implements
         Intent intent = new Intent(getActivity(), EditActivity.class);
         intent.putExtra(EditFragment.ARG_SITE_ID, e.getCard().getSite().getId());
         startActivity(intent);
+//        ViewFragment viewFragment = new ViewFragment();
+//        Bundle args = new Bundle();
+//        args.putLong(ViewFragment.ARG_SITE_ID, e.getCard().getSite().getId());
+//        viewFragment.setArguments(args);
+//        viewFragment.show(getActivity().getSupportFragmentManager(), null);
     }
 
     @Subscribe

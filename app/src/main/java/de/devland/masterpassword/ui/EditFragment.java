@@ -23,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -70,8 +72,6 @@ public class EditFragment extends BaseFragment {
     protected ScrollView scrollView;
     @Bind(R.id.editText_siteName)
     protected EditText siteName;
-    @Bind(R.id.textView_userName)
-    protected TextView userNameText;
     @Bind(R.id.editText_userName)
     protected AutoCompleteTextView userName;
     @Bind(R.id.spinner_passwordType)
@@ -84,6 +84,8 @@ public class EditFragment extends BaseFragment {
     protected SiteCounterView siteCounter;
     @Bind(R.id.password)
     protected TextView password;
+    @Bind(R.id.checkbox_generateUsername)
+    protected CheckBox generatedUsername;
 
     private String[] passwordTypeKeys;
     private String[] algorithmVersionKeys;
@@ -103,20 +105,25 @@ public class EditFragment extends BaseFragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            updatePassword();
+            updatePasswordAndLogin();
         }
     };
     private AdapterView.OnItemSelectedListener updatePasswordItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            updatePassword();
+            updatePasswordAndLogin();
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
         }
     };
-    private ActionBar actionBar;
+    private CompoundButton.OnCheckedChangeListener updateGeneratedUserNameCheckedListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            updatePasswordAndLogin();
+        }
+    };
 
 
     @Override
@@ -164,7 +171,7 @@ public class EditFragment extends BaseFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        actionBar = ((AppCompatActivity) activity).getSupportActionBar();
+        ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -223,28 +230,43 @@ public class EditFragment extends BaseFragment {
                 .createFromAsset(getActivity().getAssets(), "fonts/RobotoSlab-Light.ttf");
         password.setTypeface(typeface);
         readValues();
-        updatePassword();
+        updatePasswordAndLogin();
         siteName.addTextChangedListener(updatePasswordTextWatcher);
         siteCounter.setOnChangeListener(updatePasswordTextWatcher);
         passwordType.setOnItemSelectedListener(updatePasswordItemSelectedListener);
         algorithmVersion.setOnItemSelectedListener(updatePasswordItemSelectedListener);
+        generatedUsername.setOnCheckedChangeListener(updateGeneratedUserNameCheckedListener);
 
-        ShowCaseManager.INSTANCE.showEditShowCase(getActivity(), userNameText);
+        ShowCaseManager.INSTANCE.showEditShowCase(getActivity(), userName);
     }
 
-    private void updatePassword() {
+    private void updatePasswordAndLogin() {
         int passwordTypeIndex = passwordType.getSelectedItemPosition();
         MPSiteType siteType = MPSiteType.valueOf(passwordTypeKeys[passwordTypeIndex]);
         String name = siteName.getText().toString();
         int counter = siteCounter.getValue();
         int algorithmVersionIndex = algorithmVersion.getSelectedItemPosition();
         MasterKey.Version version = MasterKey.Version.valueOf(algorithmVersionKeys[algorithmVersionIndex]);
-        if (name != null && name.length() > 0 && MasterPasswordHolder.INSTANCE.getMasterKey(version) != null) {
+        if (name.length() > 0 && MasterPasswordHolder.INSTANCE.getMasterKey(version) != null) {
             //password.setVisibility(View.VISIBLE);
-            String generatedPassword = MasterPasswordHolder.INSTANCE.generate(siteType, MPSiteVariant.Password, name, counter, version);
+            MPSiteVariant variant = siteType == MPSiteType.GeneratedPhrase ? MPSiteVariant.Answer : MPSiteVariant.Password;
+            String generatedPassword = MasterPasswordHolder.INSTANCE.generate(siteType, variant, name, counter, version);
             password.setText(generatedPassword);
+            if (generatedUsername.isChecked()) {
+                String generatedUserName = MasterPasswordHolder.INSTANCE.generate(MPSiteType.GeneratedName, MPSiteVariant.Login, name, counter, version);
+                userName.setText(generatedUserName);
+            }
         } else {
-            password.setText(R.string.msg_pwdPreviewNotAvailable);
+            password.setText(R.string.msg_previewNotAvailable);
+            if (generatedUsername.isChecked()) {
+                userName.setText(R.string.msg_previewNotAvailable);
+            }
+        }
+
+        if (generatedUsername.isChecked()) {
+            userName.setEnabled(false);
+        } else {
+            userName.setEnabled(true);
         }
     }
 
@@ -261,11 +283,18 @@ public class EditFragment extends BaseFragment {
 
     private void readValues() {
         siteName.setText(site.getSiteName());
-        userName.setText(site.getUserName());
         updatePasswordTypeSpinner(site.getPasswordType());
         updateCategorySpinner(site.getCategory());
         updateAlgorithmVersionSpinner(site.getAlgorithmVersion());
         siteCounter.setValue(site.getSiteCounter());
+        generatedUsername.setChecked(site.isGeneratedUserName());
+        if (site.isGeneratedUserName()) {
+            userName.setEnabled(false);
+            userName.setText(MasterPasswordHolder.INSTANCE.generate(MPSiteType.GeneratedName, MPSiteVariant.Login, site.getSiteName(), site.getSiteCounter(), site.getAlgorithmVersion()));
+        } else {
+            userName.setEnabled(true);
+            userName.setText(site.getUserName());
+        }
     }
 
     private void updateCategorySpinner(String category) {
@@ -302,7 +331,12 @@ public class EditFragment extends BaseFragment {
 
     private void writeValues() {
         site.setSiteName(siteName.getText().toString());
-        site.setUserName(userName.getText().toString());
+        site.setGeneratedUserName(generatedUsername.isChecked());
+        if (site.isGeneratedUserName()) {
+            site.setUserName(null);
+        } else {
+            site.setUserName(userName.getText().toString());
+        }
         int passwordTypeIndex = passwordType.getSelectedItemPosition();
         site.setPasswordType(MPSiteType.valueOf(passwordTypeKeys[passwordTypeIndex]));
         int algorithmVersionIndex = algorithmVersion.getSelectedItemPosition();

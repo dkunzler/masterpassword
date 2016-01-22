@@ -5,7 +5,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_edit">Site</string>
     <string name="caption_siteName">Site Name</string>
-    <string name="caption_userName">Login Name</string>
+    <string name="caption_userName">Login (optional)</string>
     <string name="caption_passwordType">Password Type</string>
     <string name="caption_algorithmVersion">Algorithm Version</string>
     <string name="caption_siteCounter">Site Counter</string>
@@ -19,13 +19,13 @@
     <string name="copiedToClipboard">Copied password to clipboard.</string>
     <string name="errorEmpty">Cannot be empty</string>
     <string name="caption_save">Save</string>
+    <string name="caption_edit">Edit</string>
     <string name="caption_cancel">Cancel</string>
     <string name="msg_generateKey">Generating Master Key…</string>
     <string name="hint_password">Master Password</string>
     <string name="hint_passwordConfirm">Confirm</string>
     <string name="hint_fullName">Your Name</string>
     <string name="hint_category">Category Title</string>
-    <string name="msg_optional">optional</string>
     <string name="drawer_open">Open Menu</string>
     <string name="drawer_close">Close Menu</string>
     <string name="title_restartApp">Restart App</string>
@@ -69,10 +69,11 @@
     <string name="msg_sentToInputstick">Send to InputStick</string>
     <string name="msg_algorithmVersionNotPrecalculated">Re-login to use other algorithm version.</string>
     <string name="msg_noUrlFound">Could not find URL to add</string>
-    <string name="msg_pwdPreviewNotAvailable">No password preview available</string>
+    <string name="msg_previewNotAvailable">No preview available</string>
     <string name="showPasswordCanaryTitle">Show Verification Code</string>
     <string name="showPasswordCanarySummary">Shows a small Emoticon at login to let you verify your password</string>
     <string name="title_saveUsername">Save Username</string>
     <string name="title_builtinFileManager">Use built-in File Manager</string>
     <string name="summary_useLegacyFilemanager">Use this if you encounter problems with the Android Documents App.</string>
+    <string name="caption_generated">generated</string>
 </resources>
