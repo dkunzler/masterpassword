@@ -17,6 +17,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.ipaulpro.afilechooser.FileChooserActivity;
+import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.MPSiteTypeClass;
 import com.lyndir.masterpassword.model.MPSite;
 import com.lyndir.masterpassword.model.MPSiteUnmarshaller;
@@ -184,7 +185,28 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
                             defaultPrefs.defaultUserName(user.getFullName());
                             for (MPSite mpSite : user.getSites()) {
                                 if (mpSite.getSiteType().getTypeClass() == MPSiteTypeClass.Generated) {
-                                    importedSites.add(Site.fromMPSite(mpSite));
+                                    Site site = Site.fromMPSite(mpSite);
+                                    // hack  because MasterPassword algorithm imports wrong type
+                                    // http://help.masterpasswordapp.com/help/discussions/problems/325-java-model-imports-wrong-sitetype
+                                    switch (site.getPasswordType()) {
+                                        case GeneratedBasic:
+                                            site.setPasswordType(MPSiteType.GeneratedShort);
+                                            break;
+                                        case GeneratedShort:
+                                            site.setPasswordType(MPSiteType.GeneratedBasic);
+                                            break;
+                                        case GeneratedMaximum:
+                                        case GeneratedLong:
+                                        case GeneratedMedium:
+                                        case GeneratedPIN:
+                                        case GeneratedName:
+                                        case GeneratedPhrase:
+                                        case StoredPersonal:
+                                        case StoredDevicePrivate:
+                                            // do nothing
+                                            break;
+                                    }
+                                    importedSites.add(site);
                                 }
                             }
                         } catch (Exception e) {
