@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array translatable="false" name="passwordTypeKeys">
-        <item>GeneratedMaximum</item>
-        <item>GeneratedLong</item>
-        <item>GeneratedMedium</item>
-        <item>GeneratedBasic</item>
-        <item>GeneratedShort</item>
-        <item>GeneratedPIN</item>
-        <item>GeneratedPhrase</item>
+        <item>GeneratedMaximum:Password</item>
+        <item>GeneratedLong:Password</item>
+        <item>GeneratedMedium:Password</item>
+        <item>GeneratedBasic:Password</item>
+        <item>GeneratedShort:Password</item>
+        <item>GeneratedPIN:Password</item>
+        <item>GeneratedPhrase:Answer</item>
+        <item>GeneratedPhrase:Password</item>
     </string-array>
 
     <string-array translatable="false" name="algorithmVersionKeys">

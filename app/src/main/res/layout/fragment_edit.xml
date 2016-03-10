@@ -68,13 +68,20 @@
                 android:layout_marginTop="@dimen/edittext_marginCaption"
                 android:hint="@string/msg_optional" />
 
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editText_userName"
+                android:id="@+id/checkbox_generateUsername"
+                android:text="@string/caption_generated"/>
+
             <TextView
                 android:id="@+id/textView_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/editText_userName"
+                android:layout_below="@+id/checkbox_generateUsername"
                 android:layout_marginTop="@dimen/edittext_margin_top"
                 android:text="@string/caption_category"
                 android:textAppearance="?android:attr/textAppearanceSmall"

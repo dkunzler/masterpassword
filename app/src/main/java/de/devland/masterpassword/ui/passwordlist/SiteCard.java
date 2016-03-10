@@ -190,8 +190,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     }
 
     private void updatePassword() {
-        MPSiteVariant variant = site.getPasswordType() == MPSiteType.GeneratedPhrase ? MPSiteVariant.Answer : MPSiteVariant.Password;
-        generatedPassword = MasterPasswordHolder.INSTANCE.generate(site.getPasswordType(), variant, site.getSiteName(), site.getSiteCounter(), site.getAlgorithmVersion());
+        generatedPassword = MasterPasswordHolder.INSTANCE.generate(site.getPasswordType(), site.getPasswordVariant(), site.getSiteName(), site.getSiteCounter(), site.getAlgorithmVersion());
         if (defaultPrefs.hidePasswords()) {
             currentViewHolder.password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
         } else {

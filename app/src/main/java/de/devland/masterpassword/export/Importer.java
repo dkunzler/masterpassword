@@ -249,10 +249,23 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
                 List<Category> categories = defaultPrefs.categories();
 
-                for (Site site : importedSites) {
-                    site.save();
-                    if (!Strings.isNullOrEmpty(site.getCategory())) {
-                        Category category = new Category(site.getCategory());
+                for (Site importedSite : importedSites) {
+                    if (importType == ImportType.MERGE) {
+                        List<Site> foundSites = Site.find(Site.class, Site.SITE_NAME + " = ?", importedSite.getSiteName());
+                        if (!foundSites.isEmpty()) {
+                            Site matchCandidate = foundSites.get(0);
+                            for (Site foundSite : foundSites) {
+                                if (foundSite.getUserName() != null && foundSite.getUserName().equals(importedSite.getUserName())) {
+                                    matchCandidate = foundSite;
+                                    break;
+                                }
+                            }
+                            importedSite.setId(matchCandidate.getId());
+                        }
+                    }
+                    importedSite.save();
+                    if (!Strings.isNullOrEmpty(importedSite.getCategory())) {
+                        Category category = new Category(importedSite.getCategory());
                         if (!categories.contains(category)) {
                             categories.add(category);
                         }

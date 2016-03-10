@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -242,14 +243,16 @@ public class EditFragment extends BaseFragment {
 
     private void updatePasswordAndLogin() {
         int passwordTypeIndex = passwordType.getSelectedItemPosition();
-        MPSiteType siteType = MPSiteType.valueOf(passwordTypeKeys[passwordTypeIndex]);
+        String passwordTypeKey = passwordTypeKeys[passwordTypeIndex];
+        Pair<MPSiteType, MPSiteVariant> siteParameters = extractMPSiteParameters(passwordTypeKey);
+        MPSiteType siteType = siteParameters.first;
+        MPSiteVariant variant = siteParameters.second;
         String name = siteName.getText().toString();
         int counter = siteCounter.getValue();
         int algorithmVersionIndex = algorithmVersion.getSelectedItemPosition();
         MasterKey.Version version = MasterKey.Version.valueOf(algorithmVersionKeys[algorithmVersionIndex]);
         if (name.length() > 0 && MasterPasswordHolder.INSTANCE.getMasterKey(version) != null) {
             //password.setVisibility(View.VISIBLE);
-            MPSiteVariant variant = siteType == MPSiteType.GeneratedPhrase ? MPSiteVariant.Answer : MPSiteVariant.Password;
             String generatedPassword = MasterPasswordHolder.INSTANCE.generate(siteType, variant, name, counter, version);
             password.setText(generatedPassword);
             if (generatedUsername.isChecked()) {
@@ -261,7 +264,7 @@ public class EditFragment extends BaseFragment {
             if (generatedUsername.isChecked()) {
                 userName.setText(R.string.msg_previewNotAvailable);
             }
-        }
+       }
 
         if (generatedUsername.isChecked()) {
             userName.setEnabled(false);
@@ -283,7 +286,7 @@ public class EditFragment extends BaseFragment {
 
     private void readValues() {
         siteName.setText(site.getSiteName());
-        updatePasswordTypeSpinner(site.getPasswordType());
+        updatePasswordTypeSpinner(site.getPasswordType(), site.getPasswordVariant());
         updateCategorySpinner(site.getCategory());
         updateAlgorithmVersionSpinner(site.getAlgorithmVersion());
         siteCounter.setValue(site.getSiteCounter());
@@ -307,11 +310,13 @@ public class EditFragment extends BaseFragment {
         }
     }
 
-    private void updatePasswordTypeSpinner(MPSiteType passwordTypeEnum) {
+    private void updatePasswordTypeSpinner(MPSiteType passwordTypeEnum, MPSiteVariant passwordVariant) {
         String passwordTypeName = passwordTypeEnum.toString();
+        String passwordVariantName = passwordVariant.toString();
+        String spinnerValue = passwordTypeName + ":" + passwordVariantName;
         for (int i = 0; i < passwordTypeKeys.length; i++) {
             String passwordTypeKey = passwordTypeKeys[i];
-            if (passwordTypeKey.equals(passwordTypeName)) {
+            if (passwordTypeKey.equals(spinnerValue)) {
                 passwordType.setSelection(i, true);
                 break;
             }
@@ -338,7 +343,10 @@ public class EditFragment extends BaseFragment {
             site.setUserName(userName.getText().toString());
         }
         int passwordTypeIndex = passwordType.getSelectedItemPosition();
-        site.setPasswordType(MPSiteType.valueOf(passwordTypeKeys[passwordTypeIndex]));
+        String passwordTypeVariant = passwordTypeKeys[passwordTypeIndex];
+        Pair<MPSiteType, MPSiteVariant> passwordTypeParameters = extractMPSiteParameters(passwordTypeVariant);
+        site.setPasswordType(passwordTypeParameters.first);
+        site.setPasswordVariant(passwordTypeParameters.second);
         int algorithmVersionIndex = algorithmVersion.getSelectedItemPosition();
         site.setAlgorithmVersion(MasterKey.Version.valueOf(algorithmVersionKeys[algorithmVersionIndex]));
         site.setSiteCounter(siteCounter.getValue());
@@ -346,6 +354,11 @@ public class EditFragment extends BaseFragment {
         if (site.complete()) {
             site.touch();
         }
+    }
+
+    private Pair<MPSiteType, MPSiteVariant> extractMPSiteParameters(String passwordTypeValue) {
+        String[] typeAndVariant = passwordTypeValue.split(":");
+        return new Pair<>(MPSiteType.valueOf(typeAndVariant[0]), MPSiteVariant.valueOf(typeAndVariant[1]));
     }
 
     public void onBackPressed() {
