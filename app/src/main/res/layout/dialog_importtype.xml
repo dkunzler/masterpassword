@@ -13,6 +13,22 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/caption_merge"
+            android:id="@+id/radioButton_merge"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/text_hint"
+            android:text="@string/hint_merge"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/caption_append"
             android:id="@+id/radioButton_append"/>
 

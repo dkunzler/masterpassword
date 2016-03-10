@@ -60,7 +60,9 @@ public class ImportDrawerItem extends SettingsDrawerItem {
                     .findById(dialogView, R.id.radioButton_append);
             final RadioButton overrideRadio = ButterKnife
                     .findById(dialogView, R.id.radioButton_override);
-            appendRadio.setChecked(true);
+            final RadioButton mergeRadio = ButterKnife
+                    .findById(dialogView, R.id.radioButton_merge);
+            mergeRadio.setChecked(true);
             builder.setView(dialogView);
             builder.setTitle(R.string.title_importType);
             builder.setNegativeButton(android.R.string.cancel, null);
@@ -71,6 +73,10 @@ public class ImportDrawerItem extends SettingsDrawerItem {
                     ImportType importType = ImportType.APPEND;
                     if (overrideRadio.isChecked()) {
                         importType = ImportType.OVERRIDE;
+                    } else if  (mergeRadio.isChecked()) {
+                        importType = ImportType.MERGE;
+                    } else if (appendRadio.isChecked()) {
+                        importType = ImportType.APPEND;
                     }
                     importer.startImportIntent(activity, importType);
                     dismiss();

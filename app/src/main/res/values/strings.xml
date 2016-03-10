@@ -54,8 +54,10 @@
     <string name="hint_json">simple, easy to read</string>
     <string name="caption_override">Override</string>
     <string name="caption_append">Add imported sites</string>
+    <string name="caption_merge">Merge imported sites</string>
     <string name="hint_override">delete all existing sites before import</string>
     <string name="hint_append">keep existing sites</string>
+    <string name="hint_merge">update existing and add new sites</string>
     <string name="title_exportFormat">Export Format</string>
     <string name="title_importType">Import Type</string>
     <string name="caption_selectFile">Select a file</string>
