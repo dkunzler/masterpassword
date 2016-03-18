@@ -38,6 +38,11 @@
         <item>en</item>
         <item>de</item>
     </string-array>
+    <string-array translatable="false" name="pref_theme_values">
+        <item>AUTO</item>
+        <item>LIGHT</item>
+        <item>DARK</item>
+    </string-array>
     <string-array translatable="false" name="pref_inputstickKeymap_values">
         <item>de-DE</item>
         <item>en-US</item>

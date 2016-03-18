@@ -1,5 +1,7 @@
 package de.devland.masterpassword.prefs;
 
+import android.support.v7.app.AppCompatDelegate;
+
 import java.util.List;
 
 import de.devland.esperandro.SharedPreferenceActions;
@@ -7,6 +9,7 @@ import de.devland.esperandro.annotations.Default;
 import de.devland.esperandro.annotations.SharedPreferences;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.model.Site;
+import de.devland.masterpassword.shared.util.Utils;
 
 /**
  * Created by David Kunzler on 28/08/14.
@@ -80,5 +83,9 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     @Default(ofBoolean = false)
     boolean useLegacyFileManager();
     void useLegacyFileManager(boolean useLegacyFileManager);
+
+    @Default(ofString = Utils.ThemeMode.LIGHT)
+    String defaultThemeMode();
+    void defaultThemeMode(String defaultThemeMode);
 
 }

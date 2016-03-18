@@ -2,6 +2,7 @@ package de.devland.masterpassword.shared.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.DisplayMetrics;
 
 /**
@@ -35,4 +36,25 @@ public class Utils {
         float dp = px / (metrics.densityDpi / 160f);
         return dp;
     }
+
+    public static void setThemeModeFromName(String themeMode) {
+        switch (themeMode) {
+            case ThemeMode.LIGHT:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case ThemeMode.DARK:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case ThemeMode.AUTO:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
+                break;
+        }
+    }
+
+    public interface ThemeMode {
+        String DARK = "DARK";
+        String LIGHT = "LIGHT";
+        String AUTO = "AUTO";
+    }
+
 }

@@ -6,10 +6,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.ipaulpro.afilechooser.FileChooserActivity;
 
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.shared.util.Utils;
 
 /**
  * Created by David Kunzler on 19.10.2014.
@@ -37,6 +40,18 @@ public class SettingsFragment extends BaseSettingsFragment {
         bindPreferenceSummaryToValue(findPreference("autoLogoutDuration"));
         bindPreferenceSummaryToValue(findPreference("versionString"));
         bindPreferenceSummaryToValue(findPreference("defaultPasswordType"));
+//        Preference themeModePreference = findPreference("defaultThemeMode");
+//        bindPreferenceSummaryToValue(themeModePreference);
+//        themeModePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//            @Override
+//            public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                // bind to value
+//                bindPreferenceSummaryToValueListener.onPreferenceChange(preference, newValue);
+//                // set new theme value
+//                Utils.setThemeModeFromName(newValue.toString());
+//                return true;
+//            }
+//        });
         Preference useLegacyFileManager = findPreference("useLegacyFileManager");
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             PreferenceCategory categoryGeneral = (PreferenceCategory) findPreference("category_general");

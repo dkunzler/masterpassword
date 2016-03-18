@@ -17,5 +17,5 @@
         <!--<item name="android:textColor">#ff000000</item>-->
     </style>
 
-    <color name="card_list_background_light">#e5e5e5</color>
+    <color name="card_list_background">#e5e5e5</color>
 </resources>

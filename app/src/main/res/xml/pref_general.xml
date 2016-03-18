@@ -1,6 +1,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/pref_header_general" android:key="category_general">
+    <PreferenceCategory
+        android:key="category_general"
+        android:title="@string/pref_header_general">
         <de.devland.masterpassword.ui.preferences.LanguagePreference
             android:entries="@array/pref_language_titles"
             android:entryValues="@array/pref_language_values"
@@ -10,8 +12,13 @@
             android:title="@string/languageTitle" />
         <CheckBoxPreference
             android:key="useLegacyFileManager"
-            android:title="@string/title_builtinFileManager"
             android:summary="@string/summary_useLegacyFilemanager"
-            />
+            android:title="@string/title_builtinFileManager" />
+        <ListPreference
+            android:entries="@array/pref_theme_titles"
+            android:entryValues="@array/pref_theme_values"
+            android:key="defaultThemeMode"
+            android:title="@string/themeTitle" />
+
     </PreferenceCategory>
 </PreferenceScreen>

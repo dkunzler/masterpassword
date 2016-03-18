@@ -3,6 +3,7 @@ package de.devland.masterpassword;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.support.v7.app.AppCompatDelegate;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -12,6 +13,7 @@ import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.shared.BaseApp;
+import de.devland.masterpassword.shared.util.Utils;
 import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.UpgradeManager;
 import lombok.SneakyThrows;
@@ -48,6 +50,9 @@ public class App extends BaseApp {
         if (defaultPrefs.firstStart()) {
             defaultPrefs.firstStart(false);
         }
+
+        // Theme
+        Utils.setThemeModeFromName(defaultPrefs.defaultThemeMode());
 
         // http://stackoverflow.com/questions/2264874/changing-locale-within-the-app-itself
         Configuration config = getBaseContext().getResources().getConfiguration();

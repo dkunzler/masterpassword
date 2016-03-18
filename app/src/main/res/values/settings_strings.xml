@@ -32,6 +32,13 @@
         <item>German</item>
     </string-array>
 
+    <string name="themeTitle">Theme</string>
+    <string-array name="pref_theme_titles">
+        <item>Automatic</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+
     <string name="inputstickKeyMapTitle">Host Keyboard Layout</string>
     <string-array name="pref_inputstickKeymap_titles">
         <item>German</item>

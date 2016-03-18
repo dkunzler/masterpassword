@@ -260,7 +260,7 @@ public class PasswordViewFragment extends BaseFragment implements
         cardListLayoutManager = new LinearLayoutManager(getActivity());
         cardListView.setLayoutManager(cardListLayoutManager);
         cardListView.swapAdapter(adapter, false);
-        cardListView.setBackgroundResource(R.color.card_list_background_light);
+        cardListView.setBackgroundResource(R.color.card_list_background);
 
         fastScroller.setRecyclerView(cardListView);
         if (!defaultPrefs.sortBy().startsWith(Site.SITE_NAME)) {
