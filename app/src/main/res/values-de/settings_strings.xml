@@ -32,6 +32,13 @@
         <item>Deutsch</item>
     </string-array>
 
+    <string name="themeTitle">Theme</string>
+    <string-array name="pref_theme_titles">
+        <item>Automatisch</item>
+        <item>Hell</item>
+        <item>Dunkel</item>
+    </string-array>
+
     <string name="inputstickKeyMapTitle">PC Tastatur Layout</string>
     <string-array name="pref_inputstickKeymap_titles">
         <item>Deutsch</item>

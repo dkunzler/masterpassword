@@ -35,7 +35,7 @@
     <string name="title_passwords">Passwörter</string>
     <string name="hint_passwordConfirm">bestätigen</string>
     <string name="hidePasswordsTitle">Verstecke Passwörter</string>
-    <string name="caption_append">Importierte Sites hinzufügen</string>
+    <string name="caption_append">Hinzufügen</string>
     <string name="caption_json">JSON</string>
     <string name="caption_mpsites">MPSITES</string>
     <string name="caption_override">Überschreiben</string>
@@ -76,4 +76,7 @@
     <string name="summary_useLegacyFilemanager">Auswählen, wenn Sie Probleme mit der Android Dokumente App haben.</string>
     <string name="caption_edit">Bearbeiten</string>
     <string name="caption_generated">generiert</string>
+    <string name="caption_merge">Zusammenführen (experimentell)</string>
+    <string name="hint_merge">existierende aktualisiseren und neue hinzufügen</string>
+    <string name="msg_optional">optional</string>
 </resources>

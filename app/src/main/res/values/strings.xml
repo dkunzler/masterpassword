@@ -53,8 +53,8 @@
     <string name="hint_mpsites">proprietary format\n (compatible with iOS/Mac-app)</string>
     <string name="hint_json">simple, easy to read</string>
     <string name="caption_override">Override</string>
-    <string name="caption_append">Add imported sites</string>
-    <string name="caption_merge">Merge imported sites</string>
+    <string name="caption_append">Add</string>
+    <string name="caption_merge">Merge (experimental)</string>
     <string name="hint_override">delete all existing sites before import</string>
     <string name="hint_append">keep existing sites</string>
     <string name="hint_merge">update existing and add new sites</string>
