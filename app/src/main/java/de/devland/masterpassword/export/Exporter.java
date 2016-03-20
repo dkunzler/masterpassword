@@ -119,6 +119,26 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     MPUser user = new MPUser(defaultPrefs.defaultUserName(), MasterPasswordHolder.INSTANCE.getKeyId());
                     user.setDefaultType(MPSiteType.valueOf(defaultPrefs.defaultPasswordType()));
                     for (Site site : sites) {
+                        // hack  because MasterPassword algorithm exports wrong type
+                        // http://help.masterpasswordapp.com/help/discussions/problems/325-java-model-imports-wrong-sitetype
+                        switch (site.getPasswordType()) {
+                            case GeneratedBasic:
+                                site.setPasswordType(MPSiteType.GeneratedShort);
+                                break;
+                            case GeneratedShort:
+                                site.setPasswordType(MPSiteType.GeneratedBasic);
+                                break;
+                            case GeneratedMaximum:
+                            case GeneratedLong:
+                            case GeneratedMedium:
+                            case GeneratedPIN:
+                            case GeneratedName:
+                            case GeneratedPhrase:
+                            case StoredPersonal:
+                            case StoredDevicePrivate:
+                                // do nothing
+                                break;
+                        }
                         user.addSite(site.toMPSite(user));
                     }
                     exportData = MPSiteMarshaller.marshallSafe(user).getExport();
