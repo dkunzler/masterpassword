@@ -48,6 +48,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
     public static final String EXTRA_FILE_NAME = "de.devland.export.Exporter.FILE_NAME";
 
     private Activity activity;
+    private DefaultPrefs defaultPrefs;
 
     JsonSerializer<Date> timeStampSerializer = new JsonSerializer<Date>() {
         @Override
@@ -59,7 +60,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
 
     public void startExportIntent(Activity activity, ExportType type) {
         this.activity = activity;
-        DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
+        defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
         Date now = new Date();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
         String fileName = dateFormat.format(now) + "_export." + type.getFileExtension();
@@ -139,15 +140,15 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                 if (exportData != null) {
                     FileOutputStream fileOutputStream;
                     ParcelFileDescriptor pfd = null;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || defaultPrefs.useLegacyFileManager()) {
+                        String path = FileUtils.getPath(activity, intent.getData());
+                        File file = new File(path, fileName);
+                        fileOutputStream = new FileOutputStream(file);
+                    } else {
                         pfd = activity.getContentResolver().
                                 openFileDescriptor(intent.getData(), "w");
 
                         fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
-                    } else {
-                        String path = FileUtils.getPath(activity, intent.getData());
-                        File file = new File(path, fileName);
-                        fileOutputStream = new FileOutputStream(file);
                     }
                     fileOutputStream.write(exportData.getBytes());
                     fileOutputStream.close();

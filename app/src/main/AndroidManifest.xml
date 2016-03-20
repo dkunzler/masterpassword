@@ -100,7 +100,8 @@
         <provider
             android:name="com.ianhanniballake.localstorage.LocalStorageProvider"
             android:authorities="de.devland.masterpassword.provider.localstorage.documents"
-            android:enabled="@bool/use_provider"
+            android:enabled="false"
+            tools:replace="android:enabled"
             android:exported="true"
             android:grantUriPermissions="true"
             android:permission="android.permission.MANAGE_DOCUMENTS">
