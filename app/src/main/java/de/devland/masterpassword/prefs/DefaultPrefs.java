@@ -60,7 +60,7 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     int versionCode();
     void versionCode(int versionCode);
 
-    @Default(ofString = "GeneratedMaximum")
+    @Default(ofString = "GeneratedMaximum:Password")
     String defaultPasswordType();
     void defaultPasswordType(String defaultPasswordType);
 

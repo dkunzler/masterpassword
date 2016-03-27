@@ -58,6 +58,8 @@ import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ShowCaseManager;
 import lombok.NoArgsConstructor;
 
+import static de.devland.masterpassword.util.MPUtils.extractMPSiteParameters;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -141,7 +143,9 @@ public class EditFragment extends BaseFragment {
         site = Site.findById(Site.class, siteId);
         if (site == null) {
             site = new Site();
-            site.setPasswordType(MPSiteType.valueOf(defaultPrefs.defaultPasswordType()));
+            Pair<MPSiteType, MPSiteVariant> passwordTypeParameters = extractMPSiteParameters(defaultPrefs.defaultPasswordType());
+            site.setPasswordType(passwordTypeParameters.first);
+            site.setPasswordVariant(passwordTypeParameters.second);
         }
         if (hostname != null) {
             site.setSiteName(hostname);
@@ -354,11 +358,6 @@ public class EditFragment extends BaseFragment {
         if (site.complete()) {
             site.touch();
         }
-    }
-
-    private Pair<MPSiteType, MPSiteVariant> extractMPSiteParameters(String passwordTypeValue) {
-        String[] typeAndVariant = passwordTypeValue.split(":");
-        return new Pair<>(MPSiteType.valueOf(typeAndVariant[0]), MPSiteVariant.valueOf(typeAndVariant[1]));
     }
 
     public void onBackPressed() {
