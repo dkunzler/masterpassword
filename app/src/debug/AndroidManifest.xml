@@ -35,18 +35,6 @@
             </intent-filter>
         </receiver>
 
-        <provider
-            android:name="com.ianhanniballake.localstorage.LocalStorageProvider"
-            android:authorities="de.devland.masterpassword.debug.provider.localstorage.documents"
-            android:enabled="false"
-            android:exported="true"
-            android:grantUriPermissions="true"
-            android:permission="android.permission.MANAGE_DOCUMENTS"
-            tools:replace="android:authorities">
-            <intent-filter>
-                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
-            </intent-filter>
-        </provider>
     </application>
 
 </manifest>

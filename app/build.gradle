@@ -56,7 +56,7 @@ dependencies {
     compile project(':shared')
 
     // import, export
-    compile(name:'aFileChooser-release', ext:'aar') // Apache v2.0
+    compile 'com.nononsenseapps:filepicker:2.5.2'
     compile 'com.google.code.gson:gson:2.5' // Apache v2.0
 
     // styling

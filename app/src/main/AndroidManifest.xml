@@ -80,35 +80,16 @@
             android:enabled="true"
             android:exported="false" />
 
-        <!-- aFileChooser -->
+
         <activity
-            android:name="com.ipaulpro.afilechooser.FileChooserActivity"
-            android:enabled="true"
-            android:exported="false"
-            android:icon="@drawable/ic_chooser"
-            android:label="@string/choose_file">
+            android:name="com.nononsenseapps.filepicker.FilePickerActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FilePickerTheme">
             <intent-filter>
-                <action android:name="android.intent.action.GET_CONTENT" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.OPENABLE" />
-
-                <data android:mimeType="text/plain" />
+                <action android:name="android.intent.action.GET_CONTENT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-
-        <provider
-            android:name="com.ianhanniballake.localstorage.LocalStorageProvider"
-            android:authorities="de.devland.masterpassword.provider.localstorage.documents"
-            android:enabled="false"
-            tools:replace="android:enabled"
-            android:exported="true"
-            android:grantUriPermissions="true"
-            android:permission="android.permission.MANAGE_DOCUMENTS">
-            <intent-filter>
-                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
-            </intent-filter>
-        </provider>
 
 
     </application>

@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 
 import com.google.gson.Gson;
@@ -14,11 +16,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.ipaulpro.afilechooser.FileChooserActivity;
-import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.model.MPSiteMarshaller;
 import com.lyndir.masterpassword.model.MPUser;
+import com.nononsenseapps.filepicker.FilePickerActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,8 +27,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -83,13 +82,17 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
     }
 
     private Intent getLegacyFolderChooserIntent() {
-        Intent getContentIntent = new Intent(activity, FileChooserActivity.class);
-        // do not show any files by selecting an invalid file extension to filterText
-        getContentIntent.putStringArrayListExtra(
-                FileChooserActivity.EXTRA_FILTER_INCLUDE_EXTENSIONS,
-                new ArrayList<>(Arrays.asList("./")));
-        getContentIntent.putExtra(FileChooserActivity.EXTRA_SELECT_FOLDER, true);
-        getContentIntent.setType("text/plain");
+        Intent getContentIntent = new Intent(activity, FilePickerActivity.class);
+
+        getContentIntent.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
+        getContentIntent.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
+        getContentIntent.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
+
+        // Configure initial directory by specifying a String.
+        // You could specify a String like "/storage/emulated/0/", but that can
+        // dangerous. Always use Android's API calls to get paths to the SD-card or
+        // internal memory.
+        getContentIntent.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
         return getContentIntent;
     }
 
@@ -161,8 +164,9 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                     FileOutputStream fileOutputStream;
                     ParcelFileDescriptor pfd = null;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || defaultPrefs.useLegacyFileManager()) {
-                        String path = FileUtils.getPath(activity, intent.getData());
-                        File file = new File(path, fileName);
+                        Uri uri = intent.getData();
+
+                        File file = new File(uri.getPath(), fileName);
                         fileOutputStream = new FileOutputStream(file);
                     } else {
                         pfd = activity.getContentResolver().

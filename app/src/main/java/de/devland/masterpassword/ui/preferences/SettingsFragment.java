@@ -1,18 +1,11 @@
 package de.devland.masterpassword.ui.preferences;
 
-import android.content.ComponentName;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.support.v7.app.AppCompatDelegate;
-
-import com.ipaulpro.afilechooser.FileChooserActivity;
 
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.devland.masterpassword.shared.util.Utils;
 
 /**
  * Created by David Kunzler on 19.10.2014.
