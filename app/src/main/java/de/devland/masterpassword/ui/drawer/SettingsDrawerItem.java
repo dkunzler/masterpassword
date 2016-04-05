@@ -1,6 +1,9 @@
 package de.devland.masterpassword.ui.drawer;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +35,10 @@ public abstract class SettingsDrawerItem extends DrawerItem {
         View view = inflater.inflate(R.layout.drawer_item_settings, root, false);
         ButterKnife.bind(this, view);
         headerText.setText(getHeaderRes());
-        settingsIcon.setImageResource(getImageRes());
+        Drawable icon = ContextCompat.getDrawable(context, getImageRes());
+        Drawable wrapped = DrawableCompat.wrap(icon);
+        DrawableCompat.setTint(wrapped, ContextCompat.getColor(context, R.color.drawer_icon_tint));
+        settingsIcon.setImageDrawable(wrapped);
         return view;
     }
 

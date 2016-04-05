@@ -5,10 +5,13 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lambdaworks.crypto.SCryptUtil;
@@ -46,6 +50,8 @@ public class LoginFragment extends BaseFragment {
     protected EditText fullName;
     @Bind(R.id.textView_identicon)
     protected TextView identicon;
+    @Bind(R.id.imageView_login)
+    protected ImageView loginButton;
 
     protected DefaultPrefs defaultPrefs;
 
@@ -67,6 +73,9 @@ public class LoginFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, rootView);
+        Drawable wrapped = DrawableCompat.wrap(ContextCompat.getDrawable(getContext(), R.drawable.ic_go));
+        DrawableCompat.setTint(wrapped, ContextCompat.getColor(getContext(), R.color.login_icon_tint));
+        loginButton.setImageDrawable(wrapped);
         return rootView;
     }
 

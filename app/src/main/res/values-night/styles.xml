@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="primary">#37474f</color>
-    <color name="primary_light">#b0bec5</color>
-    <color name="primary_dark">#263238</color>
-
     <color name="accent">#259b24</color>
     <color name="accent_light">#72d572</color>
     <color name="accent_dark">#056f00</color>
 
     <color name="black">#ffffff</color>
-    <color name="divider">#dcffffff</color>
-    <color name="text_hint">#bdffffff</color>
-    <color name="text_secondary">#75ffffff</color>
+    <color name="drawer_icon_tint">#d6d6d6</color>
+    <color name="login_icon_tint">@color/primary_light</color>
+    <color name="divider">#616161</color>
+    <color name="text_secondary">#bdffffff</color>
+    <color name="text_hint">#75ffffff</color>
     <color name="icon">#75ffffff</color>
     <color name="text">#deffffff</color>
 
+    <color name="drawer_background">#263238</color>
 
     <color name="card_list_background">#1a1a1a</color>
+
+
+    <style name="FilePickerTheme" parent="NNF_BaseTheme">
+        <!-- Set these to match your theme -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+
+
+        <!-- Need to set this also to style create folder dialog -->
+        <item name="alertDialogTheme">@style/FilePickerAlertDialogTheme</item>
+
+    </style>
+
 </resources>

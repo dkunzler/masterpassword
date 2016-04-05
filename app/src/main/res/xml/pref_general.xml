@@ -14,11 +14,11 @@
             android:key="useLegacyFileManager"
             android:summary="@string/summary_useLegacyFilemanager"
             android:title="@string/title_builtinFileManager" />
-        <!--<ListPreference-->
-            <!--android:entries="@array/pref_theme_titles"-->
-            <!--android:entryValues="@array/pref_theme_values"-->
-            <!--android:key="defaultThemeMode"-->
-            <!--android:title="@string/themeTitle" />-->
+        <ListPreference
+            android:entries="@array/pref_theme_titles"
+            android:entryValues="@array/pref_theme_values"
+            android:key="defaultThemeMode"
+            android:title="@string/themeTitle"/>
 
     </PreferenceCategory>
 </PreferenceScreen>
