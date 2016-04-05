@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.shared.util.Intents;
+import de.devland.masterpassword.shared.util.Utils;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
@@ -68,7 +70,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         ButterKnife.bind(this, viewHolder.itemView);
         viewHolder.siteName.setText(site.getSiteName());
         viewHolder.siteName.setTypeface(Typeface.DEFAULT_BOLD);
-        viewHolder.siteName.setTextColor(context.getResources().getColor(R.color.text));
+        viewHolder.siteName.setTextColor(ContextCompat.getColor(context, R.color.text));
         String userName;
         if (site.isGeneratedUserName()) {
             userName = MasterPasswordHolder.INSTANCE.generate(
@@ -85,9 +87,11 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         }
         if (inputStickPrefs.inputstickEnabled()) {
             viewHolder.imageInputStick.setVisibility(View.VISIBLE);
+            Utils.tint(context, viewHolder.imageInputStick, R.color.card_icon_tint);
         } else {
             viewHolder.imageInputStick.setVisibility(View.GONE);
         }
+        Utils.tint(context, viewHolder.imageMore, R.color.card_icon_tint);
         updatePassword();
         Typeface typeface = Typeface
                 .createFromAsset(context.getAssets(), "fonts/RobotoSlab-Light.ttf");
@@ -207,6 +211,8 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         protected TextView password;
         @Bind(R.id.imageInputstick)
         protected ImageView imageInputStick;
+        @Bind(R.id.imageMore)
+        protected ImageView imageMore;
 
         public SiteCardViewHolder(View itemView) {
             super(itemView);

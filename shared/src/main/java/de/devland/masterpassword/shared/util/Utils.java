@@ -2,9 +2,13 @@ package de.devland.masterpassword.shared.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.DisplayMetrics;
-import android.util.Pair;
+import android.widget.ImageView;
 
 /**
  * Created by deekay on 27/02/15.
@@ -50,6 +54,12 @@ public class Utils {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
                 break;
         }
+    }
+
+    public static void tint(Context context, ImageView imageView, @ColorRes int tint) {
+        Drawable wrapped = DrawableCompat.wrap(imageView.getDrawable());
+        DrawableCompat.setTint(wrapped, ContextCompat.getColor(context, tint));
+        imageView.setImageDrawable(wrapped);
     }
 
     public interface ThemeMode {

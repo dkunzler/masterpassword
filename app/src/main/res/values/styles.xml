@@ -21,6 +21,8 @@
     <color name="drawer_background">@android:color/white</color>
     <color name="drawer_icon_tint">#343434</color>
     <color name="login_icon_tint">@color/primary</color>
+    <color name="drawer_item_active">@color/primary_light</color>
+    <color name="card_icon_tint">@android:color/black</color>
 
     <style name="FilePickerTheme" parent="NNF_BaseTheme.Light">
         <!-- Set these to match your theme -->

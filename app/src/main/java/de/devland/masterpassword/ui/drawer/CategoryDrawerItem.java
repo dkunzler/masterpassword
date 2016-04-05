@@ -74,9 +74,9 @@ public class CategoryDrawerItem extends DrawerItem {
     private void updateActiveState() {
         if (rootView != null) {
             if (active) {
-                rootView.setBackgroundResource(R.color.primary_light);
+                rootView.setBackgroundResource(R.color.drawer_item_active);
             } else {
-                rootView.setBackgroundResource(android.R.color.white);
+                rootView.setBackgroundResource(R.color.drawer_background);
             }
         }
     }
