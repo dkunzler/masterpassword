@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
@@ -71,23 +71,23 @@ public class EditFragment extends BaseFragment {
 
     protected DefaultPrefs defaultPrefs;
 
-    @Bind(R.id.scrollView)
+    @BindView(R.id.scrollView)
     protected ScrollView scrollView;
-    @Bind(R.id.editText_siteName)
+    @BindView(R.id.editText_siteName)
     protected EditText siteName;
-    @Bind(R.id.editText_userName)
+    @BindView(R.id.editText_userName)
     protected AutoCompleteTextView userName;
-    @Bind(R.id.spinner_passwordType)
+    @BindView(R.id.spinner_passwordType)
     protected Spinner passwordType;
-    @Bind(R.id.spinner_algorithmVersion)
+    @BindView(R.id.spinner_algorithmVersion)
     protected Spinner algorithmVersion;
-    @Bind(R.id.spinner_category)
-    protected Spinner categorySpiner;
-    @Bind(R.id.numberPicker_siteCounter)
+    @BindView(R.id.spinner_category)
+    protected Spinner categorySpinner;
+    @BindView(R.id.numberPicker_siteCounter)
     protected SiteCounterView siteCounter;
-    @Bind(R.id.password)
+    @BindView(R.id.password)
     protected TextView password;
-    @Bind(R.id.checkbox_generateUsername)
+    @BindView(R.id.checkbox_generateUsername)
     protected CheckBox generatedUsername;
 
     private String[] passwordTypeKeys;
@@ -222,7 +222,7 @@ public class EditFragment extends BaseFragment {
                 android.R.layout.simple_spinner_item,
                 categoryNames);
         categoryAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        categorySpiner.setAdapter(categoryAdapter);
+        categorySpinner.setAdapter(categoryAdapter);
 
         return rootView;
     }
@@ -308,7 +308,7 @@ public class EditFragment extends BaseFragment {
         for (int i = 0; i < categoryAdapter.getCount(); i++) {
             String spinnerCategory = categoryAdapter.getItem(i);
             if (spinnerCategory.equals(category)) {
-                categorySpiner.setSelection(i, true);
+                categorySpinner.setSelection(i, true);
                 break;
             }
         }
@@ -354,7 +354,7 @@ public class EditFragment extends BaseFragment {
         int algorithmVersionIndex = algorithmVersion.getSelectedItemPosition();
         site.setAlgorithmVersion(MasterKey.Version.valueOf(algorithmVersionKeys[algorithmVersionIndex]));
         site.setSiteCounter(siteCounter.getValue());
-        site.setCategory(categorySpiner.getSelectedItem().toString());
+        site.setCategory(categorySpinner.getSelectedItem().toString());
         if (site.complete()) {
             site.touch();
         }

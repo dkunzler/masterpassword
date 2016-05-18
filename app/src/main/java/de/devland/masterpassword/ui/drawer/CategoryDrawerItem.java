@@ -13,7 +13,7 @@ import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
@@ -36,11 +36,11 @@ public class CategoryDrawerItem extends DrawerItem {
     protected DefaultPrefs defaultPrefs;
 
     protected View rootView;
-    @Bind(R.id.textView_categoryLetter)
+    @BindView(R.id.textView_categoryLetter)
     protected TextView categoryLetter;
-    @Bind(R.id.textView_settingsItem)
+    @BindView(R.id.textView_settingsItem)
     protected TextView headerText;
-    @Bind(R.id.imageView_deleteCategory)
+    @BindView(R.id.imageView_deleteCategory)
     protected ImageView deleteCategory;
 
     protected boolean active = false;

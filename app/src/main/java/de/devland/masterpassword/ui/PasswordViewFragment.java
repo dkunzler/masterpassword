@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
@@ -60,11 +60,11 @@ public class PasswordViewFragment extends BaseFragment implements
     private static final String STATE_CATEGORY = "de.devland.PasswordViewFragment.STATE_CATEGORY";
     private static final String STATE_FIRSTITEM = "de.devland.PasswordViewFragment.STATE_FIRSTITEM";
 
-    @Bind(R.id.cardList)
+    @BindView(R.id.cardList)
     protected RecyclerView cardListView;
-    @Bind(R.id.fast_scroller)
+    @BindView(R.id.fast_scroller)
     protected VerticalRecyclerViewFastScroller fastScroller;
-    @Bind(R.id.rvfs_scroll_section_indicator)
+    @BindView(R.id.rvfs_scroll_section_indicator)
     protected CardSectionIndicator sectionIndicator;
 
     protected MenuItem searchItem;

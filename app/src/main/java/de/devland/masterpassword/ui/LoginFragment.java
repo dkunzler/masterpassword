@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.lambdaworks.crypto.SCryptUtil;
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
@@ -44,13 +44,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginFragment extends BaseFragment {
 
-    @Bind(R.id.editText_masterPassword)
+    @BindView(R.id.editText_masterPassword)
     protected EditText masterPassword;
-    @Bind(R.id.editText_fullName)
+    @BindView(R.id.editText_fullName)
     protected EditText fullName;
-    @Bind(R.id.textView_identicon)
+    @BindView(R.id.textView_identicon)
     protected TextView identicon;
-    @Bind(R.id.imageView_login)
+    @BindView(R.id.imageView_login)
     protected ImageView loginButton;
 
     protected DefaultPrefs defaultPrefs;

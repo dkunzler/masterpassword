@@ -17,7 +17,7 @@ import com.lyndir.lhunath.opal.system.util.StringUtils;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.MPSiteVariant;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
@@ -203,15 +203,15 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     }
 
     public static class SiteCardViewHolder extends CardAdapter.CardViewHolder {
-        @Bind(R.id.siteName)
+        @BindView(R.id.siteName)
         protected TextView siteName;
-        @Bind(R.id.userName)
+        @BindView(R.id.userName)
         protected TextView userName;
-        @Bind(R.id.password)
+        @BindView(R.id.password)
         protected TextView password;
-        @Bind(R.id.imageInputstick)
+        @BindView(R.id.imageInputstick)
         protected ImageView imageInputStick;
-        @Bind(R.id.imageMore)
+        @BindView(R.id.imageMore)
         protected ImageView imageMore;
 
         public SiteCardViewHolder(View itemView) {

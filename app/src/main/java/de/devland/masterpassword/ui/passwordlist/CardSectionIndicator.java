@@ -32,6 +32,7 @@ public class CardSectionIndicator extends SectionTitleIndicator<Card> {
         }
     }
 
+
     @Override
     public void setVisibility(int visibility) {
         if (enabled) {

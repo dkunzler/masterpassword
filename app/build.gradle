@@ -57,7 +57,7 @@ dependencies {
 
     // import, export
     compile 'com.nononsenseapps:filepicker:2.5.2'
-    compile 'com.google.code.gson:gson:2.5' // Apache v2.0
+    compile 'com.google.code.gson:gson:2.6.2' // Apache v2.0
 
     // styling
 //    compile 'com.github.traex.rippleeffect:library:1.2.4' // MIT
@@ -71,7 +71,8 @@ dependencies {
     apt 'de.devland.esperandro:esperandro:2.3.1' // Apache v2.0
 
     // tools
-    compile 'com.jakewharton:butterknife:7.0.1' // Apache v2.0
+    compile 'com.jakewharton:butterknife:8.0.1' // Apache v2.0
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
 //    compile 'com.google.guava:guava:18.0'
 
     // MasterPassword dependencies
@@ -84,5 +85,5 @@ dependencies {
 //        exclude module: 'jsr305' // problems while dexing
     }
     compile 'org.slf4j:slf4j-android:1.7.13' // MIT
-    compile 'com.github.maksim88:PasswordEditText:v0.2' // MIT
+    compile 'com.github.maksim88:PasswordEditText:v0.6' // MIT
 }

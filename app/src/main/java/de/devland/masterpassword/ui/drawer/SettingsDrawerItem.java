@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.devland.masterpassword.R;
 
@@ -19,9 +19,9 @@ import de.devland.masterpassword.R;
  */
 public abstract class SettingsDrawerItem extends DrawerItem {
 
-    @Bind(R.id.textView_settingsItem)
+    @BindView(R.id.textView_settingsItem)
     protected TextView headerText;
-    @Bind(R.id.imageView_settingsIcon)
+    @BindView(R.id.imageView_settingsIcon)
     protected ImageView settingsIcon;
 
 

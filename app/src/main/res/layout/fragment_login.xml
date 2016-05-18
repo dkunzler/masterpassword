@@ -35,8 +35,8 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:ems="10"
             android:hint="@string/hint_password"
-            app:iconShow="@drawable/ic_visibility"
-            app:iconHide="@drawable/ic_visibility_off"
+            app:pet_iconShow="@drawable/ic_visibility"
+            app:pet_iconHide="@drawable/ic_visibility_off"
             android:inputType="textPassword">
 
             <requestFocus />
