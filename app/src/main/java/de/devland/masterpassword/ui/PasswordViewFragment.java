@@ -4,7 +4,6 @@ package de.devland.masterpassword.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -67,8 +66,6 @@ public class PasswordViewFragment extends BaseFragment implements
     protected VerticalRecyclerViewFastScroller fastScroller;
     @Bind(R.id.rvfs_scroll_section_indicator)
     protected CardSectionIndicator sectionIndicator;
-    @Bind(R.id.floating_action_add)
-    protected FloatingActionButton addButton;
 
     protected MenuItem searchItem;
     protected SearchView searchView;
@@ -133,9 +130,14 @@ public class PasswordViewFragment extends BaseFragment implements
         inflater.inflate(R.menu.password_view, menu);
 
         searchItem = menu.findItem(R.id.action_search);
-        searchItem.setVisible(true);
         searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
+    }
+
+    @OnClick(R.id.floating_action_search)
+    public void expandSearchView() {
+        searchItem.expandActionView();
+        searchView.requestFocus();
     }
 
     @Override
@@ -155,6 +157,9 @@ public class PasswordViewFragment extends BaseFragment implements
 //                fastScroller.setSectionIndicator(null);
 //                sectionIndicator.setVisibility(View.GONE);
                 break;
+            case R.id.action_add:
+                onAddClick();
+                break;
         }
 
         if (!defaultPrefs.sortBy().equals(currentSortBy)) {
@@ -164,7 +169,6 @@ public class PasswordViewFragment extends BaseFragment implements
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.floating_action_add)
     protected void onAddClick() {
         Intent intent = new Intent(getActivity(), EditActivity.class);
         startActivity(intent);

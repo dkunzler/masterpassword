@@ -66,7 +66,7 @@ public enum ShowCaseManager {
                 showCaseBuilder.hideOnTouchOutside().setContentTitle(R.string.title_add)
                                .setStyle(R.style.ShowcaseLightTheme)
                                .setContentText(R.string.content_add)
-                               .setTarget(new ViewTarget(R.id.floating_action_add, activity));
+                               .setTarget(new ViewTarget(R.id.floating_action_search, activity));
                 showCaseBuilder.build().show();
             } catch (IllegalArgumentException e) {
             } finally {
