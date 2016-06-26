@@ -36,6 +36,7 @@ import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.util.RequestCodeManager;
 import de.devland.masterpassword.shared.util.SnackbarUtil;
+import de.devland.masterpassword.util.MPUtils;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 
 /**
@@ -120,7 +121,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                 case MPSITES:
                     DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
                     MPUser user = new MPUser(defaultPrefs.defaultUserName(), MasterPasswordHolder.INSTANCE.getKeyId());
-                    user.setDefaultType(MPSiteType.valueOf(defaultPrefs.defaultPasswordType()));
+                    user.setDefaultType(MPUtils.extractMPSiteParameters(defaultPrefs.defaultPasswordType()).first);
                     for (Site site : sites) {
                         // hack  because MasterPassword algorithm exports wrong type
                         // http://help.masterpasswordapp.com/help/discussions/problems/325-java-model-imports-wrong-sitetype
