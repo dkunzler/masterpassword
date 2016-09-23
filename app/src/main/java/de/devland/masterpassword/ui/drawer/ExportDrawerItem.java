@@ -19,7 +19,6 @@ import de.devland.masterpassword.R;
 import de.devland.masterpassword.export.ExportType;
 import de.devland.masterpassword.export.Exporter;
 import de.devland.masterpassword.shared.ui.BaseActivity;
-import de.devland.masterpassword.util.ProKeyUtil;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -60,23 +59,6 @@ public class ExportDrawerItem extends SettingsDrawerItem {
             final RadioButton mpsitesRadio = ButterKnife
                     .findById(dialogView, R.id.radioButton_mpsites);
             jsonRadio.setChecked(true);
-            jsonRadio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (!isChecked && !ProKeyUtil.INSTANCE.isPro()) {
-                        jsonRadio.setChecked(true);
-                    }
-                }
-            });
-            mpsitesRadio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked && !ProKeyUtil.INSTANCE.isPro()) {
-                        mpsitesRadio.setChecked(false);
-                        ProKeyUtil.INSTANCE.showGoProDialog(activity);
-                    }
-                }
-            });
             builder.setView(dialogView);
             builder.setTitle(R.string.title_exportFormat);
             builder.setNegativeButton(android.R.string.cancel, null);

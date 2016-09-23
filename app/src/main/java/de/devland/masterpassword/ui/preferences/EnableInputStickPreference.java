@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.devland.masterpassword.util.ProKeyUtil;
 
 /**
  * Created by David Kunzler on 26.11.2014.
@@ -52,16 +51,6 @@ public class EnableInputStickPreference extends CheckBoxPreference implements Pr
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if ((Boolean) newValue) {
-            if (!ProKeyUtil.INSTANCE.isPro()) {
-                setChecked(false);
-                ProKeyUtil.INSTANCE.showGoProDialog(settingsFragment.getAppCompatActivity());
-                return false;
-            } else {
-                updatePreferenceEnabledStatus((Boolean) newValue);
-                return true;
-            }
-        }
         updatePreferenceEnabledStatus((Boolean) newValue);
         return true;
     }

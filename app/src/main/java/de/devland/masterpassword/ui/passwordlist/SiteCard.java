@@ -14,8 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
-import com.lyndir.masterpassword.MPSiteType;
-import com.lyndir.masterpassword.MPSiteVariant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,8 +28,6 @@ import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.shared.util.Utils;
-import de.devland.masterpassword.util.MasterPasswordHolder;
-import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import de.devland.masterpassword.util.event.SiteCardClickEvent;
 import de.devland.masterpassword.util.event.SiteDeleteEvent;
@@ -128,16 +124,12 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
 
     @OnClick(R.id.imageInputstick)
     void sentToInputStick() {
-        if (ProKeyUtil.INSTANCE.isPro()) {
             Intent broadcast = new Intent();
             broadcast.setAction(Intents.ACTION_SENDTOINPUTSTICK);
             broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
             broadcast.putExtra(Intents.EXTRA_LAYOUT, inputStickPrefs.inputstickKeymap());
 
             context.sendBroadcast(broadcast);
-        } else {
-            ProKeyUtil.INSTANCE.showGoProDialog(App.get().getCurrentForegroundActivity());
-        }
     }
 
     @OnClick(R.id.card)

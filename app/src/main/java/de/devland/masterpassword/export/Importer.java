@@ -46,7 +46,6 @@ import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.shared.util.RequestCodeManager;
 import de.devland.masterpassword.shared.util.SnackbarUtil;
-import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.event.ReloadDrawerEvent;
 
 /**
@@ -180,10 +179,6 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
 
                 switch (exportType) {
                     case MPSITES:
-                        if (!ProKeyUtil.INSTANCE.isPro()) {
-                            ProKeyUtil.INSTANCE.showGoProDialog(activity);
-                            return;
-                        }
                         try {
                             MPSiteUnmarshaller unmarshaller = MPSiteUnmarshaller.unmarshall(lines);
                             MPUser user = unmarshaller.getUser();

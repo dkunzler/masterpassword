@@ -3,7 +3,6 @@ package de.devland.masterpassword;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.support.v7.app.AppCompatDelegate;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -14,7 +13,6 @@ import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.shared.BaseApp;
 import de.devland.masterpassword.shared.util.Utils;
-import de.devland.masterpassword.util.ProKeyUtil;
 import de.devland.masterpassword.util.UpgradeManager;
 import lombok.SneakyThrows;
 
@@ -31,7 +29,6 @@ public class App extends BaseApp {
     @SneakyThrows(PackageManager.NameNotFoundException.class)
     public void onCreate() {
         super.onCreate();
-        ProKeyUtil.INSTANCE.initLicenseCheck();
         DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, this);
         InputStickPrefs inputStickPrefs = Esperandro.getPreferences(InputStickPrefs.class, this);
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
