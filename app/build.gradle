@@ -41,7 +41,20 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
+
 
 repositories {
     flatDir {
@@ -79,11 +92,14 @@ dependencies {
     compile('com.lyndir.masterpassword:masterpassword-model:2.4-java') { // GPL v3
 //    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-model:d854f19') {
 //        exclude module: 'jsr305' // problems while dexing
+        exclude module: 'cglib'
     }
     compile('com.lyndir.masterpassword:masterpassword-algorithm:2.4-java') { // GPL v3
 //    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-algorithm:d854f19') {
 //        exclude module: 'jsr305' // problems while dexing
+        exclude module: 'cglib'
     }
+    compile 'cglib:cglib:3.2.4'
     compile 'org.slf4j:slf4j-android:1.7.13' // MIT
     compile 'com.github.maksim88:PasswordEditText:v0.6' // MIT
 }
