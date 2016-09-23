@@ -15,11 +15,6 @@ public class DummyCard extends Card {
     }
 
     @Override
-    public boolean isVisible(String filter) {
-        return true;
-    }
-
-    @Override
     public long getId() {
         return Long.MAX_VALUE;
     }

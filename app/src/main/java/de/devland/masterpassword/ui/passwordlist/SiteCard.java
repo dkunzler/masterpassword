@@ -71,14 +71,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         viewHolder.siteName.setText(site.getSiteName());
         viewHolder.siteName.setTypeface(Typeface.DEFAULT_BOLD);
         viewHolder.siteName.setTextColor(ContextCompat.getColor(context, R.color.text));
-        String userName;
-        if (site.isGeneratedUserName()) {
-            userName = MasterPasswordHolder.INSTANCE.generate(
-                    MPSiteType.GeneratedName, MPSiteVariant.Login,
-                    site.getSiteName(), site.getSiteCounter(), site.getAlgorithmVersion());
-        } else {
-            userName = site.getUserName();
-        }
+        String userName = site.getCurrentUserName();
         viewHolder.userName.setText(userName);
         if (userName.isEmpty()) {
             viewHolder.userName.setVisibility(View.GONE);
@@ -96,11 +89,6 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         Typeface typeface = Typeface
                 .createFromAsset(context.getAssets(), "fonts/RobotoSlab-Light.ttf");
         viewHolder.password.setTypeface(typeface);
-    }
-
-    @Override
-    public boolean isVisible(String filter) {
-        return site.getSiteName().toLowerCase().contains(filter.toLowerCase());
     }
 
     @Override
@@ -194,7 +182,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     }
 
     private void updatePassword() {
-        generatedPassword = MasterPasswordHolder.INSTANCE.generate(site.getPasswordType(), site.getPasswordVariant(), site.getSiteName(), site.getSiteCounter(), site.getAlgorithmVersion());
+        generatedPassword = site.getCurrentPassword();
         if (defaultPrefs.hidePasswords()) {
             currentViewHolder.password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
         } else {

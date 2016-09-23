@@ -268,7 +268,7 @@ public class EditFragment extends BaseFragment {
             if (generatedUsername.isChecked()) {
                 userName.setText(R.string.msg_previewNotAvailable);
             }
-       }
+        }
 
         if (generatedUsername.isChecked()) {
             userName.setEnabled(false);
@@ -295,13 +295,8 @@ public class EditFragment extends BaseFragment {
         updateAlgorithmVersionSpinner(site.getAlgorithmVersion());
         siteCounter.setValue(site.getSiteCounter());
         generatedUsername.setChecked(site.isGeneratedUserName());
-        if (site.isGeneratedUserName()) {
-            userName.setEnabled(false);
-            userName.setText(MasterPasswordHolder.INSTANCE.generate(MPSiteType.GeneratedName, MPSiteVariant.Login, site.getSiteName(), site.getSiteCounter(), site.getAlgorithmVersion()));
-        } else {
-            userName.setEnabled(true);
-            userName.setText(site.getUserName());
-        }
+        userName.setEnabled(!site.isGeneratedUserName());
+        userName.setText(site.getCurrentUserName());
     }
 
     private void updateCategorySpinner(String category) {

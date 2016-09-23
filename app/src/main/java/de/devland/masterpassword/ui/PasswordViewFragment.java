@@ -318,18 +318,23 @@ public class PasswordViewFragment extends BaseFragment implements
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Card> cards = new ArrayList<>();
+            String constraintString = constraint.toString().toLowerCase();
 
-            String where = null;
-            if (activeCategory != null && !activeCategory.equals(Category.all(getActivity()))) {
-                where = Site.CATEGORY + " = '" + activeCategory.getName() + "'";
-            }
-
-            Iterator<Site> siteIterator = Site.findAsIterator(Site.class, where, null, null,
+            Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null,
                     defaultPrefs.sortBy(), null);
             while (siteIterator.hasNext()) {
                 Site site = siteIterator.next();
-                SiteCard siteCard = new SiteCard(getActivity(), site);
-                cards.add(siteCard);
+                // search in site name and password
+                boolean siteNameMatches = site.getSiteName() != null
+                        && site.getSiteName().toLowerCase().contains(constraintString);
+                boolean siteUserMatches = site.getCurrentUserName() != null
+                        && site.getCurrentUserName().toLowerCase().contains(constraintString);
+                boolean sitePassMatches = site.getCurrentPassword() != null
+                        && site.getCurrentPassword().toLowerCase().contains(constraintString);
+                if (siteNameMatches || siteUserMatches || sitePassMatches) {
+                    SiteCard siteCard = new SiteCard(getActivity(), site);
+                    cards.add(siteCard);
+                }
             }
             if (cards.size() > 0) {
                 ShowCaseManager.INSTANCE.showFirstCardShowCase(getActivity());
@@ -337,28 +342,9 @@ public class PasswordViewFragment extends BaseFragment implements
 
             cards.add(new DummyCard());
 
-
             FilterResults filterResults = new FilterResults();
-            ArrayList<Card> tempList = new ArrayList<>();
-            //constraint is the result from text you want to filterText against.
-            //objects is your data set you will filterText from
-            if (constraint != null) {
-                // Live Site
-                int length = cards.size();
-                int i = 0;
-                while (i < length) {
-                    Card card = cards.get(i);
-                    if (card.isVisible(constraint.toString())) {
-                        tempList.add(card);
-                    }
-
-                    i++;
-                }
-                //following two lines is very important
-                //as publish result can only take FilterResults objects
-                filterResults.values = tempList;
-                filterResults.count = tempList.size();
-            }
+            filterResults.values = cards;
+            filterResults.count = cards.size();
             return filterResults;
         }
 

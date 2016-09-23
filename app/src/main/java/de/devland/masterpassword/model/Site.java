@@ -72,6 +72,20 @@ public class Site extends SugarRecord {
         this.save();
     }
 
+    public String getCurrentPassword() {
+        return MasterPasswordHolder.INSTANCE.generate(passwordType, passwordVariant,
+                siteName, siteCounter, algorithmVersion);
+    }
+
+    public String getCurrentUserName() {
+        if (isGeneratedUserName()) {
+            return userName;
+        } else {
+            return MasterPasswordHolder.INSTANCE.generate(MPSiteType.GeneratedName,
+                    MPSiteVariant.Login, siteName, siteCounter, algorithmVersion);
+        }
+    }
+
     public MPSite toMPSite(MPUser user) {
         MPSite mpSite = new MPSite(user, siteName, passwordType, UnsignedInteger.fromIntBits(siteCounter));
         if (generatedUserName) {
