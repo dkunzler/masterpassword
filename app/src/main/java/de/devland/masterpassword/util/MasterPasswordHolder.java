@@ -13,7 +13,7 @@ import java.util.Map;
 
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.shared.ui.BaseActivity;
+import de.devland.masterpassword.base.ui.BaseActivity;
 import de.devland.masterpassword.ui.LoginActivity;
 import lombok.Synchronized;
 

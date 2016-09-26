@@ -1,10 +1,10 @@
-package de.devland.masterpassword.shared.util;
+package de.devland.masterpassword.base.util;
 
 import android.app.Activity;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import de.devland.masterpassword.shared.R;
+import de.devland.masterpassword.R;
 
 /**
  * Created by deekay on 06.06.2015.

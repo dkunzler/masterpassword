@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.base.BaseApp;
+import de.devland.masterpassword.base.util.Utils;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.prefs.InputStickPrefs;
-import de.devland.masterpassword.shared.BaseApp;
-import de.devland.masterpassword.shared.util.Utils;
 import de.devland.masterpassword.util.UpgradeManager;
 import lombok.SneakyThrows;
 

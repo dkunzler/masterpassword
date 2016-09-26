@@ -14,9 +14,9 @@ import android.widget.RadioButton;
 
 import butterknife.ButterKnife;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.base.ui.BaseActivity;
 import de.devland.masterpassword.export.ImportType;
 import de.devland.masterpassword.export.Importer;
-import de.devland.masterpassword.shared.ui.BaseActivity;
 import lombok.RequiredArgsConstructor;
 
 /**

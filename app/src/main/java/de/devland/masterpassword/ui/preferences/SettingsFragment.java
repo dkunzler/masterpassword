@@ -6,7 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.shared.util.Utils;
+import de.devland.masterpassword.base.util.Utils;
 
 /**
  * Created by David Kunzler on 19.10.2014.

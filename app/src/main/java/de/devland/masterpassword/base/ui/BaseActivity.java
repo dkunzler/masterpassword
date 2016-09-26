@@ -1,4 +1,4 @@
-package de.devland.masterpassword.shared.ui;
+package de.devland.masterpassword.base.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.squareup.otto.Bus;
 
-import de.devland.masterpassword.shared.BaseApp;
-import de.devland.masterpassword.shared.util.RequestCodeManager;
+import de.devland.masterpassword.base.BaseApp;
+import de.devland.masterpassword.base.util.RequestCodeManager;
 
 
 /**

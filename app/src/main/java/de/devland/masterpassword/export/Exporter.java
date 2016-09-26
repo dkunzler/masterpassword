@@ -32,10 +32,10 @@ import java.util.List;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.base.util.RequestCodeManager;
+import de.devland.masterpassword.base.util.SnackbarUtil;
 import de.devland.masterpassword.model.Site;
 import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.devland.masterpassword.shared.util.RequestCodeManager;
-import de.devland.masterpassword.shared.util.SnackbarUtil;
 import de.devland.masterpassword.util.MPUtils;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 

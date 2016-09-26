@@ -6,9 +6,9 @@ import android.os.Bundle;
 import java.util.regex.Matcher;
 
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.shared.ui.BaseActivity;
-import de.devland.masterpassword.shared.util.Constants;
-import de.devland.masterpassword.shared.util.SnackbarUtil;
+import de.devland.masterpassword.base.ui.BaseActivity;
+import de.devland.masterpassword.base.util.Constants;
+import de.devland.masterpassword.base.util.SnackbarUtil;
 
 
 public class EditActivity extends BaseActivity {

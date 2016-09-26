@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.shared.ui.BaseActivity;
+import de.devland.masterpassword.base.ui.BaseActivity;
 
 
 public class LoginActivity extends BaseActivity {

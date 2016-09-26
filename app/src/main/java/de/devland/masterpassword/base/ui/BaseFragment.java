@@ -1,11 +1,11 @@
-package de.devland.masterpassword.shared.ui;
+package de.devland.masterpassword.base.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.squareup.otto.Bus;
 
-import de.devland.masterpassword.shared.BaseApp;
+import de.devland.masterpassword.base.BaseApp;
 
 /**
  * Created by David Kunzler on 07.11.2014.

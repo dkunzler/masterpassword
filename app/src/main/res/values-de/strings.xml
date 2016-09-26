@@ -85,4 +85,5 @@
     <string name="title_inputstick">InputStick</string>
     <string name="caption_homepage">Homepage</string>
     <string name="msg_inputstickUtilityDownload">Diese Funktionalität benötigt die App InputStickUtility. Sie können Sie vom PlayStore oder der offiziellen InputStick Homepage runterladen.</string>
+    <string name="caption_playStore">Play Store</string>
 </resources>

@@ -11,14 +11,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
 import butterknife.ButterKnife;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.base.ui.BaseActivity;
 import de.devland.masterpassword.export.ExportType;
 import de.devland.masterpassword.export.Exporter;
-import de.devland.masterpassword.shared.ui.BaseActivity;
 import lombok.RequiredArgsConstructor;
 
 /**

@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/primary</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated
+             which is used to tint widgets -->
+        <item name="colorAccent">@color/accent</item>
+
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/primary</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated
+             which is used to tint widgets -->
+        <item name="colorAccent">@color/accent</item>
+
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">false</item>
+    </style>
+
+
+    <color name="primary">#37474f</color>
+    <color name="primary_light">#b0bec5</color>
+    <color name="primary_dark">#263238</color>
+
+    <color name="accent">#259b24</color>
+    <color name="accent_light">#72d572</color>
+    <color name="accent_dark">#056f00</color>
+
+    <color name="black">#000000</color>
+    <color name="divider">#1e000000</color>
+    <color name="text_hint">#42000000</color>
+    <color name="text_secondary">#8a000000</color>
+    <color name="icon">#8a000000</color>
+    <color name="text">#de000000</color>
+
     <style name="ShowcaseLightTheme" parent="ShowcaseView">
         <item name="sv_backgroundColor">#ddffffff</item>
         <item name="sv_showcaseColor">@color/accent_light</item>

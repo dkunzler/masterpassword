@@ -20,8 +20,8 @@ import com.inputstick.api.basic.InputStickHID;
 import com.inputstick.api.layout.KeyboardLayout;
 
 import de.devland.masterpassword.R;
-import de.devland.masterpassword.shared.BaseApp;
-import de.devland.masterpassword.shared.util.SnackbarUtil;
+import de.devland.masterpassword.base.BaseApp;
+import de.devland.masterpassword.base.util.SnackbarUtil;
 import lombok.RequiredArgsConstructor;
 
 /**

@@ -1,4 +1,4 @@
-package de.devland.masterpassword.shared.util;
+package de.devland.masterpassword.base.util;
 
 import android.content.Context;
 import android.content.res.Resources;

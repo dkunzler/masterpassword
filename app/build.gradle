@@ -66,27 +66,33 @@ repositories {
 }
 
 dependencies {
-    compile project(':shared')
-
     // import, export
     compile 'com.nononsenseapps:filepicker:2.5.2'
     compile 'com.google.code.gson:gson:2.6.2' // Apache v2.0
 
     // styling
-//    compile 'com.github.traex.rippleeffect:library:1.2.4' // MIT
     compile 'com.github.emanzanoaxa:RippleEffect:52ea2a0ab6'
-//    compile 'com.github.amlcurran.showcaseview:library:5.0.0' //  Apache v2.0
     compile(name:'showcaseview-git', ext:'aar') // Apache v2.0
     compile(name:'recyclerviewfastscroller-release', ext:'aar') // Apache v2.0
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
 
     // annotation processors
     apt 'org.projectlombok:lombok:1.14.0' // MIT
     apt 'de.devland.esperandro:esperandro:2.3.1' // Apache v2.0
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
 
     // tools
     compile 'com.jakewharton:butterknife:8.0.1' // Apache v2.0
-    apt 'com.jakewharton:butterknife-compiler:8.0.1'
-//    compile 'com.google.guava:guava:18.0'
+    compile 'com.squareup:otto:1.3.8' // Apache v2.0
+    compile files('libs/lombok-api-1.14.0.jar') // MIT
+    compile 'com.github.satyan:sugar:1.5' // MIT
+    compile 'de.devland.esperandro:esperandro-api:2.3.1' // Apache v2.0
+    compile('de.devland.esperandro:esperandro-gson-addon:2.3.1') { // Apache v2.0
+        exclude module: 'gson' // problems while dexing
+    }
 
     // MasterPassword dependencies
     compile('com.lyndir.masterpassword:masterpassword-model:2.4-java') { // GPL v3

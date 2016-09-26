@@ -21,9 +21,9 @@ import butterknife.ButterKnife;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.base.ui.BaseActivity;
 import de.devland.masterpassword.model.Category;
 import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.devland.masterpassword.shared.ui.BaseActivity;
 import de.devland.masterpassword.util.event.ReloadDrawerEvent;
 
 /**

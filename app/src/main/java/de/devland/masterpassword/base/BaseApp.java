@@ -1,10 +1,10 @@
-package de.devland.masterpassword.shared;
+package de.devland.masterpassword.base;
 
 import com.orm.SugarApp;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
-import de.devland.masterpassword.shared.ui.BaseActivity;
+import de.devland.masterpassword.base.ui.BaseActivity;
 
 /**
  * Created by David Kunzler on 21.11.2014.

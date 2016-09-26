@@ -1,4 +1,4 @@
-package de.devland.masterpassword.shared.util;
+package de.devland.masterpassword.base.util;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Random;
 
 import de.devland.esperandro.Esperandro;
-import de.devland.masterpassword.shared.BaseApp;
-import de.devland.masterpassword.shared.prefs.InternalPrefs;
+import de.devland.masterpassword.base.BaseApp;
+import de.devland.masterpassword.base.prefs.InternalPrefs;
 
 /**
  * Created by David Kunzler on 23.10.2014.

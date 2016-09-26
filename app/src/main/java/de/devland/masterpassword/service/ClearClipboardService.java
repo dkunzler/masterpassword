@@ -8,13 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.design.widget.Snackbar;
 
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
+import de.devland.masterpassword.base.util.SnackbarUtil;
 import de.devland.masterpassword.prefs.DefaultPrefs;
-import de.devland.masterpassword.shared.util.SnackbarUtil;
 
 public class ClearClipboardService extends Service {
 
