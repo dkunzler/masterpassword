@@ -79,4 +79,9 @@
     <string name="title_builtinFileManager">Use built-in File Manager</string>
     <string name="summary_useLegacyFilemanager">Use this if you encounter problems with the Android Documents App.</string>
     <string name="caption_generated">generated</string>
+    <string name="msg_typedSuccessfully">Typed password successfully.</string>
+    <string name="msg_inputstickFailed">Connection to InputStick failed. See InputStickUtility for details.</string>
+    <string name="title_inputstick">InputStick</string>
+    <string name="msg_connecting">Connecting…</string>
+    <string name="msg_inputstickUtilityDownload">This functionality requires to download the InputStickUtility. You can download it from the PlayStore or the official InputStick Homepage.</string>
 </resources>

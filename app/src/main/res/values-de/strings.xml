@@ -79,4 +79,10 @@
     <string name="caption_merge">Zusammenführen (experimentell)</string>
     <string name="hint_merge">existierende aktualisiseren und neue hinzufügen</string>
     <string name="msg_optional">optional</string>
+    <string name="msg_connecting">Verbinden…</string>
+    <string name="msg_inputstickFailed">Verbindung zum InputStick fehlgeschlagen. InputStickUtility öffnen für Details.</string>
+    <string name="msg_typedSuccessfully">Password erfolgreich eingegeben.</string>
+    <string name="title_inputstick">InputStick</string>
+    <string name="caption_homepage">Homepage</string>
+    <string name="msg_inputstickUtilityDownload">Diese Funktionalität benötigt die App InputStickUtility. Sie können Sie vom PlayStore oder der offiziellen InputStick Homepage runterladen.</string>
 </resources>

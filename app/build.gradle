@@ -102,4 +102,6 @@ dependencies {
     compile 'cglib:cglib:3.2.4'
     compile 'org.slf4j:slf4j-android:1.7.13' // MIT
     compile 'com.github.maksim88:PasswordEditText:v0.6' // MIT
+
+    compile 'com.inputstick:inputstick-api:20151023' // no license
 }

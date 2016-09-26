@@ -28,6 +28,7 @@ import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.shared.util.Intents;
 import de.devland.masterpassword.shared.util.Utils;
+import de.devland.masterpassword.util.InputStickUtil;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import de.devland.masterpassword.util.event.SiteCardClickEvent;
 import de.devland.masterpassword.util.event.SiteDeleteEvent;
@@ -124,12 +125,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
 
     @OnClick(R.id.imageInputstick)
     void sentToInputStick() {
-            Intent broadcast = new Intent();
-            broadcast.setAction(Intents.ACTION_SENDTOINPUTSTICK);
-            broadcast.putExtra(Intents.EXTRA_PASSWORD, generatedPassword);
-            broadcast.putExtra(Intents.EXTRA_LAYOUT, inputStickPrefs.inputstickKeymap());
-
-            context.sendBroadcast(broadcast);
+        InputStickUtil.checkAndType(App.get().getCurrentForegroundActivity(), generatedPassword, inputStickPrefs.inputstickKeymap());
     }
 
     @OnClick(R.id.card)
