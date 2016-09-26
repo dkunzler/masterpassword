@@ -81,4 +81,6 @@
     <string name="msg_connecting">Connecting…</string>
     <string name="msg_inputstickUtilityDownload">This functionality requires to download the InputStickUtility. You can download it from the PlayStore or the official InputStick Homepage.</string>
     <string name="caption_playStore">Play Store</string>
+    <string name="summary_lockCategories" >If enabled categrories can neither get deleted nor added.</string>
+    <string name="title_lockCategories" >Lock Categories</string>
 </resources>

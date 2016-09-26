@@ -113,7 +113,9 @@ public class PasswordViewActivity extends LoginRequiringActivity implements
         for (Category category : categories) {
             drawerItems.add(new CategoryDrawerItem(category));
         }
-        drawerItems.add(new AddCategoryDrawerItem(this));
+        if (!defaultPrefs.lockCategories()) {
+            drawerItems.add(new AddCategoryDrawerItem(this));
+        }
         drawerItems.add(importDrawerItem);
         drawerItems.add(exportDrawerItem);
         drawerItems.add(new PreferencesDrawerItem(drawerLayout));

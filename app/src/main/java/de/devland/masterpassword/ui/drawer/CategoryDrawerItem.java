@@ -66,6 +66,7 @@ public class CategoryDrawerItem extends DrawerItem {
         rootView = inflater.inflate(R.layout.drawer_item_category, root, false);
         updateActiveState();
         ButterKnife.bind(this, rootView);
+        deleteCategory.setVisibility(defaultPrefs.lockCategories() ? View.GONE : View.VISIBLE);
         headerText.setText(category.getName());
         categoryLetter.setText(firstLetter);
         return rootView;

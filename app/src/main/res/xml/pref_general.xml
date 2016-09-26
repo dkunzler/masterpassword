@@ -14,6 +14,10 @@
             android:key="useLegacyFileManager"
             android:summary="@string/summary_useLegacyFilemanager"
             android:title="@string/title_builtinFileManager" />
+        <CheckBoxPreference
+            android:key="lockCategories"
+            android:summary="@string/summary_lockCategories"
+            android:title="@string/title_lockCategories" />
         <ListPreference
             android:entries="@array/pref_theme_titles"
             android:entryValues="@array/pref_theme_values"

@@ -78,6 +78,10 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     boolean useLegacyFileManager();
     void useLegacyFileManager(boolean useLegacyFileManager);
 
+    @Default(ofBoolean = false)
+    boolean lockCategories();
+    void lockCategories(boolean lockCategories);
+
     @Default(ofString = Utils.ThemeMode.LIGHT)
     String defaultThemeMode();
     void defaultThemeMode(String defaultThemeMode);

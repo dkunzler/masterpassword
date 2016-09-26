@@ -82,4 +82,6 @@
     <string name="caption_homepage">Homepage</string>
     <string name="msg_inputstickUtilityDownload">Diese Funktionalität benötigt die App InputStickUtility. Sie können Sie vom PlayStore oder der offiziellen InputStick Homepage runterladen.</string>
     <string name="caption_playStore">Play Store</string>
+    <string name="title_lockCategories">Kategorien sperren</string>
+    <string name="summary_lockCategories">Wenn aktiviert, können Kategorien weder gelöscht noch neu angelegt werden.</string>
 </resources>
