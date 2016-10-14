@@ -87,11 +87,15 @@ public class PasswordViewActivity extends LoginRequiringActivity implements
             getSupportActionBar().setHomeButtonEnabled(true);
         }
 
-        initializeDrawerItems(null);
-
         drawerList.setOnItemClickListener(this);
 
         getSupportActionBar().setTitle(R.string.title_passwords);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initializeDrawerItems(null);
     }
 
     @Override

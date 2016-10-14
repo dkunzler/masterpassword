@@ -53,16 +53,17 @@ public class AddCategoryDrawerItem extends DrawerItem {
     }
 
     @SuppressLint("ValidFragment")
-    public class AddCategoryDialog extends DialogFragment {
+    public static class AddCategoryDialog extends DialogFragment {
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            final DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setNegativeButton(android.R.string.cancel, null);
             builder.setCancelable(false);
             builder.setTitle(R.string.title_addCategory);
-            View dialogView = View.inflate(activity, R.layout.dialog_addcategory, null);
+            View dialogView = View.inflate(getActivity(), R.layout.dialog_addcategory, null);
             final EditText category = ButterKnife.findById(dialogView,
                     R.id.editText_category);
             builder.setView(dialogView);
