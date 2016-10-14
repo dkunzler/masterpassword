@@ -17,9 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.lambdaworks.crypto.SCryptUtil;
+import com.squareup.otto.Subscribe;
 
 import butterknife.ButterKnife;
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import lombok.Setter;
@@ -51,8 +53,13 @@ public class VerifyPasswordPreference extends CheckBoxPreference implements Pref
     private void init() {
         defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getContext());
         setOnPreferenceChangeListener(this);
+        App.get().getBus().register(this);
     }
 
+    @Subscribe
+    public void onVerifyPasswordCancel(VerifyPasswordCancelEvent event) {
+        setChecked(false);
+    }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -65,18 +72,22 @@ public class VerifyPasswordPreference extends CheckBoxPreference implements Pref
         return true;
     }
 
+    public static class VerifyPasswordCancelEvent {
+    }
+
     @SuppressLint("ValidFragment")
-    public class VerifyPasswordDialog extends DialogFragment {
+    public static class VerifyPasswordDialog extends DialogFragment {
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(settingsActivity);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            final DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
             builder.setPositiveButton(android.R.string.ok, null);
             builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    setChecked(false);
+                    App.get().getBus().post(new VerifyPasswordCancelEvent());
                     dismiss();
                 }
             });
@@ -86,6 +97,7 @@ public class VerifyPasswordPreference extends CheckBoxPreference implements Pref
             final EditText masterPassword = ButterKnife.findById(dialogView, R.id.editText_masterPassword);
             final EditText masterPasswordConfirm = ButterKnife.findById(dialogView, R.id.editText_masterPasswordConfirm);
             builder.setView(dialogView);
+
 
             final AlertDialog dialog = builder.create();
             dialog.setOnShowListener(new DialogInterface.OnShowListener() {

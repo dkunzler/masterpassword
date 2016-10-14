@@ -169,7 +169,7 @@ public class LoginFragment extends BaseFragment {
     }
 
     @SuppressLint("ValidFragment")
-    public class VerificationFailedDialog extends DialogFragment {
+    public static class VerificationFailedDialog extends DialogFragment {
 
         @NonNull
         @Override

@@ -48,12 +48,12 @@ public class ExportDrawerItem extends SettingsDrawerItem {
     }
 
     @SuppressLint("ValidFragment")
-    public class FileFormatDialog extends DialogFragment {
+    public static class FileFormatDialog extends DialogFragment {
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            View dialogView = View.inflate(activity, R.layout.dialog_fileformat, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            View dialogView = View.inflate(getActivity(), R.layout.dialog_fileformat, null);
             final RadioButton jsonRadio = ButterKnife.findById(dialogView, R.id.radioButton_json);
             final RadioButton mpsitesRadio = ButterKnife
                     .findById(dialogView, R.id.radioButton_mpsites);
@@ -72,7 +72,7 @@ public class ExportDrawerItem extends SettingsDrawerItem {
                     if (mpsitesRadio.isChecked()) {
                         exportType = ExportType.MPSITES;
                     }
-                    exporter.startExportIntent(activity, exportType);
+                    exporter.startExportIntent(getActivity(), exportType);
                     dismiss();
                 }
             });

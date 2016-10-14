@@ -62,13 +62,13 @@ public class LanguagePreference extends ListPreference {
 
 
     @SuppressLint("ValidFragment")
-    public class RestartDialog extends DialogFragment {
+    public static class RestartDialog extends DialogFragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(settingsActivity);
-            builder.setTitle(settingsActivity.getString(R.string.title_restartApp));
-            builder.setMessage(settingsActivity.getString(R.string.msg_restartApp));
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(getActivity().getString(R.string.title_restartApp));
+            builder.setMessage(getActivity().getString(R.string.msg_restartApp));
             builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -79,11 +79,11 @@ public class LanguagePreference extends ListPreference {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     // http://stackoverflow.com/questions/6609414/howto-programatically-restart-android-app
-                    Intent mStartActivity = new Intent(settingsActivity, LoginActivity.class);
+                    Intent mStartActivity = new Intent(getContext(), LoginActivity.class);
                     mStartActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     int mPendingIntentId = 123456;
-                    PendingIntent mPendingIntent = PendingIntent.getActivity(settingsActivity, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-                    AlarmManager mgr = (AlarmManager) settingsActivity.getSystemService(Context.ALARM_SERVICE);
+                    PendingIntent mPendingIntent = PendingIntent.getActivity(getActivity(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                    AlarmManager mgr = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                     mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
                     android.os.Process.killProcess(android.os.Process.myPid());
                 }

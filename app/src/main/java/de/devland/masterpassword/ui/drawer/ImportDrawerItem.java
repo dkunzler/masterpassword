@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
 
@@ -50,12 +51,12 @@ public class ImportDrawerItem extends SettingsDrawerItem {
     }
 
     @SuppressLint("ValidFragment")
-    public class ImportTypeDialog extends DialogFragment {
+    public static class ImportTypeDialog extends DialogFragment {
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            View dialogView = View.inflate(activity, R.layout.dialog_importtype, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            View dialogView = View.inflate(getActivity(), R.layout.dialog_importtype, null);
             final RadioButton appendRadio = ButterKnife
                     .findById(dialogView, R.id.radioButton_append);
             final RadioButton overrideRadio = ButterKnife
@@ -78,7 +79,7 @@ public class ImportDrawerItem extends SettingsDrawerItem {
                     } else if (appendRadio.isChecked()) {
                         importType = ImportType.APPEND;
                     }
-                    importer.startImportIntent(activity, importType);
+                    importer.startImportIntent((AppCompatActivity) getActivity(), importType);
                     dismiss();
                 }
             });
