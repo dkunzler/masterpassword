@@ -95,12 +95,12 @@ dependencies {
     }
 
     // MasterPassword dependencies
-    compile('com.lyndir.masterpassword:masterpassword-model:2.4-java') { // GPL v3
+    compile('com.lyndir.masterpassword:masterpassword-model:2.4.1-java') { // GPL v3
 //    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-model:d854f19') {
 //        exclude module: 'jsr305' // problems while dexing
         exclude module: 'cglib'
     }
-    compile('com.lyndir.masterpassword:masterpassword-algorithm:2.4-java') { // GPL v3
+    compile('com.lyndir.masterpassword:masterpassword-algorithm:2.4.1-java') { // GPL v3
 //    compile('com.github.dkunzler.MasterPasswordFork:masterpassword-algorithm:d854f19') {
 //        exclude module: 'jsr305' // problems while dexing
         exclude module: 'cglib'
