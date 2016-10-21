@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.jakewharton.hugo'
 
 android {
     compileSdkVersion 24
@@ -19,8 +20,8 @@ android {
         applicationId "de.devland.masterpassword"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 42
-        versionName "1.10.3"
+        versionCode 43
+        versionName "1.11.0-alpha1"
     }
 
     compileOptions {

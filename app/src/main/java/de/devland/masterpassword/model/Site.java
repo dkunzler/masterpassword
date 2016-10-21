@@ -10,10 +10,12 @@ import com.lyndir.masterpassword.MasterKey;
 import com.lyndir.masterpassword.model.MPSite;
 import com.lyndir.masterpassword.model.MPUser;
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 import java.util.Date;
 
 import de.devland.masterpassword.util.MasterPasswordHolder;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -59,6 +61,15 @@ public class Site extends SugarRecord {
     protected String category;
     protected String storedPassword;
 
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    @Ignore
+    private String cachedPassword;
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    @Ignore
+    private String cachedUserName;
+
     public boolean complete() {
         boolean complete = true;
         if (siteName == null || siteName.isEmpty()) {
@@ -72,18 +83,58 @@ public class Site extends SugarRecord {
         this.save();
     }
 
+
+
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
+        invalidateCaches();
+    }
+
+    public void setSiteCounter(int siteCounter) {
+        this.siteCounter = siteCounter;
+        invalidateCaches();
+    }
+
+    public void setPasswordVariant(MPSiteVariant passwordVariant) {
+        this.passwordVariant = passwordVariant;
+        invalidateCaches();
+    }
+
+    public void setPasswordType(MPSiteType passwordType) {
+        this.passwordType = passwordType;
+        invalidateCaches();
+    }
+
+    public void setAlgorithmVersion(MasterKey.Version algorithmVersion) {
+        this.algorithmVersion = algorithmVersion;
+        invalidateCaches();
+    }
+
     public String getCurrentPassword() {
-        return MasterPasswordHolder.INSTANCE.generate(passwordType, passwordVariant,
-                siteName, siteCounter, algorithmVersion);
+        if (cachedPassword == null) {
+            cachedPassword = MasterPasswordHolder.INSTANCE.generate(passwordType, passwordVariant,
+                    siteName, siteCounter, algorithmVersion);
+        }
+        return cachedPassword;
     }
 
     public String getCurrentUserName() {
         if (isGeneratedUserName()) {
-            return MasterPasswordHolder.INSTANCE.generate(MPSiteType.GeneratedName,
-                    MPSiteVariant.Login, siteName, siteCounter, algorithmVersion);
+            if (cachedUserName == null) {
+                cachedUserName = MasterPasswordHolder.INSTANCE.generate(MPSiteType.GeneratedName,
+                        MPSiteVariant.Login, siteName, siteCounter, algorithmVersion);
+            }
+            return cachedUserName;
         } else {
             return userName;
         }
+    }
+
+
+
+    private void invalidateCaches() {
+        cachedPassword = null;
+        cachedUserName = null;
     }
 
     public MPSite toMPSite(MPUser user) {

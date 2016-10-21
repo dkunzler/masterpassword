@@ -24,7 +24,6 @@ import com.squareup.otto.Produce;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -48,6 +47,7 @@ import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import de.devland.masterpassword.util.event.ProStatusChangeEvent;
 import de.devland.masterpassword.util.event.SiteCardClickEvent;
 import de.devland.masterpassword.util.event.SiteDeleteEvent;
+import hugo.weaving.DebugLog;
 import lombok.NoArgsConstructor;
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
@@ -72,6 +72,7 @@ public class PasswordViewFragment extends BaseFragment implements
     protected DefaultPrefs defaultPrefs;
     protected Category activeCategory;
     protected String filterText;
+    protected CardFilter filter;
 
     protected CardAdapter adapter;
     private LinearLayoutManager cardListLayoutManager;
@@ -213,6 +214,7 @@ public class PasswordViewFragment extends BaseFragment implements
         refreshCards();
     }
 
+    @DebugLog
     private void refreshCards() {
         currentVisibleItem = getCurrentVisibleItemId();
         List<Card> cards = new ArrayList<>();
@@ -221,13 +223,12 @@ public class PasswordViewFragment extends BaseFragment implements
         if (activeCategory != null && !activeCategory.equals(Category.all(getActivity()))) {
             where = Site.CATEGORY + " = '" + activeCategory.getName() + "'";
         }
+        List<Site> sites = Site.find(Site.class, where, null, null, defaultPrefs.sortBy(), null);
+        filter = new CardFilter(sites);
 
-        Iterator<Site> siteIterator = Site.findAsIterator(Site.class, where, null, null,
-                defaultPrefs.sortBy(), null);
         int currentVisible = 0;
         int position = 0;
-        while (siteIterator.hasNext()) {
-            Site site = siteIterator.next();
+        for (Site site : sites) {
             if (site.getId() == currentVisibleItem) {
                 currentVisible = position;
             }
@@ -243,7 +244,7 @@ public class PasswordViewFragment extends BaseFragment implements
         adapter = new CardAdapter();
         adapter.addAll(cards);
         if (!StringUtils.isEmpty(filterText)) {
-            new CardFilter().filter(filterText);
+            filter.filter(filterText);
         }
         cardListLayoutManager.scrollToPosition(currentVisible);
         cardListView.swapAdapter(adapter, true);
@@ -289,7 +290,7 @@ public class PasswordViewFragment extends BaseFragment implements
     @Override
     public boolean onQueryTextChange(String s) {
         filterText = s;
-        new CardFilter().filter(s);
+        filter.filter(s);
         //onScrollListener.show();
         return true;
     }
@@ -315,23 +316,42 @@ public class PasswordViewFragment extends BaseFragment implements
 
     class CardFilter extends Filter {
 
+        private final List<Site> allSites;
+
+        public CardFilter(List<Site> sites) {
+            allSites = sites;
+            // pre-cache passwords and usernames
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (Site site : allSites) {
+                        site.getCurrentPassword();
+                        site.getCurrentUserName();
+                    }
+                }
+            }).start();
+        }
+
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Card> cards = new ArrayList<>();
             String constraintString = constraint.toString().toLowerCase();
 
-            Iterator<Site> siteIterator = Site.findAsIterator(Site.class, null, null, null,
-                    defaultPrefs.sortBy(), null);
-            while (siteIterator.hasNext()) {
-                Site site = siteIterator.next();
+            for (Site site : allSites) {
                 // search in site name and password
-                boolean siteNameMatches = site.getSiteName() != null
+                boolean matches;
+                // site name matches
+                matches = site.getSiteName() != null
                         && site.getSiteName().toLowerCase().contains(constraintString);
-                boolean siteUserMatches = site.getCurrentUserName() != null
-                        && site.getCurrentUserName().toLowerCase().contains(constraintString);
-                boolean sitePassMatches = site.getCurrentPassword() != null
-                        && site.getCurrentPassword().toLowerCase().contains(constraintString);
-                if (siteNameMatches || siteUserMatches || sitePassMatches) {
+                // site user matches
+                String currentUserName = site.getCurrentUserName();
+                matches = matches || (currentUserName != null
+                        && currentUserName.toLowerCase().contains(constraintString));
+                // site password matches
+                String currentPassword = site.getCurrentPassword();
+                matches = matches || ((currentPassword != null)
+                        && currentPassword.toLowerCase().contains(constraintString));
+                if (matches) {
                     SiteCard siteCard = new SiteCard(getActivity(), site);
                     cards.add(siteCard);
                 }
