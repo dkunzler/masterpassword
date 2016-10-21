@@ -107,7 +107,7 @@ public class InputStickUtil {
     }
 
     @SuppressLint("ValidFragment")
-    private static class InputStickUtilityDownloadDialog extends DialogFragment {
+    public static class InputStickUtilityDownloadDialog extends DialogFragment {
         private AppCompatActivity activity;
 
         public InputStickUtilityDownloadDialog(AppCompatActivity activity) {
