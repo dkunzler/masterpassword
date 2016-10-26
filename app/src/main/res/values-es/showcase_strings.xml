@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_edit">Un sitio</string>
+    <string name="content_edit">Nombre del sitio, Tipo de contraseña y Contador del sitio son necesarios para generar la contraseña. Nombre de Usuario es un recordatorio para identificarte en el sitio, por lo que es opcional.</string>
+    <string name="title_login">Tus credenciales</string>
+    <string name="content_login">La combinación de tu nombre y contraseña maestra serán usadas para generar las diferentes contraseñas. </string>
+    <string name="title_add">Agregar sitio</string>
+    <string name="content_add">Agregar un sitio para el que quieras generar una contraseña.</string>
+    <string name="content_firstCard">Pulsa Contraseña para copiarla al portapapeles.</string>
+</resources>

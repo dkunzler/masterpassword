@@ -30,6 +30,7 @@
         <item>System Language</item>
         <item>English</item>
         <item>German</item>
+        <item>Spanish</item>
     </string-array>
 
     <string name="themeTitle">Theme</string>
@@ -60,7 +61,7 @@
     <string name="pref_header_inputstick">InputStick</string>
     <string name="defaultPasswordTypeTitle">Default password type</string>
     <string name="appVersionTitle">App Version</string>
-    <string name="opensourceLicensesTitle">Open-Source-Licenses</string>
+    <string name="creditsTitle">Credits</string>
     <string name="inputstickDeactivated_title">Deactivated</string>
     <string name="inputstickActivated_title">Activated</string>
 </resources>

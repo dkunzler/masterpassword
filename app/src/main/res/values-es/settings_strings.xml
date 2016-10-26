@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_settings">Configuración</string>
+
+    <string name="verifyPasswordTitle">Verificar contraseña al inicio</string>
+    <string name="verifyPasswordOff">Podrás iniciar sesión con una contraseña errónea. Las contraseñas de los sitios, serán erróneas.</string>
+    <string name="verifyPasswordOn">Tu contraseña será verificada al inicio. Esto reduce la seguridad.</string>
+
+    <string name="clipboardDurationTitle">Copiar la contraseña durante</string>
+    <string-array name="pref_clipboardDuration_titles">
+        <item>10 segundos</item>
+        <item>20 segundos</item>
+        <item>30 segundos</item>
+        <item>1 minuto</item>
+        <item>Siempre</item>
+    </string-array>
+
+
+    <string name="autoLogoutDurationTitle">Cerrar sesión automáticamente en</string>
+    <string-array name="pref_autoLogoutDuration_titles">
+        <item>1 minuto</item>
+        <item>10 minutos</item>
+        <item>30 minutos</item>
+        <item>1 hora</item>
+        <item>Nunca</item>
+    </string-array>
+
+    <string name="languageTitle">Idioma</string>
+    <string-array name="pref_language_titles">
+        <item>Idioma del sistema</item>
+        <item>Inglés</item>
+        <item>Alemán</item>
+        <item>Español</item>
+    </string-array>
+
+    <string name="themeTitle">Tema</string>
+    <string-array name="pref_theme_titles">
+        <item>Automático</item>
+        <item>Claro</item>
+        <item>Oscuro</item>
+    </string-array>
+
+    <string name="inputstickKeyMapTitle">Configuración de idioma del teclado</string>
+    <string-array name="pref_inputstickKeymap_titles">
+        <item>Alemán</item>
+        <item>Inglés (US)</item>
+        <item>Francés</item>
+        <item>Español</item>
+        <item>Noruego</item>
+        <item>Polaco</item>
+        <item>Portugués (Brasileño)</item>
+        <item>Ruso</item>
+        <item>Eslovaco</item>
+        <item>Sueco</item>
+        <item>Inglés Dvorak (US)</item>
+    </string-array>
+
+    <string name="pref_header_general">General</string>
+    <string name="pref_header_about">Acerca de</string>
+    <string name="pref_header_security">Seguridad</string>
+    <string name="pref_header_inputstick">InputStick</string>
+    <string name="defaultPasswordTypeTitle">Tipo de contraseña por defecto</string>
+    <string name="appVersionTitle">Versión de la App</string>
+    <string name="creditsTitle">Credits</string>
+    <string name="inputstickDeactivated_title">Desactivado</string>
+    <string name="inputstickActivated_title">Activado</string>
+</resources>

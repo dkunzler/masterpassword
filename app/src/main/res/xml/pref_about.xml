@@ -10,6 +10,6 @@
 
         <de.devland.masterpassword.ui.preferences.InformationDialogPreference
             content="raw/licenses"
-            android:title="@string/opensourceLicensesTitle" />
+            android:title="@string/creditsTitle" />
     </PreferenceCategory>
 </PreferenceScreen>
