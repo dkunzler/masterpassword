@@ -8,39 +8,21 @@
     android:layout_margin="5dp"
     card_view:elevation="2sp">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="15dp">
 
         <TextView
             android:id="@+id/siteName"
-            tools:text="Large Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/text"
-            android:textStyle="bold" />
-
-        <com.andexert.library.RippleView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/siteName"
-            android:layout_toLeftOf="@+id/rippleMore"
-            android:layout_toStartOf="@+id/rippleMore"
-            ripple:rv_centered="true"
-            ripple:rv_color="@color/ripple_material_light"
-            ripple:rv_rippleDuration="100">
-
-            <ImageView
-                android:id="@+id/imageInputstick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_inputstick" />
-        </com.andexert.library.RippleView>
+            android:textStyle="bold"
+            tools:text="Large Text" />
 
         <com.andexert.library.RippleView
             android:id="@+id/rippleMore"
@@ -48,41 +30,43 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/siteName"
-            ripple:rv_centered="true"
-            ripple:rv_color="@color/ripple_material_light"
-            ripple:rv_rippleDuration="100">
+            android:layout_alignParentTop="true"
+            card_view:rv_centered="true"
+            card_view:rv_color="@color/ripple_material_light"
+            card_view:rv_rippleDuration="100">
 
             <ImageView
                 android:id="@+id/imageMore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_navigation_more_vert" />
+                android:layout_marginTop="-10dp"
+                android:src="@drawable/ic_navigation_more_horiz" />
 
         </com.andexert.library.RippleView>
+
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/siteName"
+            android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/text_secondary" />
 
+
         <TextView
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/userName"
             android:layout_marginTop="10dp"
             android:background="@color/primary_dark"

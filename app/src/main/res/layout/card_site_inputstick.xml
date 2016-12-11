@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:elevation="2sp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+    <RelativeLayout
+        android:id="@+id/relativeSiteName"
+        android:layout_width="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/rippleMore"
+        android:layout_height="wrap_content">
+        <com.andexert.library.RippleView
+            android:id="@+id/rippleInputstickSitename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:rv_centered="true"
+            card_view:rv_color="@color/ripple_material_light"
+            card_view:rv_rippleDuration="100"
+
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:id="@+id/imageInputstickSitename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_inputstick" />
+        </com.andexert.library.RippleView>
+        <TextView
+            android:id="@+id/siteName"
+            tools:text="Large Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/rippleInputstickSitename"
+            android:layout_toStartOf="@id/rippleInputstickSitename"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/text"
+            android:textStyle="bold" />
+        </RelativeLayout>
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rippleMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            card_view:rv_centered="true"
+            card_view:rv_color="@color/ripple_material_light"
+            card_view:rv_rippleDuration="100">
+
+            <ImageView
+                android:id="@+id/imageMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:src="@drawable/ic_navigation_more_horiz" />
+
+        </com.andexert.library.RippleView>
+
+    <RelativeLayout
+        android:id="@+id/relativeUserName"
+        android:layout_width="match_parent"
+            android:layout_below="@+id/relativeSiteName"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rippleInputstickUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:rv_centered="true"
+            card_view:rv_color="@color/ripple_material_light"
+            card_view:rv_rippleDuration="100"
+
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/imageInputstickUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_inputstick" />
+        </com.andexert.library.RippleView>
+        <TextView
+            android:id="@+id/userName"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@id/rippleInputstickUsername"
+            android:layout_toStartOf="@id/rippleInputstickUsername"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_secondary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/relativeUserName"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+
+            <com.andexert.library.RippleView
+                android:id="@+id/rippleInputstickPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:rv_centered="true"
+                card_view:rv_color="@color/ripple_material_light"
+                card_view:rv_rippleDuration="100"
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:id="@+id/imageInputstickPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_inputstick" />
+            </com.andexert.library.RippleView>
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/primary_dark"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Large Text"
+                android:layout_toLeftOf="@id/rippleInputstickPassword"
+                android:layout_toStartOf="@id/rippleInputstickPassword"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

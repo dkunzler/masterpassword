@@ -10,6 +10,7 @@ import de.devland.masterpassword.R;
 public class CardViewHolderFactory {
     public static CardAdapter.CardViewHolder create(int layoutId, View view) {
         switch (layoutId) {
+            case R.layout.card_site_inputstick:
             case R.layout.card_site:
                 return new SiteCard.SiteCardViewHolder(view);
             case R.layout.card_dummy:

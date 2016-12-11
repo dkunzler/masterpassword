@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import butterknife.Optional;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
@@ -49,14 +51,16 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
     protected DefaultPrefs defaultPrefs;
 
     private String generatedPassword;
+    private String userName;
+    private String siteName;
 
     public SiteCard(Context context, Site site) {
-        super(R.layout.card_site);
         this.context = context;
         this.site = site;
 
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, context);
         this.inputStickPrefs = Esperandro.getPreferences(InputStickPrefs.class, context);
+        this.layoutId = inputStickPrefs.inputstickEnabled() ? R.layout.card_site_inputstick : R.layout.card_site;
     }
 
     @Override
@@ -64,10 +68,11 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         SiteCardViewHolder viewHolder = (SiteCardViewHolder) cardViewHolder;
         currentViewHolder = viewHolder;
         ButterKnife.bind(this, viewHolder.itemView);
-        viewHolder.siteName.setText(site.getSiteName());
+        siteName = site.getSiteName();
+        viewHolder.siteName.setText(siteName);
         viewHolder.siteName.setTypeface(Typeface.DEFAULT_BOLD);
         viewHolder.siteName.setTextColor(ContextCompat.getColor(context, R.color.text));
-        String userName = site.getCurrentUserName();
+        userName = site.getCurrentUserName();
         viewHolder.userName.setText(userName);
         if (userName.isEmpty()) {
             viewHolder.userName.setVisibility(View.GONE);
@@ -75,10 +80,9 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
             viewHolder.userName.setVisibility(View.VISIBLE);
         }
         if (inputStickPrefs.inputstickEnabled()) {
-            viewHolder.imageInputStick.setVisibility(View.VISIBLE);
-            Utils.tint(context, viewHolder.imageInputStick, R.color.card_icon_tint);
-        } else {
-            viewHolder.imageInputStick.setVisibility(View.GONE);
+            Utils.tint(context, viewHolder.imageInputStickPassword, R.color.card_icon_tint);
+            Utils.tint(context, viewHolder.imageInputStickSitename, R.color.card_icon_tint);
+            Utils.tint(context, viewHolder.imageInputStickUsername, R.color.card_icon_tint);
         }
         Utils.tint(context, viewHolder.imageMore, R.color.card_icon_tint);
         updatePassword();
@@ -122,9 +126,22 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         popupMenu.show();
     }
 
-    @OnClick(R.id.imageInputstick)
-    void sentToInputStick() {
+    @Optional
+    @OnClick(R.id.imageInputstickPassword)
+    void sendPasswordToInputStick() {
         InputStickUtil.checkAndType(App.get().getCurrentForegroundActivity(), generatedPassword, inputStickPrefs.inputstickKeymap());
+    }
+
+    @Optional
+    @OnClick(R.id.imageInputstickUsername)
+    void sendUsernameToInputStick() {
+        InputStickUtil.checkAndType(App.get().getCurrentForegroundActivity(), userName, inputStickPrefs.inputstickKeymap());
+    }
+
+    @Optional
+    @OnClick(R.id.imageInputstickSitename)
+    void sendSitenameToInputStick() {
+        InputStickUtil.checkAndType(App.get().getCurrentForegroundActivity(), siteName, inputStickPrefs.inputstickKeymap());
     }
 
     @OnClick(R.id.card)
@@ -132,7 +149,8 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         App.get().getBus().post(new SiteCardClickEvent(this));
     }
 
-    @OnLongClick(R.id.imageInputstick)
+    @Optional
+    @OnLongClick({R.id.imageInputstickPassword, R.id.imageInputstickUsername, R.id.imageInputstickSitename})
     public boolean showInputStickToast() {
         Toast.makeText(context, R.string.msg_sentToInputstick, Toast.LENGTH_SHORT).show();
         return true;
@@ -184,8 +202,15 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         protected TextView userName;
         @BindView(R.id.password)
         protected TextView password;
-        @BindView(R.id.imageInputstick)
-        protected ImageView imageInputStick;
+        @BindView(R.id.imageInputstickPassword)
+        @Nullable
+        protected ImageView imageInputStickPassword;
+        @BindView(R.id.imageInputstickSitename)
+        @Nullable
+        protected ImageView imageInputStickSitename;
+        @Nullable
+        @BindView(R.id.imageInputstickUsername)
+        protected ImageView imageInputStickUsername;
         @BindView(R.id.imageMore)
         protected ImageView imageMore;
 
