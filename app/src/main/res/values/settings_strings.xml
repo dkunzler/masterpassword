@@ -53,6 +53,8 @@
         <item>Slovak</item>
         <item>Swedish</item>
         <item>English Dvorak (US)</item>
+        <item>French (Switzerland)</item>
+        <item>German (Switzerland)</item>
     </string-array>
 
     <string name="pref_header_general">General</string>

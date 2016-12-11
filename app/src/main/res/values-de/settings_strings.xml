@@ -53,6 +53,8 @@
         <item>Slovakisch</item>
         <item>Schwedisch</item>
         <item>Englisch Dvorak (USA)</item>
+        <item>Französisch (Schweiz)</item>
+        <item>Deutsch (Schweiz)</item>
     </string-array>
 
     <string name="pref_header_general">Allgemein</string>
