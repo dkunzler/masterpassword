@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="de.devland.masterpassword.ui.LoginActivity$PlaceholderFragment">
+    tools:context="de.devland.masterpassword.ui.LoginActivity">
 
 
     <RelativeLayout
@@ -26,36 +26,47 @@
             android:textSize="28sp"
             tools:text="Identicon" />
 
-        <com.maksim88.passwordedittext.PasswordEditText
-            android:id="@+id/editText_masterPassword"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInput_masterPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_identicon"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:ems="10"
-            android:hint="@string/hint_password"
-            app:pet_iconShow="@drawable/ic_visibility"
-            app:pet_iconHide="@drawable/ic_visibility_off"
-            android:inputType="textPassword">
+            app:passwordToggleEnabled="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
 
-            <requestFocus />
-        </com.maksim88.passwordedittext.PasswordEditText>
+            <EditText
+                android:id="@+id/editText_masterPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword">
 
-        <EditText
-            android:id="@+id/editText_fullName"
+                <requestFocus />
+            </EditText>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInput_fullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editText_masterPassword"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:hint="@string/hint_fullName"
-            android:inputType="textVisiblePassword" />
+            android:layout_below="@+id/textInput_masterPassword"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/editText_fullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_fullName"
+                android:inputType="textVisiblePassword" />
+        </android.support.design.widget.TextInputLayout>
 
         <com.andexert.library.RippleView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editText_fullName"
+            android:layout_below="@+id/textInput_fullName"
             android:layout_centerHorizontal="true"
             android:layout_gravity="bottom|right"
             android:layout_marginTop="20dp"
