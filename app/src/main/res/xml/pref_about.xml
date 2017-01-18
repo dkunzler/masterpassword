@@ -2,6 +2,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/pref_header_about">
+        <de.devland.masterpassword.ui.preferences.StatisticsPreference android:title="Statistics" />
+
         <de.devland.masterpassword.ui.preferences.FeedbackPreference android:title="@string/title_feedback" />
 
         <Preference

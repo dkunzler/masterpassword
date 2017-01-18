@@ -66,4 +66,10 @@
     <string name="creditsTitle">Credits</string>
     <string name="inputstickDeactivated_title">Deactivated</string>
     <string name="inputstickActivated_title">Activated</string>
+
+    <string name="pref_header_statistics">Statistics</string>
+    <string name="msg_numberPasswords"># of Passwords</string>
+    <string name="msg_numberCategories"># of categories</string>
+    <string name="msg_numberGeneratedLogins"># of generated logins</string>
+    <string name="msg_numberSavedLogins"># of saved logins</string>
 </resources>
