@@ -1,0 +1,1 @@
+update SITE set LAST_CHANGE=LAST_USED

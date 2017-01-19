@@ -1,9 +1,14 @@
 package de.devland.masterpassword.model;
 
 import android.database.Cursor;
+import android.util.Log;
+import android.util.Pair;
 
 import com.google.common.primitives.UnsignedInteger;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
+import com.google.gson.reflect.TypeToken;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.MPSiteVariant;
 import com.lyndir.masterpassword.MasterKey;
@@ -12,7 +17,9 @@ import com.lyndir.masterpassword.model.MPUser;
 import com.orm.SugarRecord;
 import com.orm.dsl.Ignore;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import lombok.AccessLevel;
@@ -58,7 +65,19 @@ public class Site extends SugarRecord {
     @Expose
     protected Date lastUsed = new Date(0);
     @Expose
+    protected Date lastChange = new Date();
+    @Expose
     protected String category;
+    @Expose
+    protected String notes;
+    @Expose
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    protected String questions;
+    @Expose
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    protected String customFields;
     protected String storedPassword;
 
     @Setter(AccessLevel.NONE)
@@ -130,7 +149,49 @@ public class Site extends SugarRecord {
         }
     }
 
+    public List<String> getQuestions() {
+        List<String> result = new ArrayList<>();
+        if (questions != null) {
+            try {
+                Gson gson = new GsonBuilder().create();
+                result = gson.fromJson(questions, new TypeToken<List<String>>(){}.getType());
+            } catch (Exception e) {
+                Log.e("Site", "Error parsing questions.", e);
+            }
+        }
+        return result;
+    }
 
+    public List<Pair<String, String>> getCustomFields() {
+        List<Pair<String, String>> result = new ArrayList<>();
+        if (customFields != null) {
+            try {
+                Gson gson = new GsonBuilder().create();
+                result = gson.fromJson(customFields, new TypeToken<List<Pair<String, String>>>(){}.getType());
+            } catch (Exception e) {
+                Log.e("Site", "Error parsing questions.", e);
+            }
+        }
+        return result;
+    }
+
+    public void setQuestions(List<String> questions) {
+        if (questions != null) {
+            Gson gson = new GsonBuilder().create();
+            this.questions = gson.toJson(questions);
+        } else {
+            this.questions = null;
+        }
+    }
+
+    public void setCustomFields(List<Pair<String, String>> fields) {
+        if (fields != null) {
+            Gson gson = new GsonBuilder().create();
+            this.customFields = gson.toJson(fields);
+        } else {
+            this.customFields = null;
+        }
+    }
 
     private void invalidateCaches() {
         cachedPassword = null;
