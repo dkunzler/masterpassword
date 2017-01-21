@@ -99,9 +99,16 @@ public class Site extends SugarRecord {
 
     public void touch() {
         lastUsed = new Date();
-        this.save();
+        // use super.save here to not trigger a change for a use
+        super.save();
     }
 
+    public long change() {
+        Date now = new Date();
+        this.lastUsed = now;
+        this.lastChange = now;
+        return super.save();
+    }
 
 
     public void setSiteName(String siteName) {
@@ -154,7 +161,8 @@ public class Site extends SugarRecord {
         if (questions != null) {
             try {
                 Gson gson = new GsonBuilder().create();
-                result = gson.fromJson(questions, new TypeToken<List<String>>(){}.getType());
+                result = gson.fromJson(questions, new TypeToken<List<String>>() {
+                }.getType());
             } catch (Exception e) {
                 Log.e("Site", "Error parsing questions.", e);
             }
@@ -167,7 +175,8 @@ public class Site extends SugarRecord {
         if (customFields != null) {
             try {
                 Gson gson = new GsonBuilder().create();
-                result = gson.fromJson(customFields, new TypeToken<List<Pair<String, String>>>(){}.getType());
+                result = gson.fromJson(customFields, new TypeToken<List<Pair<String, String>>>() {
+                }.getType());
             } catch (Exception e) {
                 Log.e("Site", "Error parsing questions.", e);
             }

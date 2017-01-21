@@ -16,6 +16,10 @@ import android.widget.Toast;
 
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 
+import org.joda.time.DateTime;
+
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -89,6 +93,29 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         Typeface typeface = Typeface
                 .createFromAsset(context.getAssets(), "fonts/RobotoSlab-Light.ttf");
         viewHolder.password.setTypeface(typeface);
+        int textColor = android.R.color.white;
+        int passwordColor = R.color.password_normal;
+        if (defaultPrefs.visualizePasswordAge()) {
+            long lastChange = site.getLastChange().getTime();
+            long now = new Date().getTime();
+            long week = 1000 * 60 * 60 * 24 * 7;
+            long weeksModerate = defaultPrefs.passwordAgeModerate() * week;
+            long weeksCritical = defaultPrefs.passwordAgeCritical() * week;
+            long diff = now - lastChange;
+            new DateTime(lastChange);
+            int weeks = 3;//Weeks.weeksBetween(lastChange, now).getWeeks();
+            if (diff >= weeksModerate) {
+                if (diff >= weeksCritical) {
+                    textColor = android.R.color.white;
+                    passwordColor = R.color.password_critical;
+                } else {
+                    textColor = android.R.color.black;
+                    passwordColor = R.color.password_moderate;
+                }
+            }
+        }
+        viewHolder.password.setTextColor(ContextCompat.getColor(context, textColor));
+        viewHolder.password.setBackgroundColor(ContextCompat.getColor(context, passwordColor));
     }
 
     @Override

@@ -351,7 +351,7 @@ public class EditFragment extends BaseFragment {
         site.setSiteCounter(siteCounter.getValue());
         site.setCategory(categorySpinner.getSelectedItem().toString());
         if (site.complete()) {
-            site.touch();
+            site.change();
         }
     }
 

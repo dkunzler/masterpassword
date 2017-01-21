@@ -86,4 +86,16 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     String defaultThemeMode();
     void defaultThemeMode(String defaultThemeMode);
 
+    @Default(ofBoolean = false)
+    boolean visualizePasswordAge();
+    void visualizePasswordAge(boolean visualize);
+
+    @Default(ofInt = 6)
+    int passwordAgeModerate();
+    void passwordAgeModerate(int passwordAgeModerate);
+
+    @Default(ofInt = 8)
+    int passwordAgeCritical();
+    void passwordAgeCritical(int passwordAgeCritical);
+
 }

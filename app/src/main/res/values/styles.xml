@@ -49,6 +49,10 @@
     <color name="text_secondary">#8a000000</color>
     <color name="icon">#8a000000</color>
     <color name="text">#de000000</color>
+    
+    <color name="password_critical">#B71C1C</color>
+    <color name="password_moderate">#FFEE58</color>
+    <color name="password_normal">@color/primary_dark</color>
 
     <style name="ShowcaseLightTheme" parent="ShowcaseView">
         <item name="sv_backgroundColor">#ddffffff</item>
