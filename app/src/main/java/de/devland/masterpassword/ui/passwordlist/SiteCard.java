@@ -99,11 +99,10 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
             long lastChange = site.getLastChange().getTime();
             long now = new Date().getTime();
             long week = 1000 * 60 * 60 * 24 * 7;
-            long weeksModerate = defaultPrefs.passwordAgeModerate() * week;
-            long weeksCritical = defaultPrefs.passwordAgeCritical() * week;
+            long weeksModerate = Integer.parseInt(defaultPrefs.passwordAgeModerate()) * week;
+            long weeksCritical = Integer.parseInt(defaultPrefs.passwordAgeCritical()) * week;
             long diff = now - lastChange;
             new DateTime(lastChange);
-            int weeks = 3;//Weeks.weeksBetween(lastChange, now).getWeeks();
             if (diff >= weeksModerate) {
                 if (diff >= weeksCritical) {
                     textColor = android.R.color.white;

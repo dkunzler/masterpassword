@@ -22,7 +22,10 @@
             android:entries="@array/pref_theme_titles"
             android:entryValues="@array/pref_theme_values"
             android:key="defaultThemeMode"
-            android:title="@string/themeTitle"/>
+            android:title="@string/themeTitle" />
+        <de.devland.masterpassword.ui.preferences.PasswordAgePreference
+            android:key="passwordage"
+            android:title="@string/pref_header_passwordAge" />
 
     </PreferenceCategory>
 </PreferenceScreen>

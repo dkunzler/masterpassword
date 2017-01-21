@@ -90,12 +90,12 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     boolean visualizePasswordAge();
     void visualizePasswordAge(boolean visualize);
 
-    @Default(ofInt = 6)
-    int passwordAgeModerate();
-    void passwordAgeModerate(int passwordAgeModerate);
+    @Default(ofString = "6")
+    String passwordAgeModerate();
+    void passwordAgeModerate(String passwordAgeModerate);
 
-    @Default(ofInt = 8)
-    int passwordAgeCritical();
-    void passwordAgeCritical(int passwordAgeCritical);
+    @Default(ofString = "8")
+    String passwordAgeCritical();
+    void passwordAgeCritical(String passwordAgeCritical);
 
 }

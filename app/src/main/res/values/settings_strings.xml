@@ -61,11 +61,17 @@
     <string name="pref_header_about">About</string>
     <string name="pref_header_security">Security</string>
     <string name="pref_header_inputstick">InputStick</string>
+    <string name="pref_header_passwordAge">Visualize Password Age</string>
     <string name="defaultPasswordTypeTitle">Default password type</string>
     <string name="appVersionTitle">App Version</string>
     <string name="creditsTitle">Credits</string>
     <string name="inputstickDeactivated_title">Deactivated</string>
     <string name="inputstickActivated_title">Activated</string>
+    <string name="passwordAgeDeactivated_summary">Age of password will not be visualized</string>
+    <string name="passwordAgeActivated_summary">Age of password (normal, moderate, critical) will be visualized by different colors.</string>
+    <string name="passwordAgeModerate_title">Weeks until password age is moderate</string>
+    <string name="passwordAgeCritical_title">Weeks until password age is critical</string>
+    <string name="visualizePasswordAge_title">Password Age Visualization</string>
 
     <string name="pref_header_statistics">Statistics</string>
     <string name="msg_numberPasswords"># of Passwords</string>
