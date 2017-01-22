@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -45,6 +46,7 @@ import java.util.TreeSet;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTouch;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
@@ -83,6 +85,8 @@ public class EditFragment extends BaseFragment {
     protected Spinner algorithmVersion;
     @BindView(R.id.spinner_category)
     protected Spinner categorySpinner;
+    @BindView(R.id.editText_notes)
+    protected EditText notes;
     @BindView(R.id.numberPicker_siteCounter)
     protected SiteCounterView siteCounter;
     @BindView(R.id.password)
@@ -297,6 +301,7 @@ public class EditFragment extends BaseFragment {
         generatedUsername.setChecked(site.isGeneratedUserName());
         userName.setEnabled(!site.isGeneratedUserName());
         userName.setText(site.getCurrentUserName());
+        notes.setText(site.getNotes());
     }
 
     private void updateCategorySpinner(String category) {
@@ -350,6 +355,7 @@ public class EditFragment extends BaseFragment {
         site.setAlgorithmVersion(MasterKey.Version.valueOf(algorithmVersionKeys[algorithmVersionIndex]));
         site.setSiteCounter(siteCounter.getValue());
         site.setCategory(categorySpinner.getSelectedItem().toString());
+        site.setNotes(notes.getText().toString());
         if (site.complete()) {
             site.change();
         }
@@ -357,5 +363,19 @@ public class EditFragment extends BaseFragment {
 
     public void onBackPressed() {
         writeValues();
+    }
+
+    // http://stackoverflow.com/a/20520755
+    @OnTouch(R.id.editText_notes)
+    public boolean scrollViewFix(View v, MotionEvent event) {
+        if (v.getId() == R.id.editText_notes) {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                case MotionEvent.ACTION_UP:
+                    v.getParent().requestDisallowInterceptTouchEvent(false);
+                    break;
+            }
+        }
+        return false;
     }
 }

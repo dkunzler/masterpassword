@@ -84,4 +84,5 @@
     <string name="summary_lockCategories" >If enabled categrories can neither get deleted nor added.</string>
     <string name="title_lockCategories" >Lock Categories</string>
     <string name="caption_homepage">Homepage</string>
+    <string name="caption_notes">Notes</string>
 </resources>
