@@ -30,6 +30,7 @@ public class SettingsFragment extends BaseSettingsFragment {
 
         ((LanguagePreference) findPreference("language")).setSettingsActivity(getAppCompatActivity());
         ((VerifyPasswordPreference) findPreference("verifyPassword")).setSettingsActivity(getAppCompatActivity());
+        ((UnlockFingerprintPreference) findPreference("fingerprintEnabled")).setSettingsActivity(getAppCompatActivity());
         ((InputStickPreference) findPreference("inputstick")).setSettingsActivity(getAppCompatActivity());
         ((PasswordAgePreference) findPreference("passwordage")).setSettingsActivity(getAppCompatActivity());
         bindPreferenceSummaryToValue(findPreference("language"));

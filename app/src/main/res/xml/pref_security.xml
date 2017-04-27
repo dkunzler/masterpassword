@@ -42,6 +42,10 @@
             android:key="verifyPassword"
             android:title="@string/verifyPasswordTitle" />
 
+        <de.devland.masterpassword.ui.preferences.UnlockFingerprintPreference
+            android:key="fingerprintEnabled"
+            android:title="Use fingerprint for unlock" />
+
         <de.devland.masterpassword.ui.preferences.InputStickPreference
             android:key="inputstick"
             android:title="@string/pref_header_inputstick" />

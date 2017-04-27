@@ -98,4 +98,8 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     String passwordAgeCritical();
     void passwordAgeCritical(String passwordAgeCritical);
 
+    @Default(ofBoolean = false)
+    boolean fingerprintEnabled();
+    void fingerprintEnabled(boolean fingerprintEnabled);
+
 }

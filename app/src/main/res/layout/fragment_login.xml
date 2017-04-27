@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_identicon"
             android:layout_centerHorizontal="true"
-            app:passwordToggleEnabled="true"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/editText_masterPassword"
@@ -64,6 +64,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <com.andexert.library.RippleView
+            android:id="@+id/ripple_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textInput_fullName"
@@ -79,7 +80,17 @@
                 android:src="@drawable/ic_go" />
         </com.andexert.library.RippleView>
 
+
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/imageView_fingerprint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/ic_fingerprint_black_48dp" />
 
 </RelativeLayout>

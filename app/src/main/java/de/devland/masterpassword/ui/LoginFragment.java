@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -32,6 +33,7 @@ import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.base.ui.BaseFragment;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.util.FingerprintUtil;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
 import de.devland.masterpassword.util.Identicon;
 import de.devland.masterpassword.util.MasterPasswordHolder;
@@ -52,6 +54,8 @@ public class LoginFragment extends BaseFragment {
     protected TextView identicon;
     @BindView(R.id.imageView_login)
     protected ImageView loginButton;
+    @BindView(R.id.imageView_fingerprint)
+    protected ImageView fingerprintIcon;
 
     protected DefaultPrefs defaultPrefs;
 
@@ -65,6 +69,12 @@ public class LoginFragment extends BaseFragment {
             Intent intent = new Intent(getActivity(), PasswordViewActivity.class);
             getActivity().startActivity(intent);
             getActivity().finish();
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            } else {
+                fingerprintIcon.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -76,6 +86,12 @@ public class LoginFragment extends BaseFragment {
         Drawable wrapped = DrawableCompat.wrap(ContextCompat.getDrawable(getContext(), R.drawable.ic_go));
         DrawableCompat.setTint(wrapped, ContextCompat.getColor(getContext(), R.color.login_icon_tint));
         loginButton.setImageDrawable(wrapped);
+        wrapped = DrawableCompat.wrap(ContextCompat.getDrawable(getContext(), R.drawable.ic_fingerprint_black_24dp));
+        DrawableCompat.setTint(wrapped, ContextCompat.getColor(getContext(), R.color.login_icon_tint));
+        fingerprintIcon.setImageDrawable(wrapped);
+        if (!(defaultPrefs.fingerprintEnabled() && FingerprintUtil.canUseFingerprint(false))) {
+            fingerprintIcon.setVisibility(View.GONE);
+        }
         return rootView;
     }
 
