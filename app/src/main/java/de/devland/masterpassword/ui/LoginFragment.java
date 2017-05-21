@@ -89,10 +89,15 @@ public class LoginFragment extends BaseFragment {
         wrapped = DrawableCompat.wrap(ContextCompat.getDrawable(getContext(), R.drawable.ic_fingerprint_black_24dp));
         DrawableCompat.setTint(wrapped, ContextCompat.getColor(getContext(), R.color.login_icon_tint));
         fingerprintIcon.setImageDrawable(wrapped);
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if (!(defaultPrefs.fingerprintEnabled() && FingerprintUtil.canUseFingerprint(false))) {
             fingerprintIcon.setVisibility(View.GONE);
         }
-        return rootView;
     }
 
     @Override

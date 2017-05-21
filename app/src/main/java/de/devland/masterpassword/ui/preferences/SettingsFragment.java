@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
+import android.support.annotation.NonNull;
 
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
@@ -15,6 +16,14 @@ import de.devland.masterpassword.util.event.ReloadDrawerEvent;
  */
 public class SettingsFragment extends BaseSettingsFragment {
 
+    public interface RequestPermissionsResultListener {
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
