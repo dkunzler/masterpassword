@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,12 +22,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import javax.crypto.Cipher;
+
 import butterknife.ButterKnife;
 import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.base.util.SnackbarUtil;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.util.FingerprintUtil;
 
 /**
  * Created by deekay on 21.05.2017.
@@ -37,6 +41,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
 
         public boolean success = false;
     private CancellationSignal cancellationSignal;
+    private Cipher cipher;
     private FingerprintManager.AuthenticationCallback callback = new FingerprintManager.AuthenticationCallback() {
 
 
@@ -62,6 +67,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
         public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
             super.onAuthenticationSucceeded(result);
             success = true;
+            cipher = result.getCryptoObject().getCipher();
             if (fingerprint != null) {
                 DrawableCompat.setTint(fingerprint, Color.GREEN);
             }
@@ -97,6 +103,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
                 dismiss();
             }
         });
+        builder.setPositiveButton(android.R.string.ok, null);
         builder.setCancelable(false);
         builder.setTitle(R.string.title_confirmPassword);
         View dialogView = View.inflate(getContext(), R.layout.dialog_unlockfingerprint, null);
@@ -129,7 +136,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
             public void onShow(DialogInterface unused) {
                 FingerprintManager fingerprintManager = (FingerprintManager) getContext().getSystemService(Context.FINGERPRINT_SERVICE);
                 cancellationSignal = new CancellationSignal();
-                fingerprintManager.authenticate(null, cancellationSignal, 0, callback, null);
+                fingerprintManager.authenticate(new FingerprintManager.CryptoObject(FingerprintUtil.initEncryptCipher()), cancellationSignal, 0, callback, null);
 
 
                 Button okButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -148,10 +155,19 @@ public class UnlockFingerprintDialog extends DialogFragment {
                         String name = fullName.getText().toString();
 
                         if (success) {
-                            // TODO do crypto
-                            dismiss();
+                            Pair<String, String> passwordPair = FingerprintUtil.tryEncrypt(cipher, password);
+                            Pair<String, String> namePair = FingerprintUtil.tryEncrypt(cipher, name);
+                            if (namePair != null && passwordPair != null) {
+                                defaultPrefs.encryptedName(namePair.first);
+                                defaultPrefs.encryptionIVName(namePair.second);
+                                defaultPrefs.encryptedPassword(passwordPair.first);
+                                defaultPrefs.encryptionIVPassword(passwordPair.second);
+                                dismiss();
+                            } else {
+                                // TODO error handling
+                            }
                         } else {
-                            fullName.setError("Fingerprint error.");
+                            SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), "You need to provide your fingerprint before proceeding.");
                         }
                     }
                 });
