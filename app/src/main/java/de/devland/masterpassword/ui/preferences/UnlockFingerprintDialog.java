@@ -155,13 +155,10 @@ public class UnlockFingerprintDialog extends DialogFragment {
                         String name = fullName.getText().toString();
 
                         if (success) {
-                            Pair<String, String> passwordPair = FingerprintUtil.tryEncrypt(cipher, password);
-                            Pair<String, String> namePair = FingerprintUtil.tryEncrypt(cipher, name);
-                            if (namePair != null && passwordPair != null) {
-                                defaultPrefs.encryptedName(namePair.first);
-                                defaultPrefs.encryptionIVName(namePair.second);
-                                defaultPrefs.encryptedPassword(passwordPair.first);
-                                defaultPrefs.encryptionIVPassword(passwordPair.second);
+                            Pair<String, String> encryptPair = FingerprintUtil.tryEncrypt(cipher, password, name);
+                            if (encryptPair != null) {
+                                defaultPrefs.encrypted(encryptPair.first);
+                                defaultPrefs.encryptionIV(encryptPair.second);
                                 dismiss();
                             } else {
                                 // TODO error handling

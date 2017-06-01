@@ -2,17 +2,22 @@ package de.devland.masterpassword.ui;
 
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,12 +31,16 @@ import android.widget.TextView;
 import com.lambdaworks.crypto.SCryptUtil;
 import com.lyndir.lhunath.opal.system.util.StringUtils;
 
+import javax.crypto.Cipher;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.devland.esperandro.Esperandro;
+import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.base.ui.BaseFragment;
+import de.devland.masterpassword.base.util.SnackbarUtil;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.FingerprintUtil;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
@@ -39,6 +48,8 @@ import de.devland.masterpassword.util.Identicon;
 import de.devland.masterpassword.util.MasterPasswordHolder;
 import de.devland.masterpassword.util.ShowCaseManager;
 import lombok.NoArgsConstructor;
+
+import static android.content.Context.FINGERPRINT_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,6 +71,7 @@ public class LoginFragment extends BaseFragment {
     protected DefaultPrefs defaultPrefs;
 
     protected TextWatcher credentialsChangeWatcher = new IdenticonUpdater();
+    private CancellationSignal cancellationSignal;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,12 +81,6 @@ public class LoginFragment extends BaseFragment {
             Intent intent = new Intent(getActivity(), PasswordViewActivity.class);
             getActivity().startActivity(intent);
             getActivity().finish();
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-            } else {
-                fingerprintIcon.setVisibility(View.GONE);
-            }
         }
     }
 
@@ -92,11 +98,71 @@ public class LoginFragment extends BaseFragment {
         return rootView;
     }
 
+    @SuppressWarnings("MissingPermission")
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onResume() {
         super.onResume();
         if (!(defaultPrefs.fingerprintEnabled() && FingerprintUtil.canUseFingerprint(false))) {
             fingerprintIcon.setVisibility(View.GONE);
+        } else {
+            final Drawable fingerprint = fingerprintIcon.getDrawable();
+            FingerprintManager fingerprintManager = (FingerprintManager) App.get().getSystemService(FINGERPRINT_SERVICE);
+            FingerprintManager.CryptoObject crypto = new FingerprintManager.CryptoObject(FingerprintUtil.initDecryptCipher(defaultPrefs.encryptionIV()));
+            cancellationSignal = new CancellationSignal();
+            fingerprintManager.authenticate(crypto, cancellationSignal, 0, new FingerprintManager.AuthenticationCallback() {
+
+
+                @Override
+                public void onAuthenticationError(int errorCode, CharSequence errString) {
+                    super.onAuthenticationError(errorCode, errString);
+                    if (fingerprint != null) {
+                        DrawableCompat.setTint(fingerprint, Color.RED);
+                    }
+                    SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), errString.toString());
+                }
+
+                @Override
+                public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
+                    super.onAuthenticationHelp(helpCode, helpString);
+                    if (fingerprint != null) {
+                        DrawableCompat.setTint(fingerprint, Color.YELLOW);
+                    }
+                    SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), helpString.toString());
+                }
+
+                @Override
+                public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
+                    super.onAuthenticationSucceeded(result);
+                    Cipher cipher = result.getCryptoObject().getCipher();
+                    Pair<String, String> secret = FingerprintUtil.tryDecrypt(cipher, defaultPrefs.encrypted());
+                    if (secret != null) {
+                        String password = secret.first;
+                        String name = secret.second;
+                        doLogin(name, password);
+                    } else {
+                        DrawableCompat.setTint(fingerprint, Color.RED);
+                        // TODO message
+                    }
+                }
+
+                @Override
+                public void onAuthenticationFailed() {
+                    super.onAuthenticationFailed();
+                    if (fingerprint != null) {
+                        DrawableCompat.setTint(fingerprint, Color.RED);
+                    }
+                }
+            }, null);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (cancellationSignal != null) {
+            cancellationSignal.cancel();
         }
     }
 
@@ -121,18 +187,22 @@ public class LoginFragment extends BaseFragment {
             if (defaultPrefs.saveUserName()) {
                 defaultPrefs.defaultUserName(fullName.getText().toString());
             }
-            GenerateUserKeysAsyncTask keysAsyncTask = new GenerateUserKeysAsyncTask(getActivity(),
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(getActivity(), PasswordViewActivity.class);
-                            getActivity().startActivity(intent);
-                            getActivity().finish();
-                        }
-                    });
-            keysAsyncTask
-                    .execute(fullName.getText().toString(), masterPassword.getText().toString());
+            doLogin(fullName.getText().toString(), masterPassword.getText().toString());
         }
+    }
+
+    private void doLogin(String fullName, String password) {
+        GenerateUserKeysAsyncTask keysAsyncTask = new GenerateUserKeysAsyncTask(getActivity(),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(getActivity(), PasswordViewActivity.class);
+                        getActivity().startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
+        keysAsyncTask
+                .execute(fullName, password);
     }
 
     private boolean checkInputs() {

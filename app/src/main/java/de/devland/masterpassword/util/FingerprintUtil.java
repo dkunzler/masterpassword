@@ -124,9 +124,11 @@ public class FingerprintUtil {
      * Tries to encrypt some data with the generated key in {@link #createKey} which is
      * only works if the user has just authenticated via fingerprint.
      */
-    public static Pair<String, String> tryEncrypt(Cipher encryptCipher, String secret) {
+    public static Pair<String, String> tryEncrypt(Cipher encryptCipher, String password, String login) {
         try {
 
+            String secret = Base64.encodeToString(password.getBytes(), Base64.DEFAULT) + ":"
+                    + Base64.encodeToString(login.getBytes(), Base64.DEFAULT);
             byte[] encrypted = encryptCipher.doFinal(secret.getBytes());
 
             IvParameterSpec ivParams = encryptCipher.getParameters().getParameterSpec(IvParameterSpec.class);
@@ -146,14 +148,16 @@ public class FingerprintUtil {
      * Tries to decrypt some data with the generated key in {@link #createKey} which is
      * only works if the user has just authenticated via fingerprint.
      */
-    public static String tryDecrypt(Cipher decryptCipher, String payload) {
+    public static Pair<String, String> tryDecrypt(Cipher decryptCipher, String payload) {
         try {
 
             byte[] encodedData = Base64.decode(payload, Base64.DEFAULT);
             byte[] decodedData = decryptCipher.doFinal(encodedData);
-            return new String(decodedData);
+            String[] parts = new String(decodedData).split(":");
+            return new Pair<>(new String(Base64.decode(parts[0], Base64.DEFAULT)),
+                    new String(Base64.decode(parts[1], Base64.DEFAULT)));
 
-        } catch (BadPaddingException | IllegalBlockSizeException e) {
+        } catch (BadPaddingException | IllegalBlockSizeException | ArrayIndexOutOfBoundsException e) {
             SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), "Failed to decrypt the data with the generated key.");
             Log.e(TAG, "Failed to decrypt the data with the generated key." + e.getMessage());
             e.printStackTrace();

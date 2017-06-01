@@ -102,16 +102,9 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     boolean fingerprintEnabled();
     void fingerprintEnabled(boolean fingerprintEnabled);
 
-    String encryptedName();
-    void encryptedName(String encryptedName);
+    String encrypted();
+    void encrypted(String encryptedPassword);
 
-    String encryptedPassword();
-    void encryptedPassword(String encryptedPassword);
-
-    String encryptionIVName();
-    void encryptionIVName(String encryptionIV);
-
-    String encryptionIVPassword();
-    void encryptionIVPassword(String encryptionIV);
-
+    String encryptionIV();
+    void encryptionIV(String encryptionIV);
 }
