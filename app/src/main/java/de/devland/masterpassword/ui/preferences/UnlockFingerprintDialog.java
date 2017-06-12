@@ -59,6 +59,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
                 DrawableCompat.setTint(fingerprint, Color.RED);
             }
             helpText.setText(errString);
+            helpText.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -68,6 +69,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
                 DrawableCompat.setTint(fingerprint, Color.YELLOW);
             }
             helpText.setText(helpString);
+            helpText.setVisibility(View.VISIBLE);
         }
 
         @Override
