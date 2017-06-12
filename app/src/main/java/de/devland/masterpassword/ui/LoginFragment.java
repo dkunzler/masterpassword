@@ -42,6 +42,7 @@ import de.devland.masterpassword.R;
 import de.devland.masterpassword.base.ui.BaseFragment;
 import de.devland.masterpassword.base.util.SnackbarUtil;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.util.FingerprintException;
 import de.devland.masterpassword.util.FingerprintUtil;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
 import de.devland.masterpassword.util.Identicon;
@@ -106,54 +107,56 @@ public class LoginFragment extends BaseFragment {
         if (!(defaultPrefs.fingerprintEnabled() && FingerprintUtil.canUseFingerprint(false))) {
             fingerprintIcon.setVisibility(View.GONE);
         } else {
-            final Drawable fingerprint = fingerprintIcon.getDrawable();
-            FingerprintManager fingerprintManager = (FingerprintManager) App.get().getSystemService(FINGERPRINT_SERVICE);
-            FingerprintManager.CryptoObject crypto = new FingerprintManager.CryptoObject(FingerprintUtil.initDecryptCipher(defaultPrefs.encryptionIV()));
-            cancellationSignal = new CancellationSignal();
-            fingerprintManager.authenticate(crypto, cancellationSignal, 0, new FingerprintManager.AuthenticationCallback() {
-
-
-                @Override
-                public void onAuthenticationError(int errorCode, CharSequence errString) {
-                    super.onAuthenticationError(errorCode, errString);
-                    if (fingerprint != null) {
-                        DrawableCompat.setTint(fingerprint, Color.RED);
+            try {
+                final Drawable fingerprint = fingerprintIcon.getDrawable();
+                FingerprintManager fingerprintManager = (FingerprintManager) App.get().getSystemService(FINGERPRINT_SERVICE);
+                FingerprintManager.CryptoObject crypto = new FingerprintManager.CryptoObject(FingerprintUtil.initDecryptCipher(defaultPrefs.encryptionIV()));
+                cancellationSignal = new CancellationSignal();
+                fingerprintManager.authenticate(crypto, cancellationSignal, 0, new FingerprintManager.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationError(int errorCode, CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+                        if (fingerprint != null) {
+                            DrawableCompat.setTint(fingerprint, Color.RED);
+                        }
+                        SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), errString.toString());
                     }
-                    SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), errString.toString());
-                }
 
-                @Override
-                public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
-                    super.onAuthenticationHelp(helpCode, helpString);
-                    if (fingerprint != null) {
-                        DrawableCompat.setTint(fingerprint, Color.YELLOW);
+                    @Override
+                    public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
+                        super.onAuthenticationHelp(helpCode, helpString);
+                        if (fingerprint != null) {
+                            DrawableCompat.setTint(fingerprint, Color.YELLOW);
+                        }
+                        SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), helpString.toString());
                     }
-                    SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), helpString.toString());
-                }
 
-                @Override
-                public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-                    super.onAuthenticationSucceeded(result);
-                    Cipher cipher = result.getCryptoObject().getCipher();
-                    Pair<String, String> secret = FingerprintUtil.tryDecrypt(cipher, defaultPrefs.encrypted());
-                    if (secret != null) {
-                        String password = secret.first;
-                        String name = secret.second;
-                        doLogin(name, password);
-                    } else {
-                        DrawableCompat.setTint(fingerprint, Color.RED);
-                        // TODO message
+                    @Override
+                    public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+                        Cipher cipher = result.getCryptoObject().getCipher();
+                        Pair<String, String> secret = FingerprintUtil.tryDecrypt(cipher, defaultPrefs.encrypted());
+                        if (secret != null) {
+                            String password = secret.first;
+                            String name = secret.second;
+                            doLogin(name, password);
+                        } else {
+                            DrawableCompat.setTint(fingerprint, Color.RED);
+                            // TODO message
+                        }
                     }
-                }
 
-                @Override
-                public void onAuthenticationFailed() {
-                    super.onAuthenticationFailed();
-                    if (fingerprint != null) {
-                        DrawableCompat.setTint(fingerprint, Color.RED);
+                    @Override
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                        if (fingerprint != null) {
+                            DrawableCompat.setTint(fingerprint, Color.RED);
+                        }
                     }
-                }
-            }, null);
+                }, null);
+            } catch (FingerprintException e) {
+                SnackbarUtil.showLong(getActivity(), e.getMessage());
+            }
         }
     }
 
