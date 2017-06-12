@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import javax.crypto.Cipher;
 
@@ -30,7 +31,10 @@ import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.base.util.SnackbarUtil;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.util.FingerprintException;
 import de.devland.masterpassword.util.FingerprintUtil;
+
+import static butterknife.ButterKnife.findById;
 
 /**
  * Created by deekay on 21.05.2017.
@@ -39,7 +43,10 @@ import de.devland.masterpassword.util.FingerprintUtil;
 @TargetApi(Build.VERSION_CODES.M)
 public class UnlockFingerprintDialog extends DialogFragment {
 
-        public boolean success = false;
+    private Drawable fingerprint;
+    private TextView helpText;
+
+    public boolean success = false;
     private CancellationSignal cancellationSignal;
     private Cipher cipher;
     private FingerprintManager.AuthenticationCallback callback = new FingerprintManager.AuthenticationCallback() {
@@ -51,7 +58,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
             if (fingerprint != null) {
                 DrawableCompat.setTint(fingerprint, Color.RED);
             }
-            SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), errString.toString());
+            helpText.setText(errString);
         }
 
         @Override
@@ -60,7 +67,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
             if (fingerprint != null) {
                 DrawableCompat.setTint(fingerprint, Color.YELLOW);
             }
-            SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), helpString.toString());
+            helpText.setText(helpString);
         }
 
         @Override
@@ -81,7 +88,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
             }
         }
     };
-    private Drawable fingerprint;
+
 
     @Override
     public void onDismiss(DialogInterface dialog) {
@@ -107,9 +114,10 @@ public class UnlockFingerprintDialog extends DialogFragment {
         builder.setCancelable(false);
         builder.setTitle(R.string.title_confirmPassword);
         View dialogView = View.inflate(getContext(), R.layout.dialog_unlockfingerprint, null);
-        final EditText masterPassword = ButterKnife.findById(dialogView, R.id.editText_masterPassword);
-        final EditText fullName = ButterKnife.findById(dialogView, R.id.editText_fullName);
-        final ImageView fingerprintIcon = ButterKnife.findById(dialogView, R.id.imageView_fingerprint);
+        final EditText masterPassword = findById(dialogView, R.id.editText_masterPassword);
+        final EditText fullName = findById(dialogView, R.id.editText_fullName);
+        final ImageView fingerprintIcon = findById(dialogView, R.id.imageView_fingerprint);
+        helpText = ButterKnife.findById(dialogView, R.id.textView_fingerprintHelp);
 
         fullName.setText(defaultPrefs.defaultUserName());
         builder.setView(dialogView);
@@ -136,7 +144,13 @@ public class UnlockFingerprintDialog extends DialogFragment {
             public void onShow(DialogInterface unused) {
                 FingerprintManager fingerprintManager = (FingerprintManager) getContext().getSystemService(Context.FINGERPRINT_SERVICE);
                 cancellationSignal = new CancellationSignal();
-                fingerprintManager.authenticate(new FingerprintManager.CryptoObject(FingerprintUtil.initEncryptCipher()), cancellationSignal, 0, callback, null);
+                try {
+                    fingerprintManager.authenticate(new FingerprintManager.CryptoObject(FingerprintUtil.initEncryptCipher()), cancellationSignal, 0, callback, null);
+                } catch (FingerprintException e) {
+                    dismiss();
+                    defaultPrefs.fingerprintEnabled(false);
+                    SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), e.getMessage());
+                }
 
 
                 Button okButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -164,7 +178,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
                                 // TODO error handling
                             }
                         } else {
-                            SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), "You need to provide your fingerprint before proceeding.");
+                            helpText.setText(R.string.fingerprint_scanNeeded);
                         }
                     }
                 });

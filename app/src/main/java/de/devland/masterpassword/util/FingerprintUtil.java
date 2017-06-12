@@ -2,6 +2,7 @@ package de.devland.masterpassword.util;
 
 import android.Manifest;
 import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -32,18 +33,18 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
 import de.devland.masterpassword.App;
+import de.devland.masterpassword.R;
 import de.devland.masterpassword.base.ui.BaseActivity;
 import de.devland.masterpassword.base.util.SnackbarUtil;
 
-import static android.content.ContentValues.TAG;
-import static android.content.Context.FINGERPRINT_SERVICE;
 import static android.content.Context.KEYGUARD_SERVICE;
 
 /**
- * Created by deekay on 16.04.2017.
+ * Created by David Kunzler on 16.04.2017.
  */
-
 public class FingerprintUtil {
+
+    private static final String TAG = "FingerprintUtil";
 
     private static final String KEY_NAME = "de.devland.masterpassword.key";
 
@@ -53,21 +54,21 @@ public class FingerprintUtil {
             //Get an instance of KeyguardManager and FingerprintManager//
             KeyguardManager keyguardManager =
                     (KeyguardManager) App.get().getSystemService(KEYGUARD_SERVICE);
-            FingerprintManager fingerprintManager = (FingerprintManager) App.get().getSystemService(FINGERPRINT_SERVICE);
+            FingerprintManager fingerprintManager = (FingerprintManager) App.get().getSystemService(Context.FINGERPRINT_SERVICE);
 
 
             //Check whether the device has a fingerprint sensor//
             if (!fingerprintManager.isHardwareDetected()) {
                 // If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
                 if (doSnackbar)
-                    SnackbarUtil.showShort(activity, "Your device does not support fingerprint unlock");
+                    SnackbarUtil.showShort(activity, R.string.fingerprint_device_unsupported);
                 return false;
             }
             //Check whether the user has granted your app the USE_FINGERPRINT permission//
             if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
                 // If your app doesn't have this permission, then display the following text//
                 if (doSnackbar)
-                    SnackbarUtil.showShort(activity, "Please enable the fingerprint permission");
+                    SnackbarUtil.showShort(activity, R.string.fingerprint_permission);
                 return false;
             }
 
@@ -75,7 +76,7 @@ public class FingerprintUtil {
             if (!fingerprintManager.hasEnrolledFingerprints()) {
                 // If the user hasn’t configured any fingerprints, then display the following message//
                 if (doSnackbar)
-                    SnackbarUtil.showShort(activity, "No fingerprint configured. Please register at least one fingerprint in your device's Settings");
+                    SnackbarUtil.showShort(activity, R.string.fingerprint_unconfigured);
                 return false;
             }
 
@@ -83,20 +84,20 @@ public class FingerprintUtil {
             if (!keyguardManager.isKeyguardSecure()) {
                 // If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
                 if (doSnackbar)
-                    SnackbarUtil.showShort(activity, "Please enable lockscreen security in your device's Settings");
+                    SnackbarUtil.showShort(activity, R.string.fingerprint_noLock);
                 return false;
             }
 
             return true;
         } else {
             if (doSnackbar)
-                SnackbarUtil.showShort(activity, "Your device does not support fingerprint unlock");
+                SnackbarUtil.showShort(activity, R.string.fingerprint_device_unsupported);
             return false;
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public static Cipher initEncryptCipher() {
+    public static Cipher initEncryptCipher() throws FingerprintException {
         Cipher encryptCipher = getCipher(Cipher.ENCRYPT_MODE, getKeyStore(), null);
         if (encryptCipher == null) {
             // try again after recreating the keystore
@@ -116,7 +117,7 @@ public class FingerprintUtil {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public static Cipher initDecryptCipher(String iv) {
+    public static Cipher initDecryptCipher(String iv) throws FingerprintException {
         return  getCipher(Cipher.DECRYPT_MODE, getKeyStore(), iv);
     }
 
@@ -167,29 +168,19 @@ public class FingerprintUtil {
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private static SecretKey getKey(KeyStore keyStore) {
+    private static SecretKey getKey(KeyStore keyStore) throws FingerprintException {
         try {
             keyStore.load(null);
             SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME, null);
             if (key != null) return key;
             return createKey();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (UnrecoverableKeyException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
+        } catch (IOException | NoSuchAlgorithmException | CertificateException | KeyStoreException | UnrecoverableKeyException e) {
+            throw new FingerprintException(App.get().getString(R.string.fingeprint_secretKeyUnrecoverable), e);
         }
-        return null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private static SecretKey createKey() {
+    private static SecretKey createKey() throws FingerprintException {
         try {
 
             KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
@@ -206,14 +197,13 @@ public class FingerprintUtil {
             return keyGenerator.generateKey();
 
         } catch (Exception e) {
-
+            throw new FingerprintException(App.get().getString(R.string.fingeprint_secretKeyGenerationFailed), e);
         }
-        return null;
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private static Cipher getCipher(int mode, KeyStore keyStore, String ivString) {
+    private static Cipher getCipher(int mode, KeyStore keyStore, String ivString) throws FingerprintException {
         Cipher cipher;
 
         try {
@@ -225,7 +215,6 @@ public class FingerprintUtil {
             IvParameterSpec ivParams;
             if (mode == Cipher.ENCRYPT_MODE) {
                 cipher.init(mode, getKey(keyStore));
-
             } else {
                 SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME, null);
                 iv = Base64.decode(ivString, Base64.DEFAULT);
@@ -233,24 +222,9 @@ public class FingerprintUtil {
                 cipher.init(mode, key, ivParams);
             }
             return cipher;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (UnrecoverableKeyException e) {
-            e.printStackTrace();
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableKeyException | InvalidKeyException | KeyStoreException | InvalidAlgorithmParameterException | IOException | CertificateException e) {
+            throw new FingerprintException(App.get().getString(R.string.fingeprint_cipherUnrecoverable), e);
         }
-        return null;
     }
 
 }

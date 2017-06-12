@@ -85,4 +85,13 @@
     <string name="title_lockCategories" >Lock Categories</string>
     <string name="caption_homepage">Homepage</string>
     <string name="caption_notes">Notes</string>
+    <string name="fingerprint_device_unsupported">Your device does not support fingerprint unlock</string>
+    <string name="fingerprint_permission">Please enable the fingerprint permission</string>
+    <string name="fingerprint_unconfigured">No fingerprint configured. Please register at least one fingerprint in your device\'s Settings</string>
+    <string name="fingerprint_noLock">Please enable lockscreen security in your device\'s Settings</string>
+    <string name="fingeprint_secretKeyUnrecoverable">Could not get secret Key from Keystore. Please disable and re-enable fingerprint in setting.</string>
+    <string name="fingeprint_secretKeyGenerationFailed">Could not create secret Key. Seems that your device is unsupported.</string>
+    <string name="fingeprint_cipherUnrecoverable">Could not create cipher for encryption. Seems your device is unsupported.</string>
+    <string name="fingerprint_hint">Enter required information and then scan your fingerprint.</string>
+    <string name="fingerprint_scanNeeded">You need to provide your fingerprint before proceeding.</string>
 </resources>
