@@ -84,4 +84,21 @@
     <string name="caption_playStore">Play Store</string>
     <string name="title_lockCategories">Kategorien sperren</string>
     <string name="summary_lockCategories">Wenn aktiviert, können Kategorien weder gelöscht noch neu angelegt werden.</string>
+    <string name="caption_notes">Notizen</string>
+    <string name="passwordAgeActivated_summary">"Alter des Passworts (normal, mittelgradig, kritisch) durch Farben visualisieren. "</string>
+    <string name="passwordAgeCritical_title">Wochen bis Passwortalter kritisch</string>
+    <string name="passwordAgeDeactivated_summary">Passwortalter wird nicht visualisiert.</string>
+    <string name="passwordAgeModerate_title">Wochen bis Passwortalter mittelgradig</string>
+    <string name="pref_header_passwordAge">Passwortalter visualisieren</string>
+    <string name="visualizePasswordAge_title">Passwortalter visualieren</string>
+    <string name="fingeprint_cipherUnrecoverable">Konnte Verschlüsselung nicht generieren. Ihr Gerät scheint nicht unterstützt zu sein.</string>
+    <string name="fingeprint_secretKeyGenerationFailed">Konnte geheimen Schlüssel nicht generieren. Ihr Gerät scheint nicht unterstützt zu sein.</string>
+    <string name="fingeprint_secretKeyUnrecoverable">Konnte geheimen Schlüssel nicht erhalten. Bitte Fingerabdruck in den Einstellungen deaktiveren und wieder aktivieren.</string>
+    <string name="fingerprint_device_unsupported">Ihr Gerät unterstützt das Entsperren mit Fingerabdruck nicht</string>
+    <string name="fingerprint_dialog_success">Fingerabdruck erkannt. Bestätigen nach Eingabe des Passworts.</string>
+    <string name="fingerprint_hint">"Benötigte Informationen eingeben und danach Fingerabdruck scannen. "</string>
+    <string name="fingerprint_noLock">Bitte aktivieren Sie die Bildschirmsperre in den Geräte Einstellungen</string>
+    <string name="fingerprint_permission">Bitte aktivieren Sie die Fingerabdruck Berechtigung</string>
+    <string name="fingerprint_scanNeeded">Sie müssen Ihren Fingerabdruck scannen bevor Sie weitermachen können.</string>
+    <string name="fingerprint_unconfigured">Keine Fingerabdrücke hinterlegt. Bitte registrieren Sie Ihren Fingerabdruck in den Geräte Einstellungen.</string>
 </resources>
