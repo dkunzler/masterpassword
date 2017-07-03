@@ -6,6 +6,10 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
     signingConfigs {
         release {
             storeFile file("../release.jks")
@@ -20,8 +24,8 @@ android {
         applicationId "de.devland.masterpassword"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 44
-        versionName "1.12.0"
+        versionCode 45
+        versionName "1.13.0"
     }
 
     compileOptions {
