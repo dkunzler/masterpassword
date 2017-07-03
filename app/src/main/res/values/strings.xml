@@ -94,4 +94,5 @@
     <string name="fingeprint_cipherUnrecoverable">Could not create cipher for encryption. Seems your device is unsupported.</string>
     <string name="fingerprint_hint">Enter required information and then scan your fingerprint.</string>
     <string name="fingerprint_scanNeeded">You need to provide your fingerprint before proceeding.</string>
+    <string name="fingerprint_dialog_success">Fingerprint provided. Confirm after entering your password.</string>
 </resources>

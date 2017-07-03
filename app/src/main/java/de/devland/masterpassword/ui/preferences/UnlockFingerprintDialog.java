@@ -76,6 +76,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
         public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
             super.onAuthenticationSucceeded(result);
             success = true;
+            helpText.setText(R.string.fingerprint_dialog_success);
             cipher = result.getCryptoObject().getCipher();
             if (fingerprint != null) {
                 DrawableCompat.setTint(fingerprint, Color.GREEN);
