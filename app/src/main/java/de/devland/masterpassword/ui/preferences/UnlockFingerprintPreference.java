@@ -61,6 +61,7 @@ public class UnlockFingerprintPreference extends CheckBoxPreference implements P
         if ((Boolean) newValue) {
             if (!FingerprintUtil.canUseFingerprint(true)) {
                 this.setChecked(false);
+                FingerprintUtil.resetFingerprintSettings();
             } else {
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(settingsActivity, new String[]{Manifest.permission.USE_FINGERPRINT}, 42);
@@ -72,13 +73,14 @@ public class UnlockFingerprintPreference extends CheckBoxPreference implements P
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
                     this.setChecked(false);
+                    FingerprintUtil.resetFingerprintSettings();
                 } else {
                     UnlockFingerprintDialog verifyPasswordDialog = new UnlockFingerprintDialog();
                     verifyPasswordDialog.show(settingsActivity.getSupportFragmentManager(), null);
                 }
             }
         } else {
-            defaultPrefs.masterPasswordHash(null);
+            FingerprintUtil.resetFingerprintSettings();
         }
         return true;
     }

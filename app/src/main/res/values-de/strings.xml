@@ -101,4 +101,5 @@
     <string name="fingerprint_permission">Bitte aktivieren Sie die Fingerabdruck Berechtigung</string>
     <string name="fingerprint_scanNeeded">Sie müssen Ihren Fingerabdruck scannen bevor Sie weitermachen können.</string>
     <string name="fingerprint_unconfigured">Keine Fingerabdrücke hinterlegt. Bitte registrieren Sie Ihren Fingerabdruck in den Geräte Einstellungen.</string>
+    <string name="msg_fingerprint_changed">Fingerabdrücke wurden geändert, bitte in den Einstellungen wieder aktivieren.</string>
 </resources>

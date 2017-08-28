@@ -32,10 +32,12 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
+import de.devland.esperandro.Esperandro;
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.base.ui.BaseActivity;
 import de.devland.masterpassword.base.util.SnackbarUtil;
+import de.devland.masterpassword.prefs.DefaultPrefs;
 
 import static android.content.Context.KEYGUARD_SERVICE;
 
@@ -227,4 +229,10 @@ public class FingerprintUtil {
         }
     }
 
+    public static void resetFingerprintSettings() {
+        DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, App.get());
+        defaultPrefs.fingerprintEnabled(false);
+        defaultPrefs.encrypted(null);
+        defaultPrefs.encryptionIV(null);
+    }
 }

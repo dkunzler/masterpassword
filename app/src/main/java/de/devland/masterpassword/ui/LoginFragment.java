@@ -155,7 +155,13 @@ public class LoginFragment extends BaseFragment {
                     }
                 }, null);
             } catch (FingerprintException e) {
-                SnackbarUtil.showLong(getActivity(), e.getMessage());
+                Throwable cause = e.getCause();
+                if (cause.getClass().getSimpleName().equals("KeyPermanentlyInvalidatedException")) {
+                    FingerprintUtil.resetFingerprintSettings();
+                    SnackbarUtil.showLong(getActivity(), R.string.msg_fingerprint_changed);
+                } else {
+                    SnackbarUtil.showLong(getActivity(), e.getMessage());
+                }
             }
         }
     }
