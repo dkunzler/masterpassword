@@ -9,6 +9,6 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor(suppressConstructorProperties = true)
-public class SiteCardClickEvent {
+public class SiteCardEditEvent {
     private final SiteCard card;
 }

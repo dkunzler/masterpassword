@@ -45,7 +45,7 @@ import de.devland.masterpassword.util.ShowCaseManager;
 import de.devland.masterpassword.util.event.CategoryChangeEvent;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import de.devland.masterpassword.util.event.ProStatusChangeEvent;
-import de.devland.masterpassword.util.event.SiteCardClickEvent;
+import de.devland.masterpassword.util.event.SiteCardEditEvent;
 import de.devland.masterpassword.util.event.SiteDeleteEvent;
 import hugo.weaving.DebugLog;
 import lombok.NoArgsConstructor;
@@ -198,7 +198,7 @@ public class PasswordViewFragment extends BaseFragment implements
     }
 
     @Subscribe
-    public void onSiteCardClick(SiteCardClickEvent e) {
+    public void onSiteCardEdit(SiteCardEditEvent e) {
         Intent intent = new Intent(getActivity(), EditActivity.class);
         intent.putExtra(EditFragment.ARG_SITE_ID, e.getCard().getSite().getId());
         startActivity(intent);

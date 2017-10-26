@@ -5,6 +5,9 @@
         android:id="@+id/card_menu_show"
         android:title="@string/caption_showhide" />
     <item
+        android:id="@+id/card_menu_edit"
+        android:title="@string/caption_edit" />
+    <item
         android:id="@+id/card_menu_delete"
         android:title="@string/caption_delete" />
     <item

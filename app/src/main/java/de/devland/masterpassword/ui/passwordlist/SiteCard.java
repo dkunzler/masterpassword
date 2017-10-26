@@ -35,7 +35,7 @@ import de.devland.masterpassword.prefs.InputStickPrefs;
 import de.devland.masterpassword.service.ClearClipboardService;
 import de.devland.masterpassword.util.InputStickUtil;
 import de.devland.masterpassword.util.event.PasswordCopyEvent;
-import de.devland.masterpassword.util.event.SiteCardClickEvent;
+import de.devland.masterpassword.util.event.SiteCardEditEvent;
 import de.devland.masterpassword.util.event.SiteDeleteEvent;
 import lombok.Getter;
 
@@ -170,11 +170,6 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         InputStickUtil.checkAndType(App.get().getCurrentForegroundActivity(), siteName, inputStickPrefs.inputstickKeymap());
     }
 
-    @OnClick(R.id.card)
-    void onSiteCardClick() {
-        App.get().getBus().post(new SiteCardClickEvent(this));
-    }
-
     @Optional
     @OnLongClick({R.id.imageInputstickPassword, R.id.imageInputstickUsername, R.id.imageInputstickSitename})
     public boolean showInputStickToast() {
@@ -192,6 +187,8 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
                 App.get().getBus().post(new SiteDeleteEvent(this));
                 // TODO undobar
                 break;
+            case R.id.card_menu_edit:
+                App.get().getBus().post(new SiteCardEditEvent(this));
             case R.id.card_menu_show:
                 if (currentViewHolder.password.getText().equals(generatedPassword)) {
                     currentViewHolder.password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
