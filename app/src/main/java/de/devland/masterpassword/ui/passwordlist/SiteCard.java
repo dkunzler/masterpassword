@@ -189,6 +189,7 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
                 break;
             case R.id.card_menu_edit:
                 App.get().getBus().post(new SiteCardEditEvent(this));
+                break;
             case R.id.card_menu_show:
                 if (currentViewHolder.password.getText().equals(generatedPassword)) {
                     currentViewHolder.password.setText(StringUtils.repeat(PASSWORD_DOT, generatedPassword.length()));
