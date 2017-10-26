@@ -5,10 +5,12 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.UriPermission;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.FingerprintManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -21,6 +23,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +31,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.common.io.ByteStreams;
 import com.lambdaworks.crypto.SCryptUtil;
 import com.lyndir.lhunath.opal.system.util.StringUtils;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 import javax.crypto.Cipher;
 
@@ -42,6 +51,7 @@ import de.devland.masterpassword.R;
 import de.devland.masterpassword.base.ui.BaseFragment;
 import de.devland.masterpassword.base.util.SnackbarUtil;
 import de.devland.masterpassword.prefs.DefaultPrefs;
+import de.devland.masterpassword.prefs.FileSyncPrefs;
 import de.devland.masterpassword.util.FingerprintException;
 import de.devland.masterpassword.util.FingerprintUtil;
 import de.devland.masterpassword.util.GenerateUserKeysAsyncTask;
@@ -104,6 +114,24 @@ public class LoginFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        FileSyncPrefs fileSyncPrefs = Esperandro.getPreferences(FileSyncPrefs.class, getActivity());
+        if (fileSyncPrefs.fileSyncActivated()) {
+            Log.e("FileSync", "Current uri: " + fileSyncPrefs.fileSyncUri());
+            try {
+                List<UriPermission> persistedUriPermissions = getActivity().getContentResolver().getPersistedUriPermissions();
+                Log.e("FileSync", "onResume: " + persistedUriPermissions.size());
+                InputStream inputStream = getActivity().getContentResolver()
+                        .openInputStream(Uri.parse(fileSyncPrefs.fileSyncUri()));
+                byte[] content = ByteStreams.toByteArray(inputStream);
+                Log.e("FileSync", new String(content));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         if (!(defaultPrefs.fingerprintEnabled() && FingerprintUtil.canUseFingerprint(false))) {
             fingerprintIcon.setVisibility(View.GONE);
         } else {

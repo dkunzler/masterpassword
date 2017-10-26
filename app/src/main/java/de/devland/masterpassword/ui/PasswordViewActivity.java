@@ -48,8 +48,8 @@ public class PasswordViewActivity extends LoginRequiringActivity implements
         if (savedInstanceState == null) {
             fragment = new PasswordViewFragment();
             getSupportFragmentManager().beginTransaction()
-                                       .add(R.id.container, fragment)
-                                       .commit();
+                    .add(R.id.container, fragment)
+                    .commit();
         } else {
             fragment = getSupportFragmentManager().getFragment(
                     savedInstanceState, "fragment");

@@ -2,4 +2,5 @@
 <resources>
     <bool name="use_provider">false</bool>
     <bool name="use_activity">true</bool>
+    <bool name="activate_file_sync">true</bool>
 </resources>

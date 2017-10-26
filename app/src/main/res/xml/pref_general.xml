@@ -14,6 +14,10 @@
             android:key="useLegacyFileManager"
             android:summary="@string/summary_useLegacyFilemanager"
             android:title="@string/title_builtinFileManager" />
+        <de.devland.masterpassword.ui.preferences.FileSyncPreference
+            android:summary="Choose a file that automatically is kept in sync."
+            android:title="Sync File"
+            />
         <CheckBoxPreference
             android:key="lockCategories"
             android:summary="@string/summary_lockCategories"
