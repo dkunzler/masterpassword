@@ -4,11 +4,9 @@ import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.FingerprintManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -24,9 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import javax.crypto.Cipher;
 
@@ -157,42 +152,13 @@ public class UnlockFingerprintDialog extends DialogFragment {
                 } catch (FingerprintException e) {
                     dismiss();
                     defaultPrefs.fingerprintEnabled(false);
-                    SnackbarUtil.showLong(App.get().getCurrentForegroundActivity(), e.getMessage());
-                    Throwable cause = e;
-                    String stacktrace = "";
-                    do {
-                        StringWriter sw = new StringWriter();
-                        PrintWriter pw = new PrintWriter(sw);
-                        cause.printStackTrace(pw);
-                        stacktrace += sw.toString();
-                        cause = cause.getCause();
-                    } while (cause != null && cause != e);
-
-                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                            "mailto", "info@devland.de", null));
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Master Password Feedback");
-                    String mailTemplate = "\n\n\n-----\n" +
-                            "App Version: %s\n" +
-                            "App Version Code: %d\n" +
-                            "OS Version: %s\n" +
-                            "API Level: %d\n" +
-                            "Android Version: %s\n" +
-                            "Device Manufacturer: %s\n" +
-                            "Device Codename: %s\n" +
-                            "Device Model: %s\n" +
-                            "Stacktrace: %s";
-                    String mailText = String.format(mailTemplate,
-                            defaultPrefs.versionName(),
-                            defaultPrefs.versionCode(),
-                            System.getProperty("os.version"),
-                            Build.VERSION.SDK_INT,
-                            Build.VERSION.RELEASE,
-                            Build.MANUFACTURER,
-                            Build.DEVICE,
-                            Build.MODEL,
-                            stacktrace);
-                    emailIntent.putExtra(Intent.EXTRA_TEXT, mailText);
-                    getContext().startActivity(Intent.createChooser(emailIntent, getContext().getString(R.string.title_feedback)));
+                    Throwable cause = e.getCause();
+                    FingerprintUtil.resetFingerprintSettings();
+                    if (cause.getClass().getSimpleName().equals("KeyPermanentlyInvalidatedException")) {
+                        SnackbarUtil.showLong(getActivity(), R.string.msg_fingerprint_changed);
+                    } else {
+                        SnackbarUtil.showLong(getActivity(), e.getMessage());
+                    }
                 }
 
 
