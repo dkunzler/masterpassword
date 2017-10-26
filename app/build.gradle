@@ -1,10 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.jakewharton.hugo'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
 
     lintOptions {
         disable 'MissingTranslation'
@@ -24,8 +23,9 @@ android {
         applicationId "de.devland.masterpassword"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 47
-        versionName "1.13.1"
+        versionCode 48
+        versionName "1.13.2"
+        vectorDrawables.useSupportLibrary = true
     }
 
     compileOptions {
@@ -85,9 +85,9 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
 
     // annotation processors
-    apt 'org.projectlombok:lombok:1.14.0' // MIT
-    apt 'de.devland.esperandro:esperandro:2.4.0' // Apache v2.0
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    annotationProcessor 'org.projectlombok:lombok:1.14.0' // MIT
+    annotationProcessor 'de.devland.esperandro:esperandro:2.4.0' // Apache v2.0
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // tools
     compile 'com.jakewharton:butterknife:8.4.0' // Apache v2.0
