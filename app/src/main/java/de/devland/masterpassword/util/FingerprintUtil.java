@@ -234,5 +234,13 @@ public class FingerprintUtil {
         defaultPrefs.fingerprintEnabled(false);
         defaultPrefs.encrypted(null);
         defaultPrefs.encryptionIV(null);
+
+        try {
+            KeyStore keyStore = getKeyStore();
+            keyStore.load(null);
+            keyStore.deleteEntry(KEY_NAME);
+        } catch (KeyStoreException  | CertificateException | NoSuchAlgorithmException | IOException e) {
+            Log.e(TAG, "error deleting key", e);
+        }
     }
 }
