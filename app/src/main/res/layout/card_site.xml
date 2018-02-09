@@ -31,6 +31,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="-10dp"
             card_view:rv_centered="true"
             card_view:rv_color="@color/ripple_material_light"
             card_view:rv_rippleDuration="100">
@@ -39,7 +40,6 @@
                 android:id="@+id/imageMore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
                 android:src="@drawable/ic_navigation_more_horiz" />
 
         </com.andexert.library.RippleView>
@@ -63,10 +63,10 @@
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/userName"
             android:layout_marginTop="10dp"
             android:background="@color/primary_dark"

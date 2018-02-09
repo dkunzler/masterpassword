@@ -23,8 +23,8 @@ android {
         applicationId "de.devland.masterpassword"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 49
-        versionName "1.13.3"
+        versionCode 50
+        versionName "1.13.4"
         vectorDrawables.useSupportLibrary = true
     }
 
