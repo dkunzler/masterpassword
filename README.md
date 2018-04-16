@@ -1,3 +1,5 @@
+Contributions welcome! I don't have time at the moment, feel free to work on the open issues and submit Pull Requests.
+
 Master Password
 ===============
 
