@@ -31,7 +31,8 @@
 
         <CheckBoxPreference
             android:key="hidePasswords"
-            android:title="@string/hidePasswordsTitle" />
+            android:title="@string/hidePasswordsTitle"
+            android:summary="@string/password_toggle_content_description"/>
 
         <CheckBoxPreference
             android:key="showCanary"
@@ -40,11 +41,13 @@
 
         <de.devland.masterpassword.ui.preferences.VerifyPasswordPreference
             android:key="verifyPassword"
-            android:title="@string/verifyPasswordTitle" />
+            android:title="@string/verifyPasswordTitle"
+            android:summaryOn="@string/verifyPasswordOn"
+            android:summaryOff="@string/verifyPasswordOff"/>
 
         <de.devland.masterpassword.ui.preferences.UnlockFingerprintPreference
             android:key="fingerprintEnabled"
-            android:title="Use fingerprint for unlock" />
+            android:title="@string/fingerprintEnabledTitle" />
 
         <de.devland.masterpassword.ui.preferences.InputStickPreference
             android:key="inputstick"

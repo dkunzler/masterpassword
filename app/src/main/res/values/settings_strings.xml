@@ -78,4 +78,6 @@
     <string name="msg_numberCategories"># of categories</string>
     <string name="msg_numberGeneratedLogins"># of generated logins</string>
     <string name="msg_numberSavedLogins"># of saved logins</string>
+    <string name="inputstickEnabledTitle">InputStick support</string>
+    <string name="fingerprintEnabledTitle">Use fingerprint for unlock</string>
 </resources>
