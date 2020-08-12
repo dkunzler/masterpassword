@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="passwordTypeValues">
+        <item>Maximum Security</item>
+        <item>Long</item>
+        <item>Medium</item>
+        <item>Basic</item>
+        <item>Short</item>
+        <item>PIN</item>
+        <item>Phrase (Answer)</item>
+        <item>Phrase (Password)</item>
+    </string-array>
+
+    <string-array translatable="false" name="algorithmVersionValues">
+        <item>Version 0</item>
+        <item>Version 1</item>
+        <item>Version 2</item>
+        <item>Version 3</item>
+    </string-array>
+
+    <string-array name="emptyArray">
+        <item></item>
+    </string-array>
+</resources>

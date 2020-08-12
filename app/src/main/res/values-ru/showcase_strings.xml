@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_edit">A Site</string>
+    <string name="content_edit">Site Name, Password Type and Site Counter are required to derive the password. User Name is a reminder when logging in to the site and therefore optional.</string>
+    <string name="title_login">Your Credentials</string>
+    <string name="content_login">The combination of your full name and a master password will be used to derive your different site passwords.</string>
+    <string name="title_add">Add Site</string>
+    <string name="content_add">Add a site you want to generate a password for.</string>
+    <string name="content_firstCard">Tap password to copy to clipboard.</string>
+</resources>
