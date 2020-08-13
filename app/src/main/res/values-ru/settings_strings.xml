@@ -26,12 +26,6 @@
     </string-array>
 
     <string name="languageTitle">Локализация</string>
-    <string-array name="pref_language_titles">
-        <item>Язык системы</item>
-        <item>English</item>
-        <item>German</item>
-        <item>Spanish</item>
-    </string-array>
 
     <string name="themeTitle">Тема</string>
     <string-array name="pref_theme_titles">

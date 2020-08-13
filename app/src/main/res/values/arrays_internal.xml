@@ -38,6 +38,7 @@
         <item>en</item>
         <item>de</item>
         <item>es</item>
+        <item>ru</item>
     </string-array>
     <string-array translatable="false" name="pref_theme_values">
         <item>AUTO</item>

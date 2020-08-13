@@ -26,11 +26,12 @@
     </string-array>
 
     <string name="languageTitle">Language</string>
-    <string-array name="pref_language_titles">
+    <string-array translatable="false" name="pref_language_titles">
         <item>System Language</item>
         <item>English</item>
-        <item>German</item>
-        <item>Spanish</item>
+        <item>Deutsch</item>
+        <item>Español</item>
+        <item>Русский</item>
     </string-array>
 
     <string name="themeTitle">Theme</string>
