@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="passwordTypeValues">
-        <item>Maximum Security</item>
-        <item>Long</item>
-        <item>Medium</item>
-        <item>Basic</item>
-        <item>Short</item>
-        <item>PIN</item>
-        <item>Phrase (Answer)</item>
-        <item>Phrase (Password)</item>
-    </string-array>
-
-    <string-array translatable="false" name="algorithmVersionValues">
-        <item>Version 0</item>
-        <item>Version 1</item>
-        <item>Version 2</item>
-        <item>Version 3</item>
+        <item>Параноидальный</item>
+        <item>Хороший</item>
+        <item>Нормальный</item>
+        <item>Простой</item>
+        <item>Очень простой</item>
+        <item>ПИН-код</item>
+        <item>Фраза (Ответ)</item>
+        <item>Фраза (Пароль)</item>
     </string-array>
 
     <string-array name="emptyArray">

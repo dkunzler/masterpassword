@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_settings">Настройки</string>
 
-    <string name="verifyPasswordTitle">Verify password at login</string>
-    <string name="verifyPasswordOff">You will be able to login with a wrong password. Shown site passwords are then incorrect.</string>
-    <string name="verifyPasswordOn">Your password will be verified at login. Decreases security.</string>
+    <string name="verifyPasswordTitle">Проверять мастер-пароль при входе</string>
+    <string name="verifyPasswordOff">Можно войти с любым мастер-паролем. Но в этом случае все пароли сайтов будут неверными.</string>
+    <string name="verifyPasswordOn">Мастер-пароль будет проверен при входе. Уменьшает безопасность.</string>
 
-    <string name="clipboardDurationTitle">Copy passwords for</string>
+    <string name="clipboardDurationTitle">Копировать пароль на</string>
     <string-array name="pref_clipboardDuration_titles">
-        <item>10 seconds</item>
-        <item>20 seconds</item>
-        <item>30 seconds</item>
-        <item>1 minute</item>
-        <item>Always</item>
+        <item>10 секунд</item>
+        <item>20 секунд</item>
+        <item>30 секунд</item>
+        <item>1 минуту</item>
+        <item>Навсегда</item>
     </string-array>
 
 
-    <string name="autoLogoutDurationTitle">Auto logout after</string>
+    <string name="autoLogoutDurationTitle">Автоматический выход после</string>
     <string-array name="pref_autoLogoutDuration_titles">
-        <item>1 minute</item>
-        <item>10 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>Never</item>
+        <item>1 минуту</item>
+        <item>10 минут</item>
+        <item>30 минут</item>
+        <item>1 час</item>
+        <item>Никогда</item>
     </string-array>
 
-    <string name="languageTitle">Language</string>
+    <string name="languageTitle">Локализация</string>
     <string-array name="pref_language_titles">
-        <item>System Language</item>
+        <item>Язык системы</item>
         <item>English</item>
         <item>German</item>
         <item>Spanish</item>
     </string-array>
 
-    <string name="themeTitle">Theme</string>
+    <string name="themeTitle">Тема</string>
     <string-array name="pref_theme_titles">
-        <item>Automatic</item>
-        <item>Light</item>
-        <item>Dark</item>
+        <item>Определять автоматически</item>
+        <item>Светлая</item>
+        <item>Темная</item>
     </string-array>
 
-    <string name="inputstickKeyMapTitle">Host Keyboard Layout</string>
+    <string name="inputstickKeyMapTitle">Раскладка клавиатуры на ПК</string>
     <string-array name="pref_inputstickKeymap_titles">
         <item>German</item>
         <item>English (US)</item>
@@ -57,27 +57,26 @@
         <item>German (Switzerland)</item>
     </string-array>
 
-    <string name="pref_header_general">General</string>
-    <string name="pref_header_about">About</string>
-    <string name="pref_header_security">Security</string>
-    <string name="pref_header_inputstick">InputStick</string>
-    <string name="pref_header_passwordAge">Visualize Password Age</string>
-    <string name="defaultPasswordTypeTitle">Default password type</string>
-    <string name="appVersionTitle">App Version</string>
-    <string name="creditsTitle">Credits</string>
-    <string name="inputstickDeactivated_title">Deactivated</string>
-    <string name="inputstickActivated_title">Activated</string>
-    <string name="passwordAgeDeactivated_summary">Age of password will not be visualized</string>
-    <string name="passwordAgeActivated_summary">Age of password (normal, moderate, critical) will be visualized by different colors.</string>
-    <string name="passwordAgeModerate_title">Weeks until password age is moderate</string>
-    <string name="passwordAgeCritical_title">Weeks until password age is critical</string>
-    <string name="visualizePasswordAge_title">Password Age Visualization</string>
+    <string name="pref_header_general">Основные</string>
+    <string name="pref_header_about">О программе</string>
+    <string name="pref_header_security">Безопасность</string>
+    <string name="pref_header_passwordAge">Старые пароли</string>
+    <string name="defaultPasswordTypeTitle">Сложность пароля по-умолчанию</string>
+    <string name="appVersionTitle">Версия приложения</string>
+    <string name="creditsTitle">Благодарности</string>
+    <string name="inputstickDeactivated_title">Деактивировано</string>
+    <string name="inputstickActivated_title">Активировано</string>
+    <string name="passwordAgeDeactivated_summary">Возраст паролей не анализируется</string>
+    <string name="passwordAgeActivated_summary">Пароли будут выделяться разными цветами (норма, внимание, критично) в зависимости от даты создания.</string>
+    <string name="passwordAgeModerate_title">Кол-во недель до отметки \"внимание\"</string>
+    <string name="passwordAgeCritical_title">Кол-во недель до отметки \"критично\"</string>
+    <string name="visualizePasswordAge_title">Выделять старые пароли</string>
 
-    <string name="pref_header_statistics">Statistics</string>
-    <string name="msg_numberPasswords"># of Passwords</string>
-    <string name="msg_numberCategories"># of categories</string>
-    <string name="msg_numberGeneratedLogins"># of generated logins</string>
-    <string name="msg_numberSavedLogins"># of saved logins</string>
-    <string name="inputstickEnabledTitle">InputStick support</string>
-    <string name="fingerprintEnabledTitle">Use fingerprint for unlock</string>
+    <string name="pref_header_statistics">Статистика</string>
+    <string name="msg_numberPasswords"># паролей</string>
+    <string name="msg_numberCategories"># категорий</string>
+    <string name="msg_numberGeneratedLogins"># созданных логинов</string>
+    <string name="msg_numberSavedLogins"># сохранённых логинов</string>
+    <string name="inputstickEnabledTitle">Интеграция с InputStick</string>
+    <string name="fingerprintEnabledTitle">Использовать отпечаток для входа</string>
 </resources>
