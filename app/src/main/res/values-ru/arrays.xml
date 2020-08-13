@@ -11,6 +11,13 @@
         <item>Фраза (Пароль)</item>
     </string-array>
 
+    <string-array name="algorithmVersionValues">
+        <item>Версия 0</item>
+        <item>Версия 1</item>
+        <item>Версия 2</item>
+        <item>Версия 3</item>
+    </string-array>
+
     <string-array name="emptyArray">
         <item></item>
     </string-array>
