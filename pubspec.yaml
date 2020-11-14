@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   english_words: ^3.1.5
+  floating_search_bar: ^0.3.0
 
 
   # The following adds the Cupertino Icons font to your application.

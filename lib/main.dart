@@ -1,3 +1,4 @@
+import 'package:floating_search_bar/floating_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:masterpassword2/PasswordCard.dart';
@@ -18,27 +19,45 @@ class _PasswordListState extends State<PasswordList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_currentCategory),
-      ),
-      body: _buildSuggestions(),
-    );
+        appBar: null,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Add your onPressed code here!
+            setState(() {
+              _suggestions.add(generateWordPairs().first);
+            });
+          },
+          child: Icon(Icons.add),
+        ),
+        body: Padding(
+          padding: EdgeInsets.only(top: 12.0),
+          child: FloatingSearchBar.builder(
+            pinned: true,
+            itemCount: _suggestions.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _buildRow(_suggestions.elementAt(index));
+            },
+            trailing: CircleAvatar(
+              child: Text("RD"),
+            ),
+            drawer: Drawer(
+              child: Container(),
+            ),
+            onChanged: (String value) {},
+            onTap: () {},
+            decoration: InputDecoration.collapsed(
+              hintText: "Search...",
+            ),
+          ),
+        ));
   }
 
-  Widget _buildSuggestions() {
-    return ListView.builder(
-        padding: EdgeInsets.all(8.0),
-        itemBuilder: /*1*/ (context, i) {
-          final index = i ~/ 2; /*3*/
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10)); /*4*/
-          }
-          return _buildRow(_suggestions[index]);
-        });
-  }
 
   Widget _buildRow(WordPair pair) {
-    return PasswordCard(siteName: pair.first, userName: pair.second,);
+    return PasswordCard(
+      siteName: pair.first,
+      userName: pair.second,
+    );
   }
 }
 
