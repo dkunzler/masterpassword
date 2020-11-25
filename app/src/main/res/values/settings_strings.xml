@@ -26,8 +26,9 @@
     </string-array>
 
     <string name="languageTitle">Language</string>
+    <string name="languageTitleAuto">System Language</string>
     <string-array translatable="false" name="pref_language_titles">
-        <item>System Language</item>
+        <item>@string/languageTitleAuto</item>
         <item>English</item>
         <item>Deutsch</item>
         <item>Español</item>

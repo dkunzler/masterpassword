@@ -26,6 +26,7 @@
     </string-array>
 
     <string name="languageTitle">Sprache</string>
+    <string name="languageTitleAuto">Systemsprache</string>
 
     <string name="themeTitle">Theme</string>
     <string-array name="pref_theme_titles">

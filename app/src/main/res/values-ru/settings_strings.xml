@@ -26,6 +26,7 @@
     </string-array>
 
     <string name="languageTitle">Локализация</string>
+    <string name="languageTitleAuto">Как в устройстве</string>
 
     <string name="themeTitle">Тема</string>
     <string-array name="pref_theme_titles">
