@@ -11,7 +11,7 @@
         <item>Phrase (Password)</item>
     </string-array>
 
-    <string-array translatable="false" name="algorithmVersionValues">
+    <string-array name="algorithmVersionValues">
         <item>Version 0</item>
         <item>Version 1</item>
         <item>Version 2</item>

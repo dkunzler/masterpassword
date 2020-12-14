@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_settings">Настройки</string>
+
+    <string name="verifyPasswordTitle">Проверять мастер-пароль при входе</string>
+    <string name="verifyPasswordOff">Можно войти с любым мастер-паролем. Но в этом случае все пароли сайтов будут неверными.</string>
+    <string name="verifyPasswordOn">Мастер-пароль будет проверен при входе. Уменьшает безопасность.</string>
+
+    <string name="clipboardDurationTitle">Копировать пароль на</string>
+    <string-array name="pref_clipboardDuration_titles">
+        <item>10 секунд</item>
+        <item>20 секунд</item>
+        <item>30 секунд</item>
+        <item>1 минуту</item>
+        <item>Навсегда</item>
+    </string-array>
+
+
+    <string name="autoLogoutDurationTitle">Автоматический выход после</string>
+    <string-array name="pref_autoLogoutDuration_titles">
+        <item>1 минуту</item>
+        <item>10 минут</item>
+        <item>30 минут</item>
+        <item>1 час</item>
+        <item>Никогда</item>
+    </string-array>
+
+    <string name="languageTitle">Локализация</string>
+    <string name="languageTitleAuto">Как в устройстве</string>
+
+    <string name="themeTitle">Тема</string>
+    <string-array name="pref_theme_titles">
+        <item>Определять автоматически</item>
+        <item>Светлая</item>
+        <item>Темная</item>
+    </string-array>
+
+    <string name="inputstickKeyMapTitle">Раскладка клавиатуры на ПК</string>
+    <string-array name="pref_inputstickKeymap_titles">
+        <item>German</item>
+        <item>English (US)</item>
+        <item>French</item>
+        <item>Spanish</item>
+        <item>Norwegian</item>
+        <item>Polish</item>
+        <item>Portuguese (Brazilian)</item>
+        <item>Russian</item>
+        <item>Slovak</item>
+        <item>Swedish</item>
+        <item>English Dvorak (US)</item>
+        <item>French (Switzerland)</item>
+        <item>German (Switzerland)</item>
+    </string-array>
+
+    <string name="pref_header_general">Основные</string>
+    <string name="pref_header_about">О программе</string>
+    <string name="pref_header_security">Безопасность</string>
+    <string name="pref_header_passwordAge">Старые пароли</string>
+    <string name="defaultPasswordTypeTitle">Сложность пароля по-умолчанию</string>
+    <string name="appVersionTitle">Версия приложения</string>
+    <string name="creditsTitle">Благодарности</string>
+    <string name="inputstickDeactivated_title">Деактивировано</string>
+    <string name="inputstickActivated_title">Активировано</string>
+    <string name="passwordAgeDeactivated_summary">Возраст паролей не анализируется</string>
+    <string name="passwordAgeActivated_summary">Пароли будут выделяться разными цветами (норма, внимание, критично) в зависимости от даты создания.</string>
+    <string name="passwordAgeModerate_title">Кол-во недель до отметки \"внимание\"</string>
+    <string name="passwordAgeCritical_title">Кол-во недель до отметки \"критично\"</string>
+    <string name="visualizePasswordAge_title">Выделять старые пароли</string>
+
+    <string name="pref_header_statistics">Статистика</string>
+    <string name="msg_numberPasswords"># паролей</string>
+    <string name="msg_numberCategories"># категорий</string>
+    <string name="msg_numberGeneratedLogins"># созданных логинов</string>
+    <string name="msg_numberSavedLogins"># сохранённых логинов</string>
+    <string name="inputstickEnabledTitle">Интеграция с InputStick</string>
+    <string name="fingerprintEnabledTitle">Использовать отпечаток для входа</string>
+</resources>

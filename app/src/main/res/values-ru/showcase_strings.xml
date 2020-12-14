@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_edit">Сайт</string>
+    <string name="content_edit">\"Название сайта\", \"Сложность\" и \"Номер\" пароля необходимы для генерации пароля. Логин является необязательным и используется как напоминание для входа на сайт.</string>
+    <string name="title_login">Ваши учётные данные</string>
+    <string name="content_login">Комбинация вашего имени и мастер-пароля будет использована для генерации паролей на других сайтах.</string>
+    <string name="title_add">Добавить сайт</string>
+    <string name="content_add">Добавьте сайт, для которого хотите сгенерировать пароль.</string>
+    <string name="content_firstCard">Нажмите на пароль, чтобы скопировать его в буфер обмена.</string>
+</resources>

@@ -5,7 +5,7 @@
             android:key="inputstickEnabled"
             android:summaryOff="@string/inputstickDeactivated_title"
             android:summaryOn="@string/inputstickActivated_title"
-            android:title="Inpustick support" />
+            android:title="@string/inputstickEnabledTitle" />
         <ListPreference
             android:entries="@array/pref_inputstickKeymap_titles"
             android:entryValues="@array/pref_inputstickKeymap_values"

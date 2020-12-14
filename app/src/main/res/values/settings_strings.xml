@@ -26,11 +26,13 @@
     </string-array>
 
     <string name="languageTitle">Language</string>
-    <string-array name="pref_language_titles">
-        <item>System Language</item>
+    <string name="languageTitleAuto">System Language</string>
+    <string-array translatable="false" name="pref_language_titles">
+        <item>@string/languageTitleAuto</item>
         <item>English</item>
-        <item>German</item>
-        <item>Spanish</item>
+        <item>Deutsch</item>
+        <item>Español</item>
+        <item>Русский</item>
     </string-array>
 
     <string name="themeTitle">Theme</string>
@@ -78,4 +80,6 @@
     <string name="msg_numberCategories"># of categories</string>
     <string name="msg_numberGeneratedLogins"># of generated logins</string>
     <string name="msg_numberSavedLogins"># of saved logins</string>
+    <string name="inputstickEnabledTitle">InputStick support</string>
+    <string name="fingerprintEnabledTitle">Use fingerprint for unlock</string>
 </resources>

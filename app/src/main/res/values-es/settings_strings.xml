@@ -26,12 +26,7 @@
     </string-array>
 
     <string name="languageTitle">Idioma</string>
-    <string-array name="pref_language_titles">
-        <item>Idioma del sistema</item>
-        <item>Inglés</item>
-        <item>Alemán</item>
-        <item>Español</item>
-    </string-array>
+    <string name="languageTitleAuto">Idioma del sistema</string>
 
     <string name="themeTitle">Tema</string>
     <string-array name="pref_theme_titles">
