@@ -47,7 +47,6 @@ import de.devland.masterpassword.util.event.PasswordCopyEvent;
 import de.devland.masterpassword.util.event.ProStatusChangeEvent;
 import de.devland.masterpassword.util.event.SiteCardEditEvent;
 import de.devland.masterpassword.util.event.SiteDeleteEvent;
-import hugo.weaving.DebugLog;
 import lombok.NoArgsConstructor;
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
@@ -214,7 +213,6 @@ public class PasswordViewFragment extends BaseFragment implements
         refreshCards();
     }
 
-    @DebugLog
     private void refreshCards() {
         currentVisibleItem = getCurrentVisibleItemId();
         List<Card> cards = new ArrayList<>();
