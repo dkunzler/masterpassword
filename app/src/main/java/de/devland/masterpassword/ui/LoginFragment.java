@@ -139,7 +139,8 @@ public class LoginFragment extends BaseFragment {
                         if (secret != null) {
                             String password = secret.first;
                             String name = secret.second;
-                            doLogin(name, password);
+                            masterPassword.setText(password);
+                            fullName.setText(name);
                         } else {
                             DrawableCompat.setTint(fingerprint, Color.RED);
                             // TODO message
