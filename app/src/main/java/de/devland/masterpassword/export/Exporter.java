@@ -19,7 +19,6 @@ import com.google.gson.JsonSerializer;
 import com.lyndir.masterpassword.MPSiteType;
 import com.lyndir.masterpassword.model.MPSiteMarshaller;
 import com.lyndir.masterpassword.model.MPUser;
-import com.nononsenseapps.filepicker.FilePickerActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -66,12 +65,7 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
         String fileName = dateFormat.format(now) + "_export." + type.getFileExtension();
 
 
-        Intent intent;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || defaultPrefs.useLegacyFileManager()) {
-            intent = getLegacyFolderChooserIntent();
-        } else {
-            intent = getStorageAccessFrameworkIntent(fileName);
-        }
+        Intent intent = getStorageAccessFrameworkIntent(fileName);
 
         Bundle extraData = new Bundle();
         extraData.putSerializable(EXTRA_EXPORT_TYPE, type);
@@ -80,21 +74,6 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
                 .addRequest(REQUEST_CODE_EXPORT, this.getClass(), this, extraData);
 
         activity.startActivityForResult(intent, requestCode);
-    }
-
-    private Intent getLegacyFolderChooserIntent() {
-        Intent getContentIntent = new Intent(activity, FilePickerActivity.class);
-
-        getContentIntent.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
-        getContentIntent.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
-        getContentIntent.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
-
-        // Configure initial directory by specifying a String.
-        // You could specify a String like "/storage/emulated/0/", but that can
-        // dangerous. Always use Android's API calls to get paths to the SD-card or
-        // internal memory.
-        getContentIntent.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
-        return getContentIntent;
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)

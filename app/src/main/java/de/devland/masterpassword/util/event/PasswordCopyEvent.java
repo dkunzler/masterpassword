@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * Created by David Kunzler on 12.10.2014.
  */
-@RequiredArgsConstructor(suppressConstructorProperties = true)
+@RequiredArgsConstructor
 public class PasswordCopyEvent {
     @Getter
     private final SiteCard card;

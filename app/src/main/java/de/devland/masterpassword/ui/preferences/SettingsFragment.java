@@ -4,7 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import de.devland.masterpassword.App;
 import de.devland.masterpassword.R;

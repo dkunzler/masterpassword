@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
  * Created by deekay on 03/11/14.
  */
 @Getter
-@RequiredArgsConstructor(suppressConstructorProperties = true)
+@RequiredArgsConstructor
 public class CategoryChangeEvent {
     private final Category category;
 }

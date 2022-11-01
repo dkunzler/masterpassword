@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
@@ -22,7 +22,6 @@ import com.lyndir.masterpassword.MPSiteTypeClass;
 import com.lyndir.masterpassword.model.MPSite;
 import com.lyndir.masterpassword.model.MPSiteUnmarshaller;
 import com.lyndir.masterpassword.model.MPUser;
-import com.nononsenseapps.filepicker.FilePickerActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -102,12 +101,7 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
         this.activity = activity;
         this.defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, activity);
 
-        Intent intent;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || defaultPrefs.useLegacyFileManager()) {
-            intent = getLegacyFileChooserIntent();
-        } else {
-            intent = getStorageAccessFrameworkIntent();
-        }
+        Intent intent = getStorageAccessFrameworkIntent();
 
         Bundle extraData = new Bundle();
         extraData.putSerializable(EXTRA_IMPORT_TYPE, importType);
@@ -128,21 +122,6 @@ public class Importer implements RequestCodeManager.RequestCodeCallback {
         // Create a file with the requested MIME type.
         intent.setType("*/*");
         return intent;
-    }
-
-    private Intent getLegacyFileChooserIntent() {
-        Intent getContentIntent = new Intent(activity, FilePickerActivity.class);
-
-        getContentIntent.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
-        getContentIntent.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
-        getContentIntent.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
-
-        // Configure initial directory by specifying a String.
-        // You could specify a String like "/storage/emulated/0/", but that can
-        // dangerous. Always use Android's API calls to get paths to the SD-card or
-        // internal memory.
-        getContentIntent.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
-        return getContentIntent;
     }
 
     @Override

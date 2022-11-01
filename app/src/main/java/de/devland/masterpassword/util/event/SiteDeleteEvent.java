@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
  * Created by deekay on 07.06.2015.
  */
 @Getter
-@RequiredArgsConstructor(suppressConstructorProperties = true)
+@RequiredArgsConstructor
 public class SiteDeleteEvent {
     private final SiteCard card;
 }

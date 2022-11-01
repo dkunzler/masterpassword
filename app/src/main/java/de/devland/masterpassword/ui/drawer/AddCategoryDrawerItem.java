@@ -5,9 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,8 +64,7 @@ public class AddCategoryDrawerItem extends DrawerItem {
             builder.setCancelable(false);
             builder.setTitle(R.string.title_addCategory);
             View dialogView = View.inflate(getActivity(), R.layout.dialog_addcategory, null);
-            final EditText category = ButterKnife.findById(dialogView,
-                    R.id.editText_category);
+            final EditText category = dialogView.findViewById(R.id.editText_category);
             builder.setView(dialogView);
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override

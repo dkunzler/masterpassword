@@ -6,10 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AlertDialog;
 import android.view.View;
 import android.widget.RadioButton;
 
@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * Created by David Kunzler on 06.10.2014.
  */
-@RequiredArgsConstructor(suppressConstructorProperties = true)
+@RequiredArgsConstructor
 public class ExportDrawerItem extends SettingsDrawerItem {
     private final BaseActivity activity;
     private final DrawerLayout drawerLayout;
@@ -54,9 +54,8 @@ public class ExportDrawerItem extends SettingsDrawerItem {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             View dialogView = View.inflate(getActivity(), R.layout.dialog_fileformat, null);
-            final RadioButton jsonRadio = ButterKnife.findById(dialogView, R.id.radioButton_json);
-            final RadioButton mpsitesRadio = ButterKnife
-                    .findById(dialogView, R.id.radioButton_mpsites);
+            final RadioButton jsonRadio = dialogView.findViewById(R.id.radioButton_json);
+            final RadioButton mpsitesRadio = dialogView.findViewById(R.id.radioButton_mpsites);
             jsonRadio.setChecked(true);
             builder.setView(dialogView);
             builder.setTitle(R.string.title_exportFormat);

@@ -3,10 +3,10 @@ package de.devland.masterpassword.base.util;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
 

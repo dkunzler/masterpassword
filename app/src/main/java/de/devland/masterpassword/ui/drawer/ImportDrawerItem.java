@@ -5,11 +5,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
 
@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * Created by David Kunzler on 06.10.2014.
  */
-@RequiredArgsConstructor(suppressConstructorProperties = true)
+@RequiredArgsConstructor
 public class ImportDrawerItem extends SettingsDrawerItem {
     public static final int REQUEST_CODE_IMPORT = 1234;
 
@@ -57,12 +57,9 @@ public class ImportDrawerItem extends SettingsDrawerItem {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             View dialogView = View.inflate(getActivity(), R.layout.dialog_importtype, null);
-            final RadioButton appendRadio = ButterKnife
-                    .findById(dialogView, R.id.radioButton_append);
-            final RadioButton overrideRadio = ButterKnife
-                    .findById(dialogView, R.id.radioButton_override);
-            final RadioButton mergeRadio = ButterKnife
-                    .findById(dialogView, R.id.radioButton_merge);
+            final RadioButton appendRadio = dialogView.findViewById(R.id.radioButton_append);
+            final RadioButton overrideRadio = dialogView.findViewById(R.id.radioButton_override);
+            final RadioButton mergeRadio = dialogView.findViewById(R.id.radioButton_merge);
             mergeRadio.setChecked(true);
             builder.setView(dialogView);
             builder.setTitle(R.string.title_importType);

@@ -20,16 +20,4 @@
     <color name="card_icon_tint">@android:color/white</color>
 
 
-    <style name="FilePickerTheme" parent="NNF_BaseTheme">
-        <!-- Set these to match your theme -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-
-
-        <!-- Need to set this also to style create folder dialog -->
-        <item name="alertDialogTheme">@style/FilePickerAlertDialogTheme</item>
-
-    </style>
-
 </resources>

@@ -2,7 +2,7 @@ package de.devland.masterpassword.ui.drawer;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.widget.DrawerLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import de.devland.masterpassword.R;
 import de.devland.masterpassword.ui.preferences.SettingsActivity;
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * Created by David Kunzler on 06.09.2014.
  */
-@RequiredArgsConstructor(suppressConstructorProperties = true)
+@RequiredArgsConstructor
 public class PreferencesDrawerItem extends SettingsDrawerItem {
 
     private final DrawerLayout drawerLayout;

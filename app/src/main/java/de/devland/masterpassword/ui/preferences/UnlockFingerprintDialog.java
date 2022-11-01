@@ -10,12 +10,12 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CancellationSignal;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.util.Pair;
+import androidx.appcompat.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -33,8 +33,6 @@ import de.devland.masterpassword.base.util.SnackbarUtil;
 import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.FingerprintException;
 import de.devland.masterpassword.util.FingerprintUtil;
-
-import static butterknife.ButterKnife.findById;
 
 /**
  * Created by deekay on 21.05.2017.
@@ -117,10 +115,10 @@ public class UnlockFingerprintDialog extends DialogFragment {
         builder.setCancelable(false);
         builder.setTitle(R.string.title_confirmPassword);
         View dialogView = View.inflate(getContext(), R.layout.dialog_unlockfingerprint, null);
-        final EditText masterPassword = findById(dialogView, R.id.editText_masterPassword);
-        final EditText fullName = findById(dialogView, R.id.editText_fullName);
-        final ImageView fingerprintIcon = findById(dialogView, R.id.imageView_fingerprint);
-        helpText = ButterKnife.findById(dialogView, R.id.textView_fingerprintHelp);
+        final EditText masterPassword = dialogView.findViewById(R.id.editText_masterPassword);
+        final EditText fullName = dialogView.findViewById(R.id.editText_fullName);
+        final ImageView fingerprintIcon = dialogView.findViewById(R.id.imageView_fingerprint);
+        helpText = dialogView.findViewById(R.id.textView_fingerprintHelp);
 
         fullName.setText(defaultPrefs.defaultUserName());
         builder.setView(dialogView);

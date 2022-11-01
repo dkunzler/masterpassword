@@ -26,7 +26,7 @@
             android:textSize="28sp"
             tools:text="Identicon" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInput_masterPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,9 +45,9 @@
 
                 <requestFocus />
             </EditText>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInput_fullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 android:ems="10"
                 android:hint="@string/hint_fullName"
                 android:inputType="textVisiblePassword" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.andexert.library.RippleView
             android:id="@+id/ripple_login"

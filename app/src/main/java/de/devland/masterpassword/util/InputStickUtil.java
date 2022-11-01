@@ -9,10 +9,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.inputstick.api.ConnectionManager;
 import com.inputstick.api.InputStickStateListener;
@@ -61,7 +61,7 @@ public class InputStickUtil {
         SnackbarUtil.showShort(activity, R.string.msg_typedSuccessfully);
     }
 
-    @RequiredArgsConstructor(suppressConstructorProperties = true)
+    @RequiredArgsConstructor
     private static class TypeListener implements InputStickStateListener, DialogInterface.OnCancelListener {
 
         private final AppCompatActivity activity;

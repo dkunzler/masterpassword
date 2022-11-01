@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:padding="4dp">
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/minusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:gravity="center"
         android:inputType="numberSigned" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/plusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

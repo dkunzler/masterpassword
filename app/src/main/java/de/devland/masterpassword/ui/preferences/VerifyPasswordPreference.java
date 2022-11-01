@@ -7,10 +7,10 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -94,8 +94,8 @@ public class VerifyPasswordPreference extends CheckBoxPreference implements Pref
             builder.setCancelable(false);
             builder.setTitle(R.string.title_confirmPassword);
             View dialogView = View.inflate(getContext(), R.layout.dialog_verifypassword, null);
-            final EditText masterPassword = ButterKnife.findById(dialogView, R.id.editText_masterPassword);
-            final EditText masterPasswordConfirm = ButterKnife.findById(dialogView, R.id.editText_masterPasswordConfirm);
+            final EditText masterPassword = dialogView.findViewById(R.id.editText_masterPassword);
+            final EditText masterPasswordConfirm = dialogView.findViewById(R.id.editText_masterPasswordConfirm);
             builder.setView(dialogView);
 
 

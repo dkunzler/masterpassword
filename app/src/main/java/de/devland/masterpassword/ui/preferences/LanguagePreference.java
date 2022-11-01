@@ -9,9 +9,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.AttributeSet;
 
 import de.devland.esperandro.Esperandro;
@@ -82,7 +82,7 @@ public class LanguagePreference extends ListPreference {
                     Intent mStartActivity = new Intent(getContext(), LoginActivity.class);
                     mStartActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     int mPendingIntentId = 123456;
-                    PendingIntent mPendingIntent = PendingIntent.getActivity(getActivity(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                    PendingIntent mPendingIntent = PendingIntent.getActivity(getActivity(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
                     AlarmManager mgr = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                     mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
                     android.os.Process.killProcess(android.os.Process.myPid());

@@ -1,7 +1,7 @@
 package de.devland.masterpassword.base.util;
 
 import android.app.Activity;
-import android.support.design.widget.Snackbar;
+import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 
 import de.devland.masterpassword.R;

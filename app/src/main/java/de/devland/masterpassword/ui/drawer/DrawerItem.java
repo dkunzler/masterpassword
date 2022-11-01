@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * Created by David Kunzler on 04/09/14.
  */
-@RequiredArgsConstructor(suppressConstructorProperties = true)
+@RequiredArgsConstructor
 public abstract class DrawerItem {
 
     @Getter

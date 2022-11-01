@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
  * Created by David Kunzler on 27.11.2014.
  */
 @Getter
-@RequiredArgsConstructor(suppressConstructorProperties = true)
+@RequiredArgsConstructor
 public class ProStatusChangeEvent {
     private final boolean proStatus;
 }

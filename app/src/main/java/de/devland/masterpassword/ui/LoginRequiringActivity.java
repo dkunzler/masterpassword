@@ -54,6 +54,6 @@ public abstract class LoginRequiringActivity extends BaseActivity {
 
     private PendingIntent getLogoutPendingIntent() {
         Intent intent = new Intent(this, ClearPasswordReceiver.class);
-        return PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 }
