@@ -75,10 +75,6 @@ public interface DefaultPrefs extends SharedPreferenceActions {
     void showCanary(boolean showCanary);
 
     @Default(ofBoolean = false)
-    boolean useLegacyFileManager();
-    void useLegacyFileManager(boolean useLegacyFileManager);
-
-    @Default(ofBoolean = false)
     boolean lockCategories();
     void lockCategories(boolean lockCategories);
 

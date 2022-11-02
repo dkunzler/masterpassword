@@ -11,10 +11,6 @@
             android:positiveButtonText="@null"
             android:title="@string/languageTitle" />
         <CheckBoxPreference
-            android:key="useLegacyFileManager"
-            android:summary="@string/summary_useLegacyFilemanager"
-            android:title="@string/title_builtinFileManager" />
-        <CheckBoxPreference
             android:key="lockCategories"
             android:summary="@string/summary_lockCategories"
             android:title="@string/title_lockCategories" />

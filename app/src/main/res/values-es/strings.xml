@@ -72,8 +72,6 @@
     <string name="showPasswordCanaryTitle">Mostrar código de verificación</string>
     <string name="showPasswordCanarySummary">Mostrar un pequeño emoticono en el inicio para verificar tu contraseña.</string>
     <string name="title_saveUsername">Guardar nombre de usuario</string>
-    <string name="title_builtinFileManager">Usar el gestor de archivos incluido</string>
-    <string name="summary_useLegacyFilemanager">Usar esto si tienes problemas con la aplicación de documentos de Android.</string>
     <string name="caption_generated">generado</string>
     <string name="msg_typedSuccessfully">Contraseña escrita satisfactoriamente.</string>
     <string name="msg_inputstickFailed">Falló la conexión al InputStick. Revisa la utilidad del InputStick para más detalles.</string>

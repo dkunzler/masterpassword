@@ -70,8 +70,6 @@
     <string name="showPasswordCanaryTitle">Визуализировать пароль</string>
     <string name="showPasswordCanarySummary">Показывать небольшие значки на экране входа, помогающие убедиться в правильности пароля</string>
     <string name="title_saveUsername">Запомнить имя пользователя</string>
-    <string name="title_builtinFileManager">Встроенный файл-менеджер</string>
-    <string name="summary_useLegacyFilemanager">Включите, если есть проблемы с Android приложением \"Документы\".</string>
     <string name="caption_generated">создать автоматически</string>
     <string name="msg_typedSuccessfully">Пароль успешно набран.</string>
     <string name="msg_inputstickFailed">Не удалось подключиться к InputStick. Откройте InputStickUtility для подробностей.</string>

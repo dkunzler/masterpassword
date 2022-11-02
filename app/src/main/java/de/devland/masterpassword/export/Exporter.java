@@ -142,23 +142,15 @@ public class Exporter implements RequestCodeManager.RequestCodeCallback {
             try {
                 if (exportData != null) {
                     FileOutputStream fileOutputStream;
-                    ParcelFileDescriptor pfd = null;
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || defaultPrefs.useLegacyFileManager()) {
-                        Uri uri = intent.getData();
 
-                        File file = new File(uri.getPath(), fileName);
-                        fileOutputStream = new FileOutputStream(file);
-                    } else {
-                        pfd = activity.getContentResolver().
-                                openFileDescriptor(intent.getData(), "w");
+                    ParcelFileDescriptor pfd = activity.getContentResolver().
+                            openFileDescriptor(intent.getData(), "w");
 
-                        fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
-                    }
+                    fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
+
                     fileOutputStream.write(exportData.getBytes());
                     fileOutputStream.close();
-                    if (pfd != null) {
-                        pfd.close();
-                    }
+                    pfd.close();
                     SnackbarUtil.showShort(activity, R.string.msg_exportDone);
                 }
             } catch (IOException e) {

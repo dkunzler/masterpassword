@@ -66,11 +66,6 @@ public class SettingsFragment extends BaseSettingsFragment {
                 return true;
             }
         });
-        Preference useLegacyFileManager = findPreference("useLegacyFileManager");
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            PreferenceCategory categoryGeneral = (PreferenceCategory) findPreference("category_general");
-            categoryGeneral.removePreference(useLegacyFileManager);
-        }
     }
 
 
