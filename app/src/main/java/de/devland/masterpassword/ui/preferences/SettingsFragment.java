@@ -14,6 +14,7 @@ import de.devland.masterpassword.util.event.ReloadDrawerEvent;
 /**
  * Created by David Kunzler on 19.10.2014.
  */
+@SuppressWarnings("deprecation")
 public class SettingsFragment extends BaseSettingsFragment {
 
     public interface RequestPermissionsResultListener {
@@ -48,23 +49,17 @@ public class SettingsFragment extends BaseSettingsFragment {
         bindPreferenceSummaryToValue(findPreference("versionString"));
         bindPreferenceSummaryToValue(findPreference("defaultPasswordType"));
         Preference themeModePreference = findPreference("defaultThemeMode");
-        findPreference("lockCategories").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                App.get().getBus().post(new ReloadDrawerEvent());
-                return true;
-            }
+        findPreference("lockCategories").setOnPreferenceChangeListener((preference, o) -> {
+            App.get().getBus().post(new ReloadDrawerEvent());
+            return true;
         });
         bindPreferenceSummaryToValue(themeModePreference);
-        themeModePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                // bind to value
-                bindPreferenceSummaryToValueListener.onPreferenceChange(preference, newValue);
-                // set new theme value
-                Utils.setThemeModeFromName(newValue.toString());
-                return true;
-            }
+        themeModePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            // bind to value
+            bindPreferenceSummaryToValueListener.onPreferenceChange(preference, newValue);
+            // set new theme value
+            Utils.setThemeModeFromName(newValue.toString());
+            return true;
         });
     }
 

@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import androidx.annotation.NonNull;
+import androidx.biometric.BiometricPrompt;
 import androidx.fragment.app.DialogFragment;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -34,6 +35,8 @@ import de.devland.masterpassword.prefs.DefaultPrefs;
 import de.devland.masterpassword.util.FingerprintException;
 import de.devland.masterpassword.util.FingerprintUtil;
 
+import java.util.concurrent.Executor;
+
 /**
  * Created by deekay on 21.05.2017.
  */
@@ -47,7 +50,12 @@ public class UnlockFingerprintDialog extends DialogFragment {
     public boolean success = false;
     private CancellationSignal cancellationSignal;
     private Cipher cipher;
-    private FingerprintManager.AuthenticationCallback callback = new FingerprintManager.AuthenticationCallback() {
+
+    private Executor executor;
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
+
+    private BiometricPrompt.AuthenticationCallback callback = new androidx.biometric.BiometricPrompt.AuthenticationCallback() {
 
 
         @Override
@@ -61,17 +69,7 @@ public class UnlockFingerprintDialog extends DialogFragment {
         }
 
         @Override
-        public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
-            super.onAuthenticationHelp(helpCode, helpString);
-            if (fingerprint != null) {
-                DrawableCompat.setTint(fingerprint, Color.YELLOW);
-            }
-            helpText.setText(helpString);
-            helpText.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
+        public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
             super.onAuthenticationSucceeded(result);
             success = true;
             helpText.setText(R.string.fingerprint_dialog_success);
@@ -102,14 +100,19 @@ public class UnlockFingerprintDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        executor = ContextCompat.getMainExecutor(getContext());
+        biometricPrompt = new BiometricPrompt(getActivity(), executor, callback);
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login for my app")
+                .setSubtitle("Log in using your biometric credential")
+                .setNegativeButtonText("Use account password")
+                .build();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final DefaultPrefs defaultPrefs = Esperandro.getPreferences(DefaultPrefs.class, getActivity());
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                App.get().getBus().post(new UnlockFingerprintPreference.UnlockFingerprintCancelEvent());
-                dismiss();
-            }
+        builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+            App.get().getBus().post(new UnlockFingerprintPreference.UnlockFingerprintCancelEvent());
+            dismiss();
         });
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setCancelable(false);
@@ -143,10 +146,9 @@ public class UnlockFingerprintDialog extends DialogFragment {
             @SuppressWarnings("MissingPermission") // already done before showing the dialog
             @Override
             public void onShow(DialogInterface unused) {
-                FingerprintManager fingerprintManager = (FingerprintManager) getContext().getSystemService(Context.FINGERPRINT_SERVICE);
                 cancellationSignal = new CancellationSignal();
                 try {
-                    fingerprintManager.authenticate(new FingerprintManager.CryptoObject(FingerprintUtil.initEncryptCipher()), cancellationSignal, 0, callback, null);
+                    biometricPrompt.authenticate(promptInfo, new BiometricPrompt.CryptoObject(FingerprintUtil.initEncryptCipher()));
                 } catch (FingerprintException e) {
                     dismiss();
                     defaultPrefs.fingerprintEnabled(false);
