@@ -108,5 +108,5 @@ dependencies {
     implementation 'cglib:cglib:3.2.4'
     implementation 'org.slf4j:slf4j-android:1.7.13' // MIT
 
-    implementation files('libs/inputstickapi-20170113.jar') // no license
+    implementation files('libs/inputstickapi-20190428.jar') // no license
 }
