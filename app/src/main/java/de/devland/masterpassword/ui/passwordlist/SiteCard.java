@@ -5,6 +5,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.os.PersistableBundle;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.widget.PopupMenu;
@@ -137,6 +139,11 @@ public class SiteCard extends Card implements PopupMenu.OnMenuItemClickListener 
         final ClipboardManager clipboard = (ClipboardManager) context
                 .getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("password", generatedPassword);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            PersistableBundle extras = new PersistableBundle();
+            extras.putBoolean("android.content.extra.IS_SENSITIVE", true);
+            clip.getDescription().setExtras(extras);
+        }
         clipboard.setPrimaryClip(clip);
 
         Intent service = new Intent(context, ClearClipboardService.class);

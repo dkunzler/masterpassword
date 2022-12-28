@@ -2,12 +2,11 @@ package de.devland.masterpassword.ui;
 
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import androidx.fragment.app.Fragment;
 import androidx.core.app.NavUtils;
 import androidx.appcompat.app.ActionBar;
@@ -286,6 +285,13 @@ public class EditFragment extends BaseFragment {
         final ClipboardManager clipboard = (ClipboardManager) App.get()
                 .getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("password", password.getText());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            PersistableBundle extras = new PersistableBundle();
+            extras.putBoolean("android.content.extra.IS_SENSITIVE", true);
+            clip.getDescription().setExtras(extras);
+        }
+
         clipboard.setPrimaryClip(clip);
 
         Intent service = new Intent(App.get(), ClearClipboardService.class);
